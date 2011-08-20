@@ -9,12 +9,8 @@ please import it into mysql using		|
 Step 2:
 -------------------------------------------------
 edit misc/constants.php [$dbuname,$dbpass]	|
-edit Rayon/connection.php 			|	
+edit Rayon/connection.php 
+edit lib/connection.php 			|	
 -------------------------------------------------
 
-Step 3:[optional]
 
-------------------------------------------------
-place a png image in images/faces/ and rename	|
-it as user.png.					|
-------------------------------------------------

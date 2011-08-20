@@ -278,6 +278,7 @@ else if($mode=="os")
 	if(array_key_exists("srch",$_POST))
 	{
 		$value = $_POST["srch"];
+		
 		echo "<script type='text/javascript'>getLists(\"".$value."\",'omni');</script>";
 	}
 		

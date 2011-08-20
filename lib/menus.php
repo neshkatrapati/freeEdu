@@ -156,8 +156,8 @@ function getAdminMenu()
         </ul>
         
      
-         <form action=''>
-          <input type='text' placeholder='Search' />
+         <form action='?m=os' method='post'>
+          <input type='text' placeholder='Search' name='srch'/>
         </form>";
         
         $oid = $_COOKIE['object'];
@@ -205,8 +205,8 @@ function getFacMenu()
         </ul>
         
      
-         <form action=''>
-          <input type='text' placeholder='Search' />
+         <form action='?m=os' method='post'>
+          <input type='text' placeholder='Search' name='srch' />
         </form>";
         
         $oid = $_COOKIE['object'];

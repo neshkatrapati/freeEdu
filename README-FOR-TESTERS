@@ -1,0 +1,20 @@
+Step 1:
+------------------------------------------------
+Latest freeEdu.sql is included with the package.|
+						| 
+please import it into mysql using		|	
+	> mysqladmin/mysqldump			|	
+	> phpmyadmin				|
+-------------------------------------------------
+Step 2:
+-------------------------------------------------
+edit misc/constants.php [$dbuname,$dbpass]	|
+edit Rayon/connection.php 			|	
+-------------------------------------------------
+
+Step 3:[optional]
+
+------------------------------------------------
+place a png image in images/faces/ and rename	|
+it as user.png.					|
+------------------------------------------------

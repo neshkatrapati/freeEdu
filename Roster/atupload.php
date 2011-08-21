@@ -94,7 +94,7 @@ elseif(isset($_POST['phase2']))
         echo "<img src='../".$row['imguri']."' width='75' height='75' style='opacity:0.4;filter:alpha(opacity=40)'
 	  	onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
   		onmouseout='this.style.opacity=0.4;this.filters.alpha.opacity=20'></a>
-		<div class='desc'><b><font color=#000000>".$row['sname']."</font></b><br><b><font color=#000000>".$row['srno']."</b></font>
+		<div class='desc'><b><font color=#000000>".getFname($row['sname'])."</font></b><br><b><font color=#000000>".$row['srno']."</b></font>
                 <input type='checkbox' name='ppl[]' value='".$row['sid']."'></div></div>";
     }
     echo "</div></form>";

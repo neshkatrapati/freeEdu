@@ -858,7 +858,7 @@ function readExcel()
 		{
 			$arr[]=$pr[0];
 		}
-		print_r($arr);
+		
 		$return="<table border='1'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
 		while($res=mysql_fetch_array($result))
 		{
@@ -1357,6 +1357,19 @@ function readExcel()
 		$array = queryMe("SELECT otyid FROM MOBJECTT WHERE oid like '".$oid."'");
 		
 		if($array['otyid']=="1")
+			return true;
+		else
+			return false;
+		
+		
+	}
+	function isStudent($oid)
+	{
+		
+		
+		$array = queryMe("SELECT otyid FROM MOBJECTT WHERE oid like '".$oid."'");
+		
+		if($array['otyid']=="0")
 			return true;
 		else
 			return false;

@@ -51,6 +51,7 @@ function omniMeth(str,elementname)
 <?php
 
 include("../lib/menus.php");
+include("../lib/graphs.php");
 include("../lib/lib.php");
 include("../misc/constants.php");
 echo getMenu();
@@ -70,11 +71,12 @@ if($oid==NULL)
 if(array_key_exists("m",$optarray) || !array_key_exists("m",$optarray))
 {
         $mode = $_GET['m'];
-	echo "<div id='messages'></div>";
-	echo "<div id='content'>";
+	echo "<div id='messages'></div><div class='container-fluid'>";
+	
 	
 if($mode==NULL)
-{	
+{
+	echo "<div id='sidebar' class='sidebar'></div>";
 	include("../EditProfile/showProfile.php");
 	showProfile($oid);
 }
@@ -84,23 +86,38 @@ else if($mode == "p")
 	{
       	 $id = $_GET['id'];
        	 include("../EditProfile/showProfile.php");
+	 echo "<div id='sidebar' class='sidebar'>"; 
        	 showProf($id);
+	 echo "</div>";
+	 if(isStudent($id))
+	 {
+			echo "<div class='content' align='right'> <div id='placeholder' style='width:600px;height:300px'></div>
+			<p id='hoverdata'><span id='clickdata'></span></p></div>";
+			$obj = getObject($id);
+			$array =  queryMe("select sid from MSTUDENTT where srno like '".$obj['obhandle']."'");
+			//echo "select sid from MSTUDENT where srno like '".$obj['obhandle']."'";
+			getStuGraph($array["sid"],strtotime("-4 weeks"),strtotime("now"));
+	 }
+	 
    	}
 }
+
 else if($mode == "cre")
 {
 	include("../credits.php");
 }
 else if($mode=="ba")
 {
+	echo "<div id='content'>";
 	if(isSudo($oid))
 		include("../Rayon/batchadd.php");
 	else
 		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
 }
 else if($mode=="sa")
 {
-	
+	echo "<div id='content'  class='content'>";
 	if(isSudo($oid))
 	{
 		echo "<center>";
@@ -119,10 +136,12 @@ else if($mode=="sa")
 	else
 		notifywar("You Are Un Authorised To View This Page");
  
+	echo "</div>";
 	
 }
 else if($mode=="ma")
 {
+	echo "<div id='content'  class='content'>";
 	if(isSudo($oid))
 	{
 		echo "<center>";
@@ -144,11 +163,14 @@ else if($mode=="ma")
 	else
 		notifywar("You Are Un Authorised To View This Page");
  
+	echo "</div>";
 	
 }
 else if($mode=="cf")
 {
+	echo "<div id='content'  class='content'>";
 	if(isSudo($oid))
+
 	{
 		echo "<center>";
 		echo "<a href='?m=cf&t=e'>Upload By A Spreadsheet</a>&emsp;";	
@@ -165,9 +187,11 @@ else if($mode=="cf")
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
 }
 else if($mode=="mf")
 {
+	echo "<div id='content'  class='content'>";
 	if(isSudo($oid))
 	{
 		$low = $_GET['l'];
@@ -175,9 +199,11 @@ else if($mode=="mf")
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
 }
 else if($mode=="rga")
 {
+	echo "<div id='content'  class='content'>";
 	if(isSudo($oid))
 	{
 		echo "<center>";
@@ -186,11 +212,12 @@ else if($mode=="rga")
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
 }
 
 else if($mode=="ra")
 {
-	
+	echo "<div id='content'  class='content'>";
 	if(isSudo($oid) || isAdmin($oid))
 	{
 		
@@ -207,9 +234,11 @@ else if($mode=="ra")
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
 }
 else if($mode=="rr")
 {
+	echo "<div id='content'  class='content'>";
 	if(isSudo($oid) || isAdmin($oid))
 	{
 		echo "<fieldset><legend>Record Retrieval</legend>";
@@ -219,57 +248,72 @@ else if($mode=="rr")
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
 }
 else if($mode=="up")
 {
+	echo "<div id='content'  class='content'>";
 	if(isSudo($oid) || isAdmin($oid))
 	{
 		include("../Rayon/upgrade.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
 }
 else if($mode=="dr")
 {
+	echo "<div id='content'  class='content'>";
 	if(isSudo($oid) || isAdmin($oid))
 	{
 		include("../Roster/dayreport.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
 }
 else if($mode=="cr")
 {
+	echo "<div id='content'  class='content'>";
 	if(isSudo($oid) || isAdmin($oid))
 	{
 		include("../Roster/conreport.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
 }
 else if($mode=="sc")
 {
+	echo "<div id='content'  class='content'>";
 	if(isSudo($oid) || isAdmin($oid))
 	{
 		include("../Roster/schedule.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
 }
 else if($mode=="gf")
-	include("../Roster/graph.php");
+{
+	
+	
+}
 else if($mode=="str")
 {
+	echo "<div id='content'  class='content'>";
 	if(isSudo($oid) || isAdmin($oid))
 	{
 		include("../Roster/stureport.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
 }
 else if($mode=="os")
 {
 	
+	echo "<div id='content'  class='content'>";
 	echo "<center><input type='text' onkeyup=\"getLists(this.value,'omni')\">
 	</input><br>Select By Type :&emsp;".getTypes('type[]','onchange=\'getSelect(this.value)\'')."
 	<div id='options'></div>	
@@ -281,10 +325,11 @@ else if($mode=="os")
 		
 		echo "<script type='text/javascript'>getLists(\"".$value."\",'omni');</script>";
 	}
-		
+	echo "</div>";	
 }
 else if($mode=="fp")
 {
+	echo "<div id='content'  class='content'>";
 	if(isFaculty($oid))
 	{
 		$array = getObject($_COOKIE['object']); 
@@ -292,28 +337,33 @@ else if($mode=="fp")
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
-	
+	echo "</div>";
 }
 else if($mode=="ep")
 {
+	echo "<div id='content'  class='content'>";
 	include("../EditProfile/editProfile.php");
+	echo "</div>";
 }
 else if($mode=="ua")
 {
+	echo "<div id='content' class='content'>";
 	if(isFaculty($oid))
 	{
 		include("../Roster/atupload.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
-			
+	echo "</div>";
 
 }
 
 else
 {
+	echo "<div id='content'>";
 	notifyerr("There Is No Such Page!");
 	redirect("?");
+	echo "</div>";
 }
 }
 echo "</div>";

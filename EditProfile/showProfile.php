@@ -113,7 +113,11 @@ if(isStudent($oid))
 	$batch = $array2['brname']." ".getFullClass($array2['akayr']+1)." Section: ".$sec;
 	echo "<a href='?m=src&q=%&t=0&ip=n&op=c&c=".$batid.":".$sec."'>".$batch."</a>";
 }
-
+elseif(isFaculty($oid))
+{
+	$array = getObject($oid);
+	echo getFacPlan($array['obhandle']);
+}
 }
 ?>
 

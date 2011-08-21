@@ -773,6 +773,7 @@ function readExcel()
 		
 	$facarray = queryMe("SELECT * FROM MFACULTYT WHERE fid LIKE '".$fid."'");
 	$fcourse = $facarray['fcourse'];
+	$fcourse = substr($fcourse,0,-1);
 	$courseArray = explode(';',$fcourse);
 	$retstr = "";
 	for($i=0;$i<count($courseArray);$i++)
@@ -790,7 +791,12 @@ function readExcel()
 		$year = getFullClass($classGet['akayr']);
 		$subGet = queryMe("SELECT * FROM MSUBJECTT where subid like '".$subid."'");
 		$subname = $subGet['subname'];
-		$retstr .= $brname." ".$year." ".$sec." ".$subname."<br />"; 	
+		$batch = $brname." ".getFullClass($year+1)." ".$sec;
+		$retstr .= "<a href='?m=src&q=%&t=0&ip=n&op=c&c=".$batid.":".$sec."'>".$batch."</a>";
+		$array = queryMe("SELECT oid from MOBJECTT where obhandle like '".$subid."' and otyid like '2'");
+		//echo	 "SELECT oid from MOBJECTT where obhandle like '".$subid."' and otyid like '2'";
+		$oid = $array['oid'];
+		$retstr .= "--<a href='?m=p&id='".$oid.">".$subname."</a><br />"; 	
 		
 		
 	

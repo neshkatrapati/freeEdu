@@ -91,7 +91,7 @@ else if($mode == "p")
 	 echo "</div>";
 	 if(isStudent($id))
 	 {
-			echo "<div class='content' align='right'> <div id='placeholder' style='width:600px;height:300px'></div>
+			echo "<div class='content' align='right'> <div id='placeholder' style='width:500px;height:300px'></div>
 			<p id='hoverdata'><span id='clickdata'></span></p></div>";
 			$obj = getObject($id);
 			$array =  queryMe("select sid from MSTUDENTT where srno like '".$obj['obhandle']."'");
@@ -369,4 +369,5 @@ else
 echo "</div>";
 ?>
 </body>
+
 </html>

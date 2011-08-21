@@ -67,6 +67,7 @@ function getSudoMenu()
             <a href='#' class='menu'>Tools</a>
             <ul class='menu-dropdown'>
                  <li><a href='?m=rga'>Add Regulation</a></li>
+                 <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>
             </ul>
             
           </li>
@@ -89,7 +90,17 @@ $retstr .= " <ul class='nav secondary-nav'>
                <li><a href='?m=ep'>Edit Profile</a></li>
                 <li><a href='../login.php'>Logout</a></li>
             </ul>
+            <ul class='nav secondary-nav'>
+          <li class='menu'>
             
+            <a href='#' class='menu'><span class='profname'>
+            ".$oarray["obname"]."
+            </span></a>
+            <ul class='menu-dropdown'>
+                
+               <li><a href='?m=ep'>Edit Profile</a></li>
+                <li><a href='../login.php'>Logout</a></li>
+            </ul>
           </li>
         </ul>
 </div>
@@ -177,7 +188,8 @@ $retstr .= " <ul class='nav secondary-nav'>
             
           </li>
         </ul>
-</div>
+      
+    </div>
     </div>
   </div> <!-- topbar-wrapper -->";
 return $retstr;

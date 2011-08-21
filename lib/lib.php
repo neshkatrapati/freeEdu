@@ -578,7 +578,11 @@ function readExcel()
 		return $brid;	
 	
 	}
-
+	function getFname($name)
+	{
+		$array = explode(" ",$name);
+		return $array[0];
+	}
 	function makeObject($oname,$ohandle,$otyid,$oimgid,$ologin,$opass)
 	{
 	

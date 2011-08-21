@@ -46,7 +46,7 @@ while($s=mysql_fetch_array($student))
     echo "<img src='".$imguri."' width='50' height='50' style='opacity:0.4;filter:alpha(opacity=40)'
 	  onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
   	onmouseout='this.style.opacity=0.4;this.filters.alpha.opacity=20'>
-	<div class='desc'><b><font color=#000000>$srno</b><br /><b></font><font color=#000000>".$s['sname']."</b></font><input type='checkbox' name='chk[]' value=$srno unchecked/></div></div></a>";
+	<div class='desc'><b><font color=#000000>$srno</b><br /><b></font><font color=#000000>".getFname($s['sname'])."</b></font><input type='checkbox' name='chk[]' value=$srno unchecked/></div></div></a>";
 		
 	
 	

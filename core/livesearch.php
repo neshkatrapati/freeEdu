@@ -21,7 +21,7 @@ if($t=="")
 	 	echo "<img src='../".$row['img']."' width='50' height='50' style='opacity:0.8;filter:alpha(opacity=40)'
 	  	onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
   		onmouseout='this.style.opacity=0.8;this.filters.alpha.opacity=20'>
-		<div class='desc'><b><font color=#000000>".$row['obname']."</font></b><br><b><font color=#000000>".$row['type']."</b></font></div></div></a>";
+		<div class='desc'><b><font color=#000000>".getFname($row['obname'])."</font></b><br><b><font color=#000000>".$row['type']."</b></font></div></div></a>";
 	}
 }
 else if($t=='0')
@@ -101,7 +101,7 @@ else if($t=='2')
 	 	echo "<img src='../".$row['img']."' width='50' height='50' style='opacity:0.8;filter:alpha(opacity=40)'
 	  	onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
   		onmouseout='this.style.opacity=0.8;this.filters.alpha.opacity=20'>
-		<div class='desc'><b><font color=#000000>".$row['subname']."</font></b><br><b><font color=#000000>".$brname." ".$regname." ".$class."</b></font></div></div></a>";
+		<div class='desc'><b><font color=#000000>".getFname($row['subname'])."</font></b><br><b><font color=#000000>".$brname." ".$regname." ".$class."</b></font></div></div></a>";
 	}
 
 
@@ -119,7 +119,7 @@ else if($t=='1')
 	 	echo "<img src='../".$row['img']."' width='50' height='50' style='opacity:0.8;filter:alpha(opacity=40)'
 	  	onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
   		onmouseout='this.style.opacity=0.8;this.filters.alpha.opacity=20'>
-		<div class='desc'><b><font color=#000000>".$row['fname']."</font></b><br><b><font color=#000000>".$row['type']."</b></font></div></div></a>";
+		<div class='desc'><b><font color=#000000>".getFname($row['fname'])."</font></b><br><b><font color=#000000>".$row['type']."</b></font></div></div></a>";
 	}
 }
 

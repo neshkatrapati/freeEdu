@@ -43,9 +43,9 @@ while($s=mysql_fetch_array($student))
 	 echo "<a href='?m=p&id=".$oid."'>";	
 	echo "<div class='img'>";
 	  
-    echo "<img src='".$imguri."' width='50' height='50' style='opacity:0.4;filter:alpha(opacity=40)'
+    echo "<img src='".$imguri."' width='50' height='50' style='opacity:0.7;filter:alpha(opacity=40)'
 	  onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
-  	onmouseout='this.style.opacity=0.4;this.filters.alpha.opacity=20'>
+  	onmouseout='this.style.opacity=0.7;this.filters.alpha.opacity=60'>
 	<div class='desc'><b><font color=#000000>$srno</b><br /><b></font><font color=#000000>".getFname($s['sname'])."</b></font><input type='checkbox' name='chk[]' value=$srno unchecked/></div></div></a>";
 		
 	

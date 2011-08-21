@@ -91,7 +91,7 @@ else if($mode == "p")
 	 echo "</div>";
 	 if(isStudent($id))
 	 {
-			echo "<div class='content' align='right'> <div id='placeholder' style='width:500px;height:300px'></div>
+			echo "<div class='content' id='content' align='right'> <div id='placeholder' style='width:500px;height:300px'></div>
 			<p id='hoverdata'><span id='clickdata'></span></p></div>";
 			$obj = getObject($id);
 			$array =  queryMe("select sid from MSTUDENTT where srno like '".$obj['obhandle']."'");
@@ -294,10 +294,44 @@ else if($mode=="sc")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
-else if($mode=="gf")
+else if($mode=="src")
 {
-	
-	
+	echo "<div id='content' class='content'>";
+	if(array_key_exists("q",$_GET))
+	{
+		$q=$_GET['q'];
+		if(array_key_exists("t",$_GET))
+		{
+			
+			$t=$_GET['t'];
+			
+		}
+		if(array_key_exists("ip",$_GET))
+		{
+			
+			$ip=$_GET['ip'];
+			
+		}if(array_key_exists("op",$_GET))
+		{
+			
+			$op=$_GET['op'];
+			
+		}if(array_key_exists("b",$_GET))
+		{
+			
+			$b=$_GET['b'];
+			
+		}
+		if(array_key_exists("c",$_GET))
+		{
+			
+			$c=$_GET['c'];
+			
+		}
+	}
+	include("../core/livesearch2.php");
+	getResult($q,$t,$ip,$op,$b,$c);
+	echo "</div>";
 }
 else if($mode=="str")
 {

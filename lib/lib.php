@@ -1300,7 +1300,7 @@ function readExcel()
 		
 		$query = "SELECT distinct dayid FROM MATDT WHERE batid LIKE '".$batid."'
 			AND sec LIKE '".$sec."'
-			AND dayid BETWEEN '".$datein."' AND '".$dateout."'";
+			AND dayid BETWEEN '".$datein."' AND '".$dateout."' order by(dayid) ASC";
 		
 		$result = mysql_query($query);
 		while($row = mysql_fetch_array($result))

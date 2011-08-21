@@ -1,5 +1,6 @@
 <?php
 $q = $_GET['q'];
+
 $q = strtoupper($q);
 $t='';
 if(array_key_exists('t',$_GET))
@@ -52,7 +53,7 @@ else if($t=='0')
 		}
 		else if($op == 'c')
 		{
-			echo "Op exists";
+			//echo "Op exists";
 			$bat = $_GET['c'];
 			$barray = explode(':',$bat);			
 			$batid = 	$barray[0];
@@ -75,7 +76,7 @@ else if($t=='0')
 	 	echo "<img src='../".$row['img']."' width='50' height='50' style='opacity:0.8;filter:alpha(opacity=40)'
 	  	onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
   		onmouseout='this.style.opacity=0.8;this.filters.alpha.opacity=20'>
-		<div class='desc'><b><font color=#000000>".$row[$matcher]."</font></b><br><b><font color=#000000>".$class."</b></font></div></div></a>";
+		<div class='desc'><b><font color=#000000>".getFname($row[$matcher])."</font></b><br><b><font color=#000000>".$class."</b></font></div></div></a>";
 	}
 
 

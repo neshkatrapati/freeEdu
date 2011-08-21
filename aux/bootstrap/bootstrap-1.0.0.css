@@ -52,7 +52,6 @@ ol,
 ul,
 form,
 label,
-legend,
 button,
 caption,
 tbody,
@@ -357,6 +356,7 @@ div.container-fluid:after {
 div.container-fluid div.sidebar {
   float: left;
   width: 220px;
+
 }
 div.container-fluid div.content {
   min-width: 700px;
@@ -634,7 +634,7 @@ form fieldset {
   margin-bottom: 18px;
   padding-top: 18px;
 }
-form fieldset legend {
+form fieldset legend,legend {
   display: block;
   margin-left: 150px;
   font-size: 20px;

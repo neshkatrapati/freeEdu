@@ -79,18 +79,7 @@ function getSudoMenu()
           $oid = $_COOKIE['object'];
 
 $oarray = getObject($oid);
-$retstr .= " <ul class='nav secondary-nav'>
-          <li class='menu'>
-            
-            <a href='#' class='menu'><span class='profname'>
-            ".$oarray["obname"]."
-            </span></a>
-            <ul class='menu-dropdown'>
-                
-               <li><a href='?m=ep'>Edit Profile</a></li>
-                <li><a href='../login.php'>Logout</a></li>
-            </ul>
-            <ul class='nav secondary-nav'>
+$retstr .= "<ul class='nav secondary-nav'>
           <li class='menu'>
             
             <a href='#' class='menu'><span class='profname'>

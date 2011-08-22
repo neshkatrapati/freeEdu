@@ -1416,4 +1416,46 @@ function readExcel()
 		return $brid;
 		
 	}
+	function tpercent($rno)
+        {
+            include("connection.php");
+            $student=mysql_query("select * from MSTUDENTT where srno='$rno'");
+            $s=mysql_fetch_array($student);
+            $sid=$s['sid'];
+            $batid=$s['batid'];
+            $marks=mysql_query("select * from MAVAILT where batid='$batid' and ros='R'");
+            $num=mysql_num_rows($marks);
+            $mpercent=0;
+	    $per = array();
+	    $i=0;
+            while($m=mysql_fetch_array($marks))
+            {
+                $date=$m['doex'];
+                $akyr=$m['akayr'];
+                $mrid=$m['mrid'];
+                $marks1=mysql_query("select * from MMARKST where sid='$sid' and mrid='$mrid'");
+                $total=0;
+                $mtotal=0;
+                while($m1=mysql_fetch_array($marks1))
+                {
+                    $subj=$m1['subid'];
+                    $subject=mysql_query("select * from MSUBJECTT where subid='$subj'");
+                    $sub=mysql_fetch_array($subject);
+                    $mtotal=$mtotal+$sub['inmax']+$sub['exmax'];
+                    $total=$total+$m1['intm']+ $m1['extm'];
+                }
+                $percent=($total*100)/$mtotal;
+                $mpercent=+$mpercent+$percent;
+		$per[$i] = array();
+		$per[$i][0] = $akyr;
+		$per[$i][1] = $percent; 
+		$i++;
+            }
+	    
+            $ret=$mpercent/$num;
+	    $per[$i][0] = -1;
+	    $per[$i][1] = $ret;
+	    
+            return($per);    
+        }
 ?>

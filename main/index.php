@@ -91,12 +91,14 @@ else if($mode == "p")
 	 echo "</div>";
 	 if(isStudent($id))
 	 {
-			echo "<div class='content' id='content' align='right'> <div id='placeholder' style='width:500px;height:300px'></div>
+			echo "<div class='content' id='content' align='right'> <div id='placeholder' style='width:450px;height:250px'></div>
+			<p id='hoverdata'><span id='clickdata'></span></p><br><div id='placeholderm' style='width:450px;height:250px'></div>
 			<p id='hoverdata'><span id='clickdata'></span></p></div>";
 			$obj = getObject($id);
-			$array =  queryMe("select sid from MSTUDENTT where srno like '".$obj['obhandle']."'");
+			$array =  queryMe("select * from MSTUDENTT where srno like '".$obj['obhandle']."'");
 			//echo "select sid from MSTUDENT where srno like '".$obj['obhandle']."'";
 			getStuGraph($array["sid"],strtotime("-4 weeks"),strtotime("now"));
+			getMarksGraph($array["srno"]);
 	 }
 	 
    	}
@@ -331,6 +333,7 @@ else if($mode=="src")
 	}
 	include("../core/livesearch2.php");
 	getResult($q,$t,$ip,$op,$b,$c);
+
 	echo "</div>";
 }
 else if($mode=="str")

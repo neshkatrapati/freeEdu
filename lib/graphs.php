@@ -1,5 +1,86 @@
 <?php
 
+function getMarksGraph($srno)
+{
+    
+    $array = tpercent($srno);
+    
+     echo "<script type='text/javascript'>
+$(function () {
+    var d1 = [";
+    
+    for($i=0;$i<(count($array)-1);$i++)
+        echo  "[".$i.",".round($array[$i][1],2)."], ";    
+    echo "];
+    $.plot($('#placeholderm'), [
+        {
+        label: 'Classes',  data: d1},
+           ], {
+        series: {
+            lines: { show: true },
+            points: { show: true }
+        },
+        xaxis: {
+           tickDecimals: 0,
+           ticks: [";
+           
+           for($i=0;$i<(count($array)-1);$i++)
+            echo "[".$i.",'".getFullClass($array[$i][0])."'],";
+           
+           echo "]
+        },
+        yaxis: {
+            ticks: 10,
+            tickDecimals: 0,
+        },
+        grid: {
+            
+            hoverable: true, clickable: true,
+            }
+        }
+    );
+});
+
+    function showTooltip(x, y, contents) {
+        $('<div id=\"tooltipm\">' + contents + '</div>').css( {
+            position: 'absolute',
+            display: 'none',
+            top: y + 5,
+            left: x + 5,
+            border: '1px solid #fdd',
+            padding: '2px',
+            'background-color': '#fee',
+            opacity: 0.80
+        }).appendTo('body').fadeIn(200);
+    }
+    
+     var previousPoint = null;
+    $('#placeholderm').bind('plothover', function (event, pos, item) {
+       
+
+        
+            if (item) {
+                if (previousPoint != item.dataIndex) {
+                    previousPoint = item.dataIndex;
+                    
+                    $('#tooltipm').remove();
+                    var x = item.datapoint[0],
+                    y = item.datapoint[1];
+                    var date = item.series.xaxis.ticks[x].label
+                    showTooltip(item.pageX, item.pageY,
+                                'Scored '+y + ' % for '+date);
+                }
+            }
+            else {
+                $('#tooltipm').remove();
+                previousPoint = null;            
+            }
+        
+    });
+</script>";
+    
+}
+
 function getStuGraph($sid,$datein,$dateout)
 {
     $clsname = "Constants";

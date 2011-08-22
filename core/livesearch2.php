@@ -110,7 +110,7 @@ function getResult($q,$t,$ip,$op,$b,$c)
 	
 		$query = "SELECT *,(select oid from MOBJECTT o where obhandle=fid and otyid='0') as oid,(select imguri from MIMGT i where i.imgid = s.imgid) as img  FROM MFACULTYT s WHERE fname LIKE '".$q."%'"; 
 		$sql = mysql_query($query);
-		
+		echo "<legend>Faculty</legend>";
 		while($row = mysql_fetch_array($sql))
 		{
 			echo "<a href='?m=p&id=".$row['oid']."'>";	

@@ -122,7 +122,7 @@ function getAdminMenu()
           <li class='menu'>
             <a href='#' class='menu'>Faculty</a>
             <ul class='menu-dropdown'>
-               <li><a href='?m=fl'>See Faculty List</a></li>
+               <li><a href='?m=src&q=%&t=1'>See Faculty List</a></li>
             </ul>
             
           </li>

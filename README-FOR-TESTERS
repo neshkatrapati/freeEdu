@@ -10,7 +10,8 @@ Step 2:
 -------------------------------------------------
 edit misc/constants.php [$dbuname,$dbpass]	|
 edit Rayon/connection.php 
-edit lib/connection.php 			|	
+edit lib/connection.php 			|
+edit Ediprofile/connection.php			|
 -------------------------------------------------
 
 

@@ -216,7 +216,19 @@ else if($mode=="rga")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
-
+else if($mode=="suba")
+{
+	echo "<div id='content'  class='content'>";
+	if(isSudo($oid))
+	{
+		echo "<center>";
+		include("../core/substituteui.php");
+		echo "</center>";
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
 else if($mode=="ra")
 {
 	echo "<div id='content'  class='content'>";

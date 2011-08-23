@@ -178,7 +178,31 @@ function readExcel()
 		mysql_close($con);
 		return $ret;
 	
-	}	
+	}
+	function getSubjectsAsSelect($brid,$regid,$year,$name)
+	{
+		
+		$clsname = "Constants";
+		$batname = $clsname::$batname;
+		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+		$array = queryMe("select subid from SAVAILT where brid like '".$brid."' and regid like '".$regid."'");
+		$suid = $array['subid'];
+		if($suid == "")
+			return "ERR_INV_REG_BRNC";
+		$sql = "select * from MSUBJECTT where year like '".$year."' and suid like '".$suid."'";
+		
+		$result = mysql_query($sql);
+		$ret = "<select name='".$name."'>";
+		while($row = mysql_fetch_array($result))
+		{
+			$ret .= "<option value='".$row['subid']."'>".$row['subname']."</option>";
+			
+		}
+		$ret .= "</select>";
+		return $ret;
+		
+		
+	}
 	function getFullClass($akayr)
 	{
 		switch($akayr)
@@ -565,6 +589,58 @@ function readExcel()
 		return $imgfile;
 	
 	}
+	function putSubstituteSubject($msubid,$subname,$subcode,$img,$brid,$regid,$inmax,$exmax,$exmin,$cre,$books)
+	{
+		$clsname = "Constants";
+		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+		mysql_select_db($clsname::$dbname, $con);
+		
+		$array = queryMe("select count(subid) cnt from MSUBST");
+		$subid = $array['cnt'];
+		if($img == "")
+			$imgid = getImgId("images/others/book.jpg"); 
+		else
+			$imgid = getImgId($img);
+		$sql = "insert into MSUBST values('".$subid."','".$regid."','".$brid."','".$msubid."','".$subcode."','".$subname."','".$imgid.
+		"','".$inmax."','".$exmax."','".$exmin."','".$cre."','".$books."')";
+		mysql_query($sql);
+		makeObject($subname,$subid,'2',$imgid,"","");
+		notify("Subject Substituted Succesfully!");
+		
+	}
+	function getImgId($imgfile)
+	{
+		
+		$clsname = "Constants";
+		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+		mysql_select_db($clsname::$dbname, $con);
+		
+		$sql = "SELECT imgid from MIMGT where imguri like '".$imgfile."'";
+		$sqlresult = mysql_query($sql);
+		$imcount = mysql_num_rows($sqlresult);
+	;
+		if($imcount>0)
+		{ 
+				$sqlrows = mysql_fetch_array($sqlresult);					
+				return $sqlrows['imgid'];
+					
+		}				
+		else
+		{
+				
+				$sql = "SELECT count(imgid) as cnt from MIMGT";
+				$sqlresult = mysql_query($sql);
+				$sqlrows = mysql_fetch_array($sqlresult);
+				$imcount = $sqlrows['cnt'];
+				$sql = "INSERT INTO MIMGT VALUES('".$imcount."','".$imgfile."')";
+				mysql_query($sql);
+				
+				return $imcount;	
+				
+			
+		}
+					
+	}
 	function getBranchByName($brname)
 	{
 		$clsname = "Constants";
@@ -574,6 +650,19 @@ function readExcel()
 		$result = mysql_query("SELECT brid FROM MBRANCHT WHERE brname='".$brname."'");
 		$row = mysql_fetch_array($result);
 		$brid = $row["brid"];
+		
+		return $brid;	
+	
+	}
+	function getRegByName($brname)
+	{
+		$clsname = "Constants";
+		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+		mysql_select_db($clsname::$dbname, $con);
+		
+		$result = mysql_query("SELECT regid FROM MREGT WHERE regname='".$brname."'");
+		$row = mysql_fetch_array($result);
+		$brid = $row["regid"];
 		
 		return $brid;	
 	
@@ -1052,7 +1141,7 @@ function readExcel()
 			$treturn = ""; 
 			$treturn .=  "<td><table><tr><td><a href='?m=p&id=".$row1['oid']."'><img src='../".$row1['imguri']."' width='40' height='40' style='opacity:0.4;filter:alpha(opacity=40)'
 	  	onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
-  		onmouseout='this.style.opacity=0.4;this.filters.alpha.opacity=20'></img></a></td><td><div style='text-align:center'>".$row1['srno']."<br>".$row1['sname']."</div>
+  		onmouseout='this.style.opacity=0.4;this.filters.alpha.opacity=20'></img></a></td><td><div style='text-align:center'>".$row1['srno']."</td><td>".$row1['sname']."</div>
 			</div></td></tr></table></td>";
 			$query = "SELECT * FROM MATDT WHERE batid LIKE '".$batid."' AND sec LIKE '".$sec."' AND dayid LIKE '".$date."' order by(sessionid)";
 			$result = mysql_query($query);
@@ -1192,10 +1281,10 @@ function readExcel()
 		{
 			 
 			$return .=  "<tr><td><table><tr><td><a href='?m=p&id=".$row1['oid']."'>
-			<img src='../".$row1['imguri']."' width='40' height='40' style='opacity:0.4;filter:alpha(opacity=40)'
+			<img src='../".$row1['imguri']."' width='40' height='40' style='opacity:0.75;filter:alpha(opacity=75)'
 			onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
-			onmouseout='this.style.opacity=0.4;this.filters.alpha.opacity=20'>
-			</img></a></td><td><div style='text-align:center'>".$row1['srno']."<br>".$row1['sname']."</div>
+			onmouseout='this.style.opacity=0.75;this.filters.alpha.opacity=75'>
+			</img></a></td><td><div style='text-align:center'>".$row1['srno']."</td><td>".$row1['sname']."</div>
 			</div></td></tr></table></td>";
 			
 			for($i=0;$i<count($prefetch);$i++)

@@ -1004,6 +1004,7 @@ function readExcel()
 	{
 		echoDayReportCSS();
 		echoDayReportJS();
+		
 		$clsname = "Constants";
 		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
 		mysql_select_db($clsname::$dbname, $con);
@@ -1014,6 +1015,8 @@ function readExcel()
 		$result = mysql_query($query);
 		$return = "<table border='1'><th>Students</th>";
 		$counter = 0;
+		$periods = array();
+		$i=0;
 		while($row = mysql_fetch_array($result))
 		{
 			$subarray = queryMe("SELECT * FROM MSUBJECTT WHERE subid LIKE '".$row['subid']."'");
@@ -1022,8 +1025,10 @@ function readExcel()
 			$facarray = queryMe("SELECT * FROM MFACULTYT WHERE fid like '".$row['fid']."'");
 			$facname = $facarray['fname'];
 			$facuri = getImgUri($facarray['imgid']);
-			
-			$return .= "<th> <a id='hider' onclick='hideShow(\"D".$counter."\")' href='#'> Period".$row['sessionid']."</a>
+			$periods[$i] = array();
+			$periods[$i][0]=$row['sessionid'];
+			$periods[$i][1]= getPersCount($batid,$sec,$date,$row['sessionid']);
+			$return .= "<th> <a id='hider' onclick='hideShow(\"D".$counter."\")' href='#'> Period".$row['sessionid']."[".$periods[$i][1]."]</a>
 				<div id='D".$counter."' style=\"display:none;\">
 				<img src='../".$suburi."' width='70' height='70' style='opacity:0.9;filter:alpha(opacity=40)'
 	  	onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
@@ -1034,7 +1039,9 @@ function readExcel()
 				</div>
 			</th>";
 			$counter++;
+			$i++;
 		}
+		showDayReportGraph($periods);
 		$bunkers = 0;
 		$total = 0;
 		$sql = "SELECT *,(select imguri from MIMGT i where i.imgid=s.imgid) as imguri ,(select oid from MOBJECTT o where obhandle=srno and otyid='0') as oid FROM MSTUDENTT s WHERE batid LIKE '".$batid."' AND sec LIKE '".$sec."' order by('batid') DESC";
@@ -1106,6 +1113,24 @@ function readExcel()
 		
 		$summary = "<table border='1'><tr><td>Total:</td><td>".$total."</td></tr><tr><td>Bunkers:</td><td>".$bunkers."</td></tr></table><br />";
 		return $summary.$return;
+	}
+	function getPersCount($batid,$sec,$dayid,$pid)
+	{
+		
+		$array = queryMe("SELECT adata,pa from ADATAT where aid like (select aid from MATDT where batid like '".$batid."'
+				 and sec like '".$sec."'
+				 and dayid like '".$dayid."' and sessionid like '".$pid."')");
+		$pa = $array["pa"];
+		$array2 = explode('.',$array["adata"]);
+		$count = count($array2);
+		
+		$array = queryMe("SELECT count(sid) as cnt from MSTUDENTT where batid like '".$batid."' and sec like '".$sec."'");
+		$totcnt = $array["cnt"];
+		
+		if($pa == "P")
+			return $count;
+		else
+			return $totcnt-$count;
 	}
 	function getConReport($batid,$sec,$datein,$dateout)
 	{
@@ -1458,4 +1483,72 @@ function readExcel()
 	    
             return($per);    
         }
+	function showDayReportGraph($periods)
+	{
+	$append='';
+	
+	for($i=0;$i<count($periods);$i++)
+	{
+        
+        $append .= "sin.push([".$periods[$i][0].", ".$periods[$i][1]."]);\n";
+        
+	}
+echo "<script type='text/javascript'>
+$(function () {
+    var sin = [], cos = [];
+    ".$append."var plot = $.plot($('#placeholder'),
+           [ { data: sin, label: 'Period'} ], {
+               series: {
+                   lines: { show: true },
+                   points: { show: true }
+               },
+               grid: { hoverable: true, clickable: true },
+	       xaxis: {ticks: ".count($periods)."},
+	       yaxis: {tickDecimals: 0},
+               
+             });
+
+    function showTooltip(x, y, contents) {
+        $('<div id=\'tooltip\'>' + contents + '</div>').css( {
+            position: 'absolute',
+            display: 'none',
+            top: y + 5,
+            left: x + 5,
+            border: '1px solid #fdd',
+            padding: '2px',
+            'background-color': '#fee',
+            opacity: 0.80
+        }).appendTo('body').fadeIn(200);
+    }
+
+    var previousPoint = null;
+    $('#placeholder').bind('plothover', function (event, pos, item) {
+        $('#x').text(pos.x);
+        $('#y').text(pos.y);
+
+        if (item) {
+                if (previousPoint != item.dataIndex) {
+                    previousPoint = item.dataIndex;
+                    
+                    $('#tooltip').remove();
+                    var x = item.datapoint[0],
+                        y = item.datapoint[1];
+                    
+                    showTooltip(item.pageX, item.pageY,
+                                'Attendance of '+item.series.label + ' ' + x + ' Is ' + y);
+                }
+            }
+           
+        
+    });
+
+    $('#placeholder').bind('plotclick', function (event, pos, item) {
+        if (item) {
+            
+            plot.highlight(item.series, item.datapoint);
+        }
+    });
+});
+</script>";
+}
 ?>

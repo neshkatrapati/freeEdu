@@ -55,6 +55,9 @@
 			{
 			    if($obrid=='%' || $brid==$obrid)
 			    {
+				echo " <div id='placeholder' style='width:500px;height:300px'></div>
+				 <p id='hoverdata'> <span id='clickdata'></span></p>";
+				 echo  getStuGraph($sid,strtotime($datein),strtotime($dateout));
 			        echo getStuReport($sid,strtotime($datein),strtotime($dateout),-1);
 			    }
 			    else

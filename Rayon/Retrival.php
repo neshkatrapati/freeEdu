@@ -24,7 +24,8 @@ while($s = mysql_fetch_array($result))
 	$image=mysql_query("select * from MIMGT where imgid='$imgid'");
 	$img=mysql_fetch_array($image);
 	$imguri=$img[1];
-	echo "<img src='../".$imguri."' width='150' height='150' class='imgshadow'><br /><br />";
+	echo "<img src='../".$imguri."' width='150' height='150' class='imgshadow'></img><br /><br />";
+	
 }
 if($did>=0)
 {
@@ -87,11 +88,16 @@ while($REG=mysql_fetch_array($reg))
 	echo "<br>Regulation:".$reg;
 }
 $regular=mysql_query("select * from MAVAILT where batid='$batid' and ros='R'");
+$i=0;
 while($reglr=mysql_fetch_array($regular))
 {
 	$mrid=$reglr[0];
 	$akyr=$reglr[4];
-	echo("<br><div1><h2>Regular Results</h2></div1>");
+	echo "<br><div1><h2>Regular Results</h2></div1><br />";
+	if($i==0){
+	echo "<div id='placeholderm' style='width:450px;height:250px'></div>
+			<p id='hoverdata'><span id='clickdata'></span></p></div>" ;
+	echo getMarksGraph($srno);}
 	if($akyr=='1')
 	{
 		echo "<br>Results For 1st Year Regular<br>";
@@ -197,7 +203,8 @@ while($reglr=mysql_fetch_array($regular))
 	{
 		detainRegular($newbatid,$newakyr,$sid);
 		break;
-	}		
+	}
+	$i++;
 }
 
 $supply=mysql_query("select * from MAVAILT where batid='$batid' and ros='S'");

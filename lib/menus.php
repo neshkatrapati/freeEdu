@@ -205,7 +205,16 @@ function getFacMenu()
             
           </li>
         </ul>
-        
+         <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Marks</a>
+            <ul class='menu-dropdown'>
+              <li><a href='?m=inc'>Calculate Internals</a></li>
+<li><a href='?m=fp'>See Your Plan</a></li>
+            </ul>
+            
+          </li>
+        </ul>
      
          <form action='?m=os' method='post'>
           <input type='text' placeholder='Search' name='srch' />

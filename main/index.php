@@ -388,6 +388,17 @@ else if($mode=="fp")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+else if($mode=="inc")
+{
+	echo "<div id='content'  class='content'>";
+	if(isFaculty($oid))
+	{
+		include("../Rayon/internals.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
 else if($mode=="ep")
 {
 	echo "<div id='content'  class='content'>";

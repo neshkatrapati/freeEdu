@@ -669,6 +669,7 @@ form input[type=checkbox], form input[type=radio] {
   cursor: pointer;
 }
 form input[type=text],
+form input[type=number],
 form input[type=password],
 form textarea,
 form select,

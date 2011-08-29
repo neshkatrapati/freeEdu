@@ -42,12 +42,12 @@ $(document).ready(function(){
   // Dropdown example for topbar nav
   // ===============================
 
-  $("body").bind("hover", function(e) {
+  $("body").bind("click", function(e) {
     $("ul.menu-dropdown").hide();
     $('a.menu').parent("li").removeClass("open").children("ul.menu-dropdown").hide();
   });
 
-  $("a.menu").hover(function(e) {
+  $("a.menu").click(function(e) {
     var $target = $(this);
     var $parent = $target.parent("li");
     var $siblings = $target.siblings("ul.menu-dropdown");

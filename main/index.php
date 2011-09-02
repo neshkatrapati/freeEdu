@@ -9,7 +9,7 @@
 <script language="javascript" type="text/javascript" src="../lib/flot/jquery.flot.js"></script>
 <link rel="stylesheet" href="../aux/thickbox/ThickBox.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../aux/bootstrap/bootstrap-1.0.0.css" type="text/css" media="screen" />
-<script src="http://autobahn.tablesorter.com/jquery.tablesorter.min.js"></script>
+
 <link href="../aux/bootstrap/docs/assets/js/google-code-prettify/prettify.css" rel="stylesheet" type="text/css">
 <script src="../aux/bootstrap/docs/assets/js/google-code-prettify/prettify.js"></script>
 <script src="../aux/bootstrap/docs/assets/js/application.js"></script>
@@ -223,6 +223,19 @@ else if($mode=="suba")
 	{
 		echo "<center>";
 		include("../core/substituteui.php");
+		echo "</center>";
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+else if($mode=="immap")
+{
+	echo "<div id='content'  class='content'>";
+	if(isSudo($oid))
+	{
+		echo "<center>";
+		include("../core/imagemap.php");
 		echo "</center>";
 	}
 	else

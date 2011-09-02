@@ -14,7 +14,7 @@ $con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
 mysql_select_db($clsname::$dbname, $con);
 if($t=="")
 {
-	$sql = mysql_query("SELECT *,(select imguri from MIMGT  where imgid = oimgid) as img,(select tyname from OTYPET where tyid=otyid) as type FROM MOBJECTT WHERE obname LIKE '".$q."%'");
+	$sql = mysql_query("SELECT *,(select imguri from MIMGT  where imgid = oimgid) as img,(select tyname from OTYPET where tyid=otyid) as type FROM MOBJECTT WHERE obname LIKE '%".$q."%'");
 	while($row = mysql_fetch_array($sql))
 	{
 		echo "<a href='?m=p&id=".$row['oid']."'>";	

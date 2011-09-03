@@ -1,5 +1,5 @@
 <?php
-$con = mysql_connect("localhost","root","1234");
+$con = mysql_connect("localhost","root","maturi");
 mysql_select_db("freeEdu", $con);
 ?>
 

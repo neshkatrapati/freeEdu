@@ -670,8 +670,11 @@ function readExcel()
 	}
 	function getFname($name)
 	{
-		$array = explode(" ",$name);
-		return $array[0];
+		//$array = explode(" ",$name);
+		if(strlen($name)>10)
+			$name = substr($name,0,8);
+			$name .= "..";
+		return $name;
 	}
 	function makeObject($oname,$ohandle,$otyid,$oimgid,$ologin,$opass)
 	{

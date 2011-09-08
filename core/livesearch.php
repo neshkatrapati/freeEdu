@@ -14,6 +14,7 @@ $con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
 mysql_select_db($clsname::$dbname, $con);
 if($t=="")
 {
+	
 	$sql = mysql_query("SELECT *,(select imguri from MIMGT  where imgid = oimgid) as img,(select tyname from OTYPET where tyid=otyid) as type FROM MOBJECTT WHERE obname LIKE '%".$q."%'");
 	while($row = mysql_fetch_array($sql))
 	{
@@ -110,7 +111,7 @@ else if($t=='2')
 else if($t=='1')
 {
 
-	$query = "SELECT *,(select oid from MOBJECTT o where obhandle=fid and otyid='0') as oid,(select imguri from MIMGT i where i.imgid = s.imgid) as img  FROM MFACULTYT s WHERE fname LIKE '".$q."%'"; 
+	$query = "SELECT *,(select oid from MOBJECTT o where obhandle=fid and otyid='1') as oid,(select imguri from MIMGT i where i.imgid = s.imgid) as img  FROM MFACULTYT s WHERE fname LIKE '".$q."%'"; 
 	$sql = mysql_query($query);
 	
 	while($row = mysql_fetch_array($sql))

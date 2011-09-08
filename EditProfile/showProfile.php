@@ -115,7 +115,7 @@ echo "<img src='$imguri' width='$width' height='$height' border='1'/>";
 echo "<h3>$obname</h3>";
 if(isStudent($oid))
 {
-	$array1 = queryMe("select * from MSTUDENTT where srno like '".$obhandle."'");
+	$array1 = queryMe("select * from MSTUDENTT where sid like '".$obhandle."'");
 	$batid = $array1["batid"];
 	$sec = $array1["sec"];
 	$array2 = queryMe("select (select brname from MBRANCHT br where br.brid=ba.brid) as brname,akayr from MBATCHT ba where batid like '".$batid."'");

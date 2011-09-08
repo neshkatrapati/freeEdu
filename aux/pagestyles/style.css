@@ -100,6 +100,25 @@ color: #CCC;
 	border: 1px solid;
 	
 }
+.pills
+{
+	
+	margin: 5px 3px 5px 0;
+	padding: 0 15px;
+	text-shadow: 0 1px 1px white;
+	line-height: 30px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	display:block;
+	color: #0069D6;
+}
+.pills hover {
+background: #0050A3;
+color: white;
+text-decoration: none;
+text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
 #content,#notif,#noterr,#notwar
 {
 	margin-right:100px;

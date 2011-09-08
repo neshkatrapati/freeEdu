@@ -61,7 +61,7 @@ function getResult($q,$t,$ip,$op,$b,$c)
 			}
 		}
 		$sql = mysql_query("SELECT *,(select imguri from MIMGT i where i.imgid = s.imgid) 
-		as img,(select oid from MOBJECTT o where obhandle=srno and otyid='0') as oid ,(select batyr from MBATCHT d where d.batid=s.batid ) as batyr,(select akayr from MBATCHT d2 where d2.batid=s.batid) 
+		as img,(select oid from MOBJECTT o where obhandle=sid and otyid='0') as oid ,(select batyr from MBATCHT d where d.batid=s.batid ) as batyr,(select akayr from MBATCHT d2 where d2.batid=s.batid) 
 		as akayr FROM MSTUDENTT s WHERE ".$matcher." LIKE '".$q."%'".$extra);
 		
 		while($row = mysql_fetch_array($sql))

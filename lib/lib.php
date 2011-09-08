@@ -264,7 +264,7 @@ function readExcel()
 			$stuIncrement = $stuCount+$i;
 			$insstr = "insert into MSTUDENTT values('".$stuIncrement."'";
 			$imgid = "";
-		
+			//echo $incount;
 			for ($j=0;$j<=$incount+1;$j++)
 			{
 				
@@ -285,7 +285,7 @@ function readExcel()
 				{
 					$img = "images/faces/".$data[$i][$j].".jpg";
 					$sql = "SELECT imgid from MIMGT where imguri like '".$img."'";
-					echo $img;
+					//echo $img;
 					$sqlresult = mysql_query($sql);
 					$imcount = mysql_num_rows($sqlresult);
 					if($imcount>0)
@@ -314,9 +314,10 @@ function readExcel()
 				
 			}
 			$insstr .= ",'','0')";
+			//echo $insstr;
 			mysql_query($insstr);
 			$index = $objectCount+$i;
-			$makeObject = "insert into MOBJECTT values('".$index."','".$data[$i][1]."','".$data[$i][0]."','0','".$imgid."','','','')";		
+			$makeObject = "insert into MOBJECTT values('".$index."','".$data[$i][1]."','".$stuIncrement."','0','".$imgid."','','','')";		
 			mysql_query($makeObject);
 			$insstr = "";			
 		}

@@ -68,6 +68,7 @@ function getSudoMenu()
             <ul class='menu-dropdown'>
                  <li><a href='?m=rga'>Add Regulation</a></li>
                  <li><a href='?m=suba'>Substitute Subjects</a></li>
+                 <li><a href='?m=immap'>Assign Images To Subjects[**Experimental**]</a></li>
                  <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>
             </ul>
             

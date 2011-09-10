@@ -67,6 +67,8 @@ function showProf($oid)
 		$otyid=$img['otyid'];
 		$obhandle=$img['obhandle'];
 	}
+	
+	
 	$obj=mysql_query("select * from OTYPET where tyid='$otyid'");
 	while($object=mysql_fetch_array($obj))
 	{	
@@ -83,6 +85,13 @@ function showProf($oid)
 	while($imgur=mysql_fetch_array($imgurl))
 	{
 		$imguri="../".$imgur[0];
+	}
+	if($otyid == "2")
+	{
+		//echo "select (select imguri from MIMGT i where i.imgid=s.imgid) as imguri from MSUBJECTT s where subcode='".$obhandle."'";
+		$array1 = queryMe("select (select imguri from MIMGT i where i.imgid=s.imgid) as imguri from MSUBJECTT s where subcode='".$obhandle."'");
+		$imguri = "../".$array1["imguri"];
+		
 	}
 	list($width, $height, $type, $attr) = getimagesize($imguri);
 	if($width>$height)
@@ -106,7 +115,7 @@ echo "<img src='$imguri' width='$width' height='$height' border='1'/>";
 echo "<h3>$obname</h3>";
 if(isStudent($oid))
 {
-	$array1 = queryMe("select * from MSTUDENTT where srno like '".$obhandle."'");
+	$array1 = queryMe("select * from MSTUDENTT where sid like '".$obhandle."'");
 	$batid = $array1["batid"];
 	$sec = $array1["sec"];
 	$array2 = queryMe("select (select brname from MBRANCHT br where br.brid=ba.brid) as brname,akayr from MBATCHT ba where batid like '".$batid."'");

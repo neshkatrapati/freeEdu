@@ -42,12 +42,12 @@ $(document).ready(function(){
   // Dropdown example for topbar nav
   // ===============================
 
-  $("body").bind("hover", function(e) {
+  $("body").bind("click", function(e) {
     $("ul.menu-dropdown").hide();
     $('a.menu').parent("li").removeClass("open").children("ul.menu-dropdown").hide();
   });
 
-  $("a.menu").hover(function(e) {
+  $("a.menu").click(function(e) {
     var $target = $(this);
     var $parent = $target.parent("li");
     var $siblings = $target.siblings("ul.menu-dropdown");
@@ -65,24 +65,7 @@ $(document).ready(function(){
   });
 
 
-  // table sort example
-  // ==================
-
-  $("#sortTableExample").tablesorter( {sortList: [[1,0]]} );
-
-
-  // add on logic
-  // ============
-
-  $('.add-on :checkbox').click(function() {
-    if ($(this).attr('checked')) {
-      $(this).parents('.add-on').addClass('active');
-    } else {
-      $(this).parents('.add-on').removeClass('active');
-    }
-  });
-
-
+ 
   // Disable certain links in docs
   // =============================
 

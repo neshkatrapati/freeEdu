@@ -264,7 +264,7 @@ function readExcel()
 			$stuIncrement = $stuCount+$i;
 			$insstr = "insert into MSTUDENTT values('".$stuIncrement."'";
 			$imgid = "";
-		
+			//echo $incount;
 			for ($j=0;$j<=$incount+1;$j++)
 			{
 				
@@ -285,7 +285,7 @@ function readExcel()
 				{
 					$img = "images/faces/".$data[$i][$j].".jpg";
 					$sql = "SELECT imgid from MIMGT where imguri like '".$img."'";
-					echo $img;
+					//echo $img;
 					$sqlresult = mysql_query($sql);
 					$imcount = mysql_num_rows($sqlresult);
 					if($imcount>0)
@@ -314,9 +314,10 @@ function readExcel()
 				
 			}
 			$insstr .= ",'','0')";
+			//echo $insstr;
 			mysql_query($insstr);
 			$index = $objectCount+$i;
-			$makeObject = "insert into MOBJECTT values('".$index."','".$data[$i][1]."','".$data[$i][0]."','0','".$imgid."','','','')";		
+			$makeObject = "insert into MOBJECTT values('".$index."','".$data[$i][1]."','".$stuIncrement."','0','".$imgid."','','','')";		
 			mysql_query($makeObject);
 			$insstr = "";			
 		}
@@ -669,8 +670,11 @@ function readExcel()
 	}
 	function getFname($name)
 	{
-		$array = explode(" ",$name);
-		return $array[0];
+		//$array = explode(" ",$name);
+		if(strlen($name)>10)
+			$name = substr($name,0,8);
+			$name .= "..";
+		return $name;
 	}
 	function makeObject($oname,$ohandle,$otyid,$oimgid,$ologin,$opass)
 	{
@@ -1817,5 +1821,74 @@ $(function () {
     });
 });
 </script>";
+}
+function getBookImages($search,$subid,$ind)
+{
+$srcurl = implode("+",$search);
+$url = "https://ajax.googleapis.com/ajax/services/search/images?" .
+       "v=1.0&q=".$srcurl;
+
+// sendRequest
+// note how referer is set manually
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_REFERER, "www.google.com");
+$body = curl_exec($ch);
+curl_close($ch);
+$ret = "";
+// now, process the JSON string
+$json = json_decode($body);
+// now have some fun with the results...
+$demo = $json;
+$results = $demo->responseData->results;
+$clsname = "Constants";
+$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+mysql_select_db($clsname::$dbname, $con);
+
+$arry = queryMe("select imgid from MSUBJECTT where subid like '".$subid."'");
+$imgcurl = getImgUri($arry["imgid"]);	
+for($i=0;$i<count($results);$i++)
+{
+	$item = $results[$i];
+	$url = $item->url;
+	$width = 150;
+	$height = 200;
+	$ret .= "<td><div class='img'><img src='".$url."' width='".$width."' height='".$height."' style='padding-right:5px;z-index:1'></img><div class='desc'>
+	<input type='radio' name='selected".$ind."' value='".$subid."<".$url."<".$item->imageId."' style='z-index:4'></input></div></div></td>"; //Replace <
+	
+}
+//$ret .= "<td><div class='img'><img src='../".$imgcurl."' width='".$width."' height='".$height."' style='padding-right:5px;z-index:1'></img><div class='desc'>Donot replace<br />
+	//<input type='radio' name='selected".$ind."' value='NULL' style='z-index:4'></input></div></div></td>";
+return $ret;
+}
+function replaceSubjectImage($subid,$imguri,$imgid)
+{
+	
+	$imgnamea = explode(".",$imguri);
+	$temp = count($imgnamea)-1;
+	$imgname = $imgnamea[$temp];
+	$img = 'images/others/'.$imgid.".".$imgname;
+	echo $img;
+	$ch = curl_init($imguri);
+	$fp = fopen("../".$img, 'wb');
+	curl_setopt($ch, CURLOPT_FILE, $fp);
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	curl_exec($ch);
+	curl_close($ch);
+	fclose($fp);
+	
+	$clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	
+	$arr1 = queryMe("select count(imgid) as cnt from MIMGT");
+	$imgid = $arr1["cnt"];
+	
+	
+	mysql_query("insert into MIMGT values('".$imgid."','".$img."')");
+	mysql_query("update MSUBJECTT set imgid='".$imgid."' where subid like '".$subid."'");
+	
+	
 }
 ?>

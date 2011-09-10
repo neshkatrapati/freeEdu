@@ -401,6 +401,63 @@ else if($mode=="fp")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+else if($mode=="edit_att")
+{
+	echo "<div id='content' class='content'>";
+	if(isFaculty($oid))
+	{
+		include("../Roster/editAtt.php"); 
+		echo "<center>".getFacPlan($array['obhandle'])."</center>";
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+else if($mode=="xdebug")
+{
+	echo "<div id='content' class='content'>";
+	if(isSudo($oid))
+	{
+		if(file_exists("../misc/.xdebug"))
+		{
+			$file = fopen("../misc/.xdebug","r");
+			echo "<center>";
+			echo "<a href='?m=xdebug_clear'>Clear Entries</a><br />";
+			echo "<table class='xdebug' style='text-align:center;'>";
+			
+			echo "<th>Debug_Message</th><th>Filename</th><th>Line Number</th><th>Date</th><th>Time</th>";
+			while(!feof($file))
+				echo fgets($file);
+			echo "</table></center>";
+		}
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+else if($mode=="xdebug_exp")
+{
+	echo "<div id='content' class='content'>";
+	if(isSudo($oid))
+	{
+		xDebug("Message");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+else if($mode=="xdebug_clear")
+{
+	echo "<div id='content' class='content'>";
+	if(isSudo($oid))
+	{
+		unlink("../misc/.xdebug");
+		echo "<script type='text/javascript'>window.location='?m=xdebug';</script>";
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
 else if($mode=="inc")
 {
 	echo "<div id='content'  class='content'>";

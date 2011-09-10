@@ -69,6 +69,7 @@ function getSudoMenu()
                  <li><a href='?m=rga'>Add Regulation</a></li>
                  <li><a href='?m=suba'>Substitute Subjects</a></li>
                  <li><a href='?m=immap'>Assign Images To Subjects[**Experimental**]</a></li>
+                 <li><a href='?m=create_student'>Create Username For Student</a></li>
                  <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>
             </ul>
             
@@ -243,6 +244,63 @@ $retstr .= " <ul class='nav secondary-nav'>
   </div> <!-- topbar-wrapper -->";
 return $retstr;
 }
+function getStuMenu()
+{
+ $retstr =  " <div class='page-header'>
+    
+  </div>
+  
+  <div class='topbar-wrapper' style='z-index: 5;'>
+    <div class='topbar'>
+      <div class='container fixed'>
+        <h3><a class='logo' href='?'>freeEdu</a></h3>
+       <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Attendance</a>
+            <ul class='menu-dropdown'>
+              <li><a href='?m=see_att'>See Your Attendance</a></li>
+
+            </ul>
+            
+          </li>
+        </ul>
+         <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Marks</a>
+            <ul class='menu-dropdown'>
+              <li><a href='?m=see_marks'>See Marks</a></li>
+
+            </ul>
+            
+          </li>
+        </ul>
+     
+         <form action='?m=os' method='post'>
+          <input type='text' placeholder='Search' name='srch' />
+        </form>";
+        
+        $oid = $_COOKIE['object'];
+
+$oarray = getObject($oid);
+$retstr .= " <ul class='nav secondary-nav'>
+          <li class='menu'>
+            
+            <a href='#' class='menu'><span class='profname'>
+            ".$oarray["obname"]."
+            </span></a>
+            <ul class='menu-dropdown'>
+                
+               <li><a href='?m=ep'>Edit Profile</a></li>
+                <li><a href='../login.php'>Logout</a></li>
+            </ul>
+            
+          </li>
+        </ul>
+</div>
+    </div>
+  </div> <!-- topbar-wrapper -->";
+return $retstr;
+}
 function getMenu()
 {
 	
@@ -254,6 +312,8 @@ function getMenu()
 		return getFacMenu();
         else if($oarray['otyid']==3)
 		return getAdminMenu();
+         else if($oarray['otyid']==0)
+		return getStuMenu();
 
 
 }

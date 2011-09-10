@@ -446,6 +446,17 @@ else if($mode=="xdebug_exp")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+else if($mode=="create_student")
+{
+	echo "<div id='content' class='content'>";
+	if(isSudo($oid))
+	{
+		include("../core/createStudentUser.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
 else if($mode=="xdebug_clear")
 {
 	echo "<div id='content' class='content'>";

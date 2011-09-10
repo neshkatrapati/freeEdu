@@ -13,13 +13,13 @@ function getSudoMenu()
         <ul class='nav'>
           <li class='menu'>
             <a href='#' class='menu'>Batches</a>
-            <ul class='menu-dropdown'>
-              <li><a href='?m=ba'>Add A Batch</a></li>
-                        <li><a href='?m=up'>Upgrade Batches</a></li>
-                        <li><a href='?m=sl'>See Students List</a></li>
-                        <li><a href='?m=sa'>Add A Subject List</a></li>
-              
-            </ul>
+            
+	    <ul class='menu-dropdown'>
+	      <li><a href='?m=ba'>Add A Batch</a></li>
+              <li><a href='?m=up'>Upgrade Batches</a></li>
+              <li><a href='?m=sl'>See Students List</a></li>
+              <li><a href='?m=sa'>Add A Subject List</a></li>
+	    </ul>
             
           </li>
         </ul>

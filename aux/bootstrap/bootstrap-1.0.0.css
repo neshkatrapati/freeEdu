@@ -1127,13 +1127,16 @@ div.topbar ul li.menu a.menu:after {
   -moz-opacity: 0.5;
   opacity: 0.5;
 }
-div.topbar ul li.menu.open a.menu, div.topbar ul li.menu.open a:hover {
-  background-color: #00b4eb;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
+a.menu:hover
+{
+  display:block;
+  margin-left: -10px;
+  text-decoration:bold;
+  
 }
-div.topbar ul li.menu.open ul {
-  display: block;
+ul.menu-dropdown.open a:hover
+{
+  display:block;
 }
 div.topbar ul li.menu.open ul li a {
   background-color: transparent;

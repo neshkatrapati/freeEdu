@@ -898,8 +898,6 @@ function readExcel()
 }
 	function getFacClasses($name,$fid,$extra)
 	{
-		
-		
 		$farray = queryMe("SELECT * FROM MFACULTYT WHERE fid='".$fid."'");
 		$fcourse = $farray["fcourse"];
 		$clsarray = explode(";",$fcourse);
@@ -944,8 +942,91 @@ function readExcel()
 			print_r($p);	
 		}
 	}
-
-
+	
+	
+	function getMPeriods($batid,$sec,$date,$sujid)
+	{
+		$date = strtotime($date);
+		$sub=mysql_query("select * from MSUBJECTT where subid='$sujid'");
+		$subname=mysql_fetch_array($sub);
+		$return.="<br>";
+		$return="<table cellpadding='5'>";
+		$return.="<tr>";
+		$return.="<th>Classes Taken By<br> ".$subname['subname']."</th>";
+		$return.="<th>All Clases</th></tr>";
+		$return.="<tr><td>";
+		$return.="<table border='1'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
+		$att=mysql_query("select * from MATDT where sec='$sec' and batid='$batid' and dayid='$date' order by(sessionid)");
+		while($a=mysql_fetch_array($att))
+		{
+		    $subid=$a['subid'];
+		    $fid=$a['fid'];
+		    $p=$a['sessionid'];
+		    $aid=$a['aid'];
+		    if($subid==$sujid)
+		    {
+		       $res=mysql_query("select * from SMETAT where batid='$batid' and sec='$sec' and pid='$p'");
+		       $t=mysql_fetch_array($res);
+		       $timeinfo=$t['timeinfo'];
+		       $x=explode(';',$timeinfo);
+		       $return.="<tr><td>Period".$p."</td>";
+		       $return.="<td><input type='radio' name='per' value='$p'></td>";
+		       $return.="<td>$x[0]</td>";
+		       $return.="<td>$x[1]</td>";
+		       $return.="<input type='hidden' name='aid' value='$aid'>";
+		       $return.="</tr>";
+		    }
+		}
+		$return.="</table></td><td>";
+		$result=mysql_query("select * from SMETAT where batid='$batid' and sec='$sec' order by(pid)");
+		$return.="<table border='1'><tr><th>Period</th><th></th><th>Start</th><th>End</th><th></th><th>Taken By</th></tr>";
+		$get=mysql_query("select sessionid from MATDT where batid='$batid' and sec='$sec' and dayid='$date'");
+		while($pr=mysql_fetch_array($get))
+		{
+			$arr[]=$pr[0];
+		}
+		while($res=mysql_fetch_array($result))
+		{
+			$aid1=$aid1['aid'];
+			$pid=$res['pid'];
+			$s1=mysql_query("select * from MATDT where sec='$sec' and batid='$batid' and dayid='$date' and sessionid='$pid'");
+			$s2=mysql_fetch_array($s1);
+			$aid1=$s2['aid'];
+			if(in_array($pid,$arr))
+			{
+				$subject=mysql_query("select * from MSUBJECTT where subid='$s2[subid]'");
+				$subname=mysql_fetch_array($subject);
+				$return.="<tr>";
+				$timeinfo=$res['timeinfo'];
+				$x=explode(';',$timeinfo);
+				$return.="<td>Period $pid:</td>";
+				$return.="<td><input type='radio' name='per1' value='".$pid."'></td>";
+				$return.="<td>$x[0]</td>";
+				$return.="<td>$x[1]</td>";
+				$return.="<td><img src='../images/others/done.jpg' width='18'></td>";
+				$return.="<input type='hidden' name='aid1[$pid]' value='$aid1'>";
+				$return.="<td>$subname[subname]</td>";
+				$return.= "</tr>";
+				continue;
+			}
+				$return.="<tr>";
+				$timeinfo=$res['timeinfo'];
+				$x=explode(';',$timeinfo);
+				$return.="<td>Period $pid:</td>";
+				$return.="<td><input type='radio' name='per1' value='".$pid."'></td>";
+				$return.="<td>$x[0]</td>";
+				$return.="<td>$x[1]</td>";
+				$return.="<td><img src='../images/others/wrong.jpg' width='18'></td>";
+				$return.="<input type='hidden' name='aid1[$pid]' value='$aid1'>";
+				$return.="<td>Not Taken</td>";
+				$return.= "</tr>";
+			
+		}
+		$return.="</table>";
+		$return.="</td></tr></table>";
+		return $return;
+	}
+	
 	
 	function getPeriods($batid,$sec,$date)
 	{
@@ -988,6 +1069,103 @@ function readExcel()
 		$return.="</table>";
 		return $return;
 	}
+	
+	function geteditPeriods($batid,$sec,$date)
+	{
+		include("connection.php");
+		$date = strtotime($date);
+		
+		$get=mysql_query("select sessionid from MATDT where batid='$batid' and sec='$sec' and dayid='$date'");
+		while($pr=mysql_fetch_array($get))
+		{
+			$arr[]=$pr[0];
+		}
+		
+		$return="<table border='1'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
+		
+		while($res=mysql_fetch_array($result))
+		{
+			
+			$pid=$res['pid'];
+			if(in_array($pid,$arr))
+			{
+				$s1=mysql_query("select * from MATDT where sec='$sec' and batid='$batid' and dayid='$date' sessionid='$pid'");
+				$s2=mysql_fetch_array($s1);
+				$subject=mysql_query("select * from MSUBJECTT where subid='$s2[subid]'");
+				$subname=mysql_fetch_array($subject);
+				$return.="<tr>";
+				$timeinfo=$res['timeinfo'];
+				$x=explode(';',$timeinfo);
+				$return.="<td>Period $pid:</td>";
+				$return.="<td><img src='../images/others/done.jpg' width='18'></td>";
+				$return.="<td>$x[0]</td>";
+				$return.="<td>$x[1]</td>";
+				$return.="<td>$subname[$subname]</td>";
+				$return.= "</tr>";
+				continue;
+			}
+				$return.="<tr>";
+				$timeinfo=$res['timeinfo'];
+				$x=explode(';',$timeinfo);
+				$return.="<td>Period $pid:</td>";
+				$return.="<td><input type='checkbox' name='per[]' value='".$pid."'></td>";
+				$return.="<td>$x[0]</td>";
+				$return.="<td>$x[1]</td>";
+				$return.="<td>Not Taken</td>";
+				$return.= "</tr>";
+			
+		}
+		$return.="</table>";
+		return $return;
+	}
+	
+	function getdelPeriods($batid,$sec,$date)
+	{
+		$date = strtotime($date);
+		$result=mysql_query("select * from SMETAT where batid='$batid' and sec='$sec' order by(pid)");
+		$get=mysql_query("select * from MATDT where batid='$batid' and sec='$sec' and dayid='$date'");
+		while($pr=mysql_fetch_array($get))
+		{
+			$arr[]=$pr['sessionid'];
+		}
+		$return="<table border='1'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
+		while($res=mysql_fetch_array($result))
+		{
+			$pid=$res['pid'];
+			if(in_array($pid,$arr))
+			{
+				$id1=mysql_query("select * from MATDT where batid='$batid' and sec='$sec' and dayid='$date' and sessionid='$pid'");
+				$id2=mysql_fetch_array($id1);
+				$aid=$id2['aid'];
+				$return.="<tr>";
+				$timeinfo=$res['timeinfo'];
+				$x=explode(';',$timeinfo);
+				$return.="<td>Period $pid:</td>";
+				$return.="<td><input type='radio' name='per' value='".$pid."'>";
+				$return.="<input type='hidden' name='aid[$pid]' value='$aid'>";
+				$return.="<td>$x[0]</td>";
+				$return.="<td>$x[1]</td>";
+				$return.="<td><img src='../images/others/done.jpg' width='18'></td>";
+				$return.= "</tr>";
+				continue;
+			}
+				$return.="<tr>";
+				$timeinfo=$res['timeinfo'];
+				$x=explode(';',$timeinfo);
+				$return.="<td>Period $pid:</td>";
+				$return.="<td></td>";
+				$return.="<td>$x[0]</td>";
+				$return.="<td>$x[1]</td>";
+				$return.="<td><img src='../images/others/wrong.jpg' width='18'></td>";
+				$return.="</tr>";
+				
+		}
+		$return.="</table>";
+		return $return;
+	}
+	
+	
+	
 	function mapPeriods($batid,$sec,$pno)
 	{
 		$ret = "";

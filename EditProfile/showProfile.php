@@ -91,6 +91,8 @@ function showProf($oid)
 		//echo "select (select imguri from MIMGT i where i.imgid=s.imgid) as imguri from MSUBJECTT s where subcode='".$obhandle."'";
 		$array1 = queryMe("select (select imguri from MIMGT i where i.imgid=s.imgid) as imguri from MSUBJECTT s where subid='".$obhandle."'");
 		$imguri = "../".$array1["imguri"];
+		//echo $obhandle;
+		
 		
 	}
 	list($width, $height, $type, $attr) = getimagesize($imguri);
@@ -127,6 +129,28 @@ elseif(isFaculty($oid))
 {
 	$array = getObject($oid);
 	echo getFacPlan($array['obhandle']);
+}
+if($otyid==2)
+{
+	
+	$array = taughtBy($obhandle);
+		//print_r($array["classes"]);
+		echo "<table style='text-align:center;width:100%;'>";
+		for($i=0;$i<count($array);$i++)
+		{
+			echo "<tr>";
+			$fname = $array[$i]["fname"];
+			$fprof = $array[$i]["fprof"];
+			echo "<td><a href='".$fprof."'>".$fname."</a>-</td>";
+			for($j=0;$j<count($array[$i]["classes"]);$j++)
+			{
+				$cname = $array[$i]["classes"][$j]["name"];
+				$curl = $array[$i]["classes"][$j]["url"];
+				echo "<td><a href='".$curl."'>".$cname."</a></td>";	
+				
+			}
+			echo "</tr>";
+		}
 }
 }
 ?>

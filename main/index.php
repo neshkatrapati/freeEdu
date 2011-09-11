@@ -9,11 +9,17 @@
 <script language="javascript" type="text/javascript" src="../lib/flot/jquery.flot.js"></script>
 <link rel="stylesheet" href="../aux/thickbox/ThickBox.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../aux/bootstrap/bootstrap-1.0.0.css" type="text/css" media="screen" />
-
+<link rel="stylesheet" href="../lib/nyromodal/styles/nyroModal.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="../lib/nyromodal/js/jquery.nyroModal.custom.js"></script>
 <link href="../aux/bootstrap/docs/assets/js/google-code-prettify/prettify.css" rel="stylesheet" type="text/css">
 <script src="../aux/bootstrap/docs/assets/js/google-code-prettify/prettify.js"></script>
 <script src="../aux/bootstrap/docs/assets/js/application.js"></script>
-
+<script type="text/javascript">
+$(function() {
+  $('.nyroModal').nyroModal();
+});
+</script>
 
 
 <title>FreeEdu-CMS</title>
@@ -54,8 +60,7 @@ include("../lib/menus.php");
 include("../lib/graphs.php");
 include("../lib/lib.php");
 include("../misc/constants.php");
-echo getMenu();
-echo "<br><br>";
+
 ?>
 <script type="text/javascript" src="../core/search.js"></script>
 
@@ -68,6 +73,8 @@ if($oid==NULL)
 {
 	echo "<script type='text/javascript'>alert('Please Login Again!'); window.location='../login.php'; </script>";
 }
+echo getMenu();
+echo "<br><br>";
 if(array_key_exists("m",$optarray) || !array_key_exists("m",$optarray))
 {
         $mode = $_GET['m'];

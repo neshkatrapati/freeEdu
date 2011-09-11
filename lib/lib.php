@@ -1905,7 +1905,7 @@ $(function () {
 		
 		mysql_query("insert into MIMGT values('".$imgid."','".$img."')");
 		mysql_query("update MSUBJECTT set imgid='".$imgid."' where subid like '".$subid."'");
-		mysql_query("update MOBJECTT set imgid='".$imgid."' where obhandle='".$subid."' and otyid='2'");
+		mysql_query("update MOBJECTT set oimgid='".$imgid."' where obhandle='".$subid."' and otyid='2'");
 		
 	}
 	function xDebug($debug)

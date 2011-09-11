@@ -92,7 +92,11 @@ function showProf($oid)
 		$array1 = queryMe("select (select imguri from MIMGT i where i.imgid=s.imgid) as imguri from MSUBJECTT s where subid='".$obhandle."'");
 		$imguri = "../".$array1["imguri"];
 		//echo $obhandle;
-		
+		if(getImgUri($image)=="images/others/book.jpg")
+		{
+			echo "<a href='../core/immapind.php?subid=".$obhandle."' target='_blank' class='nyroModal'>Find Book Cover</a>";
+		//echo "<a href='../core/immapind.php?subid=".$obhandle."'&KeepThis=true&TB_iframe=true&#TB_inline class='thickbox'> Find Book Cover</a><br/>";
+		}
 		
 	}
 	list($width, $height, $type, $attr) = getimagesize($imguri);
@@ -151,6 +155,7 @@ if($otyid==2)
 			}
 			echo "</tr>";
 		}
+	
 }
 }
 ?>

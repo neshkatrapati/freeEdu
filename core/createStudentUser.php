@@ -14,7 +14,7 @@
             }
             xmlhttp.onreadystatechange=function()
             {
-            	SELECT * FROM `MOBJECTT` WHERE 1
+            	
             	if(xmlhttp.readyState==4 && xmlhttp.status==200)
             	{
             		
@@ -101,6 +101,7 @@
         createStudentUser($sid,$uname,$pass);
         xDebug($sid.$uname.$pass);
         notify("User Created Succesfully!");
+        redirect("?m=create_student");
         
     }
 ?>

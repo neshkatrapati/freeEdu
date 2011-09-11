@@ -1,9 +1,7 @@
 <?php
-    include("../lib/connection.php");
-    include("../lib/lib.php");
     $sec='A';
     $batid='1';
-    $date='02-JUN-2011';
+    $date='01-SEP-2011';
     $sujid='61';
     echo "<center>";
     echo "<fieldset style='text-align:center;width:600;'>";

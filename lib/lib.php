@@ -1041,6 +1041,18 @@ function readExcel()
 		}
 		
 		$return="<table border='1'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
+		if(mysql_num_rows($result)<=0)
+		{
+			$classGet = queryMe("SELECT (select brname from MBRANCHT b where b.brid=t.brid) 
+			as brname,akayr from MBATCHT t where batid like '".$batid."'");
+			$brname = $classGet['brname'];	
+			$year = getFullClass($classGet['akayr']);
+			$batch = $brname." ".getFullClass($year+1)." ".$sec;			
+			notifyerr("No Schedule Uploaded For The Class ".$batch);
+			redirect("?m=ua");
+			return;
+			
+		}
 		while($res=mysql_fetch_array($result))
 		{
 			
@@ -1248,7 +1260,11 @@ function readExcel()
 	{
 		echo "
 		<script type='text/javascript'>
+			setTimeout('delayer()',1000);
+			function delayer(){
+			
 			window.location = '".$location."';
+			}
 		</script>
 		";
 		

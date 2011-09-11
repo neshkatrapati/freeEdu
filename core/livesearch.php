@@ -85,7 +85,7 @@ else if($t=='0')
 else if($t=='2')
 {
 
-	$sql = mysql_query("SELECT *,(select imguri from MIMGT i where i.imgid = s.imgid) as img,(select oid from MOBJECTT o where obhandle=subcode and otyid='2') as oid  FROM MSUBJECTT s WHERE subname LIKE '".$q."%';
+	$sql = mysql_query("SELECT *,(select imguri from MIMGT i where i.imgid = s.imgid) as img,(select oid from MOBJECTT o where obhandle=subid and otyid='2') as oid  FROM MSUBJECTT s WHERE subname LIKE '".$q."%';
 ");
 	
 	while($row = mysql_fetch_array($sql))

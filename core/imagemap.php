@@ -84,7 +84,7 @@
   		onmouseout='this.style.opacity=0.8;this.filters.alpha.opacity=20'>
 		<div class='desc'><b><font color=#000000>".$row["subname"]."</font></b></font></div></div></td>";
             $books = $row["books"];
-            $barray = explode(",",$books);
+            $barray = explode(";",$books);
             $name = "bimg".$cnt;
             
 	    echo "<td><select name='books[]' onchange='getImages(\"".$row["subid"]."\",\"".$row['subname']."\",this.value,\"".$name."\",\"".$cnt."\")'>";

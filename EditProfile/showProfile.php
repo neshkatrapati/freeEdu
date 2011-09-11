@@ -89,7 +89,7 @@ function showProf($oid)
 	if($otyid == "2")
 	{
 		//echo "select (select imguri from MIMGT i where i.imgid=s.imgid) as imguri from MSUBJECTT s where subcode='".$obhandle."'";
-		$array1 = queryMe("select (select imguri from MIMGT i where i.imgid=s.imgid) as imguri from MSUBJECTT s where subcode='".$obhandle."'");
+		$array1 = queryMe("select (select imguri from MIMGT i where i.imgid=s.imgid) as imguri from MSUBJECTT s where subid='".$obhandle."'");
 		$imguri = "../".$array1["imguri"];
 		
 	}
@@ -117,6 +117,7 @@ if(isStudent($oid))
 {
 	$array1 = queryMe("select * from MSTUDENTT where sid like '".$obhandle."'");
 	$batid = $array1["batid"];
+	
 	$sec = $array1["sec"];
 	$array2 = queryMe("select (select brname from MBRANCHT br where br.brid=ba.brid) as brname,akayr from MBATCHT ba where batid like '".$batid."'");
 	$batch = $array2['brname']." ".getFullClass($array2['akayr']+1)." Section: ".$sec;

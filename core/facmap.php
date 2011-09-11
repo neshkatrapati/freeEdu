@@ -37,14 +37,9 @@ if(array_key_exists("cls",$_POST))
 			if($cls[$i][0]!="")
 			{				
 					
-					$exparray = explode(':',$cls[$i][0]); 
-					$brid = $exparray[0];
-					$akayr = substr($exparray[1],0,1)-1;
-					$sql = "SELECT batid from MBATCHT where brid like '".$brid."' and akayr like '".$akayr."'";
-					$sqlresult = mysql_query($sql);
-					$brow = mysql_fetch_array($sqlresult);
-					$batid = $brow['batid'];
-					$sec = substr($exparray[1],1);
+					$exparray = explode(':',$cls[$i][0]);
+					$batid = $exparray[0];
+					$sec = $exparray[1];
 					//echo $brid.":".$sql.":".$batid.":".$sec;	
 					$rindstring .= $batid.$sec.":".$sub[$cnt][0].";"; 					
 					$cnt++;

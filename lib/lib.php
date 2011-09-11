@@ -410,11 +410,12 @@ function readExcel()
 			}
 			$insstr .= ")";
 
-			echo $insstr."<br/>";
+			xDebug($insstr);
 			mysql_query($insstr);
 			$index = $objectCount+$i;
-			$makeObject = "insert into MOBJECTT values('".$index."','".$data[$i][1]."','".$data[$i][0]."','2','".$imgid."','','','')";		
+			$makeObject = "insert into MOBJECTT values('".$index."','".$data[$i][1]."','".$stuIncrement."','2','".$imgid."','','','')";		
 			mysql_query($makeObject);
+			xDebug($makeObject);
 			$insstr = "";			
 		}
 		
@@ -704,18 +705,18 @@ function readExcel()
 		mysql_select_db($clsname::$dbname, $con);	
 
 		
-		$query = "select brid,(select brname from MBRANCHT b  where b.brid=c.brid) as brname,akayr from MBATCHT c";
-		$exec	= mysql_query($query);
-		while ($row = mysql_fetch_array($exec))
-		{
-	
-			$ayr = $row['akayr']+1;
-			$placeBranch=$placeBranch."<option value='".$row['brid'].":".$ayr."A'>".$row['brname']." ".getFullClass($ayr)."A</option>";
-			$placeBranch=$placeBranch."<option value='".$row['brid'].":".$ayr."B'>".$row['brname']." ".getFullClass($ayr)."B</option>";
-				
-		}
+		$result = mysql_query("select (select brname from MBRANCHT b where b.brid=c.brid) as brname,brid,batyr,akayr,batid from MBATCHT c ");
+		$i =0;
+		$ret = "";
 		
-		$placeClass = 	$placeBranch;
+		while($row = mysql_fetch_array($result))
+  		{
+  			$ret  .= "<option value='".$row['batid'].":A'>".$row['brname']." ".getFullClass($row['akayr']+1)." A</option>"; 
+  			$ret  .= "<option value='".$row['batid'].":B'>".$row['brname']." ".getFullClass($row['akayr']+1)." B</option>"; 			
+  			
+  		}
+			
+		$placeClass = 	$ret;
 		echo '<br /><br />';
 		$retstr .= "<table>";
 		$i=0; 
@@ -887,9 +888,9 @@ function readExcel()
 		$batch = $brname." ".getFullClass($year+1)." ".$sec;
 		$retstr .= "<a href='?m=src&q=%&t=0&ip=n&op=c&c=".$batid.":".$sec."'>".$batch."</a>";
 		$array = queryMe("SELECT oid from MOBJECTT where obhandle like '".$subid."' and otyid like '2'");
-		//echo	 "SELECT oid from MOBJECTT where obhandle like '".$subid."' and otyid like '2'";
+		xDebug("SELECT oid from MOBJECTT where obhandle like '".$subid."' and otyid like '2'");
 		$oid = $array['oid'];
-		$retstr .= "--<a href='?m=p&id='".$oid.">".$subname."</a><br />"; 	
+		$retstr .= "--<a href='?m=p&id=".$oid."'>".$subname."</a><br />"; 	
 		
 		
 	
@@ -1869,7 +1870,7 @@ function replaceSubjectImage($subid,$imguri,$imgid)
 	$temp = count($imgnamea)-1;
 	$imgname = $imgnamea[$temp];
 	$img = 'images/others/'.$imgid.".".$imgname;
-	echo $img;
+	xDebug($img);
 	$ch = curl_init($imguri);
 	$fp = fopen("../".$img, 'wb');
 	curl_setopt($ch, CURLOPT_FILE, $fp);

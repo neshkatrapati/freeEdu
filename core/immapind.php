@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../aux/pagestyles/profiles.css" type="text/css" media='screen'>
+<link rel="stylesheet" href="../aux/pagestyles/style.css" type="text/css" media='screen'>
 <link rel="stylesheet" href="../aux/pagestyles/livesearch.css" type="text/css" media='screen'>
 <link rel="stylesheet" href="../aux/bootstrap/bootstrap-1.0.0.css" type="text/css" media="screen" />
 <script src="../aux/bootstrap/docs/assets/js/application.js"></script>
@@ -39,7 +40,7 @@
     if(!isset($_POST["sub2"]))
     {
         $subid = $_GET["subid"];
-        echo "Select A Book";
+        //echo "Select A Book";
         //require_once "../lib/lib.php";
         include("../misc/constants.php");
          echo "<form action='#' method='post'>";
@@ -47,11 +48,11 @@
         $con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
         mysql_select_db($clsname::$dbname, $con);
         $subres = mysql_query("SELECT * from MSUBJECTT where subid like '".$subid."'");
-            echo "<table style='text-align:center;'>";
+      
             $cnt = 0;
          while($row = mysql_fetch_array($subres))
         {
-                echo "<tr>";
+                
               
                 $books = $row["books"];
                 $barray = explode(";",$books);
@@ -65,30 +66,30 @@
                     
                     echo "<option value='".$barray[$i]."'>".$barray[$i]."</option>";
                 }
-                echo "</select>";
-                echo "<br><div id='bimg".$cnt."'></div>";
-                echo "</tr>";
+                echo "</select>&emsp;<input type='submit' name='sub2' /><br><br>";
+                echo "<div id='bimg".$cnt."' style='width:500px;float:right'></div>";
+                
                 
                 $cnt++;
                     
         }
-        echo "</table><br>";
-	echo "<input type='submit' name='sub2' />";
+        echo "<br />";
+	
 	echo "<input type='hidden' name='count' value='".$cnt."' />";
         //echo $cnt;
-	echo "</form>";}
+	echo "</center></form>";}
         if(isset($_POST["sub2"]))
         {
             
             $selected = $_POST["count"];
-            echo $selected;
+            //echo $selected;
 	    for($i=0;$i<$selected;$i++)
             {
                 if(array_key_exists("selected".$i,$_POST))
                 {
                     $rar = $_POST["selected".$i];
                     $arr = explode("<",$rar);
-		    print_r($arr);
+		    //print_r($arr);
 		    $imguri = $arr[1];
 		    $imgid = $arr[2];
 		    $subid = $arr[0];
@@ -114,6 +115,12 @@
 		    mysql_query("update MSUBJECTT set imgid='".$imgid."' where subid like '".$subid."'");
 		    mysql_query("update MOBJECTT set oimgid='".$imgid."' where obhandle='".$subid."' and otyid='2'");
 		    echo "Done!";
+		    echo "<script type='text/javascript'>";
+		    echo "$(function() {
+		      $('.nyroModal').close();
+	    	    });";
+		    echo "</script>";
+		    redirect("?");
                 }
             }
     }

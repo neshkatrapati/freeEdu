@@ -258,7 +258,7 @@ function getStuMenu()
             <a href='#' class='menu'>Attendance</a>
             <ul class='menu-dropdown'>
               <li><a href='?m=see_att'>See Your Attendance</a></li>
-
+		 
             </ul>
             
           </li>

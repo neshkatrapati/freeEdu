@@ -2012,4 +2012,9 @@ $(function () {
 		}
 		return $arr;
 	}
+	function getStudent($sid)
+	{
+
+		return queryMe("select * from MSTUDENTT where sid like '".$sid."'");
+	}
 ?>

@@ -119,7 +119,7 @@
 	        $arr = explode("<",$rar);
 		//print_r($rar);
 	        replaceSubjectImage($arr[0],$arr[1],$arr[2]);
-		redirect("?m=immap");
+		echo "<script type='text/javascript'>parent.location.reload(1);</script>";
 	    }
 	}
     }

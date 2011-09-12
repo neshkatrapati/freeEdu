@@ -4,6 +4,7 @@
 <body>
 <?php
 include("../lib/connection.php");
+
 $oid = $_COOKIE['object'];
 echo "Select an image file on your computer (1MB max):<br>";
 echo "<form name='newad' method='post' enctype='multipart/form-data' action='#'>";
@@ -68,12 +69,18 @@ if(isset($_POST['Submit']))
 	}
 }
 if(isset($_POST['Submit']) && !$errors) 
-{
+{	
+
+	$s=mysql_query("select obhandle from MOBJECTT where oid='$oid'");
+	$student=mysql_fetch_array($s);
+	$sid=$student['obhandle'];
 	$img=mysql_query("select * from MIMGT");
 	$num=mysql_num_rows($img);
 	mysql_query("insert into MIMGT values('$num','$imguri')");
 	mysql_query("update MOBJECTT set oimgid='$num' where oid='$oid'");
+	mysql_query("update MSTUDENTT set imgid='$num' where sid='$sid'");
 	echo "<script type='text/javascript'>parent.location.reload(1);</script>";
+
 }
 ?>
 </body>

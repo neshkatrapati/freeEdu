@@ -517,6 +517,55 @@ else if($mode=="ua")
 	echo "</div>";
 
 }
+else if($mode=="see_marks")
+{
+	echo "<div id='content' class='content' align='center'>";
+	if(isStudent($oid))
+	{
+		include("../Rayon/Retrival.php");
+		$arr = getObject($oid);
+		//print_r($arr);
+		$sidarr = getStudent($arr["obhandle"]); 	
+		//echo $sidarr["srno"];		
+		retrival($sidarr["srno"]);
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+
+}
+else if($mode=="see_att")
+{
+	echo "<div id='content' class='content' align='center'>";
+	if(isStudent($oid))
+	{
+		include("../Roster/stugetatt.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+
+}
+else if($mode=="see_att_today")
+{
+	echo "<div id='content' class='content' align='center'>";
+	if(isStudent($oid))
+	{
+		$arr = getObject($oid);
+		$sidarr = getStudent($arr["obhandle"]); 	
+		
+		
+				echo " <div id='placeholder' style='width:500px;height:300px'></div>
+				 <p id='hoverdata'> <span id='clickdata'></span></p>";
+				 echo  getStuGraph($sid,strtotime(date("d-M-Y")),strtotime(date("d-M-Y")));
+			        echo getStuReport($sid,strtotime(date("d-M-Y")),strtotime(date("d-M-Y")),-1);
+			    
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+
+}
 
 else
 {

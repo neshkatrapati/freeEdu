@@ -520,6 +520,7 @@ else if($mode=="ua")
 else if($mode=="see_marks")
 {
 	echo "<div id='content' class='content' align='center'>";
+	echo "<center>";
 	if(isStudent($oid))
 	{
 		include("../Rayon/Retrival.php");
@@ -528,6 +529,7 @@ else if($mode=="see_marks")
 		$sidarr = getStudent($arr["obhandle"]); 	
 		//echo $sidarr["srno"];		
 		retrival($sidarr["srno"]);
+		echo "</center>";
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");

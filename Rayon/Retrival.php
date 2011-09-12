@@ -1,9 +1,8 @@
 <?php
-function retrival()
+function retrival($srno)
 {
 include("connection.php");
 $newakyr=-1;
-$srno=$_POST['srno'];
 $srno= strtoupper($srno);
 $result=mysql_query("select * from MSTUDENTT where srno='$srno'");
 $rownum=mysql_num_rows($result);

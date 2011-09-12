@@ -42,7 +42,7 @@ function validator()
 		include("misc/constants.php");
 		$clsname = "Constants";
 		$batname = $clsname::$batname;
-		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass) or die(mysql_error());
 		mysql_select_db($clsname::$dbname, $con);
 		$result = mysql_query("SELECT oid FROM MOBJECTT where ologin='".$ologin."' and opwd='".$opass."'");
 		$q = mysql_num_rows($result);

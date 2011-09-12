@@ -62,7 +62,7 @@ Roll Number: <input type="text" name="srno" /><br><br><br>
 		  if($obrid=='%' || $brid==$obrid)
 		  {
 		    include("Retrival.php");
-		    retrival();
+		    retrival($srno);
 		  }
 		  else
 		    notifyerr("The Student Does Not Correspond To The Branch Concerned With You!");

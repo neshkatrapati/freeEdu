@@ -10,8 +10,7 @@
 <link rel="stylesheet" href="../aux/thickbox/ThickBox.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../aux/bootstrap/bootstrap-1.0.0.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../lib/nyromodal/styles/nyroModal.css" type="text/css" media="screen" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-<script type="text/javascript" src="../lib/nyromodal/js/jquery.nyroModal.custom.js"></script>
+ <script type="text/javascript" src="../lib/nyromodal/js/jquery.nyroModal.custom.js"></script>
 <link href="../aux/bootstrap/docs/assets/js/google-code-prettify/prettify.css" rel="stylesheet" type="text/css">
 <script src="../aux/bootstrap/docs/assets/js/google-code-prettify/prettify.js"></script>
 <script src="../aux/bootstrap/docs/assets/js/application.js"></script>
@@ -104,9 +103,9 @@ else if($mode == "p")
 			<p id='hoverdata'><span id='clickdata'></span></p><br><div id='placeholderm' style='width:450px;height:250px'></div>
 			<p id='hoverdata'><span id='clickdata'></span></p></div>";
 			$obj = getObject($id);
-			$array =  queryMe("select * from MSTUDENTT where srno like '".$obj['obhandle']."'");
+			$array =  queryMe("select * from MSTUDENTT where sid like '".$obj['obhandle']."'");
 			//echo "select sid from MSTUDENT where srno like '".$obj['obhandle']."'";
-			getStuGraph($array["sid"],strtotime("-4 weeks"),strtotime("now"));
+			getStuGraph($array["sid"],strtotime("-4 week"),strtotime("now"));
 			getMarksGraph($array["srno"]);
 	 }
 	 

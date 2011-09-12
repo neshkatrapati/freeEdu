@@ -23,7 +23,7 @@
 	if(isset($_POST['submit']))
 	{
 		
-		include("connection.php");
+		include("../lib/connection.php");
 		$srno=$_POST['srno'];
 		$student=mysql_query("select * from MSTUDENTT where srno='$srno'");
 		$stu=mysql_fetch_array($student);

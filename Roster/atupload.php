@@ -158,6 +158,7 @@ elseif(isset($_POST['confirm']))
    // echo  $batid." SEC:".$sec." SUB:".$subid." FAC:".$fid." P/A:".$pora." String:".$str." Perstr:".$perstr;
     recAtt($batid,$sec,$str,$pora,$subid,$fid,$perstr,strtotime($date));
     notify("Attendance Uploaded Succesfully!!");
+	 redirect("?m=ua");
 }
 elseif(isset($_POST['reject']))
 {

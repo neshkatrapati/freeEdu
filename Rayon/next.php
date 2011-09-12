@@ -1,14 +1,14 @@
 <?php
 function nextUp()
 {
-include("connection.php");
+include("../lib/connection.php");
 include("check.php");
 echo "<link rel='stylesheet' href='../aux/pagestyles/profiles.css' type='text/css' media='screen'>";
 $bat = $_POST['bat'][0];
 $barray = explode(':',$bat);
 $brid = $barray[0];
 $yoj = $barray[1];
-echo "<h2 align=center>Select Student for Promotion</h2>";
+echo "<h2 align=center>Select Student for Demotion</h2>";
 
 $year=mysql_query("select * from MBATCHT where batyr='$yoj' and brid='$brid'");
 while($batyr=mysql_fetch_array($year))
@@ -24,8 +24,10 @@ while($REG=mysql_fetch_array($reg))
 }
 $student=mysql_query("select * from MSTUDENTT where batid='$batid'");
 $rows=mysql_num_rows($student);
-echo "<form action='check.php' method='post'>";
+echo "<form action='check.php' method='post' align='center'>";
+
 echo "<div align='center'>";
+echo "<br><input type='submit' name='phase2'><br><br>";
 while($s=mysql_fetch_array($student))
 {
 	$srno=$s[1];
@@ -53,7 +55,7 @@ while($s=mysql_fetch_array($student))
 }
 	
 
-echo "<br><input type='submit' name='phase2'></div>";
+echo "<br></div>";
 echo "</form>";
 
 }

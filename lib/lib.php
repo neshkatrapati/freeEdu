@@ -1332,7 +1332,7 @@ function readExcel()
 		showDayReportGraph($periods);
 		$bunkers = 0;
 		$total = 0;
-		$sql = "SELECT *,(select imguri from MIMGT i where i.imgid=s.imgid) as imguri ,(select oid from MOBJECTT o where obhandle=srno and otyid='0') as oid FROM MSTUDENTT s WHERE batid LIKE '".$batid."' AND sec LIKE '".$sec."' order by('batid') DESC";
+		$sql = "SELECT *,(select imguri from MIMGT i where i.imgid=s.imgid) as imguri ,(select oid from MOBJECTT o where obhandle=sid and otyid='0') as oid FROM MSTUDENTT s WHERE batid LIKE '".$batid."' AND sec LIKE '".$sec."' order by('batid') DESC";
 			
 		$sresult = mysql_query($sql);
 		while($row1 = mysql_fetch_array($sresult))
@@ -1472,7 +1472,7 @@ function readExcel()
 			$return .= "<th>Period-".$periods[$i]."(".$totcnt[$i].")</th>";
 		}
 		$sql = "SELECT *,(select imguri from MIMGT i where i.imgid=s.imgid) as imguri ,
-		(select oid from MOBJECTT o where obhandle=srno and otyid='0')
+		(select oid from MOBJECTT o where obhandle=sid and otyid='0')
 		as oid FROM MSTUDENTT s WHERE batid LIKE '".$batid."' AND sec LIKE '".$sec."' order by('batid') DESC";
 		$sresult = mysql_query($sql);
 		

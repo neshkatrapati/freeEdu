@@ -1,9 +1,8 @@
 <?php
-function retrival()
+function retrival($srno)
 {
 include("connection.php");
 $newakyr=-1;
-$srno=$_POST['srno'];
 $srno= strtoupper($srno);
 $result=mysql_query("select * from MSTUDENTT where srno='$srno'");
 $rownum=mysql_num_rows($result);
@@ -98,6 +97,7 @@ while($reglr=mysql_fetch_array($regular))
 	echo "<div id='placeholderm' style='width:450px;height:250px'></div>
 			<p id='hoverdata'><span id='clickdata'></span></p></div>" ;
 	echo getMarksGraph($srno);}
+	echo "<center>";
 	if($akyr=='1')
 	{
 		echo "<br>Results For 1st Year Regular<br>";
@@ -127,6 +127,7 @@ while($reglr=mysql_fetch_array($regular))
 
 		echo "<br>Results For 4th Year 2nd Semester Regular<br>";
 	}
+		echo "</center>";
 		echo "<br>";
 		echo("<table border=2 align=center bordercolor=black>");
 		echo "<div4>";		
@@ -221,7 +222,7 @@ while($supp=mysql_fetch_array($supply))
 	}
 
 	echo "<br><div2><h2>Black Log History</h2></div2>";
-	
+	echo "<center>";
 	if($akyr=='1')
 	{
 		echo "<br>Results For 1st Year Supplymentary<br>";
@@ -250,6 +251,7 @@ while($supp=mysql_fetch_array($supply))
 	{
 		echo "<br>Results For 4th Year 2nd Semester Supplymentary<br>";
 	}
+	echo "</center>";
 	$marks=mysql_query("select * from MBACKLOCKT where sid='$sid' and doex='$doex'");
 	$rows=mysql_num_rows($marks);	
 	if($rows<=0)

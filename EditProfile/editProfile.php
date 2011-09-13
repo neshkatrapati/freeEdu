@@ -58,8 +58,8 @@
 .pos
 {
 	position:absolute;
-	top:280px;
-	left:160px;
+	top:320px;
+	left:150px;
 	
 }
 .form

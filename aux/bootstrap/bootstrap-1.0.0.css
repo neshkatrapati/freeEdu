@@ -639,9 +639,9 @@ form fieldset {
 }
 form fieldset legend,legend {
   display: block;
-  margin-left: 150px;
+  margin-left: 100px;
   font-size: 20px;
-  line-height: 1;
+  line-height: 2;
   color: #404040;
 }
 form div.clearfix {
@@ -977,7 +977,7 @@ div.topbar {
   background-image: -khtml-gradient(linear, left top, left bottom, from(#80BED6), to(#222222));
  background: -webkit-gradient(linear, left top, left bottom, from(#0272A7), to(#013953));
     background: -moz-linear-gradient(top, #0078A5, #000080);
-  background-image: -o-linear-gradient(#333333, #222222);
+  background: -o-linear-gradient(#333333, #222222);
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#222222', GradientType=0)";
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#222222', GradientType=0);
   background-image: linear-gradient(#333333, #222222);
@@ -1013,6 +1013,7 @@ div.topbar a.logo {
   font-weight: 200;
   line-height: 1;
 }
+
 div.topbar a.logo img {
   float: left;
   margin-right: 6px;
@@ -1069,6 +1070,8 @@ div.topbar form input:focus, div.topbar form input.focused {
   -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+
+
 }
 div.topbar ul {
   display: block;
@@ -1130,13 +1133,9 @@ div.topbar ul li.menu a.menu:after {
 a.menu:hover
 {
   display:block;
-  
+
   text-decoration:bold;
   
-}
-ul.menu-dropdown.open a:hover
-{
-  display:block;
 }
 div.topbar ul li.menu.open ul li a {
   background-color: transparent;
@@ -1658,3 +1657,5 @@ div.twipsy .twipsy-arrow {
 .popover .content p, .popover .content ul, .popover .content ol {
   margin-bottom: 0;
 }
+
+

@@ -55,14 +55,16 @@ Roll Number: <input type="text" name="srno" /><br><br><br>
 	echo "<div id='printarea'>";
 	if(isset($_POST['retrival']))
 	{
+		
 		if($_POST['srno']!="")
 		{
 		  $brid = getBranchFromSrno($_POST['srno']);
 		  $obrid = getBranchFilter();
+		  $srno=$_POST['srno'];
 		  if($obrid=='%' || $brid==$obrid)
 		  {
 		    include("Retrival.php");
-		    retrival();
+		    retrival($srno);
 		  }
 		  else
 		    notifyerr("The Student Does Not Correspond To The Branch Concerned With You!");

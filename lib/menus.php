@@ -8,8 +8,7 @@ function getSudoMenu()
   <div class='topbar-wrapper' style='z-index: 5;'>
     <div class='topbar'>
       <div class='container fixed'>
-        <h3><a class='logo' href='?'>freeEdu</a></h3>
-         
+        <a class='logo' href='?'>freeEdu<img src='../images/others/home.png' width='20'></a>
         <ul class='nav'>
           <li class='menu'>
             <a href='#' class='menu'>Batches</a>
@@ -110,7 +109,7 @@ function getAdminMenu()
   <div class='topbar-wrapper' style='z-index: 5;'>
     <div class='topbar'>
       <div class='container fixed'>
-        <h3><a class='logo' href='?'>freeEdu</a></h3>
+        <a class='logo' href='?'>freeEdu<img src='../images/others/home.png' width='20'></a>
          
         <ul class='nav'>
           <li class='menu'>
@@ -196,7 +195,7 @@ function getFacMenu()
   <div class='topbar-wrapper' style='z-index: 5;'>
     <div class='topbar'>
       <div class='container fixed'>
-        <h3><a class='logo' href='?'>freeEdu</a></h3>
+        <a class='logo' href='?'>freeEdu<img src='../images/others/home.png' width='20'></a>
        <ul class='nav'>
           <li class='menu'>
             <a href='#' class='menu'>Attendance</a>
@@ -253,13 +252,13 @@ function getStuMenu()
   <div class='topbar-wrapper' style='z-index: 5;'>
     <div class='topbar'>
       <div class='container fixed'>
-        <h3><a class='logo' href='?'>freeEdu</a></h3>
+        <a class='logo' href='?'>freeEdu<img src='../images/others/home.png' width='20'></a>
        <ul class='nav'>
           <li class='menu'>
             <a href='#' class='menu'>Attendance</a>
             <ul class='menu-dropdown'>
               <li><a href='?m=see_att'>See Your Attendance</a></li>
-
+		 
             </ul>
             
           </li>

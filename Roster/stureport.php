@@ -25,8 +25,9 @@
     </head>
     <body>
         <fieldset>
+		 <legend>Student Report</legend>
             <center>
-                <legend>Student Report</legend>
+               
                 <form action='#' method='post'>
                     Roll Number : <input type='text' name='rno' required=true/><br><br>
                     From-Date: <input type='text' id='inputField1' name='datein' required=true/>&emsp;

@@ -152,9 +152,9 @@
                         $bstr .= $backlog." ";
                         for($i=0;$i<count($arr);$i++)
                         {
-			$sub=mysql_query("select subname from MSUBJECTT where subid='$arr[$i]'");
+			$sub=mysql_query("select subshort from MSUBJECTT where subid='$arr[$i]'");
 			$subname=mysql_fetch_array($sub);	
-			$bstr .= "/$subname[0]";		
+			$bstr .= "/".$subname[0];		
                 	}
                         $worksheet->write($crow-1,$percentcol+1,$bstr);
                         unset($arr);

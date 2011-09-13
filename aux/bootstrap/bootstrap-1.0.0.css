@@ -1130,7 +1130,7 @@ div.topbar ul li.menu a.menu:after {
 a.menu:hover
 {
   display:block;
-  margin-left: -10px;
+  
   text-decoration:bold;
   
 }

@@ -15,6 +15,8 @@
 <link href="../aux/bootstrap/docs/assets/js/google-code-prettify/prettify.css" rel="stylesheet" type="text/css">
 <script src="../aux/bootstrap/docs/assets/js/google-code-prettify/prettify.js"></script>
 <script src="../aux/bootstrap/docs/assets/js/application.js"></script>
+<script type="text/javascript" src="../aux/stars/jquery.ui.stars.js?v=3.0.0b38"></script>
+<link rel="stylesheet" type="text/css" href="../aux/stars/crystal-stars.css?v=2.0.3b38"/>
 <script type="text/javascript">
 $(function() {
   $('.nyroModal').nyroModal();

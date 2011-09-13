@@ -1841,7 +1841,7 @@ $(function () {
 }
 	function getBookImages($search,$subid,$ind)
 	{
-		$srcurl = implode("+",$search);
+		$srcurl = implode("%20",$search);
 		$url = "https://ajax.googleapis.com/ajax/services/search/images?" .
 		       "v=1.0&q=".$srcurl;
 		

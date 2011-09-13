@@ -95,8 +95,10 @@ else if($t=='0')
 else if($t=='2')
 {
 
-	$sql = mysql_query("SELECT *,(select imguri from MIMGT i where i.imgid = s.imgid) as img,(select oid from MOBJECTT o where obhandle=subid and otyid='2') as oid  FROM MSUBJECTT s WHERE subname LIKE '%".$q."%';
-");
+	//echo "SELECT *,(select imguri from MIMGT i where i.imgid = s.imgid) as img,(select oid from MOBJECTT o where obhandle=subid and otyid='2') as oid
+	//		   FROM MSUBJECTT s WHERE subname LIKE '%".$q."%' or subshort like '%".$q."%'";
+	$sql = mysql_query("SELECT *,(select imguri from MIMGT i where i.imgid = s.imgid) as img,(select oid from MOBJECTT o where obhandle=subid and otyid='2') as oid
+			   FROM MSUBJECTT s WHERE subname LIKE '%".$q."%' or subshort like '%".$q."%'");
 	if(mysql_num_rows($sql)==0)
 	{
 		

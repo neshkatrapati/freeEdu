@@ -71,7 +71,13 @@ function getSelect(value)
 		options.innerHTML += "<select name='imode[]' id='imode'><option value='1'>Use Name For Selection</option><option value='2'>Use Roll Number For Selection</option></select>";	
 		
 	}
-
+	else
+	{
+		
+		options.innerHTML = "";
+	}
+	var tbox = document.getElementById("tbox").value;
+	getLists(tbox,'omni');
 }
 function getOptions(value)
 {

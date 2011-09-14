@@ -48,12 +48,17 @@
         $con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
         mysql_select_db($clsname::$dbname, $con);
         $subres = mysql_query("SELECT * from MSUBJECTT where subid like '".$subid."'");
-      
-            $cnt = 0;
+	    $cnt = 0;
          while($row = mysql_fetch_array($subres))
         {
                 
-              
+		if($row['books']=='')
+		{
+		
+		    echo "<br><br><div id='notwar'>There Are No Books Associated With The Subject</div>";
+		    return;
+		}
+        
                 $books = $row["books"];
                 $barray = explode(";",$books);
                 $name = "bimg".$cnt;

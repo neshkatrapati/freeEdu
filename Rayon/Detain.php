@@ -12,7 +12,7 @@ function detainRegular($newbatid,$newakyr,$sid)
 		$batyr=$byr['batyr'];
 		if($akyer>=$newakyr)
 		{
-			
+			echo "<center>";
 			if($akyer=='1')
 			{
 				echo "<br>Results For 1st Year Regular in Batch $batyr<br>";
@@ -41,6 +41,7 @@ function detainRegular($newbatid,$newakyr,$sid)
 			{
 				echo "<br>Results For 4th Year 2nd Semester Regular<br>";
 			}
+			echo "</center>";
 			echo "<br>";
 			echo("<table border=2 align=center bordercolor=black>");
 			echo "<div4>";		
@@ -131,6 +132,7 @@ while($supp=mysql_fetch_array($supply))
 	}
 	if($akyer>=$newakyr)
 	{
+		echo "<center>";
 		if($akyer=='1')
 		{
 		echo "<br>Results For 1st Year Supplymentary<br>";
@@ -160,6 +162,7 @@ while($supp=mysql_fetch_array($supply))
 		{
 			echo "<br>Results For 4th Year 2nd Semester Supplymentary<br>";
 		}
+		echo "</center>";
 		$marks=mysql_query("select * from MBACKLOCKT where sid='$sid' and doex='$doex'");
 		$rows=mysql_num_rows($marks);	
 		if($rows<=0)
@@ -249,6 +252,7 @@ while($REV=mysql_fetch_array($rev))
 	}
 	if($akyer>=$newakyr)
 	{
+		echo "<center>";
 		if($akyer=='1')
 		{
 			echo "<br>Revaluation For 1st Year<br>";
@@ -277,6 +281,7 @@ while($REV=mysql_fetch_array($rev))
 		{
 			echo "<br>Revaluation For 4th Year 2nd Semester<br>";
 		}
+		echo "</center>";
 		echo "<br>";
 		$marks=mysql_query("select * from MREVT where sid='$sid' and doex='$doex'");
 		$rows=mysql_num_rows($marks);	

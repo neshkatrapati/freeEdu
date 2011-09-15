@@ -107,6 +107,9 @@ function readExcel()
 	}
 	function getBranchFilter()
 	{
+		if(!array_key_exists("object",$_COOKIE))
+			return '%';
+		
 		$oid = $_COOKIE['object'];
 		$array = queryMe("SELECT otyid,obhandle FROM MOBJECTT WHERE oid like '".$oid."'");
 		$oytpe = $array['otyid'];

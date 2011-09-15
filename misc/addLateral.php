@@ -8,6 +8,7 @@
    
         <?php
         include("../lib/lib.php");
+	include("constants.php");
         include("../lib/connection.php");
         echo "<center>";
 	echo "<form action='#' method='post' >";

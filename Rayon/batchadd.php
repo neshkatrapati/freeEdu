@@ -30,6 +30,14 @@
 					Batch Year:<input type='text' name='batyr' required=true></input><br />
 					<br /><b>Strength In:</b>&emsp;Section A  <input type='number' name='A' value=60 class=num></input>
 					&emsp;Section B  <input type='number' name='B' value=60 class=num></input><br /><br />
+					Choose An Image Format:&emsp;<select name='imgfmt'>
+					<option value='JPG'>.JPG</option>
+					<option value='jpg'>.jpg</option>
+					<option value='JPEG'>.JPEG</option>
+					<option value='.jpeg'>.jpeg</option>
+					<option value='PNG'>.PNG</option>
+					<option value='png'>.png</option>
+					</select><br><br>
 					<input type=\"submit\" name=\"pre\" value=\"Preview\" />
 					<input type=\"submit\" name=\"sub\" value=\"Submit\" />
 					</fieldset>
@@ -48,9 +56,11 @@
 	   	$batyr = $_POST['batyr'];
 	   	$A = $_POST['A'];
 	   	$B = $_POST['B'];
+		$imgfmt = $_POST["imgfmt"];
 			$array = readExcel($newfile);
-			
-			putBatch($array,$reg,$brn,$batyr,$A,$B);
+		
+		//echo $imgfmt;	
+			putBatch($array,$reg,$brn,$batyr,$A,$B,$imgfmt);
 		
 		}
 		

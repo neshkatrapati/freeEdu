@@ -231,7 +231,7 @@ function readExcel()
 		} 		
 	
 	}
-	function putBatch($data,$regname,$brnname,$batyr,$A,$B)
+	function putBatch($data,$regname,$brnname,$batyr,$A,$B,$imgfmt)
 	{
 	
 		//Connection Start		
@@ -283,7 +283,7 @@ function readExcel()
 					 
 				else if ($j==$incount-1)
 				{
-					$img = "images/faces/".$data[$i][$j].".jpg";
+					$img = "images/faces/".$data[$i][$j].".".$imgfmt;
 					$sql = "SELECT imgid from MIMGT where imguri like '".$img."'";
 					//echo $img;
 					$sqlresult = mysql_query($sql);
@@ -1880,6 +1880,35 @@ $(function () {
 			return $ret;
 	}
 	function replaceSubjectImage($subid,$imguri,$imgid)
+	{
+		
+		$imgnamea = explode(".",$imguri);
+		$temp = count($imgnamea)-1;
+		$imgname = $imgnamea[$temp];
+		$img = 'images/others/'.$imgid.".".$imgname;
+		xDebug($img);
+		$ch = curl_init($imguri);
+		$fp = fopen("../".$img, 'wb');
+		curl_setopt($ch, CURLOPT_FILE, $fp);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_exec($ch);
+		curl_close($ch);
+		fclose($fp);
+		
+		$clsname = "Constants";
+		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+		mysql_select_db($clsname::$dbname, $con);
+		
+		$arr1 = queryMe("select count(imgid) as cnt from MIMGT");
+		$imgid = $arr1["cnt"];
+		
+		
+		mysql_query("insert into MIMGT values('".$imgid."','".$img."')");
+		mysql_query("update MSUBJECTT set imgid='".$imgid."' where subid like '".$subid."'");
+		mysql_query("update MOBJECTT set oimgid='".$imgid."' where obhandle='".$subid."' and otyid='2'");
+		
+	}
+	function replaceObjectImage($oid,$imguri,$imgid)
 	{
 		
 		$imgnamea = explode(".",$imguri);

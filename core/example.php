@@ -1,6 +1,6 @@
 <?php
 require '../lib/fb/src/facebook.php';
-include("../misc/constants.php");
+//include("../misc/constants.php");
 $clsname = "Constants";
 // Create our Application instance (replace this with your appId and secret).
 $facebook = new Facebook(array(
@@ -56,7 +56,7 @@ if ($user) {
     <?php else: ?>
       <div>
         Login & Comeback Again!:
-        
+        <a href="<?php echo $loginUrl; ?>">Login</a>
       </div>
     <?php endif ?>
 
@@ -69,7 +69,7 @@ if ($user) {
       if($_POST['sub']){
         //include('../lib/fb/src/curl.php');
         $img = 'images/others/'.uniqid().".jpg";
-        $imguri = "https://graph.facebook.com/".$user."/picture?type=large";
+        $imguri = "https://graph.facebook.com/".$user."/picture";
         //echo $imguri;
          $headers = get_headers($imguri,1);
         if(isset($headers['Location'])) {
@@ -82,8 +82,13 @@ if ($user) {
       $imgnamea = explode(".",$url);
       $temp = count($imgnamea)-1;
       $imgname = $imgnamea[$temp];
+      //$iname = $imgnamea[$temp-1];
+      
       $img = 'images/faces/'.uniqid().".".$imgname;
-      $ch = curl_init($url);
+      //echo $img;
+      $url2 = str_replace("_q","_n",$url);
+      //echo  $url2;
+      $ch = curl_init($url2);
       $fp = fopen("../".$img, 'wb');
       curl_setopt($ch, CURLOPT_FILE, $fp);
       curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -96,7 +101,7 @@ if ($user) {
       mysql_select_db($clsname::$dbname, $con);
 		
       $arr1 = mysql_query("select count(imgid) as cnt from MIMGT");
-      $arry = mysql_fetch_array($arry);
+      $arry = mysql_fetch_array($arr1);
       $imgid = $arry["cnt"];
 		
       $oid = $_COOKIE["object"];
@@ -114,7 +119,7 @@ if ($user) {
       if($otyid == '2')
          mysql_query("update MSUBJECTT set imgid='".$imgid."' where subid like '".$obhandle."'");
       echo "done!";
-      
+      redirect("?");
       }
       
       ?>

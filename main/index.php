@@ -117,6 +117,12 @@ else if($mode == "cre")
 {
 	include("../credits.php");
 }
+else if($mode == "fbimage")
+{
+	//echo "Hello";
+	include("../core/example.php");
+}
+
 else if($mode=="ba")
 {
 	echo "<div id='content'>";

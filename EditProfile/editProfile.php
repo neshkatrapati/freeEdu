@@ -115,7 +115,7 @@ else
 	$width=200;
 	$height=200;
 }
-echo "<a href='../core/example.php?' target='_blank' class='nyroModal' title='Image For ".$obname."'>Merge With Your Facebook Image!</a><br><br/>";
+echo "<a href='?m=fbimage' title='Image For ".$obname."'>Merge With Your Facebook Image!</a><br><br/>";
 echo "<div class='imgteaser' style='border:1px'><a href='../EditProfile/changePic.php?KeepThis=true&TB_iframe=true&#TB_inline?width=300&height=200' title='Change Picture' class='thickbox'><img src='$imguri' width='$width' height='$height' /><span class='epimg'>&raquo; Change Picture</span><span class='desc' class='strong'>Click to change the picture
 	</span></a></div>";
 echo "<div class='pos'><a href='../EditProfile/changePwd.php?KeepThis=true&TB_iframe=true&#TB_inline?width=100&height=220' title='Change Password' class='thickbox'>Change Password</a></div>

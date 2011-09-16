@@ -582,7 +582,7 @@ else if($mode=="al")
 	{
 		echo "<fieldset><legend>Lateral Entry-Add a student into the Batch</legend>";
 		echo "<center>";
-		include("../misc/addLateral.php");
+		include("../core/addLateral.php");
 		echo "</center></fieldset>";
 	}
 	else

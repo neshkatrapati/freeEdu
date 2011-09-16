@@ -575,6 +575,21 @@ else if($mode=="see_att_today")
 	echo "</div>";
 
 }
+else if($mode=="al")
+{
+	echo "<div id='content'  class='content'>";
+	if(isSudo($oid) || isAdmin($oid))
+	{
+		echo "<fieldset><legend>Lateral Entry-Add a student into the Batch</legend>";
+		echo "<center>";
+		include("../misc/addLateral.php");
+		echo "</center></fieldset>";
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+
 
 else
 {

@@ -18,6 +18,7 @@ function getSudoMenu()
               <li><a href='?m=up'>Upgrade Batches</a></li>
               <li><a href='?m=sl'>See Students List</a></li>
               <li><a href='?m=sa'>Add A Subject List</a></li>
+	      <li><a href='?m=al'>Add A Lateral Entry Student</a></li>
 	    </ul>
             
           </li>

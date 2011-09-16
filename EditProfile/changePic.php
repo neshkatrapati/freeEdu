@@ -4,24 +4,14 @@
 <body>
 <?php
 include("../lib/connection.php");
-
+include("../lib/lib.php");
+include("constants.php");
 $oid = $_COOKIE['object'];
 echo "Select an image file on your computer (1MB max):<br>";
 echo "<form name='newad' method='post' enctype='multipart/form-data' action='#'>";
 echo "<input type='file' name='image'><br><br>";
 echo "<input name='Submit' type='submit' value='Upload image'>";
 echo "</form>";
-function getExtension($str)
-{
-	$i = strrpos($str,".");
-	if (!$i) 
-	{
-		return "";
-	}
-	$l = strlen($str) - $i;
-	$ext = substr($str,$i+1,$l);
-	return $ext;
-}
 $MAX_SIZE=1000; 
 $errors=1;
 

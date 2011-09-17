@@ -15,12 +15,28 @@
 
 <?php
     $sec='A';
-    $batid='1';
-    $date='01-SEP-2011';
-    $sujid='61';
+    $batid='2';
+    $date='1-SEP-2011';
+    $fid='58';
     echo "<center>";
-    echo "<fieldset style='text-align:center;width:600;'>";
+    echo "<fieldset style='text-align:center;width:1100;'>";
     echo "<legend>Edit Attendence</legend>";
+<<<<<<< HEAD
+    echo "<center>";
+    if(!isset($_POST['phase1']) && !isset($_POST['phase2']) && !isset($_POST['phase3']))
+    {
+
+    echo "<form action='#' method='post'>";
+    echo getSubPeriods($batid,$sec,$date,$fid);
+    echo "<br><br>";
+    echo "<input type='hidden' name='batid' value='$batid'>";
+    echo "<input type='hidden' name='date' value='$date'>";
+    echo "<input type='hidden' name='fid' value='$fid'>";
+    echo "<input type='hidden' name='sec' value='$sec'>";
+    echo "<input type='submit' name='phase1' value='Replace'>";
+    }
+    if(isset($_POST['phase1']) && !isset($_POST['phase2']))
+=======
     if(!isset($_POST['phase0']) && !isset($_POST['phase1']))
     {
         
@@ -54,32 +70,164 @@
         echo "</center>";
     }
     if(isset($_POST['phase1']))
+>>>>>>> f46494c041230b0dee76e72405a2473d8e02c1f1
     {
+        include("../lib/connection.php");
+        $date = strtotime($date);
         $per=$_POST['per'];
-        $per1=$_POST['per1'];
-        $aid=$_POST['aid'];
-        $aid1=$_POST['aid1'];
-        $faculty=mysql_query("select * from MATDT where aid='$aid'");
-        $f=mysql_fetch_array($faculty);
-        $fac=$f['fid'];
-        $faculty1=mysql_query("select * from MATDT where aid='$aid1[$per1]'");
-        $f1=mysql_fetch_array($faculty1);
-        $fac1=$f1['fid'];
-        if($per==null || $per1==null)
+        $batid=$_POST['batid'];
+        $sec=$_POST['sec'];
+        $fid=$_POST['fid'];
+        $date=$_POST['date'];
+        echo "<form action='#' method='post' align='center'>";
+        echo "<input type='hidden' name='batid' value='$batid'>";
+        echo "<input type='hidden' name='date' value='$date'>";
+        echo "<input type='hidden' name='fid' value='$fid'>";
+        echo "<input type='hidden' name='sec' value='$sec'>";
+        echo "<input type='hidden' name='per' value='$per'>";
+        $student=mysql_query("select * from MSTUDENTT where batid='$batid'");
+        $rows=mysql_num_rows($student);
+        echo "<div align='center'>";
+        echo "<center>";
+        
+        while($s=mysql_fetch_array($student))
         {
-            echo("One or more Periods not selected");
-            notifyerr("One or more Periods not selected. Try Again");
-        }
-        else
-        {
-            //mysql_query("update MATDT set fid='$fac' where aid='$aid1[$per1]'");
-            //mysql_query("update MATDT set fid='$fac1' where aid='$aid'");
-           mysql_query("update MATDT set sessionid='$per' where aid='$aid1[$per1]'");
-            mysql_query("update MATDT set sessionid='$per1' where aid='$aid'");
+            $srno=$s[1];
+            $sid=$s[0];
+            $sname=$s[2];
+            $imgid=$s[5];
+            $image=mysql_query("select * from MIMGT where imgid='$imgid'");
+            while($img=mysql_fetch_array($image))
+            {
+            	$imguri="../".$img[1];
+            }
+            $oidsql = mysql_query("SELECT oid from MOBJECTT where obhandle='".$srno."' and otyid='0'");
+            $rarray = mysql_fetch_array($oidsql);
+            $oid = $rarray['oid'];
             
+            $a=mysql_query("select * from MATDT where sec='$sec'and fid='$fid' and batid='$batid' and sessionid='$per'");
+            $att=mysql_fetch_array($a);
+            $aid=$att['aid'];
+            $sa=mysql_query("select * from ADATAT where aid='$aid'");
+            $as=mysql_fetch_array($sa);
+            $adata=$as['adata'];
+            $pa=$as['pa'];
+            $satt=explode('.',$adata);
+            notifywar("! The students Present are Checked.Please Make your changes !"); 
+            echo "<div class='img'>";
+            if($pa=='P')
+            {
+              
+           
+            if(in_array($sid,$satt))
+            {
+           echo"<img src='".$imguri."' width='50' height='50' style='opacity:0.7;filter:alpha(opacity=40)'
+                  onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
+        	onmouseout='this.style.opacity=0.7;this.filters.alpha.opacity=60'>
+                <div class='desc'><b><font color=#000000>$srno</b><br /><b></font>
+                <font color=#000000>".getFname($s['sname'])."</b></font><input type='checkbox' name='chk[]' value=$srno checked/></div></div></a>";
+            }
+            else
+            {
+                echo"<img src='".$imguri."' width='50' height='50' style='opacity:0.7;filter:alpha(opacity=40)'
+                  onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
+        	onmouseout='this.style.opacity=0.7;this.filters.alpha.opacity=60'>
+                <div class='desc'><b><font color=#000000>$srno</b><br /><b></font>
+                <font color=#000000>".getFname($s['sname'])."</b></font><input type='checkbox' name='chk[]' value=$srno unchecked/></div></div></a>";
+                
+            }
+            }
+            else if($pa=='A')
+            {
+                if(in_array($sid,$satt))
+            {
+           echo"<img src='".$imguri."' width='50' height='50' style='opacity:0.7;filter:alpha(opacity=40)'
+                  onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
+        	onmouseout='this.style.opacity=0.7;this.filters.alpha.opacity=60'>
+                <div class='desc'><b><font color=#000000>$srno</b><br /><b></font>
+                <font color=#000000>".getFname($s['sname'])."</b></font><input type='checkbox' name='chk[]' value=$srno unchecked/></div></div></a>";
+            }
+            else
+            {
+                echo"<img src='".$imguri."' width='50' height='50' style='opacity:0.7;filter:alpha(opacity=40)'
+                  onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
+        	onmouseout='this.style.opacity=0.7;this.filters.alpha.opacity=60'>
+                <div class='desc'><b><font color=#000000>$srno</b><br /><b></font>
+                <font color=#000000>".getFname($s['sname'])."</b></font><input type='checkbox' name='chk[]' value=$srno checked/></div></div></a>";
+                
+            }
             
+            }
         }
+        
+         echo "<br><br><input type='submit' name='phase2'><br><br>";
+           
     }
+    if(isset($_POST['phase2']) && !isset($_POST['phase3']))
+    {
+        include("../lib/connection.php");
+        $chk=$_POST[chk];
+        $len=count($chk);
+        $per=$_POST['per'];
+        $sec=$_POST['sec'];
+        $batid=$_POST['batid'];
+        $fid=$_POST['fid'];
+        $a=mysql_query("select * from MATDT where sec='$sec'and fid='$fid' and batid='$batid' and sessionid='$per'");
+        $att=mysql_fetch_array($a);
+        $aid=$att['aid'];
+        echo "<center>";
+       echo "<h4>Please confirm the Attendence</h4>";
+        if($per='P')
+            echo "<h4>The students present are</h4>";
+        else if($per='A')
+            echo "<h4>The students Absent are</h4>";
+       
+        for($i=0;$i<$len;$i++)
+        {
+            $student=mysql_query("select * from MSTUDENTT where srno='$chk[$i]'");
+            $stu=mysql_fetch_array($student);
+            $sname=$stu['sname'];
+            if($i<($len-1))
+               $sid=$sid.$stu['sid'].'.';
+            else
+                $sid=$sid.$stu['sid'];
+            $stuimg=mysql_query("Select imgid from MSTUDENTT where srno='$chk[$i]' ");
+            $simg=mysql_fetch_array($stuimg);
+            $img=mysql_query("select * from MIMGT where imgid='$simg[imgid]'");
+            $imguid=mysql_fetch_array($img);
+            $imguri="../".$imguid['imguri'];
+            echo "<div class='img'>";
+             echo"<img src='".$imguri."' width='50' height='50' style='opacity:0.7;filter:alpha(opacity=40)'
+                  onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
+        	onmouseout='this.style.opacity=0.7;this.filters.alpha.opacity=60'>
+                <div class='desc'><b><font color=#000000>$srno</b><br /><b></font>
+                <font color=#000000>$chk[$i].<br>$sname</b></font></div></div>";
+        }
+         
+         echo $sid;
+         echo $aid;
+            echo "<form action='#' method='post'>";
+            echo "<input type='hidden' name='sid' value='$sid'>";
+            echo "<input type='hidden' name='aid' value='$aid'>";
+            echo "<br><br><br><input type='submit' value='Confirm' name='phase3'>";
+           echo "<input type='submit' value='Back' name='back'>";
+            
+    }
+    if(isset($_POST['back']))
+            {
+               redirect("?m=edit_att");
+            }
+        if(isset($_POST['phase3']))
+       {
+           $sid=$_POST['sid'];
+           $aid=$_POST['aid'];
+           echo $sid;
+           echo $aid;
+           mysql_query("update ADATAT set adata='$sid',pa='P' where aid='$aid'");
+           notify("Editing Successfully Done");
+           redirect("?");
+        }    
+   
     echo "</center>";
     echo "</fieldset>";
     echo "</center>";

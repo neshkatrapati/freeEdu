@@ -1190,7 +1190,50 @@ function readExcel()
 		return $return;
 	}
 	
-	
+	function getSubPeriods($batid,$sec,$date,$fid)
+	{
+		include("connection.php");
+		$date = strtotime($date);
+		$result=mysql_query("select * from SMETAT where batid='$batid' and sec='$sec' order by(pid)");
+		$get=mysql_query("select sessionid from MATDT where batid='$batid' and sec='$sec' and dayid='$date' and fid='$fid'");
+		while($pr=mysql_fetch_array($get))
+		{
+			$arr[]=$pr[0];
+		}
+		
+		$return="<table border='1' cellpadding=3><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
+		if(mysql_num_rows($result)<=0)
+		{
+			$classGet = queryMe("SELECT (select brname from MBRANCHT b where b.brid=t.brid) 
+			as brname,akayr from MBATCHT t where batid like '".$batid."'");
+			$brname = $classGet['brname'];	
+			$year = getFullClass($classGet['akayr']);
+			$batch = $brname." ".getFullClass($year+1)." ".$sec;			
+			notifyerr("No Schedule Uploaded For The Class ".$batch);
+			redirect("?m=ua");
+			return;
+			
+		}
+		while($res=mysql_fetch_array($result))
+		{
+			
+			$pid=$res['pid'];
+			if(in_array($pid,$arr))
+			{
+				$return.="<tr>";
+				$timeinfo=$res['timeinfo'];
+				$x=explode(';',$timeinfo);
+				$return.="<td>Period $pid:</td>";
+				$return.="<td><input type='radio' name='per' value='".$pid."'></td>";
+				$return.="<td>$x[0]</td>";
+				$return.="<td>$x[1]</td>";
+				$return.= "</tr>";
+				continue;
+			}
+		}
+		$return.="</table>";
+		return $return;
+	}
 	
 	function mapPeriods($batid,$sec,$pno)
 	{

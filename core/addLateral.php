@@ -21,7 +21,7 @@
         echo "<form name='al' method='post' enctype='multipart/form-data' action='#'>";
         $placeBranch = "";
 	$placeBranch = getBatches('bat[]');
-        echo "<table cellpadding=5>";
+        echo "<table cellpadding=10>";
         echo "<tr><td colspan=2 style='text-align:center;'style='text-align:center;'>Upload Image:&nbsp;<input type='file' name='image'></td></tr>";
         echo "<tr><td colspan=2 style='text-align:center;font-size:13; '>Note: Image size should not exceed 1MB.</td></tr>";
         echo "<tr><td colspan=2 style='text-align:center;'>Roll Number:&nbsp;<input type='text' name='srno' required=true id='srno' onkeyup='doPut()'</td></tr>";

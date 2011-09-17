@@ -127,6 +127,7 @@ if(isStudent($oid))
 	$batid = $array1["batid"];
 	
 	$sec = $array1["sec"];
+	echo "<h3>".$array1["srno"]."</h3><br/>";
 	$array2 = queryMe("select (select brname from MBRANCHT br where br.brid=ba.brid) as brname,akayr from MBATCHT ba where batid like '".$batid."'");
 	$batch = $array2['brname']." ".getFullClass($array2['akayr']+1)." Section: ".$sec;
 	echo "<a href='?m=src&q=%&t=0&ip=n&op=c&c=".$batid.":".$sec."'>".$batch."</a>";

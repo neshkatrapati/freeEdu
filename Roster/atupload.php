@@ -89,11 +89,11 @@ elseif(isset($_POST['phase2']))
         $sql = "SELECT oid from MOBJECTT WHERE obhandle like '".$row['srno']."' AND otyid='0'";
         $getSql = queryMe($sql);
         $oid = $getSql['oid'];
-        echo "<a href='?m=p&id=".$oid."'>";	
+      
         echo "<div class='img'>";
-        echo "<img src='../".$row['imguri']."' width='75' height='75' style='opacity:0.4;filter:alpha(opacity=40)'
+        echo "<img src='../".$row['imguri']."' width='75' height='75' style='opacity:0.75;filter:alpha(opacity=75)'
 	  	onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
-  		onmouseout='this.style.opacity=0.4;this.filters.alpha.opacity=20'></a>
+  		onmouseout='this.style.opacity=0.75;this.filters.alpha.opacity=75'></a>
 		<div class='desc'><b><font color=#000000>".getFname($row['sname'])."</font></b><br><b><font color=#000000>".$row['srno']."</b></font>
                 <input type='checkbox' name='ppl[]' value='".$row['sid']."'></div></div>";
     }
@@ -121,9 +121,9 @@ elseif(isset($_POST['phase3']))
         $query = "SELECT *,(SELECT imguri from MIMGT i WHERE i.imgid=s.imgid) as imguri FROM MSTUDENTT s WHERE sid LIKE '".$ppl[$i]."'";
         $row = queryMe($query);	
         echo "<div class='img'>";
-        echo "<img src='../".$row['imguri']."' width='75' height='75' style='opacity:0.4;filter:alpha(opacity=40)'
+        echo "<img src='../".$row['imguri']."' width='75' height='75' style='opacity:0.75;filter:alpha(opacity=75)'
 	  	onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
-  		onmouseout='this.style.opacity=0.4;this.filters.alpha.opacity=20'>
+  		onmouseout='this.style.opacity=0.75;this.filters.alpha.opacity=75'>
 		<div class='desc'><b><font color=#000000>".$row['sname']."</font></b><br><b><font color=#000000>".$row['srno']."</b></font>
                 </div></div>";
     }

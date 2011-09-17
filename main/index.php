@@ -431,7 +431,7 @@ else if($mode=="edit_att")
 else if($mode=="xdebug")
 {
 	echo "<div id='content' class='content'>";
-	if(isSudo($oid))
+	if(True)
 	{
 		if(file_exists("../misc/.xdebug"))
 		{

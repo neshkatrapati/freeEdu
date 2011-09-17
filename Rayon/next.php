@@ -56,6 +56,7 @@ while($s=mysql_fetch_array($student))
 	
 
 echo "<br></div>";
+echo "<input type='hidden' name='batid' value='".$batid."' />";
 echo "</form>";
 
 }

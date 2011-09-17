@@ -1,3 +1,18 @@
+<link rel="stylesheet" type="text/css" media="all" href="../aux/calendar/jsDatePick_ltr.min.css" />
+<script type="text/javascript" src="../aux/calendar/jsDatePick.min.1.3.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		new JsDatePick({
+			useMode:2,
+			target:"inputField",
+			limitToToday:true,
+			dateFormat:"%d-%M-%Y",
+			imgPath:"../aux/calendar/img/"
+			
+		});
+	};
+</script>
+
 <?php
     $sec='A';
     $batid='2';
@@ -6,6 +21,7 @@
     echo "<center>";
     echo "<fieldset style='text-align:center;width:1100;'>";
     echo "<legend>Edit Attendence</legend>";
+<<<<<<< HEAD
     echo "<center>";
     if(!isset($_POST['phase1']) && !isset($_POST['phase2']) && !isset($_POST['phase3']))
     {
@@ -20,6 +36,41 @@
     echo "<input type='submit' name='phase1' value='Replace'>";
     }
     if(isset($_POST['phase1']) && !isset($_POST['phase2']))
+=======
+    if(!isset($_POST['phase0']) && !isset($_POST['phase1']))
+    {
+        
+        echo "<center>";
+        echo "<form action='#' method='post'>";
+        $object = getObject($_COOKIE["object"]);
+        echo "Select Class:&emsp;".getFacClasses("cls[]",$object["obhandle"],"")."&emsp;Date:&emsp;";
+        echo "<input type='text' id='inputField'></input>";
+        echo "<br><br>";
+        echo "<input type='submit' name='phase0' value='Replace'>";
+        echo "</center>";
+        
+    }
+    if(isset($_POST['phase0']))
+    {
+      
+        //echo "<center>";
+        $main = $_POST['cls'][0];
+        $clsmain = explode(':',$main);
+        $cldet = $clsmain[0];
+        $subid = $clsmain[1];
+        $batid = substr($cldet,0,1);
+        $sec = substr($cldet,-1);
+        $fid = $_POST['fid'];
+        $date = $_POST['date'];
+    
+        echo "<form action='#' method='post'>";
+        echo getMPeriods($batid,$sec,$date,$subid);
+        echo "<br><br>";
+        echo "<input type='submit' name='phase1' value='Replace'>";
+        echo "</center>";
+    }
+    if(isset($_POST['phase1']))
+>>>>>>> f46494c041230b0dee76e72405a2473d8e02c1f1
     {
         include("../lib/connection.php");
         $date = strtotime($date);

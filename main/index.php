@@ -263,16 +263,7 @@ else if($mode=="ra")
 	if(isSudo($oid) || isAdmin($oid))
 	{
 		
-		echo "<center>";
-		echo "<a href='?m=ra&t=e'>Export To Spreadsheet</a>&emsp;";	
-		echo "<a href='?m=ra&t=h'>Show As HTML</a><br /><br />";
-		echo "</center>";	
-		if(array_key_exists("t",$optarray))
-			$type = $_GET['t'];
-		if($type == "e")
 		  include("../Rayon/excelex.php");
-		else
-		 include("../Rayon/ma.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");

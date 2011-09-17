@@ -24,7 +24,9 @@
         $reg=$_POST['reg'];
         $mrid=$mixarr[0];
         $doex = $mixarr[2];
-        
+        $modeax = mysql_query("select * from MAVAILT where mrid like '".$mrid."'");
+	$modea = mysql_fetch_array($modeax);
+	$mode = $modea["ros"];
         $docname = "Consolidated Report of ".$doex."  ".$reg." ". $yr.'.xls';
         
         $workbook = new Spreadsheet_Excel_Writer();
@@ -84,18 +86,21 @@
                 $worksheet->write(1,5+$i,'CRE',$format_center);
 		$i = $i+4;    
         }
-        
+         if($mode != 'S'){
         $worksheet->write(0,($subcount*4)+2,"Totals",$format_center);
         $worksheet->write(1,($subcount*4)+2,"CRE",$format_center);
         $worksheet->write(1,($subcount*4)+3,"MRS",$format_center);
         $worksheet->write(0,($subcount*4)+4,"%",$format_center);
-        $worksheet->write(0,($subcount*4)+5,"Backlogs",$format_center);
+	
+	 }
+       $worksheet->write(0,($subcount*4)+5,"Backlogs",$format_center);
+        
         
         $totcrecol = ($subcount*4)+2;
         $totmrkcol = ($subcount*4)+3;
         $percentcol = ($subcount*4)+4;
         
-        $query = mysql_query("SELECT * FROM MMARKST WHERE mrid like '".$mrid."'");
+        $query = mysql_query("SELECT * FROM MMARKST WHERE mrid like '".$mrid."' ORDER BY(sid)");
         $past = "";
         $crow = 1;
         $current = "";
@@ -135,15 +140,16 @@
                 $worksheet->write($crow,1,$sname,$format_center);
                 if($crow!=2)
                 {
-                        if($totcre==$idcre)
-                                $worksheet->write($crow-1,$totcrecol,$totcre,$format_center);
-                        else
-                                $worksheet->write($crow-1,$totcrecol,$totcre,$format_fail);
-                                
-                        $worksheet->write($crow-1,$totmrkcol,$totmrk,$format_center);
-                        $percent=number_format(($totmrk/$mxtot)*100,2,'.','');
-                        $worksheet->write($crow-1,$percentcol,$percent,$format_center);
-                        
+                        if($mode != 'S'){
+				if($totcre==$idcre)
+				        $worksheet->write($crow-1,$totcrecol,$totcre,$format_center);
+				else
+				        $worksheet->write($crow-1,$totcrecol,$totcre,$format_fail);
+				        
+				$worksheet->write($crow-1,$totmrkcol,$totmrk,$format_center);
+				$percent=number_format(($totmrk/$mxtot)*100,2,'.','');
+				$worksheet->write($crow-1,$percentcol,$percent,$format_center);
+			}
                         if($tothigh<$totmrk)
                                 $tothigh=$totmrk;
                         if($totlow>$totmrk || $totlow==0 )
@@ -246,19 +252,19 @@
              
              
         }
-        
-        if($totcre==$idcre)
-                $worksheet->write($crow,$totcrecol,$totcre,$format_center);
-        else
-                $worksheet->write($crow,$totcrecol,$totcre,$format_fail);
-        $worksheet->write($crow,$totmrkcol,$totmrk,$format_center);
-        $percent=number_format(($totmrk/$mxtot)*100,2,'.','');
-        $worksheet->write($crow,$percentcol,$percent,$format_center);
-        if($attcheck!=-20)
-                $totatt++;
-        if($mark!=-20)
-                $totpass++;
-                
+         if($mode != 'S'){
+		if($totcre==$idcre)
+		        $worksheet->write($crow,$totcrecol,$totcre,$format_center);
+		else
+		        $worksheet->write($crow,$totcrecol,$totcre,$format_fail);
+		$worksheet->write($crow,$totmrkcol,$totmrk,$format_center);
+		$percent=number_format(($totmrk/$mxtot)*100,2,'.','');
+		$worksheet->write($crow,$percentcol,$percent,$format_center);
+		if($attcheck!=-20)
+		        $totatt++;
+		if($mark!=-20)
+		        $totpass++;
+	 }
         $bstr .= $backlog." ";
         for($i=0;$i<count($arr);$i++)
         {
@@ -270,7 +276,7 @@
         unset($arr);
         
         $crow += 5;
-        
+         if($mode != 'S'){
         $worksheet->write($crow,1,"Total Passed");
         $worksheet->write($crow+1,1,"Total Attended");
         $worksheet->write($crow+2,1,"Pass %:");
@@ -295,7 +301,7 @@
         $worksheet->write($crow+3,4+($i*4),$tothigh);
         $worksheet->write($crow+4,4+($i*4),$totlow);
         $worksheet->write($crow+5,4+($i*4),round($totmean/$totatt,2));
-        
+	 }
         $workbook->send($docname);
         $workbook->close();
 ?>

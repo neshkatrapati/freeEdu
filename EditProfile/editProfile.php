@@ -28,7 +28,7 @@
 	position: absolute;
 	right: 10px;
 	top: 10px;
-	font-size: 10px;
+	font-size: 12px;
 	color: #fff;
 	background: #000;
 	padding: 4px 10px;
@@ -39,7 +39,7 @@
 }
 .imgteaser a:hover .desc{
 	display: block;
-	font-size: 10px;
+	font-size: 11px;
 	padding: 10px 0;
 	background: #111;
 	filter:alpha(opacity=75);
@@ -58,8 +58,8 @@
 .pos
 {
 	position:absolute;
-	top:320px;
-	left:150px;
+	top:91px;
+	left:350px;
 	
 }
 .form

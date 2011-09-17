@@ -208,11 +208,11 @@
                   onmouseover='this.style.opacity=1;this.filters.alpha.opacity=100'
         	onmouseout='this.style.opacity=0.7;this.filters.alpha.opacity=60'>
                 <div class='desc'><b><font color=#000000>$srno</b><br /><b></font>
-                <font color=#000000>$chk[$i].<br>$sname</b></font></div></div>";
+                <font color=#000000>$chk[$i].<br>".getFname($sname)."</b></font></div></div>";
         }
          
-         echo $sid;
-         echo $aid;
+         //echo $sid;
+         //echo $aid;
             echo "<form action='#' method='post'>";
             echo "<input type='hidden' name='sid' value='$sid'>";
             echo "<input type='hidden' name='aid' value='$aid'>";
@@ -228,8 +228,8 @@
        {
            $sid=$_POST['sid'];
            $aid=$_POST['aid'];
-           echo $sid;
-           echo $aid;
+           //echo $sid;
+           //echo $aid;
            mysql_query("update ADATAT set adata='$sid',pa='P' where aid='$aid'");
            notify("Editing Successfully Done");
            redirect("?");

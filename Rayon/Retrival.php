@@ -252,7 +252,7 @@ while($supp=mysql_fetch_array($supply))
 		echo "<br>Results For 4th Year 2nd Semester Supplymentary<br>";
 	}
 	echo "</center>";
-	$marks=mysql_query("select * from MBACKLOCKT where sid='$sid' and doex='$doex'");
+	$marks=mysql_query("select * from MBACKLOGT where sid='$sid' and doex='$doex'");
 	$rows=mysql_num_rows($marks);	
 	if($rows<=0)
 	{
@@ -288,7 +288,7 @@ while($supp=mysql_fetch_array($supply))
 			{
 				$subname=$subj[2];
 				$subcode=$subj[1];
-				echo("<tr bgcolor=cyan>");
+				echo("<tr class='$class'>");
 				echo("<td>");
 					echo($subcode);
 				echo("</td>");

@@ -512,6 +512,13 @@ else if($mode=="ep")
 	include("../EditProfile/editProfile.php");
 	echo "</div>";
 }
+else if($mode=="license")
+{
+	echo "<div id='content'  class='content'>";
+	echo "<center><pre>";
+	include("../COPYING");
+	echo "</pre></center></div>";
+}
 else if($mode=="ua")
 {
 	echo "<div id='content' class='content'>";

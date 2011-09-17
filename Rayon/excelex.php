@@ -30,10 +30,10 @@
 		
                 while($result1 = mysql_fetch_array($query1))
                 {
-                	if($result1['ros']="R")
+                	if($result1['ros']=="R")
                            	$reg="Regular";
-                        else
-                        	$reg="Supplymentary";
+                        if($result1['ros']=="S")
+                        	$reg="Supplimentary";
 	
 	switch ($result1['akayr']):
 	    case 1:

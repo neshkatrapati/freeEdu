@@ -500,10 +500,76 @@ function readExcel()
 			mysql_query($insstr);
 			$insstr = "";			
 		}
-		
 		notify("Updated Succesfully! Consider Upgrading The Batches Go To <a href='?m=up'>");
 		notify("You Have Upgraded The Batches! Consider Mapping Faculty A Fresh! Go To <a href='?m=mf&l=0&r=5'>");
+	
+		updateMarks($mrcount);
 	}
+	function updateMarks($mrid)
+	{
+	  include("connection.php");
+	  $ros=mysql_query('select * from MAVAILT where mrid='.$mrid);
+	  while($ROS = mysql_fetch_array($ros))
+	   {
+	     $batid=$ROS["batid"];
+	     $doex=$ROS["doex"];
+	     $ros=$ROS["ros"];
+	     $akayr = $ROS["akayr"];
+	   }
+	  
+	  if($ros=='R')
+	   {
+	  	
+	  
+	  
+	   }
+	  else if($ros=='S')
+	   {
+	  	$regular=mysql_query("select * from MAVAILT where batid='$batid' and ros='R' and akayr like '$akayr'");
+		xDebug("select * from MAVAILT where batid='$batid' and ros='R' and akayr like '$akayr'");
+	  	while($Reg = mysql_fetch_array($regular))
+	  	{
+	  		$mrid2=$Reg["mrid"];
+	  		$doex=$Reg["doex"];
+	  	}
+	  	$supply=mysql_query('select * from MMARKST where mrid='.$mrid);
+	  	while($sup = mysql_fetch_array($supply))
+	  	{
+	  		$sid=$sup["sid"];
+			$subid=$sup["subid"];
+			$intr=$sup["intm"];
+			$extr=$sup["extm"];
+			$cre=$sup["cre"];
+			if($cre>0)
+			{	     
+			 	 $supply1=mysql_query('select * from MMARKST where mrid='.$mrid2.' and sid='.$sid.' and subid='.$subid);
+				  $bl=mysql_query('select * from MBACKLOGT');
+				 $rows=mysql_num_rows($bl);
+				 while($sup1 = mysql_fetch_array($supply1))
+				 {
+					$sid1=$sup1["sid"];
+					$subid1=$sup1["subid"];
+					$intr1=$sup1["intm"];
+					$extr1=$sup1["extm"];
+					$cre1=$sup1["cre"];    
+					mysql_query("insert into MBACKLOGT values('$rows','$sid1','$subid1','$intr1','$extr1','$doex')");
+					xDebug("insert into MBACKLOGT values('$rows','$sid1','$subid1','$intr1','$extr1','$doex')");
+				 }
+				 mysql_query("update MMARKST set extm='$extr' where sid='$sid' and subid='$subid' and mrid='$mrid2'");
+				 mysql_query("update MMARKST set cre='$cre' where sid='$sid' and subid='$subid' and mrid='$mrid2'");
+			}
+			else
+			{
+				mysql_query("insert into MBACKLOGT values('$rows','$sid','$subid','$intr','$extr,'$doex1')");	
+			}	
+		}
+	
+		
+}	
+  
+  
+}
+
 	function addFaculty($fname,$depname,$imguri,$bio,$login,$pass)
 	{
 	
@@ -1291,7 +1357,7 @@ function readExcel()
 		
 		echo "
 		<script type='text/javascript'>
-			document.getElementById('messages').innerHTML+='<div id=\"notif\">".$text."</div><br />';
+			document.getElementById('messages').innerHTML += '<div id=\"notif\">".$text."</div><br />';
 		</script>
 		";
 	}
@@ -1761,6 +1827,17 @@ function readExcel()
 		
 	}
 	function isSudo($oid)
+	{
+		
+		$array = queryMe("SELECT otyid FROM MOBJECTT WHERE oid like '".$oid."'");
+		if($array['otyid']=='4')
+			return true;
+		else
+			return false;
+		
+		
+	}
+	function isAAdmin($oid)
 	{
 		
 		$array = queryMe("SELECT otyid FROM MOBJECTT WHERE oid like '".$oid."'");

@@ -14,18 +14,32 @@
 </script>
 
 <?php
-    $sec='A';
-    $batid='2';
-    $date='1-SEP-2011';
-    $fid='58';
     echo "<center>";
     echo "<fieldset style='text-align:center;width:1100;'>";
     echo "<legend>Edit Attendence</legend>";
+<<<<<<< HEAD
 
+=======
+>>>>>>> c0bd1722c15507956aa216ce9600cf691f9f860d
     echo "<center>";
-    if(!isset($_POST['phase1']) && !isset($_POST['phase2']) && !isset($_POST['phase3']))
+    if(!isset($_POST['phaseminus1']) && !isset($_POST['phase4']) && !isset($_POST['phase0']) && !isset($_POST['phase1']) && !isset($_POST['phase2']) && !isset($_POST['phase3']))
+    {
+        
+        echo "<form action='#' method='post'>";
+        echo getClassesAsSelect("cls[]","");
+        echo "&emsp;Date&emsp;<input type='text' id='inputField' name='date'/>&emsp;<input type='submit' name='phaseminus1' />";
+        
+        
+    }
+    if(isset($_POST['phaseminus1']))
     {
 
+    $xyz = explode(":",$_POST['cls'][0]);
+    $batid = $xyz[0];
+    $sec = $xyz[1];
+    $date = $_POST["date"];
+    $f = getObject($_COOKIE["object"]);
+    $fid = $f["obhandle"];
     echo "<form action='#' method='post'>";
     echo getSubPeriods($batid,$sec,$date,$fid);
     echo "<br><br>";
@@ -33,7 +47,7 @@
     echo "<input type='hidden' name='date' value='$date'>";
     echo "<input type='hidden' name='fid' value='$fid'>";
     echo "<input type='hidden' name='sec' value='$sec'>";
-    echo "<input type='submit' name='phase1' value='Replace'>";
+    echo "<input type='submit' name='phase1' value='Edit'>";
     }
     if(isset($_POST['phase1']) && !isset($_POST['phase2']))
     {
@@ -86,7 +100,7 @@
         $rows=mysql_num_rows($student);
         echo "<div align='center'>";
         echo "<center>";
-        
+        notifywar("! The students Present are Checked.Please Make your changes !");
         while($s=mysql_fetch_array($student))
         {
             $srno=$s[1];
@@ -110,7 +124,7 @@
             $adata=$as['adata'];
             $pa=$as['pa'];
             $satt=explode('.',$adata);
-            notifywar("! The students Present are Checked.Please Make your changes !"); 
+             
             echo "<div class='img'>";
             if($pa=='P')
             {

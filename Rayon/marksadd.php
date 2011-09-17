@@ -62,7 +62,7 @@
 			$array = readExcel($newfile);
 			
 			putMarks($array,$batyr,$brid,$date,$ros,$akayr);
-		
+			
 		}
 ?>
 </html>

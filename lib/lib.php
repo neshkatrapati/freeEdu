@@ -7,7 +7,7 @@ function printPreview()
 
 			$newfile = "/tmp/tmp.xls";
 			move_uploaded_file($filename, $newfile);	
-	      require_once 'spreader.php';
+		      require_once 'spreader.php';
 			$reader = new ExcelReader();
 			$product = $reader->parse($newfile);
 			$outcount = count($product);
@@ -501,7 +501,8 @@ function readExcel()
 			$insstr = "";			
 		}
 		
-		notify("Updated Succesfully! Consider Upgrading The Batches Go To <a href='m=?'>");
+		notify("Updated Succesfully! Consider Upgrading The Batches Go To <a href='?m=up'>");
+		notify("You Have Upgraded The Batches! Consider Mapping Faculty A Fresh! Go To <a href='?m=mf&l=0&r=5'>");
 	}
 	function addFaculty($fname,$depname,$imguri,$bio,$login,$pass)
 	{
@@ -1290,7 +1291,7 @@ function readExcel()
 		
 		echo "
 		<script type='text/javascript'>
-			document.getElementById('messages').innerHTML='<div id=\"notif\">".$text."</div><br />';
+			document.getElementById('messages').innerHTML+='<div id=\"notif\">".$text."</div><br />';
 		</script>
 		";
 	}
@@ -1308,7 +1309,7 @@ function readExcel()
 		
 		echo "
 		<script type='text/javascript'>
-			document.getElementById('messages').innerHTML='<div id=\"notwar\">".$text."</div><br />';
+			document.getElementById('messages').innerHTML+='<div id=\"notwar\">".$text."</div><br />';
 		</script>
 		";
 	}

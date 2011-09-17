@@ -501,7 +501,7 @@ function readExcel()
 			$insstr = "";			
 		}
 		
-		notify("Update Done!");
+		notify("Updated Succesfully! Consider Upgrading The Batches Go To <a href='m=?'>");
 	}
 	function addFaculty($fname,$depname,$imguri,$bio,$login,$pass)
 	{

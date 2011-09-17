@@ -1,18 +1,14 @@
 <?php
 function cheker()
 {
-include("connection.php");
+include("../lib/connection.php");
 $rnum=array();
 $detain=mysql_query("select count(did) as cnt from MDETAINT");
 $didarray=mysql_fetch_array($detain);
 $did=$didarray['cnt'];
 $rnum=$_POST['chk'];
-$stu=$rnum[0];
-$bat=mysql_query("select batid from MSTUDENTT where srno='$stu'");
-while($BAT=mysql_fetch_array($bat))
-{
-	$batid=$BAT['batid'];
-}
+$batid = $_POST["batid"];
+
 $year=mysql_query("select * from MBATCHT where batid='$batid'");
 while($barray=mysql_fetch_array($year))
 {
@@ -32,11 +28,18 @@ for($i=0;$i<$len;$i++)
 		mysql_query("update MSTUDENTT set  batid='$newbatid' where srno='$srno'");
 		mysql_query("update MSTUDENTT set  did='$did' where srno='$srno'");
 		mysql_query("insert into MDETAINT values('$did','$srno','$batid','$newbatid','$akyr')");
+		
 			$did=$did+1;		
 		
 	}
 
 mysql_query("update MBATCHT set akayr=akayr+1 where batid='$batid'");
-echo "Updated Succesfully";
+mysql_query("update MSTUDENTT set tap='0' where batid='$batid'");
+//mysql_query("update MBATCHT set akayr=akayr+1 where batid='$batid'");
+mysql_query("delete from ADATAT where aid in (select aid from MATDT where batid like '".$batid."')");
+mysql_query("delete from MATDT where batid like '".$batid."'");
+
+notify("Updated Succesfully");
+redirect("?");
 } 
 ?>

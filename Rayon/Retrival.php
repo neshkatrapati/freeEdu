@@ -92,7 +92,7 @@ while($reglr=mysql_fetch_array($regular))
 {
 	$mrid=$reglr[0];
 	$akyr=$reglr[4];
-	echo "<br><div1><h2>Regular Results</h2></div1><br />";
+	echo "<br><div1><center><h2>Regular Results</h2></center></div1><br />";
 	if($i==0){
 	echo "<div id='placeholderm' style='width:450px;height:250px'></div>
 			<p id='hoverdata'><span id='clickdata'></span></p></div>" ;

@@ -13,7 +13,7 @@ if(!array_key_exists("batsub",$_POST) && !array_key_exists("phase2",$_POST))
 ?>
 </center>
 <div id='php_next'>
-<?php
+<?php 
 include("next.php");
 if(isset($_POST['batsub']))
 {

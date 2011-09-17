@@ -935,17 +935,27 @@ function readExcel()
 		return "<select name='".$name."' ".$extra.">".$mprinter."</select>";
 	}
 	
-	function totAtt($ppl)
+	function totAtt($ppl,$pora,$batid)
 	{
 		include("connection.php");	
 		$p=explode(".",$ppl);
 		$num=count($p);	
+		$set = "";
 		for($i=0;$i<$num;$i++)
-		{
-			mysql_query("update MSTUDENTT set tap=tap+1 where sid='$p[$i]'");	
-			print_r($p);	
+				{	
+					$set .= $p[$i].",";
+					
+				}
+				$set = substr($set,0,-1);
+				
+			if($pora=='A'){
+				mysql_query("update MSTUDENTT set tap=tap+1 where sid NOT IN (".$set.") and batid like '".$batid."'");
+			}
+			else if($pora=='P')
+				mysql_query("update MSTUDENTT set tap=tap+1 where sid  IN (".$set.") and batid like '".$batid."'");
+			
+			//print_r($p);	
 		}
-	}
 	
 	
 	function getMPeriods($batid,$sec,$date,$sujid)
@@ -1280,6 +1290,7 @@ function readExcel()
 		$aid=mysql_num_rows($att);
 		mysql_query("insert into MATDT values('$aid','$fid','$batid','$sec','$date','$per','$subid')");
 		mysql_query("insert into ADATAT values('$aid','$ppl','$pora')");
+		totAtt($ppl,$pora,$batid);	
 	}
 	function recAtt($batid,$sec,$ppl,$pora,$subid,$fid,$per,$date)
 	{
@@ -1541,7 +1552,14 @@ function readExcel()
 		$sec = $bA["sec"];
 		$i=0;
 		$return = "<table border='1' style='text-align:center;'><th>Dates</th>";
-				
+		$ex = mysql_query("select * from MATDT where batid like '".$batid."' and sec like '".$sec."'");
+		$exnum = mysql_num_rows($ex);
+		if($exnum<=0)
+		{
+			notifyerr("No Attendance Uploaded Till Now!");
+			redirect("?");
+			return;
+		}
 		if($pid==-1)
 		{
 			

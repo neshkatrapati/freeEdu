@@ -225,7 +225,7 @@
                                 $worksheet->write($crow,3+($index*4),$ext,$format_center);
                                 $worksheet->write($crow,4+($index*4),$int+$ext,$format_center);
                                 $worksheet->write($crow,5+($index*4),$cre,$format_center);
-                                $passed[$pi]++;
+				$passed[$pi]++;
                                 
                          }
                          else
@@ -262,7 +262,7 @@
         $bstr .= $backlog." ";
         for($i=0;$i<count($arr);$i++)
         {
-                $sub=mysql_query("select subname from MSUBJECTT where subid='$arr[$i]'");
+                $sub=mysql_query("select subshort from MSUBJECTT where subid='$arr[$i]'");
                 $subname=mysql_fetch_array($sub);	
 		$bstr .= "/$subname[0]";		
       	}
@@ -281,7 +281,7 @@
         for($i=0;$i<count($attend);$i++)
         {
                 $worksheet->write($crow,5+($i*4),$passed[$i]);
-                $worksheet->write($crow+1,5+($i*4),$attend[$i]);
+                $worksheet->write($crow+1,5+($i*4),$attend[$i]-1);
                 $worksheet->write($crow+2,5+($i*4),round(($passed[$i]/$attend[$i])*100,2));
                 $worksheet->write($crow+3,5+($i*4),$highest[$i]);
                 $worksheet->write($crow+4,5+($i*4),$lowest[$i]);

@@ -1,3 +1,18 @@
+<link rel="stylesheet" type="text/css" media="all" href="../aux/calendar/jsDatePick_ltr.min.css" />
+<script type="text/javascript" src="../aux/calendar/jsDatePick.min.1.3.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		new JsDatePick({
+			useMode:2,
+			target:"inputField",
+			limitToToday:true,
+			dateFormat:"%d-%M-%Y",
+			imgPath:"../aux/calendar/img/"
+			
+		});
+	};
+</script>
+
 <?php
     $sec='A';
     $batid='1';
@@ -6,11 +21,38 @@
     echo "<center>";
     echo "<fieldset style='text-align:center;width:600;'>";
     echo "<legend>Edit Attendence</legend>";
-    echo "<center>";
-    echo "<form action='#' method='post'>";
-    echo getMPeriods($batid,$sec,$date,$sujid);
-    echo "<br><br>";
-    echo "<input type='submit' name='phase1' value='Replace'>";
+    if(!isset($_POST['phase0']) && !isset($_POST['phase1']))
+    {
+        
+        echo "<center>";
+        echo "<form action='#' method='post'>";
+        $object = getObject($_COOKIE["object"]);
+        echo "Select Class:&emsp;".getFacClasses("cls[]",$object["obhandle"],"")."&emsp;Date:&emsp;";
+        echo "<input type='text' id='inputField'></input>";
+        echo "<br><br>";
+        echo "<input type='submit' name='phase0' value='Replace'>";
+        echo "</center>";
+        
+    }
+    if(isset($_POST['phase0']))
+    {
+      
+        //echo "<center>";
+        $main = $_POST['cls'][0];
+        $clsmain = explode(':',$main);
+        $cldet = $clsmain[0];
+        $subid = $clsmain[1];
+        $batid = substr($cldet,0,1);
+        $sec = substr($cldet,-1);
+        $fid = $_POST['fid'];
+        $date = $_POST['date'];
+    
+        echo "<form action='#' method='post'>";
+        echo getMPeriods($batid,$sec,$date,$subid);
+        echo "<br><br>";
+        echo "<input type='submit' name='phase1' value='Replace'>";
+        echo "</center>";
+    }
     if(isset($_POST['phase1']))
     {
         $per=$_POST['per'];

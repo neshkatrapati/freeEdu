@@ -21,7 +21,7 @@
     echo "<center>";
     echo "<fieldset style='text-align:center;width:1100;'>";
     echo "<legend>Edit Attendence</legend>";
-<<<<<<< HEAD
+
     echo "<center>";
     if(!isset($_POST['phase1']) && !isset($_POST['phase2']) && !isset($_POST['phase3']))
     {
@@ -36,8 +36,6 @@
     echo "<input type='submit' name='phase1' value='Replace'>";
     }
     if(isset($_POST['phase1']) && !isset($_POST['phase2']))
-=======
-    if(!isset($_POST['phase0']) && !isset($_POST['phase1']))
     {
         
         echo "<center>";
@@ -70,7 +68,6 @@
         echo "</center>";
     }
     if(isset($_POST['phase1']))
->>>>>>> f46494c041230b0dee76e72405a2473d8e02c1f1
     {
         include("../lib/connection.php");
         $date = strtotime($date);
@@ -204,8 +201,7 @@
                 <font color=#000000>$chk[$i].<br>$sname</b></font></div></div>";
         }
          
-         echo $sid;
-         echo $aid;
+         
             echo "<form action='#' method='post'>";
             echo "<input type='hidden' name='sid' value='$sid'>";
             echo "<input type='hidden' name='aid' value='$aid'>";
@@ -221,8 +217,7 @@
        {
            $sid=$_POST['sid'];
            $aid=$_POST['aid'];
-           echo $sid;
-           echo $aid;
+          
            mysql_query("update ADATAT set adata='$sid',pa='P' where aid='$aid'");
            notify("Editing Successfully Done");
            redirect("?");

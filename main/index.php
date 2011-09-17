@@ -422,7 +422,7 @@ else if($mode=="edit_att")
 	if(isFaculty($oid))
 	{
 		include("../Roster/editAtt.php"); 
-		echo "<center>".getFacPlan($array['obhandle'])."</center>";
+		//echo "<center>".getFacPlan($array['obhandle'])."</center>";
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");

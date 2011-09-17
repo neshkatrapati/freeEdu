@@ -7,7 +7,7 @@ function printPreview()
 
 			$newfile = "/tmp/tmp.xls";
 			move_uploaded_file($filename, $newfile);	
-	      require_once 'spreader.php';
+		      require_once 'spreader.php';
 			$reader = new ExcelReader();
 			$product = $reader->parse($newfile);
 			$outcount = count($product);

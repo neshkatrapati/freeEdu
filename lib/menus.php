@@ -202,6 +202,7 @@ function getFacMenu()
             <a href='#' class='menu'>Attendance</a>
             <ul class='menu-dropdown'>
               <li><a href='?m=ua'>Upload Attendance</a></li>
+              <li><a href='?m=edit_att'>Edit Attendance</a></li>
 <li><a href='?m=fp'>See Your Plan</a></li>
             </ul>
             

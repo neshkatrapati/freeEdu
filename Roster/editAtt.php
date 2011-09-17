@@ -17,10 +17,8 @@
     echo "<center>";
     echo "<fieldset style='text-align:center;width:1100;'>";
     echo "<legend>Edit Attendence</legend>";
-<<<<<<< HEAD
 
-=======
->>>>>>> c0bd1722c15507956aa216ce9600cf691f9f860d
+
     echo "<center>";
     if(!isset($_POST['phaseminus1']) && !isset($_POST['phase4']) && !isset($_POST['phase0']) && !isset($_POST['phase1']) && !isset($_POST['phase2']) && !isset($_POST['phase3']))
     {

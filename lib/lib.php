@@ -500,8 +500,8 @@ function readExcel()
 			mysql_query($insstr);
 			$insstr = "";			
 		}
-		notify("Updated Succesfully! Consider Upgrading The Batches Go To <a href='?m=up'>");
-		notify("You Have Upgraded The Batches! Consider Mapping Faculty A Fresh! Go To <a href='?m=mf&l=0&r=5'>");
+		notify("Updated Succesfully! Consider Upgrading The Batches Go To <a href=\"?m=up\">");
+		notify("You Have Upgraded The Batches! Consider Mapping Faculty A Fresh! Go To <a href=\"?m=mf&l=0&r=5\">");
 	
 		updateMarks($mrcount);
 	}
@@ -1853,7 +1853,7 @@ function readExcel()
 	{
 		
 		$array = queryMe("SELECT otyid FROM MOBJECTT WHERE oid like '".$oid."'");
-		if($array['otyid']=='4')
+		if($array['otyid']=='5')
 			return true;
 		else
 			return false;

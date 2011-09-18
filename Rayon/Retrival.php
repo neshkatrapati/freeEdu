@@ -88,11 +88,12 @@ while($REG=mysql_fetch_array($reg))
 }
 $regular=mysql_query("select * from MAVAILT where batid='$batid' and ros='R'");
 $i=0;
+echo "<br><div1><center><h2>Regular Results</h2></center></div1><br />";
 while($reglr=mysql_fetch_array($regular))
 {
 	$mrid=$reglr[0];
 	$akyr=$reglr[4];
-	echo "<br><div1><center><h2>Regular Results</h2></center></div1><br />";
+	
 	if($i==0){
 	echo "<div id='placeholderm' style='width:450px;height:250px'></div>
 			<p id='hoverdata'><span id='clickdata'></span></p></div>" ;

@@ -169,8 +169,8 @@ function readExcel()
 		$brfilter = getBranchFilter();
 		$result = mysql_query("select (select brname from MBRANCHT b where b.brid=c.brid) as brname,brid,batyr,akayr,batid from MBATCHT c where brid like '".$brfilter."'");
 		$i =0;
-		$ret = "<select name='".$name."' ".$extra.">";
-		
+		$ret = "<select name='".$name."' ".$extra."  onchange='showUser(this.value)'>";
+		$ret .="<option value='null'>--Select A class--</option>";
 		while($row = mysql_fetch_array($result))
   		{
   			$ret  .= "<option value='".$row['batid'].":A'>".$row['brname']." ".getFullClass($row['akayr']+1)." A</option>"; 
@@ -1025,28 +1025,25 @@ function readExcel()
 		}
 	
 	
-	function getMPeriods($batid,$sec,$date,$sujid)
+	function getMPeriods($batid,$sec,$date,$fid)
 	{
 		$date = strtotime($date);
-		$sub=mysql_query("select * from MSUBJECTT where subid='$sujid'");
-		$subname=mysql_fetch_array($sub);
+		$fac=mysql_query("select * from MFACULTYT where fid='$fid'");
+		$faculty=mysql_fetch_array($fac);
 		$return.="<br>";
-		$return="<table cellpadding='5'>";
+		$return="<table cellpadding='10'>";
 		$return.="<tr>";
-		$return.="<th>Classes Taken By<br> ".$subname['subname']."</th>";
+		$return.="<th>Classes Taken By<br> ".$faculty['fname']."</th>";
 		$return.="<th>All Clases</th></tr>";
 		$return.="<tr><td>";
-		$return.="<table border='1'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
-		$att=mysql_query("select * from MATDT where sec='$sec' and batid='$batid' and dayid='$date' order by(sessionid)");
+		$return.="<table border='1' cellpadding='5'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
+		$att=mysql_query("select * from MATDT where sec='$sec' and batid='$batid' and dayid='$date' and fid='$fid' order by(sessionid)");
 		while($a=mysql_fetch_array($att))
 		{
 		    $subid=$a['subid'];
-		    $fid=$a['fid'];
 		    $p=$a['sessionid'];
 		    $aid=$a['aid'];
-		    if($subid==$sujid)
-		    {
-		       $res=mysql_query("select * from SMETAT where batid='$batid' and sec='$sec' and pid='$p'");
+		   $res=mysql_query("select * from SMETAT where batid='$batid' and sec='$sec' and pid='$p'");
 		       $t=mysql_fetch_array($res);
 		       $timeinfo=$t['timeinfo'];
 		       $x=explode(';',$timeinfo);
@@ -1056,24 +1053,30 @@ function readExcel()
 		       $return.="<td>$x[1]</td>";
 		       $return.="<input type='hidden' name='aid' value='$aid'>";
 		       $return.="</tr>";
-		    }
+		    
 		}
 		$return.="</table></td><td>";
-		$result=mysql_query("select * from SMETAT where batid='$batid' and sec='$sec' order by(pid)");
-		$return.="<table border='1'><tr><th>Period</th><th></th><th>Start</th><th>End</th><th></th><th>Taken By</th></tr>";
+		
+		$return.="<table border='1' cellpadding='5'><tr><th>Period</th><th></th><th>Start</th><th>End</th><th></th><th>Taken By</th></tr>";
 		$get=mysql_query("select sessionid from MATDT where batid='$batid' and sec='$sec' and dayid='$date'");
 		while($pr=mysql_fetch_array($get))
 		{
 			$arr[]=$pr[0];
 		}
+		$result=mysql_query("select * from SMETAT where batid='$batid' and sec='$sec' order by(pid)");
 		while($res=mysql_fetch_array($result))
 		{
 			$aid1=$aid1['aid'];
 			$pid=$res['pid'];
 			$s1=mysql_query("select * from MATDT where sec='$sec' and batid='$batid' and dayid='$date' and sessionid='$pid'");
 			$s2=mysql_fetch_array($s1);
+			$fid1=$s2['fid'];
 			$aid1=$s2['aid'];
-			if(in_array($pid,$arr))
+			if($fid1==$fid)
+			{
+				continue;
+			}
+			else if(in_array($pid,$arr))
 			{
 				$subject=mysql_query("select * from MSUBJECTT where subid='$s2[subid]'");
 				$subname=mysql_fetch_array($subject);
@@ -1120,7 +1123,7 @@ function readExcel()
 			$arr[]=$pr[0];
 		}
 		
-		$return="<table border='1'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
+		$return="<table border='1' cellpadding='5'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
 		if(mysql_num_rows($result)<=0)
 		{
 			$classGet = queryMe("SELECT (select brname from MBRANCHT b where b.brid=t.brid) 
@@ -1174,7 +1177,7 @@ function readExcel()
 			$arr[]=$pr[0];
 		}
 		
-		$return="<table border='1'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
+		$return="<table border='1' cellpadding='5'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
 		
 		while($res=mysql_fetch_array($result))
 		{
@@ -1221,7 +1224,7 @@ function readExcel()
 		{
 			$arr[]=$pr['sessionid'];
 		}
-		$return="<table border='1'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
+		$return="<table border='1' cellpadding='5'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
 		while($res=mysql_fetch_array($result))
 		{
 			$pid=$res['pid'];
@@ -1388,6 +1391,15 @@ function readExcel()
 			
 			window.location = '".$location."';
 			}
+		</script>
+		";
+		
+	}
+	function check($checker)
+	{
+		echo "
+		<script type='text/javascript'>
+			alert($checker)
 		</script>
 		";
 		

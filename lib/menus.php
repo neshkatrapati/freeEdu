@@ -348,7 +348,8 @@ function getAAdminMenu()
           <li class='menu'>
             <a href='#' class='menu'>Attendance</a>
             <ul class='menu-dropdown'>
-              <li><a href='?m=edit_att'>Edit Attendance</a></li>
+              <li><a href='?m=edit_Matt'>Edit Attendance</a></li>
+	      
 		 
             </ul>
             

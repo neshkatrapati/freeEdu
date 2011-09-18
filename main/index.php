@@ -449,6 +449,18 @@ else if($mode=="edit_att")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+else if($mode=="edit_Matt")
+{
+	echo "<div id='content' class='content'>";
+	if(isSudo($oid))
+	{
+		include("../Roster/maineditAtt.php"); 
+		//echo "<center>".getFacPlan($array['obhandle'])."</center>";
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
 else if($mode=="xdebug")
 {
 	echo "<div id='content' class='content'>";

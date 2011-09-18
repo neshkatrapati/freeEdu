@@ -452,7 +452,7 @@ else if($mode=="edit_att")
 else if($mode=="edit_Matt")
 {
 	echo "<div id='content' class='content'>";
-	if(isSudo($oid))
+	if(isAAdmin($oid))
 	{
 		include("../Roster/maineditAtt.php"); 
 		//echo "<center>".getFacPlan($array['obhandle'])."</center>";

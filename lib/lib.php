@@ -1056,7 +1056,7 @@ function readExcel()
 		    
 		}
 		$return.="</table></td><td>";
-		$return.="<table border='1' cellpadding='5'><tr><th>Period</th><th></th><th>Start</th><th>End</th><th></th><th>Taken By</th></tr>";
+		$return.="<table border='1' cellpadding='10'><tr><th>Period</th><th></th><th>Start</th><th>End</th><th></th><th>Taken By</th></tr>";
 		$get=mysql_query("select sessionid from MATDT where batid='$batid' and sec='$sec' and dayid='$date'");
 		while($pr=mysql_fetch_array($get))
 		{
@@ -1860,7 +1860,7 @@ function readExcel()
 	{
 		
 		$array = queryMe("SELECT otyid FROM MOBJECTT WHERE oid like '".$oid."'");
-		if($array['otyid']=='4')
+		if($array['otyid']=='5')
 			return true;
 		else
 			return false;

@@ -1,6 +1,4 @@
 <html>
-<link rel="stylesheet" type="text/css" media="all" href="../aux/calendar/jsDatePick_ltr.min.css" />
-<script type="text/javascript" src="../aux/calendar/jsDatePick.min.1.3.js"></script>
 <script type="text/javascript">
 	window.onload = function(){
 		new JsDatePick({

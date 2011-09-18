@@ -15,6 +15,8 @@
 <script src="../aux/bootstrap/docs/assets/js/google-code-prettify/prettify.js"></script>
 <script src="../aux/bootstrap/docs/assets/js/application.js"></script>
 <script type="text/javascript" src="../aux/stars/jquery.starRating.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="../aux/calendar/jsDatePick_ltr.min.css" />
+<script type="text/javascript" src="../aux/calendar/jsDatePick.min.1.3.js"></script>
 <script type="text/javascript">
 $(function() {
   $('.nyroModal').nyroModal();
@@ -277,6 +279,34 @@ else if($mode=="rr")
 		echo "<fieldset><legend>Record Retrieval</legend>";
 		echo "<center>";
 		include("../Rayon/MRetrival.php");
+		echo "</center></fieldset>";
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+else if($mode=="fbcreate")
+{
+	echo "<div id='content'  class='content'>";
+	if(isSudo($oid) || isAdmin($oid))
+	{
+		echo "<fieldset><legend>Create A Feedback Form</legend>";
+		echo "<center>";
+		include("../modules/feedback/fbcreate.php");
+		echo "</center></fieldset>";
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+else if($mode=="fbget")
+{
+	echo "<div id='content'  class='content'>";
+	if(isSudo($oid) || isAdmin($oid))
+	{
+		echo "<fieldset><legend>Analyse Feedback Forms</legend>";
+		echo "<center>";
+		include("../modules/feedback/fbget.php");
 		echo "</center></fieldset>";
 	}
 	else

@@ -299,6 +299,20 @@ else if($mode=="fbcreate")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+else if($mode=="fbput")
+{
+	echo "<div id='content'  class='content'>";
+	if(isStudent($oid))
+	{
+		echo "<fieldset><legend>Submit A Feedback Form</legend>";
+		echo "<center>";
+		include("../modules/feedback/fbput.php");
+		echo "</center></fieldset>";
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
 else if($mode=="fbget")
 {
 	echo "<div id='content'  class='content'>";

@@ -500,8 +500,8 @@ function readExcel()
 			mysql_query($insstr);
 			$insstr = "";			
 		}
-		notify("Updated Succesfully! Consider Upgrading The Batches Go To <a href='?m=up'>");
-		notify("You Have Upgraded The Batches! Consider Mapping Faculty A Fresh! Go To <a href='?m=mf&l=0&r=5'>");
+		notify("Updated Succesfully! Consider Upgrading The Batches Go To <a href=\"?m=up\">");
+		notify("You Have Upgraded The Batches! Consider Mapping Faculty A Fresh! Go To <a href=\"?m=mf&l=0&r=5\">");
 	
 		updateMarks($mrcount);
 	}

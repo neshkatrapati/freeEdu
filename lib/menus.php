@@ -70,7 +70,9 @@ function getSudoMenu()
                  <li><a href='?m=suba'>Substitute Subjects</a></li>
                  <li><a href='?m=immap'>Assign Images To Subjects[**Experimental**]</a></li>
                  <li><a href='?m=create_student'>Create Username For Student</a></li>
+                 <li><a href='?m=license' >License</a></li>
                  <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>
+                 
             </ul>
             
           </li>
@@ -157,6 +159,16 @@ function getAdminMenu()
             
           </li>
         </ul>
+        <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Tools</a>
+            <ul class='menu-dropdown'>
+                 <li><a href='?m=license' >Download Source</a></li>
+                 <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>
+            </ul>
+            
+          </li>
+        </ul>
         
      
          <form action='?m=os' method='post'>
@@ -218,7 +230,17 @@ function getFacMenu()
             
           </li>
         </ul>
-     
+        <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Tools</a>
+            <ul class='menu-dropdown'>
+                 <li><a href='?m=license' >Download Source</a></li>
+                 <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>
+            </ul>
+            
+          </li>
+        </ul>
+        
          <form action='?m=os' method='post'>
           <input type='text' placeholder='Search' name='srch' />
         </form>";
@@ -275,7 +297,17 @@ function getStuMenu()
             
           </li>
         </ul>
-     
+        <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Tools</a>
+            <ul class='menu-dropdown'>
+                 <li><a href='?m=license' >Download Source</a></li>
+                 <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>
+            </ul>
+            
+          </li>
+        </ul>
+        
          <form action='?m=os' method='post'>
           <input type='text' placeholder='Search' name='srch' />
         </form>";
@@ -302,6 +334,75 @@ $retstr .= " <ul class='nav secondary-nav'>
   </div> <!-- topbar-wrapper -->";
 return $retstr;
 }
+function getAAdminMenu()
+{
+ $retstr =  " <div class='page-header'>
+    
+  </div>
+  
+  <div class='topbar-wrapper' style='z-index: 5;'>
+    <div class='topbar'>
+      <div class='container fixed'>
+        <a class='logo' href='?'>freeEdu<img src='../images/others/home.png' width='20'></a>
+       <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Attendance</a>
+            <ul class='menu-dropdown'>
+              <li><a href='?m=edit_Matt'>Edit Attendance</a></li>
+	      
+		 
+            </ul>
+            
+          </li>
+        </ul>
+          <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Tools</a>
+            <ul class='menu-dropdown'>
+              <li><a href='?m=edit_att'>Edit Attendance</a></li>
+		 
+            </ul>
+            
+          </li>
+        </ul>
+        <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Tools</a>
+            <ul class='menu-dropdown'>
+                 <li><a href='?m=license' >Download Source</a></li>
+                 <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>
+            </ul>
+            
+          </li>
+        </ul>
+        
+         <form action='?m=os' method='post'>
+          <input type='text' placeholder='Search' name='srch' />
+        </form>";
+        
+        $oid = $_COOKIE['object'];
+
+$oarray = getObject($oid);
+$retstr .= " <ul class='nav secondary-nav'>
+          <li class='menu'>
+            
+            <a href='#' class='menu'><span class='profname'>
+            ".$oarray["obname"]."
+            </span></a>
+            <ul class='menu-dropdown'>
+                
+               <li><a href='?m=ep'>Edit Profile</a></li>
+                <li><a href='../login.php'>Logout</a></li>
+            </ul>
+            
+          </li>
+        </ul>
+</div>
+    </div>
+  </div> <!-- topbar-wrapper -->";
+return $retstr;
+}
+
 function getMenu()
 {
 	
@@ -315,7 +416,8 @@ function getMenu()
 		return getAdminMenu();
          else if($oarray['otyid']==0)
 		return getStuMenu();
-
+     else if($oarray['otyid']==5)
+		return getAadminMenu();
 
 }
 ?>

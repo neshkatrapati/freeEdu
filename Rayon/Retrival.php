@@ -88,11 +88,12 @@ while($REG=mysql_fetch_array($reg))
 }
 $regular=mysql_query("select * from MAVAILT where batid='$batid' and ros='R'");
 $i=0;
+echo "<br><div1><center><h2>Regular Results</h2></center></div1><br />";
 while($reglr=mysql_fetch_array($regular))
 {
 	$mrid=$reglr[0];
 	$akyr=$reglr[4];
-	echo "<br><div1><center><h2>Regular Results</h2></center></div1><br />";
+	
 	if($i==0){
 	echo "<div id='placeholderm' style='width:450px;height:250px'></div>
 			<p id='hoverdata'><span id='clickdata'></span></p></div>" ;
@@ -252,7 +253,7 @@ while($supp=mysql_fetch_array($supply))
 		echo "<br>Results For 4th Year 2nd Semester Supplymentary<br>";
 	}
 	echo "</center>";
-	$marks=mysql_query("select * from MBACKLOCKT where sid='$sid' and doex='$doex'");
+	$marks=mysql_query("select * from MBACKLOGT where sid='$sid' and doex='$doex'");
 	$rows=mysql_num_rows($marks);	
 	if($rows<=0)
 	{
@@ -288,7 +289,7 @@ while($supp=mysql_fetch_array($supply))
 			{
 				$subname=$subj[2];
 				$subcode=$subj[1];
-				echo("<tr bgcolor=cyan>");
+				echo("<tr class='$class'>");
 				echo("<td>");
 					echo($subcode);
 				echo("</td>");

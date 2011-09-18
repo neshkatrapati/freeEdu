@@ -428,6 +428,18 @@ else if($mode=="edit_att")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+else if($mode=="edit_Matt")
+{
+	echo "<div id='content' class='content'>";
+	if(isSudo($oid))
+	{
+		include("../Roster/maineditAtt.php"); 
+		//echo "<center>".getFacPlan($array['obhandle'])."</center>";
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
 else if($mode=="xdebug")
 {
 	echo "<div id='content' class='content'>";
@@ -511,6 +523,13 @@ else if($mode=="ep")
 	echo "<div id='content'  class='content'>";
 	include("../EditProfile/editProfile.php");
 	echo "</div>";
+}
+else if($mode=="license")
+{
+	echo "<div id='content'  class='content'>";
+	echo "<center><pre>";
+	include("../COPYING");
+	echo "</pre></center></div>";
 }
 else if($mode=="ua")
 {

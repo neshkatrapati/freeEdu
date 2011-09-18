@@ -208,7 +208,7 @@
                                 $highest[$sind]=($int+$ext);
                         if($lowest[$sind]>($int+$ext) || $lowest[$sind]==0)
                                 $lowest[$sind]=($int+$ext);
-                         if($ext != -1)
+                         if($ext != -1 && $ext!="")
                          {
                                 
                                 $attend[$ai]++;

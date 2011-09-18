@@ -170,7 +170,7 @@ function readExcel()
 		$result = mysql_query("select (select brname from MBRANCHT b where b.brid=c.brid) as brname,brid,batyr,akayr,batid from MBATCHT c where brid like '".$brfilter."'");
 		$i =0;
 		$ret = "<select name='".$name."' ".$extra."  onchange='showUser(this.value)'>";
-		$ret .="<option value='null'>--Select A class--</option>";
+		$ret .="<option value='null'>--Classes--</option>";
 		while($row = mysql_fetch_array($result))
   		{
   			$ret  .= "<option value='".$row['batid'].":A'>".$row['brname']." ".getFullClass($row['akayr']+1)." A</option>"; 
@@ -1036,47 +1036,47 @@ function readExcel()
 		$return.="<th>Classes Taken By<br> ".$faculty['fname']."</th>";
 		$return.="<th>All Clases</th></tr>";
 		$return.="<tr><td>";
-		$return.="<table border='1' cellpadding='5'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
+		$return.="<table border='1' cellpadding='10'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
 		$att=mysql_query("select * from MATDT where sec='$sec' and batid='$batid' and dayid='$date' and fid='$fid' order by(sessionid)");
 		while($a=mysql_fetch_array($att))
 		{
 		    $subid=$a['subid'];
 		    $p=$a['sessionid'];
 		    $aid=$a['aid'];
-		   $res=mysql_query("select * from SMETAT where batid='$batid' and sec='$sec' and pid='$p'");
-		       $t=mysql_fetch_array($res);
-		       $timeinfo=$t['timeinfo'];
-		       $x=explode(';',$timeinfo);
-		       $return.="<tr><td>Period".$p."</td>";
-		       $return.="<td><input type='radio' name='per' value='$p'></td>";
-		       $return.="<td>$x[0]</td>";
-		       $return.="<td>$x[1]</td>";
-		       $return.="<input type='hidden' name='aid' value='$aid'>";
-		       $return.="</tr>";
+		    $res=mysql_query("select * from SMETAT where batid='$batid' and sec='$sec' and pid='$p'");
+		    $t=mysql_fetch_array($res);
+		    $timeinfo=$t['timeinfo'];
+		    $x=explode(';',$timeinfo);
+		    $return.="<tr><td>Period".$p."</td>";
+		    $return.="<td><input type='radio' name='per' value='$p'></td>";
+		    $return.="<td>$x[0]</td>";
+		    $return.="<td>$x[1]</td>";
+		    $return.="<input type='hidden' name='aid[$p]' value='$aid'>";
+		    $return.="</tr>";
 		    
 		}
 		$return.="</table></td><td>";
-		
 		$return.="<table border='1' cellpadding='5'><tr><th>Period</th><th></th><th>Start</th><th>End</th><th></th><th>Taken By</th></tr>";
 		$get=mysql_query("select sessionid from MATDT where batid='$batid' and sec='$sec' and dayid='$date'");
 		while($pr=mysql_fetch_array($get))
 		{
-			$arr[]=$pr[0];
+			$arr[]=$pr['sessionid'];
 		}
 		$result=mysql_query("select * from SMETAT where batid='$batid' and sec='$sec' order by(pid)");
 		while($res=mysql_fetch_array($result))
 		{
-			$aid1=$aid1['aid'];
+			include("connection.php");
 			$pid=$res['pid'];
 			$s1=mysql_query("select * from MATDT where sec='$sec' and batid='$batid' and dayid='$date' and sessionid='$pid'");
 			$s2=mysql_fetch_array($s1);
 			$fid1=$s2['fid'];
 			$aid1=$s2['aid'];
+			$fname=getFacName($fid1);
 			if($fid1==$fid)
 			{
 				continue;
 			}
-			else if(in_array($pid,$arr))
+			 if(in_array($pid,$arr))
 			{
 				$subject=mysql_query("select * from MSUBJECTT where subid='$s2[subid]'");
 				$subname=mysql_fetch_array($subject);
@@ -1085,11 +1085,11 @@ function readExcel()
 				$x=explode(';',$timeinfo);
 				$return.="<td>Period $pid:</td>";
 				$return.="<td><input type='radio' name='per1' value='".$pid."'></td>";
+				$return.="<input type='hidden' name='aid1[$pid]' value='$aid1'>";
 				$return.="<td>$x[0]</td>";
 				$return.="<td>$x[1]</td>";
 				$return.="<td><img src='../images/others/done.jpg' width='18'></td>";
-				$return.="<input type='hidden' name='aid1[$pid]' value='$aid1'>";
-				$return.="<td>$subname[subname]</td>";
+				$return.="<td>$fname</td>";
 				$return.= "</tr>";
 				continue;
 			}
@@ -1101,7 +1101,6 @@ function readExcel()
 				$return.="<td>$x[0]</td>";
 				$return.="<td>$x[1]</td>";
 				$return.="<td><img src='../images/others/wrong.jpg' width='18'></td>";
-				$return.="<input type='hidden' name='aid1[$pid]' value='$aid1'>";
 				$return.="<td>Not Taken</td>";
 				$return.= "</tr>";
 			
@@ -1123,7 +1122,7 @@ function readExcel()
 			$arr[]=$pr[0];
 		}
 		
-		$return="<table border='1' cellpadding='5'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
+		$return="<table border='1' cellpadding='10'><tr><th>Period</th><th></th><th>Start</th><th>End</th></tr>";
 		if(mysql_num_rows($result)<=0)
 		{
 			$classGet = queryMe("SELECT (select brname from MBRANCHT b where b.brid=t.brid) 
@@ -1413,6 +1412,14 @@ function readExcel()
 		mysql_query("insert into MATDT values('$aid','$fid','$batid','$sec','$date','$per','$subid')");
 		mysql_query("insert into ADATAT values('$aid','$ppl','$pora')");
 		totAtt($ppl,$pora,$batid);	
+	}
+	function getFacName($fid)
+	{
+		
+		$fac=mysql_query("select * from MFACULTYT where fid ='$fid'");
+		$faculty=mysql_fetch_array($fac);
+		$facname=$faculty['fname'];
+		return($facname);
 	}
 	function recAtt($batid,$sec,$ppl,$pora,$subid,$fid,$per,$date)
 	{

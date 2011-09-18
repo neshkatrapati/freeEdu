@@ -39,6 +39,7 @@ xmlhttp.send();
 }        
 </script>
 <?php
+    notifywar("Please Note that some Periods are already uploaded. Edit the Attendence carefully");
     echo "<center>";
      echo "<fieldset style='text-align:center;width:700;'>";
         echo "<legend>Edit Attendence</legend>";
@@ -70,25 +71,33 @@ xmlhttp.send();
             $per1=$_POST['per1'];
             $aid=$_POST['aid'];
             $aid1=$_POST['aid1'];
-            $faculty=mysql_query("select * from MATDT where aid='$aid'");
+            $faculty=mysql_query("select * from MATDT where aid='$aid[$per]'");
             $f=mysql_fetch_array($faculty);
             $fac=$f['fid'];
             $faculty1=mysql_query("select * from MATDT where aid='$aid1[$per1]'");
             $f1=mysql_fetch_array($faculty1);
             $fac1=$f1['fid'];
+            xDebug($aid[$per]);
+            xDebug($aid1[$per1]);
             if($per==null || $per1==null)
             {
                 notifyerr("One or more Periods not selected. Try Again");
                 redirect("?m=edit_Matt");
+            }
+            else if($aid1[$per1]==NULL)
+            {
+                mysql_query("update MATDT set sessionid='$per1' where aid='$aid[$per]'");
+                notify("Updated Successfully");
+                //redirect("?");
             }
             else
             {
                 //mysql_query("update MATDT set fid='$fac' where aid='$aid1[$per1]'");
                 //mysql_query("update MATDT set fid='$fac1' where aid='$aid'");
                 mysql_query("update MATDT set sessionid='$per' where aid='$aid1[$per1]'");
-                mysql_query("update MATDT set sessionid='$per1' where aid='$aid'");
-                notify("Updated Successfully");
-                redirect("?");
+                mysql_query("update MATDT set sessionid='$per1' where aid='$aid[$per]'");
+                //notify("Updated Successfully");
+                //redirect("?");
             }
         }
     

@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" media="all" href="../aux/calendar/jsDatePick_ltr.min.css" />
-<script type="text/javascript" src="../aux/calendar/jsDatePick.min.1.3.js"></script>
 <script type="text/javascript">
 	window.onload = function(){
 		new JsDatePick({
@@ -39,7 +37,7 @@ xmlhttp.send();
 }        
 </script>
 <?php
-    notifywar("Please Note that some Periods are already uploaded. Edit the Attendence carefully");
+    notifywar("Please Note that some Periods may be already uploaded. Edit the Attendence carefully");
     echo "<center>";
      echo "<fieldset style='text-align:center;width:700;'>";
         echo "<legend>Edit Attendence</legend>";
@@ -88,7 +86,7 @@ xmlhttp.send();
             {
                 mysql_query("update MATDT set sessionid='$per1' where aid='$aid[$per]'");
                 notify("Updated Successfully");
-                //redirect("?");
+                redirect("?m=edit_Matt");
             }
             else
             {

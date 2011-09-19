@@ -1,7 +1,7 @@
 <?php
 function retrival($srno)
 {
-include("connection.php");
+include("../lib/connection.php");
 $newakyr=-1;
 $srno= strtoupper($srno);
 $result=mysql_query("select * from MSTUDENTT where srno='$srno'");

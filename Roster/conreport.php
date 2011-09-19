@@ -24,10 +24,11 @@
 <?php
 
 echo "<fieldset><legend>Consolidated Report</legend><center><form action='#' method='post'>Select Class: ";
-echo getClassesAsSelect("cls[]","");
+echo getClassesAsSelect("cls","");
 echo "&emsp;From-Date: <input type='text' id='inputField1' name='datein' />To-Date: <input type='text' id='inputField2' name='dateout'></input><input type='submit' name='phase1'><br /></form>";
 if(isset($_POST['phase1']))
 {
+	$bat = $_POST['cls'];
 	
 	$batdet = explode(":",$_POST['cls'][0]);
 	$batid = $batdet[0];
@@ -46,6 +47,7 @@ if(isset($_POST['phase1']))
 	}
 
 	echo "</center></fieldset>";
+	
 }
 ?>
 </html>

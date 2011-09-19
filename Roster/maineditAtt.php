@@ -49,7 +49,7 @@ xmlhttp.send();
         include("../lib/connection.php");
         
         echo "<form action='#' method='post'>";
-        echo getClassesAsSelect("cls[]","");
+        echo getEClassesAsSelect("cls[]","");
         echo "&emsp;Date&emsp;<input type='text' id='inputField' name='date' required=true/>&emsp;<input type='submit' name='phase0' />";
         echo "<br><br><div id='txtHint'>Note : Faculty will be given here</div>";
         
@@ -68,7 +68,7 @@ xmlhttp.send();
         }
         else
         {
-            notifywar("Please Note that some Periods are already uploaded. Edit the Attendence carefully");
+            notifywar("Please Note that some Periods are already uploaded.This Edit swaps the data so Edit the Attendence carefully");
         
         
         echo "<form action='#' method='post'>";

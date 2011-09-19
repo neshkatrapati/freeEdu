@@ -21,10 +21,8 @@ if(!isset($_POST['mainsub']) && !isset($_POST['phase2']))
 
 if(isset($_POST['mainsub']))
 {
-	
 	echo "<form action='#' method='post'>";
 	$bat = $_POST['cls'];
-	
 	$batdet = explode(":",$bat);
 	$batid = $batdet[0];
 	$sec = $batdet[1];

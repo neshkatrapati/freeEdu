@@ -115,6 +115,7 @@ else
 	$width=200;
 	$height=200;
 }
+
 echo "<a href='?m=fbimage' title='Image For ".$obname."'>Merge With Your Facebook Image!</a><br><br/>";
 echo "<div class='imgteaser' style='border:1px'><a href='../EditProfile/changePic.php?KeepThis=true&TB_iframe=true&#TB_inline?width=300&height=200' title='Change Picture' class='thickbox'><img src='$imguri' width='$width' height='$height' /><span class='epimg'>&raquo; Change Picture</span><span class='desc' class='strong'>Click to change the picture
 	</span></a></div>";
@@ -123,7 +124,7 @@ echo "<div class='pos'><a href='../EditProfile/changePwd.php?KeepThis=true&TB_if
 <fieldset style='width:350' align='center'>
 	<legend align='left'>Edit Profile</legend>
 	Name:<input type='text' name='name' size='30' value='$obname' ><br>
-	About Me:<br><textarea name='aboutme' rows='5' cols='30'>$bio</textarea><br><br>	
+	About Me:<br><textarea name='aboutme' cols='30' rows='10' >$bio</textarea><br><br>	
 	<input type='submit' value='Update' name='update'/>
 </fieldset>
 </form>";

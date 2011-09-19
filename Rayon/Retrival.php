@@ -130,7 +130,7 @@ while($reglr=mysql_fetch_array($regular))
 	}
 		echo "</center>";
 		echo "<br>";
-		echo("<table border=2 align=center bordercolor=black>");
+		echo("<table border=2 align=center bordercolor=black cellpadding='5'>");
 		echo "<div4>";		
 		echo "<tr bgcolor=pink>";
 			echo("<td>");
@@ -261,7 +261,7 @@ while($supp=mysql_fetch_array($supply))
 		break;
 	}		
 		echo "<br>";
-		echo("<table border=2 align=center bordercolor=black>");
+		echo("<table border=2 align=center bordercolor=black cellpadding='5'>");
 		echo "<div4>";
 		echo "<tr bgcolor=pink>";
 			echo("<td >");
@@ -387,7 +387,7 @@ while($REV=mysql_fetch_array($rev))
 			echo "<br>No Revaluation History Found<br><br>";
 			break;
 		}
-		echo("<table border=2 align=center bordercolor=black>");
+		echo("<table border=2 align=center bordercolor=black cellpadding='5'>");
 		echo "<div4>";
 		echo "<tr bgcolor=pink>";
 			echo("<td>");

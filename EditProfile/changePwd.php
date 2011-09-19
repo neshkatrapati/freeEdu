@@ -1,12 +1,15 @@
-<html align=center>
+<html>
 <head>
+	<link rel="stylesheet" href="../aux/pagestyles/style.css" type="text/css" media='screen'>
 </head>
 <body>
-<?php
+<?php 
 echo "<form action='#' method='post'>";
-echo "Old Password*:<input type='password' name='opswd'><br>";
-echo "New Password*:<input type='password' name='npwd'><br>";
-echo "Confirm Password*:<input type='password' name='cpwd'><br>";
+echo "<center>";
+echo "<table>";
+echo "<tr><td>Old Password*</td><td>:<input type='password' name='opswd'></td></tr>";
+echo "<tr><td>New Password*</td><td>:<input type='password' name='npwd'></td></tr>";
+echo "<tr><td>Confirm Password*</td><td>:<input type='password' name='cpwd'></td></tr></table>";
 echo "<h4>Note:Please type the password minimum of 6 Charecters!</h4>";
 echo "<input type='submit' name='pwd'>";
 echo "</form>";
@@ -57,9 +60,6 @@ if(isset($_POST['pwd']))
 	else
 	{
 		echo "<h3>Authentication Failure</h3>";
-		echo "1234".$oldpwd;
-		echo "hello";
-		echo $oid;
 	}
 
 }

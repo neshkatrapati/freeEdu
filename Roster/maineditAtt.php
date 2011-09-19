@@ -37,7 +37,11 @@ xmlhttp.send();
 }        
 </script>
 <?php
+<<<<<<< HEAD
+   
+=======
     notifywar("Please Note that some Periods may be already uploaded. Edit the Attendence carefully");
+>>>>>>> 157aa80d0fd3c586f6fab8d1fc5b9dbc520e89d7
     echo "<center>";
      echo "<fieldset style='text-align:center;width:700;'>";
         echo "<legend>Edit Attendence</legend>";
@@ -45,18 +49,30 @@ xmlhttp.send();
     if(!isset($_POST['phase0']) && !isset($_POST['phase1']))
     {
         include("../lib/connection.php");
+        
         echo "<form action='#' method='post'>";
-        echo getClassesAsSelect("cls[]","");
+        echo getEClassesAsSelect("cls[]","");
         echo "&emsp;Date&emsp;<input type='text' id='inputField' name='date' required=true/>&emsp;<input type='submit' name='phase0' />";
         echo "<br><br><div id='txtHint'>Note : Faculty will be given here</div>";
         
     }
     if(isset($_POST['phase0']))
     {
+        
         $batid=$_POST['batid'];
         $sec=$_POST['sec'];
         $fid=$_POST['fid'];
         $date=$_POST['date'];
+        if($batid==null || $fid=='null')
+        {
+            notifyerr("Some Fields are not selected");
+            redirect('?m=edit_Matt');
+        }
+        else
+        {
+            notifywar("Please Note that some Periods are already uploaded.This Edit swaps the data so Edit the Attendence carefully");
+        
+        
         echo "<form action='#' method='post'>";
         echo getMPeriods($batid,$sec,$date,$fid);
         echo "<br><br>";
@@ -98,7 +114,7 @@ xmlhttp.send();
                 //redirect("?");
             }
         }
-    
+    }
     echo "</center>";
     echo "</fieldset>";
     echo "</center>";

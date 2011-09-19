@@ -54,7 +54,6 @@ elseif(isset($_POST['phase1']))
     echo "<input type='hidden' name='batid' value='".$batid."' />";
     echo "<input type='hidden' name='sec' value='".$sec."' />";
     echo "<input type='hidden' name='subid' value='".$subid."' />";
-    
     echo "<fieldset style='width: 200px'><legend>Select Periods:</legend>".getPeriods($batid,$sec,$date)."</fieldset><br />";
     echo "<input type='submit' name='phase2' /></form>";
    //echo "batid: ".$batid." sec:".$sec." subid:".$subid." fid:".$fid." ".$date;
@@ -69,6 +68,12 @@ elseif(isset($_POST['phase2']))
     $subid = $_POST['subid'];
     $date = $_POST['date'];
     $fid = $_POST['fid'];
+    $per=$_POST['per'];
+    if(count($per)<=0)
+    {
+	notifywar("You are unautherized to perform that task");
+	redirect("?m=ua");
+    }
     $query = "SELECT *,(SELECT imguri from MIMGT i WHERE i.imgid=s.imgid) as imguri FROM MSTUDENTT s WHERE batid LIKE '".$batid."' AND sec LIKE '".$batsec."'";
     $result = mysql_query($query);
     echo "<form action='#' method='post'>";
@@ -141,7 +146,6 @@ elseif(isset($_POST['phase3']))
      echo "<input type='hidden' name='pora' value='".$pora."' />";
     echo "<input type='submit' name='confirm' value='Confirm'/>";
     echo "<input type='submit' name='reject' value='Reject'/>";
-    
     echo "</div></center></form></fieldset>";
 }
 elseif(isset($_POST['confirm']))

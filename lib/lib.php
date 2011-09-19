@@ -170,6 +170,32 @@ function readExcel()
 		$result = mysql_query("select (select brname from MBRANCHT b where b.brid=c.brid) as brname,brid,batyr,akayr,batid from MBATCHT c where brid like '".$brfilter."'");
 		$i =0;
 		$ret = "<select name='".$name."' ".$extra."  onchange='showUser(this.value)'>";
+		
+		while($row = mysql_fetch_array($result))
+  		{
+  			$ret  .= "<option value='".$row['batid'].":A'>".$row['brname']." ".getFullClass($row['akayr']+1)." A</option>"; 
+  			$ret  .= "<option value='".$row['batid'].":B'>".$row['brname']." ".getFullClass($row['akayr']+1)." B</option>"; 			
+  			
+  		}
+		$ret .= "</select>";
+		mysql_close($con);
+		return $ret;
+	
+	}
+		function getEClassesAsSelect($name,$extra)
+	{
+		$clsname = "Constants";
+		$dbuname = $clsname::$dbuname;
+		$dbpass = $clsname::$dbpass;
+		$dbname = $clsname::$dbname;
+		$regtab = $clsname::$regtab;
+		$regname = $clsname::$regname;
+		$con = mysql_connect("localhost",$dbuname,$dbpass);
+		mysql_select_db($dbname, $con);
+		$brfilter = getBranchFilter();
+		$result = mysql_query("select (select brname from MBRANCHT b where b.brid=c.brid) as brname,brid,batyr,akayr,batid from MBATCHT c where brid like '".$brfilter."'");
+		$i =0;
+		$ret = "<select name='".$name."' ".$extra."  onchange='showUser(this.value)'>";
 		$ret .="<option value='null'>--Classes--</option>";
 		while($row = mysql_fetch_array($result))
   		{
@@ -1056,7 +1082,7 @@ function readExcel()
 		    
 		}
 		$return.="</table></td><td>";
-		$return.="<table border='1' cellpadding='5'><tr><th>Period</th><th></th><th>Start</th><th>End</th><th></th><th>Taken By</th></tr>";
+		$return.="<table border='1' cellpadding='10'><tr><th>Period</th><th></th><th>Start</th><th>End</th><th></th><th>Taken By</th></tr>";
 		$get=mysql_query("select sessionid from MATDT where batid='$batid' and sec='$sec' and dayid='$date'");
 		while($pr=mysql_fetch_array($get))
 		{

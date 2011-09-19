@@ -52,6 +52,8 @@
             redirect("?m=fbput");
             
         }
+        
+    
         else
         {
             $get = getFacultyForClass($batid,$sec);
@@ -59,9 +61,11 @@
             echo "<table class='bttable' border=1>";
             echo "<th class='blue'>Faculty</th>";
             echo "<th class='blue'>Rating</th>";
+            echo "<th class='blue'>Faculty</th>";
+            echo "<th class='blue'>Rating</th>";
             $fbmin = $fbentry["fbmin"];
             $fbmax = $fbentry["fbmax"];
-	
+            $l=0;
             for($i=0;$i<count($get);$i++)
             {
                 $name = $get[$i]["Name"];
@@ -80,11 +84,15 @@
                     }
                  $ret.="</select>";
             
-                echo "<tr>";
+                if($i%2==0)
+                    echo "<tr>";
                 echo "<td><div class='img'><img src='../".$imguri."' width='100' height='100' style='padding-right:5px;z-index:1'></img><div class='desc'>".$name."</div></div></td>";
                 echo "<td>".$ret."</td>";
-                echo "</tr>";
-                
+                if($i%2==1){
+                    echo "</tr>";
+                    $l=0;
+                }
+                $l++;
             }
             echo "</table><br><input type='submit' name='postbtn'></input>
             <input type='hidden' name='fbid' value='".$fbid."'></input>

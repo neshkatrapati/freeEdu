@@ -14,7 +14,8 @@ else if(!isset($_GET["fbid"]))
     $barray = explode(':',$bat);
     $batid = $barray[0];
     $sec = $barray[1];
-    
+    $object = getObject($_COOKIE["object"]);
+    $student = getStudent($object["obhandle"]);
     
    $entries = getFeedbackEntries($batid,$sec);
    //print_r($entries);
@@ -22,7 +23,7 @@ else if(!isset($_GET["fbid"]))
     echo "<th class='blue'>Feedback Form Name</th>";
     echo "<th class='blue'>Creation Date</th>";
     echo "<th class='blue'>Subbmitable By:</th>";
-    
+   
     for($i=0;$i<count($entries);$i++)
     {
         
@@ -30,11 +31,18 @@ else if(!isset($_GET["fbid"]))
         echo "<td><a href='".$entries[$i]["Link"]."'>".$entries[$i]['Name']."</a></td>";
         echo "<td>".$entries[$i]["Cdate"]."</td>";
         echo "<td>".$entries[$i]["Edate"]."</td>";
+      
         echo "</tr>";
         
         
     }
     echo "</table>";
+    
+}
+else if(isset($_GET["fbid"]))
+{
+   
+   echo getFeedback($_GET["fbid"]);
     
 }
 ?>

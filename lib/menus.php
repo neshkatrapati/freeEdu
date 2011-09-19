@@ -29,6 +29,8 @@ function getSudoMenu()
             <ul class='menu-dropdown'>
                <li><a href='?m=cf'>Create Faculty</a></li>
                         <li><a href='?m=mf&l=0&r=5'>Map Faculty</a></li>
+                         <li><a href='?m=fbcreate'>Create Faculty Feedback</a></li>
+              <li><a href='?m=fbget'>Analyze Faculty Feedback</a></li>
             </ul>
             
           </li>
@@ -61,6 +63,7 @@ function getSudoMenu()
             
           </li>
         </ul>
+      
         
         <ul class='nav'>
           <li class='menu'>
@@ -163,7 +166,7 @@ function getAdminMenu()
           <li class='menu'>
             <a href='#' class='menu'>Tools</a>
             <ul class='menu-dropdown'>
-                 <li><a href='?m=license' >Download Source</a></li>
+                 <li><a href='?m=license' >License</a></li>
                  <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>
             </ul>
             
@@ -234,7 +237,7 @@ function getFacMenu()
           <li class='menu'>
             <a href='#' class='menu'>Tools</a>
             <ul class='menu-dropdown'>
-                 <li><a href='?m=license' >Download Source</a></li>
+                 <li><a href='?m=license' >License</a></li>
                  <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>
             </ul>
             
@@ -299,9 +302,20 @@ function getStuMenu()
         </ul>
         <ul class='nav'>
           <li class='menu'>
+            <a href='#' class='menu'>Feedback</a>
+            <ul class='menu-dropdown'>
+              <li><a href='?m=fbput'>Give Faculty Feedback</a></li>
+
+            </ul>
+            
+          </li>
+        </ul>
+        
+        <ul class='nav'>
+          <li class='menu'>
             <a href='#' class='menu'>Tools</a>
             <ul class='menu-dropdown'>
-                 <li><a href='?m=license' >Download Source</a></li>
+                 <li><a href='?m=license' >License</a></li>
                  <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>
             </ul>
             
@@ -354,22 +368,11 @@ function getAAdminMenu()
             </ul>
             
           </li>
-        </ul>
-          <ul class='nav'>
+         <ul class='nav'>
           <li class='menu'>
             <a href='#' class='menu'>Tools</a>
             <ul class='menu-dropdown'>
-              <li><a href='?m=edit_att'>Edit Attendance</a></li>
-		 
-            </ul>
-            
-          </li>
-        </ul>
-        <ul class='nav'>
-          <li class='menu'>
-            <a href='#' class='menu'>Tools</a>
-            <ul class='menu-dropdown'>
-                 <li><a href='?m=license' >Download Source</a></li>
+                 <li><a href='?m=license' >License</a></li>
                  <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>
             </ul>
             

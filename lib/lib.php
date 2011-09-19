@@ -2233,6 +2233,11 @@ $(function () {
 
 		return queryMe("select * from MSTUDENTT where sid like '".$sid."'");
 	}
+	function getFaculty($fid)
+	{
+
+		return queryMe("select * from MFACULTYT where fid like '".$fid."'");
+	}
 	function getExtension($str)
 	{
 	$i = strrpos($str,".");
@@ -2243,5 +2248,64 @@ $(function () {
 	$l = strlen($str) - $i;
 	$ext = substr($str,$i+1,$l);
 	return $ext;
+	}
+	function getFacultyForClassAsSelect($batid1,$sec1)
+	{
+		
+		include("connection.php");
+		
+		   
+		    $ret = "Select Faculty : <select name='fid'>";
+		    $ret .= "<option value='null'>--Faculty--</option>";
+		    $f=mysql_query("select * from MFACULTYT where fcourse like '%$batid1$sec1%'");
+		    while($f1=mysql_fetch_array($f))
+			{
+				$fid=$f1['fid'];
+				$fname=$f1['fname'];
+				$ret .="<option value='$fid'>$fname</option>";
+			}
+		return $ret;
+		
+		
+	}
+	function getFacultyForClass($batid1,$sec1)
+	{
+		
+		include("connection.php");
+	        //$ret .= "<option value='null'>--Faculty--</option>";
+		$f=mysql_query("select * from MFACULTYT where fcourse like '%$batid1$sec1%'");
+		$ret = array();
+		$i=0;
+		while($f1=mysql_fetch_array($f))
+		{
+			$fid=$f1['fid'];
+			$fname=$f1['fname'];
+			$ret[$i] = array();
+			$ret[$i]["Name"] = $fname;
+			$ret[$i]["Id"] = $fid;
+			$ret[$i]["imguri"] = getImgUri($f1["imgid"]);
+			$i++;
+			
+			
+		}
+		return $ret;
+		
+		
+	}
+	function getObjectByType($tyid,$handle)
+	{
+		
+		return queryMe("select * from MOBJECTT where obhandle like '".$handle."' and otyid like '".$tyid."'");
+	}
+	function getStudentType()
+	{
+		
+		return 0;
+		
+	}
+	function getFacultyType()
+	{
+		
+		return 2;
 	}
 ?>

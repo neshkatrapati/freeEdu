@@ -135,7 +135,8 @@ else if($mode == "p")
 
 else if($mode == "cre")
 {
-	include("../credits.php");
+	
+	echo "<iframe src='../credits/credits.html' frameborder='0' scrolling='auto' width='100%' height='100%'>";
 }
 else if($mode == "fbimage")
 {

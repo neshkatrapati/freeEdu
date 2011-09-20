@@ -1,7 +1,7 @@
 /* START Default colour styles */
 
 body {
-	background-image: url(../../images/design/background-grey-image.jpg);
+	background-image: url(background-grey-image.jpg);
 	background-repeat: repeat;
 }
 
@@ -217,7 +217,7 @@ body.not-front #block-block-8 .content {
 }
 
 #block-menu-menu-social-media-links li.first a {
-	background-image: url(../../images/design/icon-facebook.png);
+	background-image: url(icon-facebook.png);
 }
 
 #block-menu-menu-social-media-links li.last a {
@@ -230,7 +230,7 @@ body.not-front #block-block-8 .content {
 }
 
 #block-aggregator-feed-2 {
-	background-image: url(../../images/design/twitter.png);
+	background-image: url(twitter.png);
 }
 
 #block-aggregator-feed-2 a,

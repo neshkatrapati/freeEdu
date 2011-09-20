@@ -114,4 +114,10 @@
   padding-left: 0px;
   padding-right: 0px;
 }
+.creditimage
+{
 
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+
+}

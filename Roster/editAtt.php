@@ -213,12 +213,10 @@
                 <font color=#000000>$chk[$i].<br>".getFname($sname)."</b></font></div></div>";
         }
          
-<<<<<<< HEAD
-         
-=======
-         //echo $sid;
-         //echo $aid;
->>>>>>> d91d8d873f2d148d6605dd61d16249a4cd0870f5
+
+        //echo $sid;
+        //echo $aid;
+
             echo "<form action='#' method='post'>";
             echo "<input type='hidden' name='sid' value='$sid'>";
             echo "<input type='hidden' name='aid' value='$aid'>";
@@ -234,12 +232,9 @@
        {
            $sid=$_POST['sid'];
            $aid=$_POST['aid'];
-<<<<<<< HEAD
-          
-=======
            //echo $sid;
            //echo $aid;
->>>>>>> d91d8d873f2d148d6605dd61d16249a4cd0870f5
+
            mysql_query("update ADATAT set adata='$sid',pa='P' where aid='$aid'");
            notify("Editing Successfully Done");
            redirect("?");

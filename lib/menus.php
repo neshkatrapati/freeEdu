@@ -75,7 +75,7 @@ function getSudoMenu()
                  <li><a href='?m=create_student'>Create Username For Student</a></li>
                  <li><a href='?m=license' >License</a></li>
                  <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>
-                 
+                          
             </ul>
             
           </li>
@@ -97,10 +97,11 @@ $retstr .= "<ul class='nav secondary-nav'>
                 
                <li><a href='?m=ep'>Edit Profile</a></li>
                 <li><a href='../login.php'>Logout</a></li>
+                <li><a href='?m=cre' style='font-size:15px;'><b><i>@</i>Team-Alacrity</b></a></li>
             </ul>
           </li>
         </ul>
-	<a href='?m=cre' class='credits'><img src='../images/others/credits.png' width='13'>Team_GAP</img></a>
+	
 </div>
     </div>
   </div> <!-- topbar-wrapper -->";
@@ -192,11 +193,12 @@ $retstr .= " <ul class='nav secondary-nav'>
                 
                <li><a href='?m=ep'>Edit Profile</a></li>
                 <li><a href='../login.php'>Logout</a></li>
+                <li><a href='?m=cre' style='font-size:15px;'><b><i>@</i>Team-Alacrity</b></a></li>
             </ul>
             
           </li>
         </ul>
-      <a href='?m=cre' class='credits'><img src='../images/others/credits.png' width='13'>Team_GAP</img></a>
+      
     </div>
     </div>
   </div> <!-- topbar-wrapper -->";
@@ -262,11 +264,12 @@ $retstr .= " <ul class='nav secondary-nav'>
                 
                <li><a href='?m=ep'>Edit Profile</a></li>
                 <li><a href='../login.php'>Logout</a></li>
+                <li><a href='?m=cre' style='font-size:15px;'><b><i>@</i>Team-Alacrity</b></a></li>
             </ul>
             
           </li>
         </ul>
-	<a href='?m=cre' class='credits'><img src='../images/others/credits.png' width='13' />Team_GAP</a>
+	
 </div>
     </div>
   </div> <!-- topbar-wrapper -->";
@@ -341,11 +344,12 @@ $retstr .= " <ul class='nav secondary-nav'>
                 
                <li><a href='?m=ep'>Edit Profile</a></li>
                 <li><a href='../login.php'>Logout</a></li>
+                <li><a href='?m=cre' style='font-size:15px;'><b><i>@</i>Team-Alacrity</b></a></li>
             </ul>
             
           </li>
         </ul>
-	<a href='?m=cre' class='credits'><img src='../images/others/credits.png' width='13' />Team_GAP</a>
+	
 </div>
     </div>
   </div> <!-- topbar-wrapper -->";
@@ -399,13 +403,14 @@ $retstr .= " <ul class='nav secondary-nav'>
                 
                <li><a href='?m=ep'>Edit Profile</a></li>
                 <li><a href='../login.php'>Logout</a></li>
+                <li><a href='?m=cre' style='font-size:15px;'><b><i>@</i>Team-Alacrity</b></a></li>
             </ul>
             
           </li>
         </ul>
 	
 </div>
-<a href='?m=cre' class='credits'><img src='../images/others/credits.png' width='13'>&nbspTeam_GAP</img></a>
+
     </div>
   </div> <!-- topbar-wrapper -->";
 return $retstr;

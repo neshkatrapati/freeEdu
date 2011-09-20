@@ -1,3 +1,21 @@
+<?php/*
+Copyright 2011
+Ganesh Katrapati <ganesh.katrapati@gmail.com>
+Aditya Maturi <maturiaditya@gmail.com>
+This file is part of FreeEdu.
+
+FreeEdu is free software: you can redistribute it and/or modify
+it under the terms of the Affero GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+FreeEdu is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the Affero GNU General Public License
+along with FreeEdu.  If not, see <http://www.gnu.org/licenses/>.*/?>
 <html>
 <head> 
 <link rel="stylesheet" href="../aux/demo/menu.css" type="text/css" media='screen'>
@@ -426,10 +444,11 @@ else if($mode=="os")
 {
 	
 	echo "<div id='content'  class='content'>";
+	echo "<form>"; 
 	echo "<center><input type='text' onkeyup=\"getLists(this.value,'omni')\" id='tbox'>
-	</input><br>Select By Type :&emsp;".getTypes('type[]','onchange=\'getSelect(this.value)\'')."
+	</input><br><br>Select By Type :&emsp;".getTypes('type[]','onchange=\'getSelect(this.value)\'')."
 	<div id='options'></div>	
-	<div id='omni'></div></center>";
+	<div id='omni'></form></div></center>";
 	
 	if(array_key_exists("srch",$_POST))
 	{

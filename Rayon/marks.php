@@ -50,7 +50,7 @@
 	</head>
 	<body>
 	<?php
-	include("connection.php");
+	include("../lib/connection.php");
 		$year=$_GET["year"];
 		$mrid=$_GET["mrid"];
 		$suid=$_GET["subid"];

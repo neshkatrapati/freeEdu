@@ -56,6 +56,7 @@
 	$ret .= "<a href='?m=fbget'>Go Back</a><br ><br>";
 	$faculty = array();
 	$i = 0;
+	$xnum =0;
 	$ret .= "<table class='bttable' border='1' style=\"margin-left:50px;margin-right:50px;\">";
 	$ret .= "<th class='blue'>Student</th>";
 	while($row = mysql_fetch_array($result2))
@@ -79,16 +80,27 @@
 		$cnt++;
 	    }
 	    $ret .= "</tr>";
-	    
+	    $xnum++;
 	}
-	$ret .= "<td>Cumulative Result</td>";
+	$ret .= "<tr><td>Cumulative Result</td>";
+	
 	for($i=0;$i<count($totalrating);$i++)
 	{
 	    
 	    $ret .= "<td>".$totalrating[$i]."</td>";
+	  
 	    
 	}
-	$ret .= "</table>";
+	$ret .= "</tr><tr>";
+	$ret .= "<td>Average Result</td>";
+	for($i=0;$i<count($totalrating);$i++)
+	{
+	    
+	    
+	    $ret .= "<td>".round($totalrating[$i]/$xnum,2)."</td>";
+	    
+	}
+	$ret .= "</tr></table>";
 	return $ret;
 	
 	

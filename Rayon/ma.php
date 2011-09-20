@@ -71,7 +71,7 @@
 	?>
 	
 	<?php
-	include("connection.php");
+	include("../lib/connection.php");
 		$bat=$_POST['bat'][0];
 		$array=explode(':',$bat);
 		$brid=$array[0];
@@ -137,7 +137,7 @@
 	<?php
 	if(isset($_POST['ok']))
 	{
-	include("connection.php");
+	include("../lib/connection.php");
 	$year=$_POST['year'];
 	$suid=$_POST['subid'];
 	$batid=$_POST['batid'];

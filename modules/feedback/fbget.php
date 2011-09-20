@@ -41,8 +41,10 @@ else if(!isset($_GET["fbid"]))
 }
 else if(isset($_GET["fbid"]))
 {
+   echo "<form action='../modules/feedback/xlsxport.php' method='post'>";
    
    echo getFeedback($_GET["fbid"]);
-    
+   echo "<input type='image' value='' style='margin-right:5px;' src='../modules/feedback/xlsxp.png'></input>";
+   echo "<input type='hidden' name='fbid' value='".$_GET['fbid']."'></input>";    
 }
 ?>

@@ -15,7 +15,7 @@
     <?php
 	if(isset($_POST['submit']))
 	{
-		include("connection.php");
+		include("../lib/connection.php");
 		$bat=$_POST['bat'][0];
 		$array=explode(':',$bat);
 		$brid=$array[0];

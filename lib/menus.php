@@ -100,6 +100,7 @@ $retstr .= "<ul class='nav secondary-nav'>
             </ul>
           </li>
         </ul>
+	<a href='?m=cre' class='credits'><img src='../images/others/credits.png' width='13'>Team_GAP</img></a>
 </div>
     </div>
   </div> <!-- topbar-wrapper -->";
@@ -195,7 +196,7 @@ $retstr .= " <ul class='nav secondary-nav'>
             
           </li>
         </ul>
-      
+      <a href='?m=cre' class='credits'><img src='../images/others/credits.png' width='13'>Team_GAP</img></a>
     </div>
     </div>
   </div> <!-- topbar-wrapper -->";
@@ -265,6 +266,7 @@ $retstr .= " <ul class='nav secondary-nav'>
             
           </li>
         </ul>
+	<a href='?m=cre' class='credits'><img src='../images/others/credits.png' width='13' />Team_GAP</a>
 </div>
     </div>
   </div> <!-- topbar-wrapper -->";
@@ -343,6 +345,7 @@ $retstr .= " <ul class='nav secondary-nav'>
             
           </li>
         </ul>
+	<a href='?m=cre' class='credits'><img src='../images/others/credits.png' width='13' />Team_GAP</a>
 </div>
     </div>
   </div> <!-- topbar-wrapper -->";
@@ -400,7 +403,9 @@ $retstr .= " <ul class='nav secondary-nav'>
             
           </li>
         </ul>
+	
 </div>
+<a href='?m=cre' class='credits'><img src='../images/others/credits.png' width='13'>&nbspTeam_GAP</img></a>
     </div>
   </div> <!-- topbar-wrapper -->";
 return $retstr;

@@ -123,8 +123,8 @@ echo "<div class='pos'><a href='../EditProfile/changePwd.php?KeepThis=true&TB_if
 <form action='#' method='post' class='form'> 
 <fieldset style='width:350' align='center'>
 	<legend align='left'>Edit Profile</legend>
-	Name:<input type='text' name='name' size='30' value='$obname' ><br>
-	About Me:<br><textarea name='aboutme' cols='30' rows='10' >$bio</textarea><br><br>	
+	Name:<input type='text' name='name' size='30' value='$obname' ><br><br>
+	About Me:<br><textarea name='aboutme' class='large' rows='5'>$bio</textarea><br><br>	
 	<input type='submit' value='Update' name='update'/>
 </fieldset>
 </form>";

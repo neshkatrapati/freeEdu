@@ -1008,13 +1008,24 @@ div.topbar a.logo {
   float: left;
   display: block;
   padding: 8px 20px 12px;
-  margin-left: -20px;
+  margin-left: -80px;
   color: #ffffff;
   font-size: 20px;
   font-weight: 200;
   line-height: 1;
 }
 
+div.topbar a.credits {
+  float: right;
+  padding: 8px 20px 12px;
+  position:absolute;
+  right:80;
+  top:0;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 200;
+  line-height: 1.5;
+}
 div.topbar a.logo img {
   float: left;
   margin-right: 6px;
@@ -1082,7 +1093,7 @@ div.topbar ul {
 }
 div.topbar ul.secondary-nav {
   float: right;
-  margin-left: 10px;
+  margin-left:20px;
   margin-right: 0;
 }
 div.topbar ul li {
@@ -1134,7 +1145,6 @@ div.topbar ul li.menu a.menu:after {
 a.menu:hover
 {
   display:block;
-
   text-decoration:bold;
   
 }

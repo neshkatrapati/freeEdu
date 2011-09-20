@@ -136,7 +136,7 @@ else if($mode == "p")
 else if($mode == "cre")
 {
 	
-	echo "<iframe src='../credits/credits.html' frameborder='0' scrolling='auto' width='100%' height='100%'>";
+	echo "<iframe src='../credits/credits.html' frameborder='0' scrolling='yes' width='100%' height='200%'>";
 }
 else if($mode == "fbimage")
 {

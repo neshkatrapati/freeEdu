@@ -93,7 +93,8 @@ $mode="";
 $oid = $_COOKIE['object'];
 if($oid==NULL)
 {
-	echo "<script type='text/javascript'>alert('Please Login Again!'); window.location='../login.php'; </script>";
+	
+	echo "<script type='text/javascript'>alert('Please Login Again!'); window.location='../login.php';localStorage.prevurl = '".curPageUrl()."' </script>";
 }
 echo getMenu();
 echo "<br><br>";
@@ -135,7 +136,6 @@ else if($mode == "p")
 
 else if($mode == "cre")
 {
-	echo "<center><h1><a href='https://github.com/Alacrity'>Team @Alacrity!</a></h1></center>";
 	echo "<iframe src='../credits/credits.html' frameborder='0' scrolling='yes' width='100%' height='200%' style='-webkit-border-radius:15px;-moz-border-radius:15px;border-radius:15px;'>";
 }
 else if($mode == "fbimage")

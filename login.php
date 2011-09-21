@@ -35,6 +35,8 @@ function validator()
 <center>
 <div id="fail">
 <?php
+	
+
 	if(isset($_POST['btnLogin']))
 	{
 		$ologin = $_POST['ologin'];
@@ -55,7 +57,7 @@ function validator()
 		{
 			$row = mysql_fetch_array($result);
 			setcookie('object',$row["oid"]);
-			echo "<script type='text/javascript'>window.location = 'main/?'</script>";		
+			echo "<script type='text/javascript'>window.location = localStorage.prevurl;</script>";		
 		
 		}
 	}	

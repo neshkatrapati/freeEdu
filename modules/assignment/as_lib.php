@@ -36,5 +36,32 @@
         $result = queryMe("select * from MASSIGNMENTT where asid like '".$asid."'");
         $data = file_get_contents($result["docpath"]);
         return $data;
-     }
+    }
+     
+    function getAssignmentEntries($oid)
+    {
+	$clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	
+	$query = "SELECT * From MASSIGNMENTT where oid like '".$oid."'";
+	$result = mysql_query($query);
+	$returnLinks = array();
+	$i=0;
+	while($row=mysql_fetch_array($result))
+	{
+	    $asid = $row["asid"];
+	    $asname = $row["asname"];
+	    $returnLinks[$i] = array();
+	    $returnLinks[$i]["Name"] = $asname;
+	    $returnLinks[$i]["Id"] = $asid;
+	    $returnLinks[$i]["Link"] = curPageURL()."&asid=".$asid;
+	    $i++;
+	}
+       return $returnLinks;
+    } 
+     
+     
+     
+     
 ?>

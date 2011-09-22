@@ -589,10 +589,7 @@ else if($mode=="ass_see")
 {
 	echo "<div id='content'  class='content'>";
 	
-	include("../modules/assignment/as_lib.php");
-	$asid = $_GET["asid"];
-	echo "<a href='?m=ass_edit&asid=".$asid."' style='float:right;'>Edit This Assignment</a>";
-	echo  getAssignmentContent($asid);
+	include("../modules/assignment/showassignment.php");
 	echo "</div>";
 }
 else if($mode=="ass_edit")

@@ -579,6 +579,32 @@ else if($mode=="ep")
 	include("../EditProfile/editProfile.php");
 	echo "</div>";
 }
+else if($mode=="ass")
+{
+	echo "<div id='content'  class='content'>";
+	include("../modules/assignment/createassignment.php");
+	echo "</div>";
+}
+else if($mode=="ass_see")
+{
+	echo "<div id='content'  class='content'>";
+	
+	include("../modules/assignment/as_lib.php");
+	$asid = $_GET["asid"];
+	echo "<a href='?m=ass_edit&asid=".$asid."' style='float:right;'>Edit This Assignment</a>";
+	echo  getAssignmentContent($asid);
+	echo "</div>";
+}
+else if($mode=="ass_edit")
+{
+	echo "<div id='content'  class='content'>";
+	echo "<fieldset><legend>Edit Assignment</legend>";
+	
+	$asid = $_GET["asid"];
+	//echo "<a href='?m=ass_edit&asid=".$asid."' style='float:right;'>Edit This Assignment</a>";
+	include("../modules/assignment/editassignment.php");
+	echo "</div></fieldset>";
+}
 else if($mode=="license")
 {
 	echo "<div id='content'  class='content'>";
@@ -674,7 +700,11 @@ else
 }
 }
 echo "</div>";
+echo "<div id='fixer' style='position:fixed;'>";
+echo getMenu();
+echo "</div>";
 ?>
+
 </body>
 
 </html>

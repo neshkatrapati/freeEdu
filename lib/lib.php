@@ -2251,6 +2251,16 @@ $(function () {
 
 		return queryMe("select * from MSTUDENTT where sid like '".$sid."'");
 	}
+	function getBatchFromId($batid)
+	{
+
+		return queryMe("select *,(select brname from MBRANCHT b where b.brid = t.brid) as brname from MBATCHT t where batid like '".$batid."'");
+	}
+	function getSubject($subid)
+	{
+
+		return queryMe("select * from MSUBJECTT where subid like '".$subid."'");
+	}
 	function getFaculty($fid)
 	{
 

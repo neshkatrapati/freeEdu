@@ -3,7 +3,7 @@ include("as_lib.php");
 
 if(!isset($_GET["asid"]))
 {
-    echo "<center>";    
+    echo "<center><fieldset><legend>Assignment List</legend>";    
    $entries = getAssignmentEntries($_COOKIE["object"]);
    //print_r($entries);
     echo "<table class='bttable' border='1'>";
@@ -22,7 +22,7 @@ if(!isset($_GET["asid"]))
         
     }
     echo "</table>";
-    echo "</center>";
+    echo "</center></fieldset>";
 }
 else if(isset($_GET["asid"]))
 {

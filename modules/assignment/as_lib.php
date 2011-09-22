@@ -60,7 +60,29 @@
 	}
        return $returnLinks;
     } 
-     
+    
+    function getAssignmentEntriesForBatch($batid,$sec)
+    {
+	$clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	
+	$query = "SELECT * From MASSIGNMENTT where batid like '".$batid."' and sec like '".$sec."'";
+	$result = mysql_query($query);
+	$returnLinks = array();
+	$i=0;
+	while($row=mysql_fetch_array($result))
+	{
+	    $asid = $row["asid"];
+	    $asname = $row["asname"];
+	    $returnLinks[$i] = array();
+	    $returnLinks[$i]["Name"] = $asname;
+	    $returnLinks[$i]["Id"] = $asid;
+	    $returnLinks[$i]["Link"] = curPageURL()."&asid=".$asid;
+	    $i++;
+	}
+       return $returnLinks;
+    } 
      
      
      

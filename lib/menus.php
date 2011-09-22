@@ -326,6 +326,16 @@ function getStuMenu()
             
           </li>
         </ul>
+        <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Assignments</a>
+            <ul class='menu-dropdown'>
+                 
+                  <li><a href='?m=ass_see' >See  Assignment</a></li>
+            </ul>
+            
+          </li>
+        </ul>
         
         <ul class='nav'>
           <li class='menu'>

@@ -587,9 +587,12 @@ else if($mode=="ass")
 }
 else if($mode=="ass_see")
 {
-	echo "<div id='content'  class='content'>";
 	
-	include("../modules/assignment/showassignment.php");
+	echo "<div id='content'  class='content'>";
+	if(isFaculty($_COOKIE["object"]))
+		include("../modules/assignment/showassignment.php");
+	else if(isStudent($_COOKIE["object"]))
+		include("../modules/assignment/showassignment_stu.php");
 	echo "</div>";
 }
 else if($mode=="ass_edit")

@@ -1,6 +1,6 @@
 <?php
 
-    function putAssignment($asname,$oid,$batid,$sec,$contents)
+    function putAssignment($asname,$oid,$batid,$sec,$subid,$contents)
     {
         $clsname = "Constants";
 	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
@@ -13,8 +13,9 @@
         //$file = fopen($docname,'w');
         file_put_contents($docpath,$contents);
         //echo "insert into MASSIGNMENT values('".$rows."','".$asname."','".$oid."','".$batid."','".$sec."','".$docpath."')";
-        mysql_query("insert into MASSIGNMENTT values('".$rows."','".$asname."','".$oid."','".$batid."','".$sec."','".$docpath."')");	
-        return $rows;
+        mysql_query("insert into MASSIGNMENTT values('".$rows."','".$asname."','".$oid."','".$batid."','".$sec."','".$subid."','".strtotime(date("d-M-Y"))."','".$docpath."')");	
+        
+	return $rows;
     }
     function updateAssignment($asid,$contents)
     {
@@ -37,7 +38,15 @@
         $data = file_get_contents($result["docpath"]);
         return $data;
     }
-     
+    function getAssignment($asid)
+    {
+        $clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	
+        $result = queryMe("select * from MASSIGNMENTT where asid like '".$asid."'");
+        return $result;
+    }
     function getAssignmentEntries($oid)
     {
 	$clsname = "Constants";
@@ -55,6 +64,8 @@
 	    $returnLinks[$i] = array();
 	    $returnLinks[$i]["Name"] = $asname;
 	    $returnLinks[$i]["Id"] = $asid;
+	    $returnLinks[$i]["cdate"] = date("d-M-Y",$row['cdate']);
+	    $returnLinks[$i]["subid"] = $row["subid"];
 	    $returnLinks[$i]["Link"] = curPageURL()."&asid=".$asid;
 	    $i++;
 	}
@@ -78,6 +89,8 @@
 	    $returnLinks[$i] = array();
 	    $returnLinks[$i]["Name"] = $asname;
 	    $returnLinks[$i]["Id"] = $asid;
+	    $returnLinks[$i]["cdate"] = date("d-M-Y",$row['cdate']);
+	    $returnLinks[$i]["subid"] = $row["subid"];
 	    $returnLinks[$i]["Link"] = curPageURL()."&asid=".$asid;
 	    $i++;
 	}

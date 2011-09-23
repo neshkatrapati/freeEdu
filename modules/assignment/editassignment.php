@@ -40,15 +40,29 @@
 <center>
     <?php if(!isset($_POST["phase1"])){?>
 <form method="post" action="#">
-    	<textarea id="elm1" name="elm1" rows='200' style="width: 100%">
+    	
             <?php
-                include("as_lib.php");    
+                include("as_lib.php");
+		
                $asid = $_GET["asid"];
-            
-               echo getAssignmentContent($asid);
+	       $ass = getAssignment($asid);
+	       if($_COOKIE["object"] == $ass["oid"])
+	       {
+			echo "<a href='".$ass["docpath"]."' style='float:right;' target='_blank'>Permalink</a>";
+			echo "<a href='?m=ass_see' style='float:left;'>Back</a><br><br>";
+			echo "<textarea id='elm1' name='elm1' rows='30' style='width: 100%'>";
+			echo getAssignmentContent($asid);
+			echo "</textarea><input type='submit' name='phase1' value='Submit' />";
+	       }
+			
+		else{
+			notifyerr("You Are Unauthorised To View This Assignment");
+			redirect("?m=ass_see");
+		}
             ?>
-	</textarea><br><br>
-	<input type="submit" name="phase1" value="Submit" />
+	    
+	<br><br>
+	
 	<?php
         echo "<input type='hidden' name='asid' value='".$asid."'>";
         ?>

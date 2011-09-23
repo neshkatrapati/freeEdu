@@ -582,7 +582,11 @@ else if($mode=="ep")
 else if($mode=="ass")
 {
 	echo "<div id='content'  class='content'>";
-	include("../modules/assignment/createassignment.php");
+	if(isFaculty($_COOKIE["object"]))
+		include("../modules/assignment/createassignment.php");
+	else
+		notifywar("You Are Un Authorised To View This Page");
+		
 	echo "</div>";
 }
 else if($mode=="ass_see")
@@ -593,6 +597,10 @@ else if($mode=="ass_see")
 		include("../modules/assignment/showassignment.php");
 	else if(isStudent($_COOKIE["object"]))
 		include("../modules/assignment/showassignment_stu.php");
+	else
+		notifywar("You Are Un Authorised To View This Page");
+
+		
 	echo "</div>";
 }
 else if($mode=="ass_edit")

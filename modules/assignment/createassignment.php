@@ -59,7 +59,7 @@
 <body>
 <center>
 <form method="post" action="#">
-    	<textarea id="elm1" name="elm1" rows='200' style="width: 100%">
+    	<textarea id="elm1" name="elm1" rows='30' style="width: 100%">
             <?php
                 $main = $_POST['cls'][0];
                 $clsmain = explode(':',$main);
@@ -78,7 +78,9 @@
 	</textarea><br><br>
         <?php  echo "<input type='hidden' name='docname' value ='".$_POST["docname"]."' />";
                 echo "<input type='hidden' name='batid' value ='".$batid."' />";
-                echo "<input type='hidden' name='sec' value ='".$sec."' />";?>
+                echo "<input type='hidden' name='sec' value ='".$sec."' />";
+		 echo "<input type='hidden' name='subid' value ='".$subid."' />";
+	?>
 	<input type="submit" name="phase2" value="Submit" />
 	
 </form>
@@ -88,7 +90,9 @@ if(isset($_POST["phase2"])){
     $docname = $_POST["docname"];
     $batid = $_POST["batid"];
     $sec = $_POST["sec"];
-    $asid = putAssignment($docname,$_COOKIE["object"],$batid,$sec,$_POST["elm1"]);
+    $subid = $_POST["subid"];
+    $asid = putAssignment($docname,$_COOKIE["object"],$batid,$sec,$subid,$_POST["elm1"]);
+
     notify("Assignment Created! See it <a href=?m=ass_see&asid=".$asid.">Here</a> ");
    // redirect("?m=ass");
     }?>

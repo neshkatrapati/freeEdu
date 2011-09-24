@@ -1,60 +1,55 @@
 <?php
 
-    /*
-Copyright 2011
-Ganesh Katrapati <ganesh.katrapati@gmail.com>
-Aditya Maturi <maturiaditya@gmail.com>
-This file is part of FreeEdu.
-
-FreeEdu is free software: you can redistribute it and/or modify
-it under the terms of the Affero GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-FreeEdu is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the Affero GNU General Public License
-along with FreeEdu.  If not, see <http://www.gnu.org/licenses/>.*/
+    
     include("fb_lib.php");
+    
     $object = getObject($_COOKIE["object"]);
     $student = getStudent($object["obhandle"]);
     $batid = $student["batid"];
     $sec = $student["sec"];
+
     if(!isset($_GET['fbid']) && !isset($_POST["postbtn"]))
     {
        
-    
+            
         $entries = getFeedbackEntries($batid,$sec);
-        echo "<table class='bttable' border='1'>";
-        echo "<th class='blue'>Feedback Form Name</th>";
-        echo "<th class='blue'>Creation Date</th>";
-        echo "<th class='blue'>Subbmitable By:</th>";
-         echo "<th class='blue'>Submitted?</th>";
-        for($i=0;$i<count($entries);$i++)
+        if(count($entries)>0)
         {
-            
-            echo "<tr>";
-            if(!checkSubmitted($entries[$i]["Id"],$object["obhandle"]))
+            echo "<table class='bttable' border='1'>";
+            echo "<th class='blue'>Feedback Form Name</th>";
+            echo "<th class='blue'>Creation Date</th>";
+            echo "<th class='blue'>Subbmitable By:</th>";
+             echo "<th class='blue'>Submitted?</th>";
+            for($i=0;$i<count($entries);$i++)
             {
-                echo "<td><a href='".$entries[$i]["Link"]."'>".$entries[$i]['Name']."</a></td>";
-                echo "<td>".$entries[$i]["Cdate"]."</td>";
-                echo "<td>".$entries[$i]["Edate"]."</td>";
-                echo "<td><center>No</center></td>";
+                
+                echo "<tr>";
+                if(!checkSubmitted($entries[$i]["Id"],$object["obhandle"]))
+                {
+                    echo "<td><a href='".$entries[$i]["Link"]."'>".$entries[$i]['Name']."</a></td>";
+                    echo "<td>".$entries[$i]["Cdate"]."</td>";
+                    echo "<td>".$entries[$i]["Edate"]."</td>";
+                    echo "<td><center>No</center></td>";
+                }
+                else{
+                    echo "<td>".$entries[$i]['Name']."</td>";
+                    echo "<td>".$entries[$i]["Cdate"]."</td>";
+                    echo "<td>".$entries[$i]["Edate"]."</td>";
+                    echo "<td><center>Yes</center></td>";
+                }
+                echo "</tr>";
+                
+                
             }
-            else{
-                echo "<td>".$entries[$i]['Name']."</td>";
-                echo "<td>".$entries[$i]["Cdate"]."</td>";
-                echo "<td>".$entries[$i]["Edate"]."</td>";
-                echo "<td><center>Yes</center></td>";
-            }
-            echo "</tr>";
-            
-            
+            echo "</table>";
         }
-        echo "</table>";
+         else
+    {
+        
+        echo "<pre style='width:50%'>There Are No Assignments To Show</pre>";
+        
+    }
+        
     }
     else if(isset($_GET["fbid"]) && !isset($_POST["postbtn"]))
     {

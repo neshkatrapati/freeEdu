@@ -78,13 +78,14 @@ function validator()
 		<h1><center>FreeEdu Login<center></h1>
 		<div id="loginForm">	
 			<form method="post" action="#" onsubmit="return validator()" name="login" id="login">
-				<dt><label for="ologin">Username</label></dt>
-				<dd><input type="text" name="ologin" id="ologin" value=""></input></dd>
-				<dt><label for="opass">Password</label></dt>
-				<dd><input type="password" name="opass" value=""></input>
-				<a href='doc/loginpage.php?var=1' class='thickbox'>Help</a><br>	</dd>			
-				<input type="submit" id="btnLogin" name="btnLogin" value="Submit"></dd>
-						
+				<table>
+				<tr><td><label for="ologin">Username</label></td>
+				<td><input type="text" name="ologin" id="ologin" value="" style=''></input></td></tr><tr>
+				<td><label for="opass">Password</label></td>
+				<td><input type="password" name="opass" value=""></input></td>
+				</table>
+				<a href='doc/loginpage.php?var=1' class='thickbox'>Help</a><br><br>		
+				<input type="submit" id="btnLogin" name="btnLogin" value="Submit">
 				</form>		
 				
 		</div>

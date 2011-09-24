@@ -8,30 +8,39 @@ if(!isset($_GET["asid"]))
     $student = getStudent($object["obhandle"]);
    $entries = getAssignmentEntriesForBatch($student["batid"],$student["sec"]);
    //print_r($entries);
-    echo "<table class='bttable' border='1'>";
-    echo "<th class='blue'>Assignment Name</th>";
-     echo "<th class='blue'>Subject</th>";
-    echo "<th class='blue'>Created Date</th>";
-   
-    for($i=0;$i<count($entries);$i++)
+    if(count($entries)>0)
     {
-        
-        echo "<tr>";
-        echo "<td><a href='".$entries[$i]["Link"]."'>".$entries[$i]['Name']."</a></td>";
-	 $asid = $entries[$i]["Id"];
-        $subject = getSubject($entries[$i]['subid']);
-        $subname =  $subject["subname"];
-        $object = getObjectByType('2',$entries[$i]["subid"]);
-        $oid = $object["oid"];
-        echo "<td><a href='?m=p&id=".$oid."'>".$subname."</a></td>";
-        echo "<td>".$entries[$i]["cdate"]."</td>";
-        $asid = $entries[$i]["Id"];
+	echo "<table class='bttable' border='1'>";
+	echo "<th class='blue'>Assignment Name</th>";
+	 echo "<th class='blue'>Subject</th>";
+	echo "<th class='blue'>Created Date</th>";
     
-        echo "</tr>";
-        
-        
+	for($i=0;$i<count($entries);$i++)
+	{
+	    
+	    echo "<tr>";
+	    echo "<td><a href='".$entries[$i]["Link"]."'>".$entries[$i]['Name']."</a></td>";
+	     $asid = $entries[$i]["Id"];
+	    $subject = getSubject($entries[$i]['subid']);
+	    $subname =  $subject["subname"];
+	    $object = getObjectByType('2',$entries[$i]["subid"]);
+	    $oid = $object["oid"];
+	    echo "<td><a href='?m=p&id=".$oid."'>".$subname."</a></td>";
+	    echo "<td>".$entries[$i]["cdate"]."</td>";
+	    $asid = $entries[$i]["Id"];
+	
+	    echo "</tr>";
+	    
+	    
+	}
+	echo "</table>";
     }
-    echo "</table>";
+    else
+    {
+	
+	echo "<pre style='width:50%;' >No Assignments Assignments To Display</pre>";
+	
+    }
     echo "</center></fieldset>";
 }
 else if(isset($_GET["asid"]))

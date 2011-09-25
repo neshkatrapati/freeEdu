@@ -2262,6 +2262,16 @@ $(function () {
 
 		return queryMe("select * from MSTUDENTT where sid like '".$sid."'");
 	}
+	function getBatchFromId($batid)
+	{
+
+		return queryMe("select *,(select brname from MBRANCHT b where b.brid = t.brid) as brname from MBATCHT t where batid like '".$batid."'");
+	}
+	function getSubject($subid)
+	{
+
+		return queryMe("select * from MSUBJECTT where subid like '".$subid."'");
+	}
 	function getFaculty($fid)
 	{
 
@@ -2337,4 +2347,16 @@ $(function () {
 		
 		return 2;
 	}
+	  function curPageURL()
+    {
+        $pageURL = 'http';
+        if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+        $pageURL .= "://";
+        if ($_SERVER["SERVER_PORT"] != "80") {
+         $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+        } else {
+         $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+        }
+       return $pageURL;
+    }
 ?>

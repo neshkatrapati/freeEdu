@@ -232,11 +232,22 @@ function getFacMenu()
             <a href='#' class='menu'>Marks</a>
             <ul class='menu-dropdown'>
               <li><a href='?m=inc'>Calculate Internals</a></li>
-<li><a href='?m=fp'>See Your Plan</a></li>
+
             </ul>
             
           </li>
         </ul>
+        <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Assignments</a>
+            <ul class='menu-dropdown'>
+                 <li><a href='?m=ass' >Create Assignment</a></li>
+                  <li><a href='?m=ass_see' >See  Assignment</a></li>
+            </ul>
+            
+          </li>
+        </ul>
+        
         <ul class='nav'>
           <li class='menu'>
             <a href='#' class='menu'>Tools</a>
@@ -316,6 +327,16 @@ function getStuMenu()
             
           </li>
         </ul>
+        <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Assignments</a>
+            <ul class='menu-dropdown'>
+                 
+                  <li><a href='?m=ass_see' >See  Assignment</a></li>
+            </ul>
+            
+          </li>
+        </ul>
         
         <ul class='nav'>
           <li class='menu'>
@@ -333,6 +354,7 @@ function getStuMenu()
         </form>";
         
         $oid = $_COOKIE['object'];
+        
 
 $oarray = getObject($oid);
 $retstr .= " <ul class='nav secondary-nav'>

@@ -93,7 +93,8 @@ $mode="";
 $oid = $_COOKIE['object'];
 if($oid==NULL)
 {
-	echo "<script type='text/javascript'>alert('Please Login Again!'); window.location='../login.php'; </script>";
+	
+	echo "<script type='text/javascript'>alert('Please Login Again!'); window.location='../login.php';localStorage.prevurl = '".curPageUrl()."' </script>";
 }
 echo getMenu();
 echo "<br><br>";
@@ -135,7 +136,6 @@ else if($mode == "p")
 
 else if($mode == "cre")
 {
-	echo "<center><h1><a href='https://github.com/Alacrity'>Team @Alacrity!</a></h1></center>";
 	echo "<iframe src='../credits/credits.html' frameborder='0' scrolling='yes' width='100%' height='200%' style='-webkit-border-radius:15px;-moz-border-radius:15px;border-radius:15px;'>";
 }
 else if($mode == "fbimage")
@@ -601,6 +601,40 @@ else if($mode=="ep")
 	include("../EditProfile/editProfile.php");
 	echo "</div>";
 }
+else if($mode=="ass")
+{
+	echo "<div id='content'  class='content'>";
+	if(isFaculty($_COOKIE["object"]))
+		include("../modules/assignment/createassignment.php");
+	else
+		notifywar("You Are Un Authorised To View This Page");
+		
+	echo "</div>";
+}
+else if($mode=="ass_see")
+{
+	
+	echo "<div id='content'  class='content'>";
+	if(isFaculty($_COOKIE["object"]))
+		include("../modules/assignment/showassignment.php");
+	else if(isStudent($_COOKIE["object"]))
+		include("../modules/assignment/showassignment_stu.php");
+	else
+		notifywar("You Are Un Authorised To View This Page");
+
+		
+	echo "</div>";
+}
+else if($mode=="ass_edit")
+{
+	echo "<div id='content'  class='content'>";
+	echo "<fieldset><legend>Edit Assignment</legend>";
+	
+	$asid = $_GET["asid"];
+	//echo "<a href='?m=ass_edit&asid=".$asid."' style='float:right;'>Edit This Assignment</a>";
+	include("../modules/assignment/editassignment.php");
+	echo "</div></fieldset>";
+}
 else if($mode=="license")
 {
 	echo "<div id='content'  class='content'>";
@@ -696,7 +730,11 @@ else
 }
 }
 echo "</div>";
+echo "<div id='fixer' style='position:fixed;'>";
+echo getMenu();
+echo "</div>";
 ?>
+
 </body>
 
 </html>

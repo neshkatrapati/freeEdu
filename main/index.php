@@ -441,6 +441,28 @@ else if($mode=="str")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+else if($mode=="lib")
+{
+	echo "<div id='content'  class='content'>";
+	if(isAlib($oid))
+	{
+		include("../core/library.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+else if($mode=="ab")
+{
+	echo "<div id='content'  class='content'>";
+	if(isAlib($oid))
+	{
+		include("../core/addBook.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
 else if($mode=="os")
 {
 	

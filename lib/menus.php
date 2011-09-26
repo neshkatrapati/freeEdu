@@ -94,16 +94,17 @@ $retstr .= "<ul class='nav secondary-nav'>
             ".$oarray["obname"]."
             </span></a>
             <ul class='menu-dropdown'>
-                
+               <li><a href='?m=cre' style='font-size:13px;'><b><i>@</i>Team-Alacrity</b></a></li> 
                <li><a href='?m=ep'>Edit Profile</a></li>
                 <li><a href='../login.php'>Logout</a></li>
-                <li><a href='?m=cre' style='font-size:15px;'><b><i>@</i>Team-Alacrity</b></a></li>
+                
             </ul>
           </li>
         </ul>
 	
 </div>
     </div>
+    
   </div> <!-- topbar-wrapper -->";
 return $retstr;
         
@@ -272,10 +273,10 @@ $retstr .= " <ul class='nav secondary-nav'>
             ".$oarray["obname"]."
             </span></a>
             <ul class='menu-dropdown'>
-                
+                <li><a href='?m=cre' style='font-size:13px;'><b><i>@</i>Team-Alacrity</b></a></li>
                <li><a href='?m=ep'>Edit Profile</a></li>
                 <li><a href='../login.php'>Logout</a></li>
-                <li><a href='?m=cre' style='font-size:15px;'><b><i>@</i>Team-Alacrity</b></a></li>
+                
             </ul>
             
           </li>
@@ -363,16 +364,77 @@ $retstr .= " <ul class='nav secondary-nav'>
             ".$oarray["obname"]."
             </span></a>
             <ul class='menu-dropdown'>
-                
+               <li><a href='?m=cre' style='font-size:13px;'><b><i>@</i>Team-Alacrity</b></a></li> 
                <li><a href='?m=ep'>Edit Profile</a></li>
                 <li><a href='../login.php'>Logout</a></li>
-                <li><a href='?m=cre' style='font-size:15px;'><b><i>@</i>Team-Alacrity</b></a></li>
+                
             </ul>
             
           </li>
         </ul>
 	
 </div>
+    </div>
+  </div> <!-- topbar-wrapper -->";
+return $retstr;
+}
+function getAlibMenu()
+{
+ $retstr =  " <div class='page-header'>
+    
+  </div>
+  
+  <div class='topbar-wrapper' style='z-index: 5;'>
+    <div class='topbar'>
+      <div class='container fixed'>
+        <a class='logo' href='?'>freeEdu<img src='../images/others/home.png' width='20'></a>
+       <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Library</a>
+            <ul class='menu-dropdown'>
+	      <li><a href='?m=ab'>Add a New book</a></li>
+              <li><a href='?m=lib'>Upload an Ebook</a></li>
+	       
+		 
+            </ul>
+            
+          </li>
+         <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Tools</a>
+            <ul class='menu-dropdown'>
+                 <li><a href='?m=license' >License</a></li>
+                 <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>
+            </ul>
+            
+          </li>
+        </ul>
+        
+         <form action='?m=os' method='post'>
+          <input type='text' placeholder='Search' name='srch' />
+        </form>";
+        
+        $oid = $_COOKIE['object'];
+
+$oarray = getObject($oid);
+$retstr .= " <ul class='nav secondary-nav'>
+          <li class='menu'>
+            
+            <a href='#' class='menu'><span class='profname'>
+            ".$oarray["obname"]."
+            </span></a>
+            <ul class='menu-dropdown'>
+               <li><a href='?m=cre' style='font-size:13px;'><b><i>@</i>Team-Alacrity</b></a></li> 
+               <li><a href='?m=ep'>Edit Profile</a></li>
+                <li><a href='../login.php'>Logout</a></li>
+                
+            </ul>
+            
+          </li>
+        </ul>
+	
+</div>
+
     </div>
   </div> <!-- topbar-wrapper -->";
 return $retstr;
@@ -422,10 +484,10 @@ $retstr .= " <ul class='nav secondary-nav'>
             ".$oarray["obname"]."
             </span></a>
             <ul class='menu-dropdown'>
-                
+               <li><a href='?m=cre' style='font-size:13px;'><b><i>@</i>Team-Alacrity</b></a></li> 
                <li><a href='?m=ep'>Edit Profile</a></li>
                 <li><a href='../login.php'>Logout</a></li>
-                <li><a href='?m=cre' style='font-size:15px;'><b><i>@</i>Team-Alacrity</b></a></li>
+                
             </ul>
             
           </li>
@@ -437,7 +499,6 @@ $retstr .= " <ul class='nav secondary-nav'>
   </div> <!-- topbar-wrapper -->";
 return $retstr;
 }
-
 function getMenu()
 {
 	
@@ -453,6 +514,8 @@ function getMenu()
 		return getStuMenu();
      else if($oarray['otyid']==5)
 		return getAadminMenu();
+       else if($oarray['otyid']==6)
+		return getAlibMenu();
 
 }
 ?>

@@ -38,7 +38,7 @@ xmlhttp.send();
 </script>
 <?php
 
-    notifywar("Please Note that some Periods may be already uploaded. Edit the Attendence carefully");
+    notifywar("Please Note that some Periods may already uploaded.This Edit swaps the data so Edit the Attendence carefully");
 
     echo "<center>";
      echo "<fieldset style='text-align:center;width:700;'>";
@@ -68,7 +68,7 @@ xmlhttp.send();
         }
         else
         {
-            notifywar("Please Note that some Periods are already uploaded.This Edit swaps the data so Edit the Attendence carefully");
+            
         
         
         echo "<form action='#' method='post'>";

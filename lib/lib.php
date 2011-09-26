@@ -1911,6 +1911,17 @@ function readExcel()
 		
 		
 	}
+	function isALib($oid)
+	{
+		
+		$array = queryMe("SELECT otyid FROM MOBJECTT WHERE oid like '".$oid."'");
+		if($array['otyid']=='6')
+			return true;
+		else
+			return false;
+		
+		
+	}
 	function isAdmin($oid)
 	{
 		

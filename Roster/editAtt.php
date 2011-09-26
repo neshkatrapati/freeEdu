@@ -232,9 +232,6 @@
        {
            $sid=$_POST['sid'];
            $aid=$_POST['aid'];
-           //echo $sid;
-           //echo $aid;
-
            mysql_query("update ADATAT set adata='$sid',pa='P' where aid='$aid'");
            notify("Editing Successfully Done");
            redirect("?");

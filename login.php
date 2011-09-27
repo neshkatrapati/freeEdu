@@ -60,8 +60,15 @@ function validator()
 			echo "<script type='text/javascript'>
 			if(localStorage.prevurl!='')
 			{
+<<<<<<< HEAD
 				window.location = localStorage.prevurl;
 				localstorage.prevurl='index.php';
+=======
+				var setter = localStorage.prevurl;
+				localStorage.prevurl='main/';
+				window.location = setter;
+				
+>>>>>>> c4ede7fdb967fc8a1dcfbd8eaec0ae1bc6b8038e
 			}
 			else
 				window.location = 'index.php';

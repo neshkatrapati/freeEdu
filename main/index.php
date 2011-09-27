@@ -390,6 +390,7 @@ else if($mode=="sc")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+
 else if($mode=="src")
 {
 	echo "<div id='content' class='content'>";
@@ -446,7 +447,18 @@ else if($mode=="lib")
 	echo "<div id='content'  class='content'>";
 	if(isAlib($oid))
 	{
-		include("../core/library.php");
+		include("../modules/library/library.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+else if($mode=="eb")
+{
+	echo "<div id='content'  class='content'>";
+	if(isAlib($oid))
+	{
+		include("../modules/library/editBook.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -457,7 +469,7 @@ else if($mode=="ab")
 	echo "<div id='content'  class='content'>";
 	if(isAlib($oid))
 	{
-		include("../core/addBook.php");
+		include("../modules/library/addBook.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");

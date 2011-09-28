@@ -40,7 +40,7 @@ function validator()
 	if(isset($_POST['btnLogin']))
 	{
 		$ologin = $_POST['ologin'];
-	$opass = $_POST['opass'];
+		$opass = $_POST['opass'];
 		include("misc/constants.php");
 		$clsname = "Constants";
 		$batname = $clsname::$batname;
@@ -60,6 +60,7 @@ function validator()
 			$url = $_GET["url"];
 			if(array_key_exists("url",$_GET))
 			{
+
 				echo "<script type='text/javascript'>
 				window.location = '".$url."';
 				</script>";		
@@ -71,6 +72,9 @@ function validator()
 				window.location = 'main/';
 				</script>";		
 			}
+						
+		
+
 		}
 	}	
 ?>	

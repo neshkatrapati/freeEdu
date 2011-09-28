@@ -398,6 +398,7 @@ else if($mode=="sc")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+
 else if($mode=="src")
 {
 	echo "<div id='content' class='content'>";
@@ -455,6 +456,17 @@ else if($mode=="lib")
 	if(isSudo($oid))
 	{
 		include("../modules/library/library.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+else if($mode=="eb")
+{
+	echo "<div id='content'  class='content'>";
+	if(isAlib($oid))
+	{
+		include("../modules/library/editBook.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");

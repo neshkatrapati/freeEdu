@@ -35,9 +35,12 @@ along with FreeEdu.  If not, see <http://www.gnu.org/licenses/>.*/?>
 <script type="text/javascript" src="../aux/stars/jquery.starRating.js"></script>
 <link rel="stylesheet" type="text/css" media="all" href="../aux/calendar/jsDatePick_ltr.min.css" />
 <script type="text/javascript" src="../aux/calendar/jsDatePick.min.1.3.js"></script>
+
 <script type="text/javascript">
 $(function() {
+	
   $('.nyroModal').nyroModal();
+  $('.nyroModal').resize();
 });
 
 
@@ -93,10 +96,14 @@ $mode="";
 $oid = $_COOKIE['object'];
 if($oid==NULL)
 {
+	$url = htmlify(curPageUrl());
 	
-	echo "<script type='text/javascript'>alert('Please Login Again!'); window.location='../login.php';localStorage.prevurl = '".curPageUrl()."' </script>";
+	echo "<script type='text/javascript'>window.location='../login.php?url=".$url."' </script>";
 }
-echo getMenu();
+if($_GET["menu"]!="no")
+{
+	echo getMenu();
+}
 echo "<br><br>";
 if(array_key_exists("m",$optarray) || !array_key_exists("m",$optarray))
 {
@@ -116,7 +123,7 @@ else if($mode == "p")
 	{
       	 $id = $_GET['id'];
        	 include("../EditProfile/showProfile.php");
-	 echo "<div id='sidebar' class='sidebar'>"; 
+	 echo "<div id='sidebar' style='float:left'>"; 
        	 showProf($id);
 	 echo "</div>";
 	 if(isStudent($id))
@@ -129,6 +136,7 @@ else if($mode == "p")
 			//echo "select sid from MSTUDENT where srno like '".$obj['obhandle']."'";
 			getStuGraph($array["sid"],strtotime("-4 week"),strtotime("now"));
 			getMarksGraph($array["srno"]);
+			echo "</div>";
 	 }
 	 
    	}
@@ -159,7 +167,7 @@ else if($mode=="sa")
 	if(isSudo($oid))
 	{
 		echo "<center>";
-		echo "<a href='?m=sa&t=a' class='pills'>Create A Sublist</a>&emsp;";	
+		echo "<a href='?m=sa&t=a' >Create A Sublist</a>&emsp;";	
 		echo "<a href='?m=sa&t=e'>Edit A Sublist</a><br /><br />";
 		echo "</center>";	
 		if(array_key_exists("t",$optarray))
@@ -357,6 +365,7 @@ else if($mode=="up")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+
 else if($mode=="dr")
 {
 	echo "<div id='content'  class='content'>";
@@ -445,7 +454,7 @@ else if($mode=="str")
 else if($mode=="lib")
 {
 	echo "<div id='content'  class='content'>";
-	if(isAlib($oid))
+	if(isSudo($oid))
 	{
 		include("../modules/library/library.php");
 	}
@@ -475,10 +484,11 @@ else if($mode=="eb")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+
 else if($mode=="ab")
 {
 	echo "<div id='content'  class='content'>";
-	if(isAlib($oid))
+	if(isSudo($oid))
 	{
 		include("../modules/library/addBook.php");
 	}
@@ -511,6 +521,51 @@ else if($mode=="fp")
 	{
 		$array = getObject($_COOKIE['object']); 
 		echo "<center>".getFacPlan($array['obhandle'])."</center>";
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+
+else if($mode=="ot_create")
+{
+	echo "<div id='content'  class='content'>";
+	if(!isStudent($oid))
+	{
+		include("../modules/objective/input.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+else if($mode=="ot_edit")
+{
+	echo "<div id='content'  class='content'>";
+	if(true)
+	{
+		include("../modules/objective/editobjective.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+else if($mode=="ot_ques")
+{
+	echo "<div id='content'  class='content'>";
+	if(!isStudent($oid))
+	{
+		include("../modules/objective/otques.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+else if($mode=="ot_edit_meta")
+{
+	echo "<div id='content'  class='content'>";
+	if(!isStudent($oid))
+	{
+		include("../modules/objective/editmeta.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -595,10 +650,111 @@ else if($mode=="feedback")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
-else if($mode=="xdebug_clear")
+else if($mode=="cflow")
 {
 	echo "<div id='content' class='content'>";
 	if(isSudo($oid))
+	{
+		
+		echo "<div id='coverflowHolder'>
+
+<div id='__cvfl-coverflow-holder' style='display:none'><div id='__cvfl-coverflow'>
+<div id='__cvfl-coverflow-wrapper'></div>
+<div id='smallerPreview'></div>
+<div id='__cvfl-coverflow-label'></div>";
+		echo "<SCRIPT type='text/javascript'>
+	if (true) {
+	
+window.onload = function(){	Coverflow.init([
+
+		{src: 'CoverFlows_files/covers/cover1med.jpg',
+		  label: {album: 'Abbey Road', artist: 'The Beatles', url:'http://www.beatles.com/', high:'CoverFlows_files/covers/cover1large.jpg'}},
+
+		{src: 'CoverFlows_files/covers/cover2med.jpg',
+		   label: {album: 'Graduation', artist: 'Kanye West', url:'http://www.kanyewest.com', high:'CoverFlows_files/covers/cover2large.jpg'}},
+
+		{src: 'CoverFlows_files/covers/cover3med.jpg',
+		   label: {album: 'Circus', artist: 'Britney Spears', url:'http://www.britneyspears.com', high:'CoverFlows_files/covers/cover3large.jpg'}},
+		   
+		{src: 'CoverFlows_files/covers/cover13med.jpg',
+		   label: {album: 'The Fame', artist: 'Lady Gaga', url:'http://www.ladygaga.com', high:'CoverFlows_files/covers/cover13large.jpg'}},
+		   
+		{src: 'CoverFlows_files/covers/cover14med.jpg',
+		   label: {album: 'The Fray', artist: 'The Fray', url:'http://www.thefray.com', high:'CoverFlows_files/covers/cover14large.jpg'}},
+		   
+		{src: 'CoverFlows_files/covers/cover12med.jpg',
+		   label: {album: 'Funhouse', artist: 'Pink', url:'http://www.pinkspage.com', high:'CoverFlows_files/covers/cover12large.jpg'}},
+		   
+
+		{src: 'CoverFlows_files/covers/cover4med.jpg',
+		   label: {album: '21st Century Breakdown', artist: 'Greenday', url:'http://www.greenday.com', high:'CoverFlows_files/covers/cover4large.jpg'}},
+
+		{src: 'CoverFlows_files/covers/cover5med.jpg',
+		   label: {album: 'Carter III', artist: 'Lil Wayne', url:'http://www.lilwayne.com', high:'CoverFlows_files/covers/cover5large.jpg'}},
+
+		{src: 'CoverFlows_files/covers/cover6med.jpg',
+		   label: {album: 'Clumsy', artist: 'Fergie', url:'http://www.fergie.com', high:'CoverFlows_files/covers/cover6large.jpg'}},
+
+		{src: 'CoverFlows_files/covers/cover7med.jpg',
+		   label: {album: 'The Best Of', artist: 'Blur', url:'http://ww.blur.com', high:'CoverFlows_files/covers/cover7large.jpg'}},
+
+		{src: 'CoverFlows_files/covers/cover8med.jpg',
+		   label: {album: 'Rockferry', artist: 'Duffy', url:'http://www.duffy.com', high:'CoverFlows_files/covers/cover8large.jpg'}},
+
+		{src: 'CoverFlows_files/covers/cover9med.jpg',
+		   label: {album: 'Dig out your soul', artist: 'Oasis', url:'http://www.oasis.com', high:'CoverFlows_files/covers/cover9large.jpg'}},
+
+		{src: 'CoverFlows_files/covers/cover10med.jpg',
+		   label: {album: 'Loose', artist: 'Nelly Furtado', url:'http://www.nellyfurtado.com', high:'CoverFlows_files/covers/cover10large.jpg'}}
+		   
+],
+{	createLabel: function(item)
+       {
+			
+			return item.label.album +'<br><span id=\"artist\">'+ item.label.artist + '</span><br><a href=\"\" + item.label.url + \"\">'+item.label.url+'</a>';
+	         
+	  },
+		onSelectCenter: function(item,id){
+		
+		var img = new Image();
+		img.onload = function(){ 
+		
+		
+		Lightbox.show(this.src,id);	
+		
+		}; 
+		
+		img.src = item.label.high;
+		
+		},
+		
+		refill: function(start){
+
+			new HTTPQuery('/ajax/cflow/0/?from='+start+'&l=1&cache=3998668924011356071',0,'updateCflow');
+		}		
+		});
+		}
+	}
+	
+	function updateCflow(oHttp) {
+		cResponse = oHttp.responseText;
+		if (cResponse.substr(0,1)=='!'){
+			cResponse=cResponse.substr(1);
+			eval(cResponse);
+		}
+	}
+
+</SCRIPT></div></div>";
+
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+else if($mode=="xdebug_clear")
+{
+	echo "<div id='content' class='content'>";
+	if(True)
 	{
 		unlink("../misc/.xdebug");
 		echo "<script type='text/javascript'>window.location='?m=xdebug';</script>";
@@ -753,9 +909,7 @@ else
 }
 }
 echo "</div>";
-echo "<div id='fixer' style='position:fixed;'>";
-echo getMenu();
-echo "</div>";
+
 ?>
 
 </body>

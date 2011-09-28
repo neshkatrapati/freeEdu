@@ -37,7 +37,7 @@ else
     $fbmax = $_POST["max"];
     
     $fbid = createFeedback($oid,$fbname,$cdate,$edate,$fbmin,$fbmax,$batid,$sec);
-    notify("Feedback Created! See It <a href=?m=fbget&fbid=\"".$fbid."\">Here</a>");
+    notify("Feedback Created! See It <a href=?m=fbget&fbid=".$fbid.">Here</a>");
    // redirect("?m=fbcreate");
 }
 ?>

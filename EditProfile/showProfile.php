@@ -135,7 +135,15 @@ if(isStudent($oid))
 elseif(isFaculty($oid))
 {
 	$array = getObject($oid);
+	echo "</div><div style='float:right'>";
 	echo getFacPlan($array['obhandle']);
+}
+else if(isPage($oid))
+{
+	
+	
+	echo page_profile($_GET["id"]);
+	
 }
 if($otyid==2)
 {
@@ -160,6 +168,7 @@ if($otyid==2)
 		}
 	
 }
+
 }
 ?>
 

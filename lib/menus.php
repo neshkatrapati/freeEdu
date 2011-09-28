@@ -16,7 +16,6 @@ function getSudoMenu()
 	    <ul class='menu-dropdown'>
 	      <li><a href='?m=ba'>Add A Batch</a></li>
               <li><a href='?m=up'>Upgrade Batches</a></li>
-              <li><a href='?m=sl'>See Students List</a></li>
               <li><a href='?m=sa'>Add A Subject List</a></li>
 	      <li><a href='?m=al'>Add A Lateral Entry</a></li>
 	    </ul>
@@ -242,7 +241,10 @@ function getFacMenu()
             <a href='#' class='menu'>Assignments</a>
             <ul class='menu-dropdown'>
                  <li><a href='?m=ass' >Create Assignment</a></li>
+                 <li><a href='?m=ot_create' >Create An Objective Test</a></li>
+                 <li><a href='?m=ot_edit' >See Existing Objective Tests</a></li>
                   <li><a href='?m=ass_see' >See  Assignment</a></li>
+                  
             </ul>
             
           </li>

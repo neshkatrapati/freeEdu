@@ -46,11 +46,13 @@ echo "<script>function check()
             
             $otid = $_GET["otid"];
             $entry = getObjectiveEntry($otid);
+	    
             $object = getObject($_COOKIE["object"]);
             if($_COOKIE["object"] == $entry["oid"])
             {
                 echo "<fieldset><legend>Update Objective Test - ".$entry["otname"]."</legend>";
-                if(!isset($_POST["Submit"]))
+                echo "<a href='?m=ot_edit&otid=".$otid."' style='float:left;margin-left:50px;'>Go Back</a><br>";
+		if(!isset($_POST["Submit"]))
                 {
                 	    echo "<form method=\"post\" action=\"\">";
                     echo "<table class=\"aaa\" align=\"center\" width=\"300\" cellpadding='10px;'>";
@@ -59,8 +61,8 @@ echo "<script>function check()
                     echo "</tr>";
                 
                     echo "<tr>";
-                	echo "<td align=\"right\">Test Date:</td><td><input type=\"text\" name='otdate' value='' required=true id='inputField1'
-                    value='".date("d-M-Y",$entry["otdate"])."'> </td>";
+                	echo "<td align=\"right\">Test Date:</td><td><input type=\"text\" name='otdate'
+                    required=true id='inputField1' value='".date("d-M-Y",$entry["otdate"])."'> </td>";
                     echo "</tr>";
                 
                     echo "<tr>";
@@ -72,7 +74,7 @@ echo "<script>function check()
                 
                     
                     echo "<tr>";
-                	echo "<td align=\"right\">Deadline for Test Date:</td><td><input type=\"text\" name='otdline'
+                	echo "<td align=\"right\">Deadline for Test </td><td><input type=\"text\" name='otdline'
                     required=true id='inputField2' value='".date("d-M-Y",$entry["otdline"])."'> </td>";
                     echo "</tr>";
                 

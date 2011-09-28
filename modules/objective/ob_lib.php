@@ -90,7 +90,8 @@
         $motoptions = implode(";",$optext);
         $motcorrect = implode(";",$opcorrect);
         
-        mysql_query("insert into MOTESTT values('".$rows."','".$ques."','".$motoptions."','".$motcorrect."','".$otid."')");
+        mysql_query("insert into MOTESTT values('".$rows."',\"".$ques."\",\"".$motoptions."\",'".$motcorrect."','".$otid."')");
+	xDebug("insert into MOTESTT values('".$rows."',\"".$ques."\",\"".$motoptions."\",'".$motcorrect."','".$otid."')");
         return $rows;
     }
     function editQuestion($motid,$ques,$optext,$opcorrect)

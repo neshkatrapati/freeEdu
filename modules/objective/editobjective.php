@@ -94,34 +94,37 @@
 		    echo "<tr><td>Time Limit</td><td>".$entarry["Timelt"]." Minutes</td></tr>";
 		    $ct = getObject($entarry["Object"]);
 		    echo "<tr><td>Created By</td><td>".getImageBox(getObjectLink($ct["oid"]),"../".getImgUri($ct["oimgid"]),$ct["obname"],"","50","50","1","0.8")."</td></tr>";
-		    echo "<tr><td>Created For</td><td>".getClassPreview($entarry["Class"]["Id"],$entarry["Class"]["Sec"],3,9)."</td></tr>";
+		    echo "<tr><td>Created For</td><td style='margin-right:20px;'>".getClassPreview($entarry["Class"]["Id"],$entarry["Class"]["Sec"],3,9)."</td></tr>";
 		    echo "</table>";
 		    echo "</div>";
-		    echo "<div style='float:right;margin-right:50px;margin-bottom:50px;margin-top:20px;border: 2px solid #550;'><br><h2 style='border: 2px solid #550;width:70%'>Questions</h2><br>";
+		    echo "<div style='width:400px;float:right;margin-right:50px;margin-bottom:50px;margin-top:20px;border: 2px solid #550;'>
+		    <br><div style='float:right;margin-right:10px;'>
+		    <a href='?m=ot_ques&mode=add&otid=".$otid."'><img src='../images/others/add.png' style='margin-left:20px;' width='25' hieght='25'></img></a></div><h2 style='border: 2px solid #550;width:70%'>Questions</h2><br>";
 		    for($i=0;$i<count($questions);$i++)
 		    {
 		        
-		        echo "<table cellpadding='10px;' style='margin-left:50px;border: 2px solid #550;'>";
-		        echo "<tr style='border: 2px solid #550;'>";
+		        echo "<table class='bttable' cellpadding='10px;' style='margin-left:50px;border: 2px solid #550;'>";
+		        echo "<tr>";
 		        $ques = $questions[$i]["Question"];
 		        
-		        echo "<td>Question :</td><td>".$ques."&emsp;<a href='?m=ot_ques&mode=edit&motid=".$questions[$i]["Id"]."'><img src='../images/others/edit.png' width='20' hieght='20'></img></a></td></tr>";
+		        echo "<td>Question :</td><td>".$ques."&emsp;<a href='?m=ot_ques&mode=edit&motid=".$questions[$i]["Id"]."'>
+			<img src='../images/others/edit.png' width='20' hieght='20'></img></a></td></tr>";
 		        for($j=0;$j<count($questions[$i]["Options"]);$j++)
 		        {
 		            
 		            $option = $questions[$i]["Options"][$j]["Option"];
 		            $correct = $questions[$i]["Options"][$j]["Correct"];
 		            if($correct!='true')
-		                $string = "<td style='border: 1px solid black'>".$option."</td>";
+		                $string = "<td >".$option."</td>";
 		            if($correct=='true')
-		                $string = "<td style='border: 1px solid black'>".$option."&emsp;<img src='../images/others/done.jpg' width='20' hieght='20'></img></td>";
+		                $string = "<td >".$option."&emsp;<img src='../images/others/done.jpg' width='20' hieght='20'></img></td>";
 		            
 		            if($j%2==0)
 		            {
 		                if($j==(count($questions[$i]["Options"])-1))
 		                    echo $string."<td ></td></tr>";
 		                else
-		                    echo "<tr >".$string;
+		                    echo "<tr   style='border: 2px solid #550;'>".$string;
 		                
 		            }
 		            else

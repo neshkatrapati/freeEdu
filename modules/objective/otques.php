@@ -92,7 +92,7 @@ function addEdit()
         if(isset($_GET["otid"]) && !isset($_POST["fin"]))
         {
             echo "<legend>Add A Question</legend><center>";
-            
+            echo "<a href='?m=ot_edit&otid=".$_GET["otid"]."' style='float:left;margin-left:50px;'>Go Back</a><br>";
             echo "<form action='' method='post'>";
            
             echo "<table cellpadding='10px;' id='inputtable'><tr><td>Question</td><td colspan='30'><textarea name='ques' rows='3' cols='50'></textarea></td>
@@ -130,6 +130,7 @@ function addEdit()
             $optcorrect = $_POST["check"];
             $entry = getObjectiveEntry($otid);
             $row = putQuestion($otid,$ques,$opttext,$optcorrect);
+            updateQuestionCount($otid,($entry["otcnt"]+1));
             echo "<form action='' method='post'><center>";
             echo "<input type='number' name='thres' value='".$entry["otthresh"]."'></input>&emsp;<input type='submit' name='over'></input>
             <input type='hidden' name='otid' value='".$otid."'></center></form>";
@@ -144,12 +145,13 @@ function addEdit()
             echo "<legend>Edit A Question</legend><center>";
             
             $motid = $_GET["motid"];
+            $quest = getQuestion($motid);
+            $questions = getQuestionAsArray($motid);
+            $xcnt = count($questions[0]["Options"]);
+            echo "<a href='?m=ot_edit&otid=".$quest["otid"]."' style='float:left;margin-left:50px;'>Go Back</a><br>";
             echo "<form action='?m=ot_ques&mode=edit&motid=".($motid+1)."' method='post'>";
            
             
-            $quest = getQuestion($motid);
-            $questions = getQuestionAsArray($motid);
-                $xcnt = count($questions[0]["Options"]);
             
             if(count($questions)>0)
             {
@@ -162,6 +164,7 @@ function addEdit()
                     echo "<script>even=1;number=".($xcnt-1).";</script>";
                 if($xcnt%2==1)
                     echo "<script>even=0;number=".($xcnt-1).";</script>";
+                    
                    
                 for($j=0;$j<count($questions[0]["Options"]);$j++)
                     {
@@ -242,9 +245,10 @@ function addEdit()
             $opttext = $_POST["options"];
             $optcorrect = $_POST["check"];
             $question = getQuestion($postmotid);
+            $entry2 = getObjectiveEntry($question["otid"]);
             $row = editQuestion($postmotid,$ques,$opttext,$optcorrect);
             echo "<form action='' method='post'><center>";
-            echo "<input type='number' name='thres' value='".$entry["otthresh"]."'></input>&emsp;<input type='submit' name='over'></input>
+            echo "<input type='number' name='thres' value='".$entry2["otthresh"]."'></input>&emsp;<input type='submit' name='over'></input>
             <input type='hidden' name='otid' value='".$question["otid"]."'></center></form>";
             
             notify("Modified Question Succesfully!");
@@ -259,6 +263,7 @@ function addEdit()
         $otid = $_POST["otid"];
         updateQuestionTreshold($otid,$thresh);
         notify("Objective Treshold Updated Succesfully!");
+        redirect("?m=ot_edit&otid=".$otid);
     }
     echo "</center></fieldset>";
 ?>

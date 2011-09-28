@@ -123,7 +123,7 @@ else if($mode == "p")
 	{
       	 $id = $_GET['id'];
        	 include("../EditProfile/showProfile.php");
-	 echo "<div id='sidebar' class='sidebar'>"; 
+	 echo "<div id='sidebar' style='float:left'>"; 
        	 showProf($id);
 	 echo "</div>";
 	 if(isStudent($id))
@@ -136,6 +136,7 @@ else if($mode == "p")
 			//echo "select sid from MSTUDENT where srno like '".$obj['obhandle']."'";
 			getStuGraph($array["sid"],strtotime("-4 week"),strtotime("now"));
 			getMarksGraph($array["srno"]);
+			echo "</div>";
 	 }
 	 
    	}

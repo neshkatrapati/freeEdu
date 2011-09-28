@@ -1000,12 +1000,13 @@ function readExcel()
 		$subGet = queryMe("SELECT * FROM MSUBJECTT where subid like '".$subid."'");
 		$subname = $subGet['subname'];
 		$batch = $brname." ".getFullClass($year+1)." ".$sec;
-		$retstr .= "<a href='?m=src&q=%&t=0&ip=n&op=c&c=".$batid.":".$sec."'>".$batch."</a>";
+		
 		$array = queryMe("SELECT oid from MOBJECTT where obhandle like '".$subid."' and otyid like '2'");
 		xDebug("SELECT oid from MOBJECTT where obhandle like '".$subid."' and otyid like '2'");
 		$oid = $array['oid'];
-		$retstr .= "--<a href='?m=p&id=".$oid."'>".$subname."</a><br />"; 	
-		
+		$retstr .= "<div class='box'><center><h3>Teaches</h3>";
+		$retstr .= "<div style='width:80%'>".getSubjectBox($subid)."</div>"; 	
+		$retstr .= "<h3>To</h3><table><tr><td>".getClassPreview($batid,$sec,4,16)."</td></tr></table></center></div>";
 		
 	
 	} 
@@ -2460,6 +2461,34 @@ $(function () {
   		onmouseout='this.style.opacity=".$uncativeopacity.";'>
 		<div class='desc'><b><font color=#000000>".$name."</font></b><br><b><font color=#000000>".$desc."</b></font></div></div></a>";
     }
+    function getSubjectBox($subid)
+    {
+	
+	$query = queryMe("select * from MSUBJECTT where subid like '".$subid."'");
+	
+	$img = "../".getImgUri($query["imgid"]);
+	$name = $query["subname"];
+	$books = explode(";",$query["books"]);
+	$year = getFullClass($query["year"]);
+	
+	$object = getObjectByType("2",$subid);
+	$link = "?m=p&id=".$object["oid"];
+	
+	$query2 = queryMe("select (select regname from MREGT r where r.regid like s.regid) as regname from SAVAILT s where subid like '".$query["suid"]."' ");
+	//xDebug("select (select regname from MREGT r where r.regid like s.regid) as regname from SAVAILT where subid like '".$query["suid"]."' ");
+	$regname = $query2["regname"];
+	$ret = "<div class='box' style=''><table><tr><td><a href='".$link."'><img src='".$img."' width='75' height='75'></img></a></td>
+		<td style='margin-left:10px;'>
+			<table class='bttable' style='margin-left:10px;'>
+			<tr><td>Name</td><td>".$name."</td></tr>
+			<tr><td>Year</td><td>".$year."</td></tr>
+			<tr><td>Regulation</td><td>".$regname."</td></tr>
+			</table>
+		</td>
+	</table></div>";
+	return $ret;
+    }
+    
     function getClassPreview($batid,$sec,$size,$number)
     {
 	$clsname = "Constants";
@@ -2485,8 +2514,8 @@ $(function () {
 		$object = getObjectByType("0",$row["sid"]);
 		$link = "?m=p&id=".$object["oid"];
 		$ret .= "<td><a href='".$link."'>	
-		<div><img src='".$img."' width='50' height='50' style='opacity:0.8';onmouseover='this.style.opacity=1'
-  		onmouseout='this.style.opacity=0.8'>
+		<div style=''><img src='".$img."' width='50' height='50' style='opacity:0.8';onmouseover='this.style.opacity=1'
+  		onmouseout='this.style.opacity=0.8'><div style='font-size:10px;text-align:center'>".$name."</div>
 		</div></a></td>";
 		
 		if(($i+1)%$size == 0)

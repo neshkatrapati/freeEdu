@@ -135,6 +135,7 @@ if(isStudent($oid))
 elseif(isFaculty($oid))
 {
 	$array = getObject($oid);
+	echo "</div><div style='float:right'>";
 	echo getFacPlan($array['obhandle']);
 }
 else if(isPage($oid))

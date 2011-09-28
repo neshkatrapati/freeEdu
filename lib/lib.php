@@ -1889,6 +1889,19 @@ function readExcel()
 		
 		
 	}
+	function isPage($oid)
+	{
+		
+		
+		$array = queryMe("SELECT otyid FROM MOBJECTT WHERE oid like '".$oid."'");
+		$arrayd = array("0","1","2","3","4","5","6");
+		if(in_array($array["otyid"],$arrayd))
+			return false;
+		else
+			return true;
+		
+		
+	}
 	function isSudo($oid)
 	{
 		
@@ -2359,4 +2372,129 @@ $(function () {
         }
        return $pageURL;
     }
+    function htmlify($url)
+    {
+	
+	$str = str_replace("&","%26",$url);
+	$str2 = str_replace("/","%2F",$str);
+	$str3 = str_replace(":","%3A",$str2);
+	$str4 = str_replace("?","%3F",$str3);
+	
+	return $str4;
+	
+    }
+     function getClassLink($batid,$sec)
+    {
+	$array2 = queryMe("select (select brname from MBRANCHT br where br.brid=ba.brid) as brname,akayr from MBATCHT ba where batid like '".$batid."'");
+	$batch = $array2['brname']." ".getFullClass($array2['akayr']+1)." Section: ".$sec;
+	echo "<a href='?m=src&q=%&t=0&ip=n&op=c&c=".$batid.":".$sec."'>".$batch."</a>";
+	
+    }
+     function getClassName($batid,$sec)
+    {
+	$array2 = queryMe("select (select brname from MBRANCHT br where br.brid=ba.brid) as brname,akayr from MBATCHT ba where batid like '".$batid."'");
+	$batch = $array2['brname']." ".getFullClass($array2['akayr']+1)." Section: ".$sec;
+	echo $batch;
+	
+    }
+    
+    
+    function page_descriptor($oid,$context)
+    {
+	switch($page)
+	{
+		
+		case "fb":return fb_descriptor($oid,$context);
+		case '':return false;
+	}
+    }
+    function page_profile($oid)
+    {
+
+	$object = getObject($oid);
+	$otype = $object["otyid"];
+	echo  $type;
+	if($otype == "7"){
+		
+		return fb_profile($oid);
+	}
+    }
+    function fb_descriptor($oid)
+    {
+	
+	return "Feedback Form";
+	
+	
+    }
+    
+    function fb_profile($oid)
+    {
+
+	$object = getObject($oid);
+	$fbid = $object["obhandle"];
+	include("../modules/feedback/fb_lib.php");
+	$entry = getFeedbackEntry($fbid);
+	$batid =  $entry["batid"];
+	$sec = $entry["sec"];
+	$array2 = queryMe("select (select brname from MBRANCHT br where br.brid=ba.brid) as brname,akayr from MBATCHT ba where batid like '".$batid."'");
+	$batch = $array2['brname']." ".getFullClass($array2['akayr']+1)." Section: ".$sec;
+	$ret .= "<a href='?m=src&q=%&t=0&ip=n&op=c&c=".$batid.":".$sec."'>Feedback for :".$batch."</a>";
+	
+	$ret .= "<center></div><div id='content' style='float:right;'>";
+	$ret .= "<h4 style='float:left;'>Feedback Entries&emsp;&emsp;<a href='?m=fbget&fbid=".$fbid."' style='float:right;margin-left:300px;'>Analyze</a></h4><br><br><br>";
+	$ret .= getFeedback($fbid);
+	$ret .= "</div></center>";
+	return $ret;
+    }
+    function getObjectLink($oid)
+    {
+	return  "?m=p&id=".$oid;
+	
+    }
+    function getImageBox($link,$image,$name,$desc,$width,$hieght,$activeopacity,$uncativeopacity)
+    {
+	
+	return "<a href='".$link."'>	
+		<div class='img'><img src='".$image."' width='".$width."' height='".$hieght."' style='opacity:".$uncativeopacity."'
+	  	onmouseover='this.style.opacity=".$activeopacity."'
+  		onmouseout='this.style.opacity=".$uncativeopacity.";'>
+		<div class='desc'><b><font color=#000000>".$name."</font></b><br><b><font color=#000000>".$desc."</b></font></div></div></a>";
+    }
+    function getClassPreview($batid,$sec,$size,$number)
+    {
+	$clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	//xDebug("select * from MSTUDENTT where batid like '".$batid."' and sec like '".$sec."' order by rand()");
+	$result = mysql_query("select * from MSTUDENTT where batid like '".$batid."' and sec like '".$sec."' order by rand() LIMIT 0,".$number);
+	$ret = "<div class='box' style='width:auto;'>";
+	$array2 = queryMe("select (select brname from MBRANCHT br where br.brid=ba.brid) as brname,akayr from MBATCHT ba where batid like '".$batid."'");
+	$batch = $array2['brname']." ".getFullClass($array2['akayr']+1)." Section: ".$sec;
+	$ret .= "<b>".$batch."</b>   <a href='?m=src&q=%&t=0&ip=n&op=c&c=".$batid.":".$sec."' target='_blank' title='".$batch."'><img src='../images/others/expand.png' width='20' hieght='20'></img></a>";
+	$ret .= "<table>";
+	$i=0;
+
+	while($row = mysql_fetch_array($result))
+	{
+		if($i%$size == 0)
+			$ret.= "<tr>";
+	
+		$name = getFname($row["sname"]);
+		$img = "../".getImgUri($row["imgid"]);
+		$roll = $row["srno"];
+		$object = getObjectByType("0",$row["sid"]);
+		$link = "?m=p&id=".$object["oid"];
+		$ret .= "<td><a href='".$link."'>	
+		<div><img src='".$img."' width='50' height='50' style='opacity:0.8';onmouseover='this.style.opacity=1'
+  		onmouseout='this.style.opacity=0.8'>
+		</div></a></td>";
+		
+		if(($i+1)%$size == 0)
+			$ret .= "</tr>";
+		$i++;
+	}
+	$ret .= "</table></div>";
+	return $ret;
+    }
+    
 ?>

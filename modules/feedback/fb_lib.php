@@ -8,6 +8,7 @@
         $result = mysql_query("select * from FBAVAILT");
         $rows = mysql_num_rows($result);
         mysql_query("insert into FBAVAILT values('".$rows."','".$fbname."','".$cdate."','".strtotime($edate)."','".$fbmin."','".$fbmax."','".$oid."','".$batid."','".$sec."')");	
+	makeObject($fbname,$rows,'7','476','','');
         return $rows;
     }
     function getFeedbackEntries($batid,$sec)
@@ -52,8 +53,7 @@
 	$fbentry = getFeedbackEntry($fid);
 	$fbname = $fbentry["fbname"];
 	
-	$ret = "<h3>Feedback Analysis For ".$fbname."</h3><br>";
-	$ret .= "<a href='?m=fbget'>Go Back</a><br ><br>";
+	
 	$faculty = array();
 	$i = 0;
 	$xnum =0;

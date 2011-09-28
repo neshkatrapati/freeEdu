@@ -242,7 +242,10 @@ function getFacMenu()
             <a href='#' class='menu'>Assignments</a>
             <ul class='menu-dropdown'>
                  <li><a href='?m=ass' >Create Assignment</a></li>
+                 <li><a href='?m=ot_create' >Create An Objective Test</a></li>
+                 <li><a href='?m=ot_edit' >See Existing Objective Tests</a></li>
                   <li><a href='?m=ass_see' >See  Assignment</a></li>
+                  
             </ul>
             
           </li>

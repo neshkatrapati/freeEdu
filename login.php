@@ -57,18 +57,20 @@ function validator()
 		{
 			$row = mysql_fetch_array($result);
 			setcookie('object',$row["oid"]);
-			echo "<script type='text/javascript'>
-			if(localStorage.prevurl!='')
+			$url = $_GET["url"];
+			if(array_key_exists("url",$_GET))
 			{
-				var setter = localStorage.prevurl;
-				localStorage.prevurl='main/';
-				window.location = setter;
-				
+				echo "<script type='text/javascript'>
+				window.location = '".$url."';
+				</script>";		
+		
 			}
 			else
+			{
+				echo "<script type='text/javascript'>
 				window.location = 'main/';
-			</script>";		
-		
+				</script>";		
+			}
 		}
 	}	
 ?>	

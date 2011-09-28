@@ -602,7 +602,7 @@ address {
   line-height: 18px;
   margin-bottom: 18px;
 }
-code, pre {
+code, pre,.box {
   padding: 0 3px 2px;
   font-family: Monaco, Andale Mono, Courier New, monospace;
   font-size: 12px;
@@ -615,7 +615,7 @@ code {
   color: rgba(0, 0, 0, 0.75);
   padding: 1px 3px;
 }
-pre {
+pre , .box{
   background-color: #f5f5f5;
   display: block;
   padding: 17px;
@@ -690,6 +690,12 @@ form .uneditable-input {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+}
+form textarea
+{
+  
+  width:auto;
+  
 }
 form select, form input[type=file] {
   height: 27px;
@@ -1727,24 +1733,24 @@ div.twipsy .twipsy-arrow {
   border-color: #000 transparent;
   visibility: hidden;
 }
-.zebra-striped .headerSortUp, .zebra-striped .headerSortDown {
+.zebra-striped .headerSortUp, .zebra-striped .headerSortDown, .zebra-striped  {
   background-color: rgba(141, 192, 219, 0.25);
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
   border-radius: 3px 3px 0 0;
 }
-.zebra-striped .header:hover:after {
+.zebra-striped .header:hover:after,.zebra-striped {
   visibility: visible;
 }
-.zebra-striped .headerSortDown:after, .zebra-striped .headerSortDown:hover:after {
+.zebra-striped .headerSortDown:after, .zebra-striped .headerSortDown:hover:after,.zebra-striped:after,.zebra-striped:hover:after {
   visibility: visible;
   filter: alpha(opacity=60);
   -khtml-opacity: 0.6;
   -moz-opacity: 0.6;
   opacity: 0.6;
 }
-.zebra-striped .headerSortUp:after {
+.zebra-striped .headerSortUp:after,.zebra-striped:after{
   border-bottom: none;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;

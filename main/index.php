@@ -453,6 +453,17 @@ else if($mode=="lib")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+else if($mode=="edit_ebook")
+{
+	echo "<div id='content'  class='content'>";
+	if(isAlib($oid))
+	{
+		include("../modules/library/editEbook.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
 else if($mode=="eb")
 {
 	echo "<div id='content'  class='content'>";

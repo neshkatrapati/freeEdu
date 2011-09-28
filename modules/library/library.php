@@ -39,7 +39,9 @@
             echo "Upload E-Book:(pdf or doc):<input type='file' name='file' required='true'><br><br>";
 	    echo "Upload Cover Page:(jpg or png or gif):<input type='file' name='img'><br><br>";
 	    echo "Book Name:<input type='text' name='book' required='true'>&nbsp&nbsp";
-	    echo "Author:<input type='text' name='author' required='true'><br><br>";
+	    echo "Author:<input type='text' name='author' required='true'>&nbsp";
+	    echo "Publication:<input type='text' name='pub' required='true'>&nbsp";
+	    echo "Edition:<input type='text' name='edition' required='true'>&nbsp<br><br><br>";
             echo "Linking to Existing Book:<select name='link' onchange='showUser(this.value)'>";
 	    echo "<option value='dln'>Dont Link</option>";
 	    echo "<option value='ln'>Link to Existing Book</option>";
@@ -57,9 +59,21 @@
 		$brid=$branch['brid'];
 		echo "<option value='$brid'>$arr[$i]</option>";
 	    }
+	    echo "</select>&nbspRegulation: ";
+	    $reg=getRegulations();
+	    $rlen=count($reg);
+	    include("../lib/connection.php");
+	    echo "<select name='reg'>";
+	    for($i=0;$i<$rlen;$i++)
+	    {
+		$r=mysql_query("select * from MREGT where regname='$reg[$i]'") or die(mysql_error());
+		$rg=mysql_fetch_array($r);
+		$regid=$rg['regid'];
+		echo "<option value='$regid'>$reg[$i]</option>";
+	    }
 	    echo "</select>&nbsp";
 	    echo "Year:";
-	    echo "</select>";
+	    
 	    echo "<select name='year'>";
 	    echo "<option value='0'>1st-Year</option>";
 	    echo "<option value='1'>2nd-Year 1st-Sem</option>";
@@ -84,6 +98,9 @@
 	    $author=$_POST['author'];
 	    $year=$_POST['year'];
 	    $bk=$_POST['bk'];
+	    $reg=$_POST['reg'];
+	    $bpub=$_POST['pub'];
+	    $edition=$POST['edition'];
 	    $extension = getExtension($ebook);
 	    $extension = strtolower($extension);
 	    $ext=strtolower(getExtension($img));
@@ -108,8 +125,8 @@
 			include("../lib/connection.php");
 		        //uploading into database
 		        $fname=time().'.'.$extension;
-		        $newname="../ebooks/".$fname;
-		        $eburi="ebooks/".$fname;
+		        $newname="../doc/ebooks/".$fname;
+		        $eburi="doc/ebooks/".$fname;
 		        $copied = copy($_FILES['file']['tmp_name'], $newname);
 		        if (!$copied)
 		        {
@@ -122,8 +139,8 @@
 		    	mysql_query("insert into MIMGT values('$imgid','$imguri')");
 		        $eb=mysql_query("select * from MDOCT")or die(mysql_error()) ;
 		       	$num=mysql_num_rows($eb);
-			mysql_query("insert into MDOCT values('$num','$book','$author','$brid','$year','$eburi','$imgid','$bk')");
-			notify('Copy Successfull!');
+			mysql_query("insert into MDOCT values('$num','$book','$author','$bpub','$edition','$brid','$year','$reg','$eburi','$imgid','$bk')");
+			notify('Ebook Added Successfull!');
 			redirect('?');
 		        }
 		    }

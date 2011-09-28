@@ -1005,7 +1005,7 @@ function readExcel()
 		xDebug("SELECT oid from MOBJECTT where obhandle like '".$subid."' and otyid like '2'");
 		$oid = $array['oid'];
 		$retstr .= "<div class='box'><center><h3>Teaches</h3>";
-		$retstr .= "<div style='width:80%'>".getSubjectBox($subid)."</div>"; 	
+		$retstr .= "<div style='width:100%'>".getSubjectBox($subid)."</div>"; 	
 		$retstr .= "<h3>To</h3><table><tr><td>".getClassPreview($batid,$sec,4,16)."</td></tr></table></center></div>";
 		
 	

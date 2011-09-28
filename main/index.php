@@ -167,7 +167,7 @@ else if($mode=="sa")
 	if(isSudo($oid))
 	{
 		echo "<center>";
-		echo "<a href='?m=sa&t=a' class='pills'>Create A Sublist</a>&emsp;";	
+		echo "<a href='?m=sa&t=a' >Create A Sublist</a>&emsp;";	
 		echo "<a href='?m=sa&t=e'>Edit A Sublist</a><br /><br />";
 		echo "</center>";	
 		if(array_key_exists("t",$optarray))

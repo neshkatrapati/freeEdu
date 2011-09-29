@@ -2525,5 +2525,10 @@ $(function () {
 	$ret .= "</table></div>";
 	return $ret;
     }
+    function getCurrentObject()
+    {
+	
+	return $_COOKIE["object"];
+    }
     
 ?>

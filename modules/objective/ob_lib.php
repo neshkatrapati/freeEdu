@@ -81,6 +81,13 @@
 	return queryMe("select * from MOTESTT where motid like '".$motid."'");
 	
     }
+    function getSubmission($otid,$sid)
+    {
+	
+	return queryMe("select * from MSUBMISSIONT where sid like '".$sid."' and otid like '".$otid."'");
+	
+    }
+    
     function isAuth($oid,$otid)
     {
 	$entry = getObjectiveEntry($otid);
@@ -252,7 +259,7 @@
     
        return $returnLinks;
     }
-    function getObjectiveEntries($batid,$sec)
+    function getObjectiveEntries($batid,$sec,$obid='%')
     {
 	$clsname = "Constants";
 	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
@@ -274,27 +281,74 @@
 	    $ottt = $row["ottt"];
 	    $oid = $row["oid"];
 	    
-	    
-	    $returnLinks[$i] = array();
-	    $returnLinks[$i]["Name"] = $otname;
-	    $returnLinks[$i]["Cdate"] = date("d-M-Y",$otdate);
-	    $returnLinks[$i]["Edate"]= date("d-M-Y",$otdline);
-	    $returnLinks[$i]["Id"] = $otid;
-	    $returnLinks[$i]["Thresh"] = $otthresh;
-	    $returnLinks[$i]["Timelt"] = $ottt;
-	    $returnLinks[$i]["Count"] = $otcnt;
-	    $subject = getSubject($otsub);
-	    $subob = getObjectByType("2",$otsub);
-	    $returnLinks[$i]["Subject"] = array();
-	    $returnLinks[$i]["Subject"]["Id"] = $otsub;
-	    $returnLinks[$i]["Subject"]["Name"] = $subject["subname"];
-	    $returnLinks[$i]["Subject"]["Link"] = "?m=p&id=".$subob["oid"] ;
-	    $returnLinks[$i]["Object"] = $oid;
-	    $returnLinks[$i]["Link"] = curPageURL()."&otid=".$otid;
-	    $i++;
+	    if(($oid == $obid) || ($obid == "%"))
+	    {
+		$returnLinks[$i] = array();
+		$returnLinks[$i]["Name"] = $otname;
+		$returnLinks[$i]["Cdate"] = date("d-M-Y",$otdate);
+		$returnLinks[$i]["Edate"]= date("d-M-Y",$otdline);
+		$returnLinks[$i]["Id"] = $otid;
+		$returnLinks[$i]["Thresh"] = $otthresh;
+		$returnLinks[$i]["Timelt"] = $ottt;
+		$returnLinks[$i]["Count"] = $otcnt;
+		$subject = getSubject($otsub);
+		$subob = getObjectByType("2",$otsub);
+		$returnLinks[$i]["Subject"] = array();
+		$returnLinks[$i]["Subject"]["Id"] = $otsub;
+		$returnLinks[$i]["Subject"]["Name"] = $subject["subname"];
+		$returnLinks[$i]["Subject"]["Link"] = "?m=p&id=".$subob["oid"] ;
+		$returnLinks[$i]["Object"] = $oid;
+		$returnLinks[$i]["Link"] = curPageURL()."&otid=".$otid;
+		$i++;
+	    }
 	}
        return $returnLinks;
     }
+    function getSubmissionAsArray($submid)
+    {
+        
+        $clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	
+        $result = mysql_query("select * from MSUBMISSIONT where submid like '".$submid."' order by(submid) ASC");
+        $returnLinks = array();
+	$row=mysql_fetch_array($result);
+	
+	$submid = $row["submid"];
+	$sid = $row["sid"];
+	$stu = getStudent($sid);
+	$detail = $row["detail"];
+	$otid = $row["otid"];
+	$result = $row["result"];
+	
+        $returnLinks["Id"] = $submid;
+	$returnLinks["Student"] = $stu;
+	$returnLinks["Detail"] = array();
+        $array = explode(';',$detail);
+	
+	
+	for($i=0;$i<count($array);$i++)
+	{
+	    $arr2 = explode(":",$array[$i]);
+	    $motid = $arr2[0];
+	    $answer = $arr2[1];
+	    //echo $motid;
+	    $res = queryMe("select * from MOTESTT where motid like '".$motid."'");
+	    $correct = explode(';',$res["motcorrect"]);
+	    $returnLinks["Details"][$i] = array();
+	    $returnLinks["Details"][$i]["Qid"] = $motid;
+	    $returnLinks["Details"][$i]["Aid"] = $answer;
+	    if(in_array($answer,$correct))
+		$returnLinks["Details"][$i]["Status"] = "True";
+	    else
+		$returnLinks["Details"][$i]["Status"] = "False";
+	    
+	}
+	
+       return $returnLinks;
+    }
+    
     function getObjectiveEntryAsArray($otid)
     {
 	$clsname = "Constants";
@@ -397,4 +451,15 @@
 	}
        return $returnLinks;
     }
+    function checkSubmitted($otid,$sid)
+    {
+	//xDebug("select * from MSUBMISSIONT where sid like '".$sid."' and otid like '".$otid."'");
+	$res = mysql_query("select * from MSUBMISSIONT where sid like '".$sid."' and otid like '".$otid."'");
+	xDebug(mysql_num_rows($res));
+	if(mysql_num_rows($res)==0)
+	    return false;
+	else
+	    return true;
+    }
+    
 ?>

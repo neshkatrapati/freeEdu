@@ -333,8 +333,8 @@ function getStuMenu()
           <li class='menu'>
             <a href='#' class='menu'>Assignments</a>
             <ul class='menu-dropdown'>
-                 
-                  <li><a href='?m=ass_see' >See  Assignment</a></li>
+                <li><a href='?m=ass_see' >See Existing Assignments</a></li>
+                <li><a href='?m=ot_edit' >See Existing Objective Assignments</a></li>
             </ul>
             
           </li>

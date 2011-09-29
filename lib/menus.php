@@ -397,6 +397,7 @@ function getAlibMenu()
 	      <li><a href='?m=ab'>Add a New book</a></li>
 	      <li><a href='?m=eb'>Edit Books</a></li>
               <li><a href='?m=lib'>Upload an Ebook</a></li>
+	      <li><a href='?m=edit_ebook'>Edit an Ebook</a></li>
 	       
 		 
             </ul>

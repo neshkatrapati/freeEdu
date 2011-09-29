@@ -244,6 +244,7 @@ function addEdit()
             $ques = $_POST["ques"];
             $opttext = $_POST["options"];
             $optcorrect = $_POST["check"];
+            
             $question = getQuestion($postmotid);
             $entry2 = getObjectiveEntry($question["otid"]);
             $row = editQuestion($postmotid,$ques,$opttext,$optcorrect);

@@ -154,7 +154,7 @@ else if($mode == "fbimage")
 
 else if($mode=="ba")
 {
-	echo "<div id='content'>";
+	echo "<div id='content' >";
 	if(isSudo($oid))
 		include("../Rayon/batchadd.php");
 	else
@@ -529,7 +529,7 @@ else if($mode=="ot_create")
 }
 else if($mode=="ot_edit")
 {
-	echo "<div id='content'  class='content'>";
+	echo "<div id='content' style='margin-left:20px;margin-right:20px'>";
 	if(true)
 	{
 		include("../modules/objective/editobjective.php");
@@ -549,6 +549,18 @@ else if($mode=="ot_ques")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+else if($mode=="ot_submit")
+{
+	echo "<div id='content'  class='content'>";
+	if(isStudent($oid))
+	{
+		include("../modules/objective/otsubmit.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+
 else if($mode=="ot_edit_meta")
 {
 	echo "<div id='content'  class='content'>";

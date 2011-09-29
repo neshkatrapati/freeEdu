@@ -62,11 +62,30 @@
 }
 
 </style>
+<script>
+	function show(value,element)
+			{
+				var ele = document.getElementById(value);
+				
+				if(ele.style.display == 'none'){
+					
+					ele.style.display = 'block';
+					element.src = "../images/others/collapse.png";	
+				}
+					
+				else{
+					ele.style.display = 'none';
+					element.src = "../images/others/expandico.gif";	
+				}
+			}
+	
+</script>
 <?php
     echo "<fieldset>";
     include("ob_lib.php");
     if(isset($_GET["otid"]))
     {
+	
         $otid = $_GET["otid"];
         $entry = getObjectiveEntry($otid);
 	echo "<legend>Objective Test ".$entry["otname"]."</legend><center>";
@@ -97,46 +116,56 @@
 		    echo "<tr><td>Created For</td><td style='margin-right:20px;'>".getClassPreview($entarry["Class"]["Id"],$entarry["Class"]["Sec"],3,9)."</td></tr>";
 		    echo "</table>";
 		    echo "</div>";
-		    echo "<div style='width:400px;float:right;margin-right:50px;margin-bottom:50px;margin-top:20px;border: 2px solid #550;'>
-		    <br><div style='float:right;margin-right:10px;'>
-		    <a href='?m=ot_ques&mode=add&otid=".$otid."'><img src='../images/others/add.png' style='margin-left:20px;' width='25' hieght='25'></img></a></div><h2 style='border: 2px solid #550;width:70%'>Questions</h2><br>";
-		    for($i=0;$i<count($questions);$i++)
+		    if($entry["oid"]==$_COOKIE["object"])
 		    {
-		        
-		        echo "<table class='bttable' cellpadding='10px;' style='margin-left:50px;border: 2px solid #550;'>";
-		        echo "<tr>";
-		        $ques = $questions[$i]["Question"];
-		        
-		        echo "<td>Question :</td><td>".$ques."&emsp;<a href='?m=ot_ques&mode=edit&motid=".$questions[$i]["Id"]."'>
-			<img src='../images/others/edit.png' width='20' hieght='20'></img></a></td></tr>";
-		        for($j=0;$j<count($questions[$i]["Options"]);$j++)
-		        {
-		            
-		            $option = $questions[$i]["Options"][$j]["Option"];
-		            $correct = $questions[$i]["Options"][$j]["Correct"];
-		            if($correct!='true')
-		                $string = "<td >".$option."</td>";
-		            if($correct=='true')
-		                $string = "<td >".$option."&emsp;<img src='../images/others/done.jpg' width='20' hieght='20'></img></td>";
-		            
-		            if($j%2==0)
-		            {
-		                if($j==(count($questions[$i]["Options"])-1))
-		                    echo $string."<td ></td></tr>";
-		                else
-		                    echo "<tr   style='border: 2px solid #550;'>".$string;
-		                
-		            }
-		            else
-		            {
-		                    echo $string."</tr>";
-		            }
-		            
-		        }
-		        
-		        echo "</table><br>";    
+			echo "<center><table class='bttable' style='width:400px;float:right;margin-right:50px;margin-bottom:50px;margin-top:20px;float:right;text-align:center;border: 2px solid #550;'>";
+		    echo "<th colspan='2' class='zebra-striped'>
+		    <br><div style='float:right;margin-right:10px;text-align:center'>
+		    <a href='?m=ot_ques&mode=add&otid=".$otid."'>
+		    <img src='../images/others/add.png' style='margin-left:20px' width='25' hieght='25'></img></a></div>
+		    <h4>Questions</h4></th>";
+		    
+			for($i=0;$i<count($questions);$i++)
+			{
+			    
+			    echo "";
+				 echo "<tr>";	       
+			    $ques = $questions[$i]["Question"];
+			    
+			    echo "<tr><td>Question</td><td>".$ques."&emsp;<a href='?m=ot_ques&mode=edit&motid=".$questions[$i]["Id"]."'>";
+				echo "<img style='float:right' src='../images/others/edit.png' width='20' height='20'></img>&emsp;</a><div style='float:right'>
+					<input type='image' onclick='show(\"div".$i."\",this)' src='../images/others/expandico.gif' ></input></div></div>";
+				echo "</td></tr>
+					<tr><td style='display:none;' colspan='2' id=\"div".$i."\"><table class='box' align='center' style='float:center;' >";
+			    for($j=0;$j<count($questions[$i]["Options"]);$j++)
+			    {
+			        
+			        $option = $questions[$i]["Options"][$j]["Option"];
+			        $correct = $questions[$i]["Options"][$j]["Correct"];
+			        if($correct!='true')
+			            $string = "<td >".$option."</td>";
+			        if($correct=='true')
+			            $string = "<td >".$option."&emsp;<img src='../images/others/done.jpg' width='20' hieght='20'></img></td>";
+			        
+			        if($j%2==0)
+			        {
+			            if($j==(count($questions[$i]["Options"])-1))
+			                echo $string."<td ></td></tr>";
+			            else
+			                echo "<tr>".$string;
+			            
+			        }
+			        else
+			        {
+			                echo $string."</tr>";
+			        }
+			        
+			    }
+			    
+			    echo "</table></td></tr>";    
+			}
+			echo "</table></div>";
 		    }
-		    echo "</div>";
 		}
 	}
 	else

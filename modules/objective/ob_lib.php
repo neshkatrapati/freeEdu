@@ -14,6 +14,44 @@
         return $rows;    
         
     }
+    function putSubmission($sid,$detail,$date,$res,$otid)
+    {
+        $clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	
+        $result = mysql_query("select * from MSUBMISSIONT");
+        $rows = mysql_num_rows($result);
+	
+        mysql_query("insert into MSUBMISSIONT values('".$rows."','".$sid."','".$detail."','".strtotime($date)."','".$res."','".$otid."')");	
+        return $rows;    
+        
+    }
+    function computeResult($detail,$otid)
+    {
+	
+	$array = explode(';',$detail);
+	//print_r($array);
+	$clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	$result = 0;
+	for($i=0;$i<count($array);$i++)
+	{
+	    $arr2 = explode(":",$array[$i]);
+	    $motid = $arr2[0];
+	    $answer = $arr2[1];
+	    //echo $motid;
+	    $res = queryMe("select * from MOTESTT where motid like '".$motid."'");
+	    $correct = explode(';',$res["motcorrect"]);
+	    //print_r($correct);
+	    if(in_array($answer,$correct))
+		$result++;
+	    
+	}
+	return $result;
+	
+    }
     function updateObjectiveTest($otid,$otname,$otdate,$otsub,$otdline,$ottt,$batid,$sec)
     {
         $clsname = "Constants";
@@ -107,8 +145,9 @@
         $motoptions = implode(";",$optext);
         $motcorrect = implode(";",$opcorrect);
         
-        mysql_query("update MOTESTT set ques='".$ques."' where motid like '".$motid."'");
-        mysql_query("update MOTESTT set motoptions='".$motoptions."' where motid like '".$motid."'");
+        mysql_query("update MOTESTT set motques=\"".$ques."\" where motid like '".$motid."'");
+	//echo "update MOTESTT set ques=\"".$ques."\" where motid like '".$motid."'";
+        mysql_query("update MOTESTT set motoptions=\"".$motoptions."\" where motid like '".$motid."'");
         mysql_query("update MOTESTT set motcorrect='".$motcorrect."' where motid like '".$motid."'");
         return $rows;
     }

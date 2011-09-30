@@ -3,6 +3,10 @@
 	margin:0;
 	padding:0;
 }
+label.loginlabel
+{
+	font-size:15px;
+}
 body
 {
 	margin:0 auto;

@@ -69,8 +69,8 @@
 	    $bpub=$_POST['pub'];
 	    $reg=$_POST['reg'];
 	    $year=$_POST['year'];
-	    $ncp=$_POST['cp'];
-	    $edition=$POST['edition'];
+	    $ncps=$_POST['cp'];
+	    $edition=$_POST['edition'];
 	    $extension = getExtension($ebook);
 	    $extension = strtolower($extension);
 	    $ext=strtolower(getExtension($img));
@@ -96,7 +96,7 @@
 		        $b=mysql_query("select * from MLIBRARYT")or die(mysql_error()) ;
 		        $num=mysql_num_rows($b);
 		        mysql_query("insert into MLIBRARYT values('$num','$bookid','$book','$author','$bpub','$reg','$edition','$brid','$year','$imgid','$ncps')");
-		        notify('Copy Successfull!');
+		        notify('Book Added Succesfully Successfull!');
 		        redirect('?');
 		    }
 		    else
@@ -105,6 +105,13 @@
 		        redirect('?m=ab');
 		    }
 		}
+	    }
+	    else if($img==NULL)
+	    {
+		mysql_query("insert into MLIBRARYT values('$num','$bookid','$book','$author','$bpub','$reg','$edition','$brid','$year','','$ncps')");
+		notify('Book Added Succesfully Successfull!');
+		redirect('?');
+		
 	    }
 	}
 	?>

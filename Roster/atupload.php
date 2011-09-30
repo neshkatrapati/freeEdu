@@ -54,7 +54,7 @@ elseif(isset($_POST['phase1']))
     echo "<input type='hidden' name='batid' value='".$batid."' />";
     echo "<input type='hidden' name='sec' value='".$sec."' />";
     echo "<input type='hidden' name='subid' value='".$subid."' />";
-    echo "<fieldset style='width: 200px'><legend>Select Periods:</legend>".getPeriods($batid,$sec,$date)."</fieldset><br />";
+    echo "<fieldset style='width: 300px'><legend>Select Periods:</legend>".getPeriods($batid,$sec,$date)."</fieldset><br />";
     echo "<input type='submit' name='phase2' /></form>";
    //echo "batid: ".$batid." sec:".$sec." subid:".$subid." fid:".$fid." ".$date;
     

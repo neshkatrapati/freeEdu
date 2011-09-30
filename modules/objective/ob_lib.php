@@ -461,5 +461,47 @@
 	else
 	    return true;
     }
-    
+    function getSubmissionsForOtid($otid)
+    {
+	$clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	
+	$res = mysql_query("select * from MSUBMISSIONT where otid='".$otid."' order by(date)");
+	$returnX = array();
+	
+	$i =0;
+	while($row = mysql_fetch_array($res))
+	{
+	    $id = $row["submid"];
+	    $detail = $row["detail"];
+	    $student = getStudent($row["sid"]);
+	    $date = date("d-M-y",$row["date"]);
+	    $result = $row["result"];
+	    
+	    $returnX[$i] = array();
+	    $returnX[$i]["Id"] = $id;
+	    $returnX[$i]["Student"] = $student;
+	    $returnX[$i]["date"] = $date;
+	    $returnX[$i]["detail"] = $detail;
+	    $returnX[$i]["result"] = $result;
+	    $i++;
+	}
+	return $returnX;
+    }
+    function getSubmissionCount($otid)
+    {
+	
+	$clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	
+	$res = mysql_query("select * from MSUBMISSIONT where otid='".$otid."' order by(date)");
+	return mysql_num_rows($res);
+    }
+    function getCorrectCount($motid)
+    {
+	
+	
+    }
 ?>

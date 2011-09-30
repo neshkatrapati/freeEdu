@@ -2274,7 +2274,7 @@ $(function () {
 	function getStudent($sid)
 	{
 
-		return queryMe("select * from MSTUDENTT where sid like '".$sid."'");
+		return queryMe("select *,(select imguri from MIMGT i where i.imgid=s.imgid) as img from MSTUDENTT s where sid like '".$sid."'");
 	}
 	function getBatchFromId($batid)
 	{

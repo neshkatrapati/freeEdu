@@ -88,7 +88,7 @@
 	
         $otid = $_GET["otid"];
         $entry = getObjectiveEntry($otid);
-	echo "<legend>Objective Test ".$entry["otname"]."</legend><center>";
+	echo "<legend>Objective Test ".$entry["otname"]."</legend><a href='?m=ot_edit' style='float:left;margin-left:50px;'>Go Back</a></br><center>";
         if(isAuth($_COOKIE["object"],$otid))
 	{
 		if(isNotSubmitted($otid)) //Replace By More Stringent Auth Check
@@ -112,6 +112,9 @@
 		    echo "<tr><td>Number Of Questions Answerable To Pass</td><td>".$entarry["Thresh"]."</td></tr>";
 		    echo "<tr><td>Time Limit</td><td>".$entarry["Timelt"]." Minutes</td></tr>";
 		    $ct = getObject($entarry["Object"]);
+		    $subcnt = getSubmissionCount($otid);
+		    if($subcnt>0)
+			echo "<tr><td>Submissions</td><td><a href='../modules/objective/whosub.php?otid=".$otid."' class='nyroModal'>".$subcnt." Submissions</a></td></tr>";
 		    echo "<tr><td>Created By</td><td>".getImageBox(getObjectLink($ct["oid"]),"../".getImgUri($ct["oimgid"]),$ct["obname"],"","50","50","1","0.8")."</td></tr>";
 		    echo "<tr><td>Created For</td><td style='margin-right:20px;'>".getClassPreview($entarry["Class"]["Id"],$entarry["Class"]["Sec"],3,9)."</td></tr>";
 		    echo "</table>";
@@ -315,8 +318,10 @@
 		$ret .= "<th class='blue'>Treshold</th>";
 		$ret .= "<th class='blue'>Timelimit</th>";
 		$ret .= "<th class='blue' >Created By</th>";
+		$ret .= "<th class='blue'>Actions</th>";
+		if($mode == "F")
+			$ret .= "<th class='blue' >Submissions</th>";
 		
-		$ret .= "<th class='blue' colspan='2'>Actions</th>";
 		for($i=0;$i<count($entries);$i++)
 		{
 		    
@@ -350,8 +355,12 @@
 			}
 			$ret .= "</td>";
 		    }
-		    else
+		    else{
+			
 			$ret .= "<td><a href='?m=ot_edit&otid=".$entries[$i]["Id"]."'>Edit</a></td>";
+			$subcnt = getSubmissionCount($entries[$i]["Id"]);
+			$ret .= "<td><a href='../modules/objective/whosub.php?otid=".$entries[$i]["Id"]."' class='nyroModal'>".$subcnt." Submissions</a></td>";
+		    }
 		    $ret .= "</tr>";
 		    
 		    

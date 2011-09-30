@@ -549,6 +549,18 @@ else if($mode=="ot_edit")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+else if($mode=="ot_submit_see")
+{
+	echo "<div id='content' style='margin-left:20px;margin-right:20px'>";
+	if(true)
+	{
+		include("../modules/objective/subview.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+
 else if($mode=="ot_ques")
 {
 	echo "<div id='content'  class='content'>";

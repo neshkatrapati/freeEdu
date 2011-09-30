@@ -145,29 +145,6 @@ else if(isPage($oid))
 	echo page_profile($_GET["id"]);
 	
 }
-if($otyid==2)
-{
-	
-	$array = taughtBy($obhandle);
-		//print_r($array["classes"]);
-		echo "<table style='text-align:center;width:100%;'>";
-		for($i=0;$i<count($array);$i++)
-		{
-			echo "<tr>";
-			$fname = $array[$i]["fname"];
-			$fprof = $array[$i]["fprof"];
-			echo "<td><a href='".$fprof."'>".$fname."</a>-</td>";
-			for($j=0;$j<count($array[$i]["classes"]);$j++)
-			{
-				$cname = $array[$i]["classes"][$j]["name"];
-				$curl = $array[$i]["classes"][$j]["url"];
-				echo "<td><a href='".$curl."'>".$cname."</a></td>";	
-				
-			}
-			echo "</tr>";
-		}
-	
-}
 
 }
 ?>

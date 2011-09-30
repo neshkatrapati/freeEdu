@@ -159,7 +159,8 @@ else if($mode == "p")
 			
 	 }
 	 $obj = getObject($_GET["id"]);
-	 $boxes = freeedu_boxes($obj["otyid"]);
+	 $abcd = freeedu_boxes($obj["otyid"]);
+	 $boxes = $abcd["right"];
 	 echo "<div style='float:right'>";
 	 for($i=0;$i<count($boxes);$i++)
 	 {

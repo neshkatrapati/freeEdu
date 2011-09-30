@@ -186,4 +186,60 @@ class freeEdu_box
 	
         }
     }
+    class subjects_fac_Box extends freeEdu_box
+    {
+	
+	public $name = "Faculty Assigned To This Subject";
+	public $module = "freeedu.mod_core";
+	public $classinfo= "box";
+	public $floatinfo ="right";
+	private $object = "";
+	public $defstate_e = "none";
+	public $defstate_c = "block";
+	
+	public function __construct($oid)
+	{
+	    $this->object = $oid;
+	    //$this->defstate = $defstate;
+
+	}
+	public function box_oncollapse()
+	{
+		//include("../modules/assignment/as_lib.php");
+		$ob = getObject($this->object);
+		$obhandle = $ob["obhandle"];
+		$array = taughtBy($obhandle);
+	    
+		return "This Subject Is Assigned To ".count($array)." People <br>Expand To See The Details";	
+		
+	}
+	public function box_onexpand()
+	{
+		$ob = getObject($this->object);
+		$obhandle = $ob["obhandle"];
+		$array = taughtBy($obhandle);
+	    
+		$ret = "<table class='bttable'>";
+		for($i=0;$i<count($array);$i++)
+		{
+			$ret .= "<tr>";
+			$fname = $array[$i]["fname"];
+			$fprof = $array[$i]["fprof"];
+			$ret .= "<td><a href='".$fprof."'>".$fname."</a>-</td>";
+			for($j=0;$j<count($array[$i]["classes"]);$j++)
+			{
+				$cname = $array[$i]["classes"][$j]["name"];
+				$curl = $array[$i]["classes"][$j]["url"];
+				$ret .= "<td><a href='".$curl."'>".$cname."</a></td>";	
+				
+			}
+			$ret .= "</tr>";
+		}
+		$ret .= "</table>";
+		return $ret;
+	}
+	
+ 
+    }
+
 ?>

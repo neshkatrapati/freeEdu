@@ -239,6 +239,7 @@
 	    $returnLinks[$i] = array();
             $returnLinks[$i]["Id"] = $motid;
 	    $returnLinks[$i]["Question"] = $motques;
+	    
 	    $returnLinks[$i]["Options"] = array();
             $options = explode(";",$motoptions);
             $correct = explode(";",$motcorrect);
@@ -499,9 +500,39 @@
 	$res = mysql_query("select * from MSUBMISSIONT where otid='".$otid."' order by(date)");
 	return mysql_num_rows($res);
     }
-    function getCorrectCount($motid)
+    function getCorrectCount($motid2)
     {
-	
+	$question = getQuestion($motid2);
+	$submissions = getSubmissionsForOtid($question["otid"]);
+	//print_r($submissions);
+	$result = 0;
+	for($j=0;$j<count($submissions);$j++)
+	{
+	    $detail = $submissions[$j]["detail"];
+	    $array = explode(';',$detail);
+	    
+	    for($i=0;$i<count($array);$i++)
+	    {
+	        $arr2 = explode(":",$array[$i]);
+	        $motid = $arr2[0];
+	        $answer = $arr2[1];
+		
+	        if($motid == $motid2)
+		{
+		    $res = queryMe("select * from MOTESTT where motid like '".$motid."'");
+		    $correct = explode(';',$res["motcorrect"]);
+		    //echo $answer;    
+		    if(in_array($answer,$correct))
+		    {
+			$result++;
+			
+		    }
+		}	        
+	    }
+	     
+	    
+	}
+	return $result;
 	
     }
 ?>

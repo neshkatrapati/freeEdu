@@ -137,7 +137,9 @@
 			    
 			    echo "<tr><td>Question</td><td>".$ques."&emsp;";
 				echo "<div style='float:right'>
-					<input type='image' onclick='show(\"div".$i."\",this)' src='../images/others/expandico.gif' style='float:right;' ></input></div><a href='?m=ot_ques&mode=edit&motid=".$questions[$i]["Id"]."'><img style='float:right' src='../images/others/edit.png' width='20' height='20'></img>&emsp;</a></div>";
+					<input type='image' onclick='show(\"div".$i."\",this)' src='../images/others/expandico.gif' style='float:right;' ></input></div><a href='?m=ot_ques&mode=edit&motid=".$questions[$i]["Id"]."'>
+					&emsp;<img style='float:right' src='../images/others/edit.png' width='20' height='20'></img></a>
+					&emsp;<div style='float:right;' >".getCorrectCount($questions[$i]["Id"])."<img style='' src='../images/others/tick.png' width='20' hieght='20'></img></div></div>";
 				echo "</td></tr>
 					<tr><td style='display:none;' colspan='2' id=\"div".$i."\"><table class='box' align='center' style='float:center;' >";
 			    for($j=0;$j<count($questions[$i]["Options"]);$j++)
@@ -172,8 +174,10 @@
 		    else if(isStudent(getCurrentObject()))
 		    {
 			$obj = getObject(getCurrentObject());
+			//echo getCurrentObject();
 			$stu = getStudent($obj["obhandle"]);
 			$subi = getSubmission($_GET["otid"],$stu["sid"]);
+			//print_r($subi);
 			$suba = getSubmissionAsArray($subi["submid"]);
 			$image = getImgUri($obj["imguri"]);
 			if(checkSubmitted($_GET["otid"],$obj["obhandle"]))
@@ -195,7 +199,9 @@
 				    
 				    echo "<tr><td>Question</td><td>".$ques."&emsp;";
 					echo "<div style='float:right'>
-						<input type='image' onclick='show(\"div".$i."\",this)' src='../images/others/expandico.gif' style='float:right;' ></input></div><a href='?m=ot_ques&mode=edit&motid=".$questions[$i]["Id"]."'><img style='float:right' src='../images/others/edit.png' width='20' height='20'></img>&emsp;</a></div>";
+						<input type='image' onclick='show(\"div".$i."\",this)' src='../images/others/expandico.gif' style='float:right;' ></input></div><a href='?m=ot_ques&mode=edit&motid=".$questions[$i]["Id"]."'>
+						</div>";
+						
 					echo "</td></tr>
 						<tr><td style='display:none;' colspan='2' id=\"div".$i."\"><table class='box' align='center' style='float:center;' >";
 				    for($j=0;$j<count($questions[$i]["Options"]);$j++)
@@ -203,7 +209,7 @@
 				        
 				        $option = $questions[$i]["Options"][$j]["Option"];
 				        $correct = $questions[$i]["Options"][$j]["Correct"];
-				        if($suba["Details"][$i]["Status"]["Aid"] != $j)
+				        if($suba["Details"][$i]["Aid"] != $j)
 				            $string = "<td >".$option."</td>";
 				        else{
 						//xDebug($suba["Detail"][0]["Status"]);

@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class PersistentFBPublic</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> PersistentFBPublic</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-consts">Constants</a>
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Extends the BaseFacebook class with the intent of using PHP sessions to store user ids and access tokens.</p>
+<p class="description"><p>Extends the BaseFacebook class with the intent of using PHP sessions to store user ids and access tokens.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Naitik Shah &lt;<a href="mailto:naitik@facebook.com">naitik@facebook.com</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_lib---fb---tests---tests.php.html">/lib/fb/tests/tests.php</a> (line <span class="field">876</span>)
+		</p>
+		
+				
+		<pre><a href="../freeEdu/BaseFacebook.html">BaseFacebook</a>
+   |
+   --<a href="../freeEdu/Facebook.html">Facebook</a>
+      |
+      --PersistentFBPublic</pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-consts">Constants</a>
+							
+															<a href="#sec-vars">Vars</a>
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#publicParseSignedRequest" title="details" class="method-name">publicParseSignedRequest</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$input</span>)
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#publicSetPersistentData" title="details" class="method-name">publicSetPersistentData</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$key</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-consts">Constants</a>
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../freeEdu/Facebook.html">Facebook</a></span></p>
+					<blockquote>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../freeEdu/Facebook.html#var$kSupportedKeys">Facebook::$kSupportedKeys</a></span><br>
+							</span>
+											</blockquote> 
+									<p>Inherited from <span class="classname"><a href="../freeEdu/BaseFacebook.html">BaseFacebook</a></span></p>
+					<blockquote>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../freeEdu/BaseFacebook.html#var$accessToken">BaseFacebook::$accessToken</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../freeEdu/BaseFacebook.html#var$apiSecret">BaseFacebook::$apiSecret</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../freeEdu/BaseFacebook.html#var$appId">BaseFacebook::$appId</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../freeEdu/BaseFacebook.html#var$CURL_OPTS">BaseFacebook::$CURL_OPTS</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../freeEdu/BaseFacebook.html#var$DOMAIN_MAP">BaseFacebook::$DOMAIN_MAP</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../freeEdu/BaseFacebook.html#var$DROP_QUERY_PARAMS">BaseFacebook::$DROP_QUERY_PARAMS</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../freeEdu/BaseFacebook.html#var$fileUploadSupport">BaseFacebook::$fileUploadSupport</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../freeEdu/BaseFacebook.html#var$signedRequest">BaseFacebook::$signedRequest</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../freeEdu/BaseFacebook.html#var$state">BaseFacebook::$state</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../freeEdu/BaseFacebook.html#var$user">BaseFacebook::$user</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-vars">Vars</a>
+																			<a href="#sec-consts">Constants</a>
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodpublicParseSignedRequest" id="publicParseSignedRequest"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">publicParseSignedRequest</span> (line <span class="line-number">877</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			publicParseSignedRequest
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$input</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$input</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpublicSetPersistentData" id="publicSetPersistentData"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">publicSetPersistentData</span> (line <span class="line-number">881</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			publicSetPersistentData
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$key</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$key</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$value</span>			</li>
+				</ul>
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../freeEdu/Facebook.html">Facebook</a></span></p>
+					<blockquote>
+													<img src="../media/images/Constructor.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/Facebook.html#method__construct">Facebook::__construct()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/Facebook.html#methodclearAllPersistentData">Facebook::clearAllPersistentData()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/Facebook.html#methodclearPersistentData">Facebook::clearPersistentData()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/Facebook.html#methodconstructSessionVariableName">Facebook::constructSessionVariableName()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/Facebook.html#methodgetPersistentData">Facebook::getPersistentData()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/Facebook.html#methodsetPersistentData">Facebook::setPersistentData()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../freeEdu/BaseFacebook.html">BaseFacebook</a></span></p>
+					<blockquote>
+													<img src="../media/images/Constructor.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#method__construct">BaseFacebook::__construct()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodapi">BaseFacebook::api()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodbase64UrlDecode">BaseFacebook::base64UrlDecode()</a></span><br>
+													<img src="../media/images/AbstractMethod.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodclearAllPersistentData">BaseFacebook::clearAllPersistentData()</a></span><br>
+													<img src="../media/images/AbstractMethod.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodclearPersistentData">BaseFacebook::clearPersistentData()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methoderrorLog">BaseFacebook::errorLog()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodestablishCSRFTokenState">BaseFacebook::establishCSRFTokenState()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetAccessToken">BaseFacebook::getAccessToken()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetAccessTokenFromCode">BaseFacebook::getAccessTokenFromCode()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetApiSecret">BaseFacebook::getApiSecret()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetApiUrl">BaseFacebook::getApiUrl()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetAppId">BaseFacebook::getAppId()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetApplicationAccessToken">BaseFacebook::getApplicationAccessToken()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetCode">BaseFacebook::getCode()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetCurrentUrl">BaseFacebook::getCurrentUrl()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetLoginStatusUrl">BaseFacebook::getLoginStatusUrl()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetLoginUrl">BaseFacebook::getLoginUrl()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetLogoutUrl">BaseFacebook::getLogoutUrl()</a></span><br>
+													<img src="../media/images/AbstractMethod.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetPersistentData">BaseFacebook::getPersistentData()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetSignedRequest">BaseFacebook::getSignedRequest()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetSignedRequestCookieName">BaseFacebook::getSignedRequestCookieName()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetUrl">BaseFacebook::getUrl()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetUser">BaseFacebook::getUser()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetUserAccessToken">BaseFacebook::getUserAccessToken()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetUserFromAccessToken">BaseFacebook::getUserFromAccessToken()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodgetUserFromAvailableData">BaseFacebook::getUserFromAvailableData()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodmakeRequest">BaseFacebook::makeRequest()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodparseSignedRequest">BaseFacebook::parseSignedRequest()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodsetAccessToken">BaseFacebook::setAccessToken()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodsetApiSecret">BaseFacebook::setApiSecret()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodsetAppId">BaseFacebook::setAppId()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodsetFileUploadSupport">BaseFacebook::setFileUploadSupport()</a></span><br>
+													<img src="../media/images/AbstractMethod.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodsetPersistentData">BaseFacebook::setPersistentData()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodshouldRetainParam">BaseFacebook::shouldRetainParam()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methodthrowAPIException">BaseFacebook::throwAPIException()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#methoduseFileUploadSupport">BaseFacebook::useFileUploadSupport()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#method_graph">BaseFacebook::_graph()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#method_oauthRequest">BaseFacebook::_oauthRequest()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../freeEdu/BaseFacebook.html#method_restserver">BaseFacebook::_restserver()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-vars">Vars</a>
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+										<h4>Inherited Constants</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../freeEdu/BaseFacebook.html">BaseFacebook</a></span></p>
+					<blockquote>
+													<img src="../media/images/Variable.png" />
+							<span class="const-title">
+								<span class="const-name"><a href="../freeEdu/BaseFacebook.html#constVERSION">BaseFacebook::VERSION</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 30 Sep 2011 16:12:58 +0530 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

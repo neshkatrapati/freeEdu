@@ -14,6 +14,44 @@
         return $rows;    
         
     }
+    function putSubmission($sid,$detail,$date,$res,$otid)
+    {
+        $clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	
+        $result = mysql_query("select * from MSUBMISSIONT");
+        $rows = mysql_num_rows($result);
+	
+        mysql_query("insert into MSUBMISSIONT values('".$rows."','".$sid."','".$detail."','".strtotime($date)."','".$res."','".$otid."')");	
+        return $rows;    
+        
+    }
+    function computeResult($detail,$otid)
+    {
+	
+	$array = explode(';',$detail);
+	//print_r($array);
+	$clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	$result = 0;
+	for($i=0;$i<count($array);$i++)
+	{
+	    $arr2 = explode(":",$array[$i]);
+	    $motid = $arr2[0];
+	    $answer = $arr2[1];
+	    //echo $motid;
+	    $res = queryMe("select * from MOTESTT where motid like '".$motid."'");
+	    $correct = explode(';',$res["motcorrect"]);
+	    //print_r($correct);
+	    if(in_array($answer,$correct))
+		$result++;
+	    
+	}
+	return $result;
+	
+    }
     function updateObjectiveTest($otid,$otname,$otdate,$otsub,$otdline,$ottt,$batid,$sec)
     {
         $clsname = "Constants";
@@ -43,6 +81,13 @@
 	return queryMe("select * from MOTESTT where motid like '".$motid."'");
 	
     }
+    function getSubmission($otid,$sid)
+    {
+	
+	return queryMe("select * from MSUBMISSIONT where sid like '".$sid."' and otid like '".$otid."'");
+	
+    }
+    
     function isAuth($oid,$otid)
     {
 	$entry = getObjectiveEntry($otid);
@@ -107,8 +152,9 @@
         $motoptions = implode(";",$optext);
         $motcorrect = implode(";",$opcorrect);
         
-        mysql_query("update MOTESTT set ques='".$ques."' where motid like '".$motid."'");
-        mysql_query("update MOTESTT set motoptions='".$motoptions."' where motid like '".$motid."'");
+        mysql_query("update MOTESTT set motques=\"".$ques."\" where motid like '".$motid."'");
+	//echo "update MOTESTT set ques=\"".$ques."\" where motid like '".$motid."'";
+        mysql_query("update MOTESTT set motoptions=\"".$motoptions."\" where motid like '".$motid."'");
         mysql_query("update MOTESTT set motcorrect='".$motcorrect."' where motid like '".$motid."'");
         return $rows;
     }
@@ -193,6 +239,7 @@
 	    $returnLinks[$i] = array();
             $returnLinks[$i]["Id"] = $motid;
 	    $returnLinks[$i]["Question"] = $motques;
+	    
 	    $returnLinks[$i]["Options"] = array();
             $options = explode(";",$motoptions);
             $correct = explode(";",$motcorrect);
@@ -213,7 +260,7 @@
     
        return $returnLinks;
     }
-    function getObjectiveEntries($batid,$sec)
+    function getObjectiveEntries($batid,$sec,$obid='%')
     {
 	$clsname = "Constants";
 	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
@@ -235,27 +282,74 @@
 	    $ottt = $row["ottt"];
 	    $oid = $row["oid"];
 	    
-	    
-	    $returnLinks[$i] = array();
-	    $returnLinks[$i]["Name"] = $otname;
-	    $returnLinks[$i]["Cdate"] = date("d-M-Y",$otdate);
-	    $returnLinks[$i]["Edate"]= date("d-M-Y",$otdline);
-	    $returnLinks[$i]["Id"] = $otid;
-	    $returnLinks[$i]["Thresh"] = $otthresh;
-	    $returnLinks[$i]["Timelt"] = $ottt;
-	    $returnLinks[$i]["Count"] = $otcnt;
-	    $subject = getSubject($otsub);
-	    $subob = getObjectByType("2",$otsub);
-	    $returnLinks[$i]["Subject"] = array();
-	    $returnLinks[$i]["Subject"]["Id"] = $otsub;
-	    $returnLinks[$i]["Subject"]["Name"] = $subject["subname"];
-	    $returnLinks[$i]["Subject"]["Link"] = "?m=p&id=".$subob["oid"] ;
-	    $returnLinks[$i]["Object"] = $oid;
-	    $returnLinks[$i]["Link"] = curPageURL()."&otid=".$otid;
-	    $i++;
+	    if(($oid == $obid) || ($obid == "%"))
+	    {
+		$returnLinks[$i] = array();
+		$returnLinks[$i]["Name"] = $otname;
+		$returnLinks[$i]["Cdate"] = date("d-M-Y",$otdate);
+		$returnLinks[$i]["Edate"]= date("d-M-Y",$otdline);
+		$returnLinks[$i]["Id"] = $otid;
+		$returnLinks[$i]["Thresh"] = $otthresh;
+		$returnLinks[$i]["Timelt"] = $ottt;
+		$returnLinks[$i]["Count"] = $otcnt;
+		$subject = getSubject($otsub);
+		$subob = getObjectByType("2",$otsub);
+		$returnLinks[$i]["Subject"] = array();
+		$returnLinks[$i]["Subject"]["Id"] = $otsub;
+		$returnLinks[$i]["Subject"]["Name"] = $subject["subname"];
+		$returnLinks[$i]["Subject"]["Link"] = "?m=p&id=".$subob["oid"] ;
+		$returnLinks[$i]["Object"] = $oid;
+		$returnLinks[$i]["Link"] = curPageURL()."&otid=".$otid;
+		$i++;
+	    }
 	}
        return $returnLinks;
     }
+    function getSubmissionAsArray($submid)
+    {
+        
+        $clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	
+        $result = mysql_query("select * from MSUBMISSIONT where submid like '".$submid."' order by(submid) ASC");
+        $returnLinks = array();
+	$row=mysql_fetch_array($result);
+	
+	$submid = $row["submid"];
+	$sid = $row["sid"];
+	$stu = getStudent($sid);
+	$detail = $row["detail"];
+	$otid = $row["otid"];
+	$result = $row["result"];
+	
+        $returnLinks["Id"] = $submid;
+	$returnLinks["Student"] = $stu;
+	$returnLinks["Detail"] = array();
+        $array = explode(';',$detail);
+	
+	
+	for($i=0;$i<count($array);$i++)
+	{
+	    $arr2 = explode(":",$array[$i]);
+	    $motid = $arr2[0];
+	    $answer = $arr2[1];
+	    //echo $motid;
+	    $res = queryMe("select * from MOTESTT where motid like '".$motid."'");
+	    $correct = explode(';',$res["motcorrect"]);
+	    $returnLinks["Details"][$i] = array();
+	    $returnLinks["Details"][$i]["Qid"] = $motid;
+	    $returnLinks["Details"][$i]["Aid"] = $answer;
+	    if(in_array($answer,$correct))
+		$returnLinks["Details"][$i]["Status"] = "True";
+	    else
+		$returnLinks["Details"][$i]["Status"] = "False";
+	    
+	}
+	
+       return $returnLinks;
+    }
+    
     function getObjectiveEntryAsArray($otid)
     {
 	$clsname = "Constants";
@@ -357,5 +451,88 @@
 	    $i++;
 	}
        return $returnLinks;
+    }
+    function checkSubmitted($otid,$sid)
+    {
+	//xDebug("select * from MSUBMISSIONT where sid like '".$sid."' and otid like '".$otid."'");
+	$res = mysql_query("select * from MSUBMISSIONT where sid like '".$sid."' and otid like '".$otid."'");
+	xDebug(mysql_num_rows($res));
+	if(mysql_num_rows($res)==0)
+	    return false;
+	else
+	    return true;
+    }
+    function getSubmissionsForOtid($otid)
+    {
+	$clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	
+	$res = mysql_query("select * from MSUBMISSIONT where otid='".$otid."' order by(date)");
+	$returnX = array();
+	
+	$i =0;
+	while($row = mysql_fetch_array($res))
+	{
+	    $id = $row["submid"];
+	    $detail = $row["detail"];
+	    $student = getStudent($row["sid"]);
+	    $date = date("d-M-y",$row["date"]);
+	    $result = $row["result"];
+	    
+	    $returnX[$i] = array();
+	    $returnX[$i]["Id"] = $id;
+	    $returnX[$i]["Student"] = $student;
+	    $returnX[$i]["date"] = $date;
+	    $returnX[$i]["detail"] = $detail;
+	    $returnX[$i]["result"] = $result;
+	    $i++;
+	}
+	return $returnX;
+    }
+    function getSubmissionCount($otid)
+    {
+	
+	$clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	
+	$res = mysql_query("select * from MSUBMISSIONT where otid='".$otid."' order by(date)");
+	return mysql_num_rows($res);
+    }
+    function getCorrectCount($motid2)
+    {
+	$question = getQuestion($motid2);
+	$submissions = getSubmissionsForOtid($question["otid"]);
+	//print_r($submissions);
+	$result = 0;
+	for($j=0;$j<count($submissions);$j++)
+	{
+	    $detail = $submissions[$j]["detail"];
+	    $array = explode(';',$detail);
+	    
+	    for($i=0;$i<count($array);$i++)
+	    {
+	        $arr2 = explode(":",$array[$i]);
+	        $motid = $arr2[0];
+	        $answer = $arr2[1];
+		
+	        if($motid == $motid2)
+		{
+		    $res = queryMe("select * from MOTESTT where motid like '".$motid."'");
+		    $correct = explode(';',$res["motcorrect"]);
+		    //echo $answer;    
+		    if(in_array($answer,$correct))
+		    {
+			$result++;
+			
+		    }
+		}	        
+	    }
+	     
+	    
+	}
+	return $result;
+	
     }
 ?>

@@ -76,6 +76,23 @@ function omniMeth(str,elementname)
 	xmlhttp.open("GET",string,true);
 	xmlhttp.send();
 }
+function show(value,element)
+			{
+				var ele = document.getElementById(value+"#expand");
+				var ele_c = document.getElementById(value+"#collapse");
+				if(ele.style.display == 'none'){
+					
+					ele.style.display = 'block';
+					ele_c.style.display = 'none';
+					element.src = "../images/others/collapse.png";	
+				}
+					
+				else{
+					ele.style.display = 'none';
+					ele_c.style.display = 'block';
+					element.src = "../images/others/expandico.gif";	
+				}
+			}
 </script>
  </head>
 <body>
@@ -85,6 +102,9 @@ include("../lib/menus.php");
 include("../lib/graphs.php");
 include("../lib/lib.php");
 include("../misc/constants.php");
+include("../core/interfaces.php");
+require("../lib/boxes.php");
+
 
 ?>
 <script type="text/javascript" src="../core/search.js"></script>
@@ -128,17 +148,39 @@ else if($mode == "p")
 	 echo "</div>";
 	 if(isStudent($id))
 	 {
-			echo "<div class='content' id='content' align='right'> <div id='placeholder' style='width:450px;height:250px'></div>
-			<p id='hoverdata'><span id='clickdata'></span></p><br><div id='placeholderm' style='width:450px;height:250px'></div>
-			<p id='hoverdata'><span id='clickdata'></span></p></div>";
-			$obj = getObject($id);
-			$array =  queryMe("select * from MSTUDENTT where sid like '".$obj['obhandle']."'");
+			//echo "<div class='content' id='content' align='right'> <div id='placeholder' style='width:450px;height:250px'></div>
+			//<br><div id='placeholderm' style='width:450px;height:250px'></div>
+			//<p id='hoverdata'><span id='clickdata'></span></p></div>";
+			//$obj = getObject($id);
+			//$array =  queryMe("select * from MSTUDENTT where sid like '".$obj['obhandle']."'");
 			//echo "select sid from MSTUDENT where srno like '".$obj['obhandle']."'";
-			getStuGraph($array["sid"],strtotime("-4 week"),strtotime("now"));
-			getMarksGraph($array["srno"]);
-			echo "</div>";
+			//getStuGraph($array["sid"],strtotime("-4 week"),strtotime("now"));
+			//getMarksGraph($array["srno"]);
+			
 	 }
-	 
+	 $obj = getObject($_GET["id"]);
+	 $abcd = freeedu_boxes($obj["otyid"]);
+	 $boxes = $abcd["right"];
+	 echo "<div style='float:right'>";
+	 for($i=0;$i<count($boxes);$i++)
+	 {
+		$boxname = $boxes[$i];
+		
+	
+		$box = new $boxname($_GET["id"]);
+		
+		echo "<div id='box#".$boxname."#main' class='".$box->classinfo."' style=''>";
+		if($box->defstate_e == "none")
+			$img = "../images/others/expandico.gif";
+		else
+			$img = "../images/others/collapse.png";
+		echo "".$box->name."&emsp;<input type='image' onclick='show(\"box#".$boxname."\",this)' src='".$img."' style='float:right;' ></input>";
+		echo "<div id='box#".$boxname."#expand' class='".$box->classinfo."' style='display:".$box->defstate_e.";'>".$box->box_onexpand()."</div>";
+		echo "<div id='box#".$boxname."#collapse' class='' style='display:".$box->defstate_c."'>".$box->box_oncollapse()."</div>";
+		echo $ret."</div>";
+	 }
+	 echo "</div>";
+	
    	}
 }
 
@@ -154,7 +196,7 @@ else if($mode == "fbimage")
 
 else if($mode=="ba")
 {
-	echo "<div id='content'>";
+	echo "<div id='content' >";
 	if(isSudo($oid))
 		include("../Rayon/batchadd.php");
 	else
@@ -540,7 +582,7 @@ else if($mode=="ot_create")
 }
 else if($mode=="ot_edit")
 {
-	echo "<div id='content'  class='content'>";
+	echo "<div id='content' style='margin-left:20px;margin-right:20px'>";
 	if(true)
 	{
 		include("../modules/objective/editobjective.php");
@@ -549,6 +591,18 @@ else if($mode=="ot_edit")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+else if($mode=="ot_submit_see")
+{
+	echo "<div id='content' style='margin-left:20px;margin-right:20px'>";
+	if(true)
+	{
+		include("../modules/objective/subview.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+
 else if($mode=="ot_ques")
 {
 	echo "<div id='content'  class='content'>";
@@ -560,6 +614,18 @@ else if($mode=="ot_ques")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+else if($mode=="ot_submit")
+{
+	echo "<div id='content'  class='content'>";
+	if(isStudent($oid))
+	{
+		include("../modules/objective/otsubmit.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+
 else if($mode=="ot_edit_meta")
 {
 	echo "<div id='content'  class='content'>";

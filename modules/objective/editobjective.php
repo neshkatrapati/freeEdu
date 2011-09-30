@@ -62,14 +62,33 @@
 }
 
 </style>
+<script>
+	function show(value,element)
+			{
+				var ele = document.getElementById(value);
+				
+				if(ele.style.display == 'none'){
+					
+					ele.style.display = 'block';
+					element.src = "../images/others/collapse.png";	
+				}
+					
+				else{
+					ele.style.display = 'none';
+					element.src = "../images/others/expandico.gif";	
+				}
+			}
+	
+</script>
 <?php
     echo "<fieldset>";
     include("ob_lib.php");
     if(isset($_GET["otid"]))
     {
+	
         $otid = $_GET["otid"];
         $entry = getObjectiveEntry($otid);
-	echo "<legend>Objective Test ".$entry["otname"]."</legend><center>";
+	echo "<legend>Objective Test ".$entry["otname"]."</legend><a href='?m=ot_edit' style='float:left;margin-left:50px;'>Go Back</a></br><center>";
         if(isAuth($_COOKIE["object"],$otid))
 	{
 		if(isNotSubmitted($otid)) //Replace By More Stringent Auth Check
@@ -93,50 +112,139 @@
 		    echo "<tr><td>Number Of Questions Answerable To Pass</td><td>".$entarry["Thresh"]."</td></tr>";
 		    echo "<tr><td>Time Limit</td><td>".$entarry["Timelt"]." Minutes</td></tr>";
 		    $ct = getObject($entarry["Object"]);
+		    $subcnt = getSubmissionCount($otid);
+		    if($subcnt>0)
+			echo "<tr><td>Submissions</td><td><a href='../modules/objective/whosub.php?otid=".$otid."' class='nyroModal'>".$subcnt." Submissions</a></td></tr>";
 		    echo "<tr><td>Created By</td><td>".getImageBox(getObjectLink($ct["oid"]),"../".getImgUri($ct["oimgid"]),$ct["obname"],"","50","50","1","0.8")."</td></tr>";
 		    echo "<tr><td>Created For</td><td style='margin-right:20px;'>".getClassPreview($entarry["Class"]["Id"],$entarry["Class"]["Sec"],3,9)."</td></tr>";
 		    echo "</table>";
 		    echo "</div>";
-		    echo "<div style='width:400px;float:right;margin-right:50px;margin-bottom:50px;margin-top:20px;border: 2px solid #550;'>
-		    <br><div style='float:right;margin-right:10px;'>
-		    <a href='?m=ot_ques&mode=add&otid=".$otid."'><img src='../images/others/add.png' style='margin-left:20px;' width='25' hieght='25'></img></a></div><h2 style='border: 2px solid #550;width:70%'>Questions</h2><br>";
-		    for($i=0;$i<count($questions);$i++)
+		    if($entry["oid"]==$_COOKIE["object"])
 		    {
-		        
-		        echo "<table class='bttable' cellpadding='10px;' style='margin-left:50px;border: 2px solid #550;'>";
-		        echo "<tr>";
-		        $ques = $questions[$i]["Question"];
-		        
-		        echo "<td>Question :</td><td>".$ques."&emsp;<a href='?m=ot_ques&mode=edit&motid=".$questions[$i]["Id"]."'>
-			<img src='../images/others/edit.png' width='20' hieght='20'></img></a></td></tr>";
-		        for($j=0;$j<count($questions[$i]["Options"]);$j++)
-		        {
-		            
-		            $option = $questions[$i]["Options"][$j]["Option"];
-		            $correct = $questions[$i]["Options"][$j]["Correct"];
-		            if($correct!='true')
-		                $string = "<td >".$option."</td>";
-		            if($correct=='true')
-		                $string = "<td >".$option."&emsp;<img src='../images/others/done.jpg' width='20' hieght='20'></img></td>";
-		            
-		            if($j%2==0)
-		            {
-		                if($j==(count($questions[$i]["Options"])-1))
-		                    echo $string."<td ></td></tr>";
-		                else
-		                    echo "<tr   style='border: 2px solid #550;'>".$string;
-		                
-		            }
-		            else
-		            {
-		                    echo $string."</tr>";
-		            }
-		            
-		        }
-		        
-		        echo "</table><br>";    
+			echo "<center><table class='bttable' style='width:400px;float:right;margin-right:50px;margin-bottom:50px;margin-top:20px;float:right;text-align:center;border: 2px solid #550;'>";
+			echo "<th colspan='2' class='zebra-striped'>
+			<br><div style='float:right;margin-right:10px;text-align:center'>
+			<a href='?m=ot_ques&mode=add&otid=".$otid."'>
+			<img src='../images/others/add.png' style='margin-left:20px' width='25' hieght='25'></img></a></div>
+			<h4>Questions</h4></th>";
+			
+			for($i=0;$i<count($questions);$i++)
+			{
+			    
+			    echo "";
+				 echo "<tr>";	       
+			    $ques = $questions[$i]["Question"];
+			    
+			    echo "<tr><td>Question</td><td>".$ques."&emsp;";
+				echo "<div style='float:right'>
+					<input type='image' onclick='show(\"div".$i."\",this)' src='../images/others/expandico.gif' style='float:right;' ></input></div><a href='?m=ot_ques&mode=edit&motid=".$questions[$i]["Id"]."'>
+					&emsp;<img style='float:right' src='../images/others/edit.png' width='20' height='20'></img></a>
+					&emsp;<div style='float:right;' >".getCorrectCount($questions[$i]["Id"])."<img style='' src='../images/others/tick.png' width='20' hieght='20'></img></div></div>";
+				echo "</td></tr>
+					<tr><td style='display:none;' colspan='2' id=\"div".$i."\"><table class='box' align='center' style='float:center;' >";
+			    for($j=0;$j<count($questions[$i]["Options"]);$j++)
+			    {
+			        
+			        $option = $questions[$i]["Options"][$j]["Option"];
+			        $correct = $questions[$i]["Options"][$j]["Correct"];
+			        if($correct!='true')
+			            $string = "<td >".$option."</td>";
+			        if($correct=='true')
+			            $string = "<td >".$option."&emsp;<img src='../images/others/tick.png' width='20' hieght='20'></img></td>";
+			        
+			        if($j%2==0)
+			        {
+			            if($j==(count($questions[$i]["Options"])-1))
+			                echo $string."<td ></td></tr>";
+			            else
+			                echo "<tr>".$string;
+			            
+			        }
+			        else
+			        {
+			                echo $string."</tr>";
+			        }
+			        
+			    }
+			    
+			    echo "</table></td></tr>";    
+			}
+			echo "</table></div>";
 		    }
-		    echo "</div>";
+		    else if(isStudent(getCurrentObject()))
+		    {
+			$obj = getObject(getCurrentObject());
+			//echo getCurrentObject();
+			$stu = getStudent($obj["obhandle"]);
+			$subi = getSubmission($_GET["otid"],$stu["sid"]);
+			//print_r($subi);
+			$suba = getSubmissionAsArray($subi["submid"]);
+			$image = getImgUri($obj["imguri"]);
+			if(checkSubmitted($_GET["otid"],$obj["obhandle"]))
+			{
+				echo "<div class='box' style='width:30%;float:right;margin-right:50px;margin-bottom:20px;margin-top:20px'>Number Of Correct Answers:".$subi["result"]."
+				<br>Submitted On:".date("d-M-y",$subi["date"])."</div>";
+				echo "<center><table class='bttable' style='width:400px;float:right;margin-right:50px;margin-bottom:50px;margin-top:20px;float:right;text-align:center;border: 2px solid #550;'>";
+				echo "<th colspan='2' class='zebra-striped'>
+				<br><div style='float:right;margin-right:10px;text-align:center'></div>
+				<h4>Questions</h4></th>";
+				//print_r($suba);
+				
+				for($i=0;$i<count($questions);$i++)
+				{
+				    
+				    echo "";
+					 echo "<tr>";	       
+				    $ques = $questions[$i]["Question"];
+				    
+				    echo "<tr><td>Question</td><td>".$ques."&emsp;";
+					echo "<div style='float:right'>
+						<input type='image' onclick='show(\"div".$i."\",this)' src='../images/others/expandico.gif' style='float:right;' ></input></div><a href='?m=ot_ques&mode=edit&motid=".$questions[$i]["Id"]."'>
+						</div>";
+						
+					echo "</td></tr>
+						<tr><td style='display:none;' colspan='2' id=\"div".$i."\"><table class='box' align='center' style='float:center;' >";
+				    for($j=0;$j<count($questions[$i]["Options"]);$j++)
+				    {
+				        
+				        $option = $questions[$i]["Options"][$j]["Option"];
+				        $correct = $questions[$i]["Options"][$j]["Correct"];
+				        if($suba["Details"][$i]["Aid"] != $j)
+				            $string = "<td >".$option."</td>";
+				        else{
+						//xDebug($suba["Detail"][0]["Status"]);
+					    if($correct == 'true')
+						$string = "<td >".$option."&emsp;<img src='../images/others/answer.gif' width='20' hieght='20'></img><img src='../images/others/tick.png' width='20' hieght='20'></img></td>";
+					else
+						$string = "<td >".$option."&emsp;<img src='../images/others/answer.gif' width='20' hieght='20'></img><img src='../images/others/wrong.jpg' width='20' hieght='20'></img></td>";
+				        }
+				        
+				        if($j%2==0)
+				        {
+				            if($j==(count($questions[$i]["Options"])-1))
+				                echo $string."<td ></td></tr>";
+				            else
+				                echo "<tr>".$string;
+				            
+				        }
+				        else
+				        {
+				                echo $string."</tr>";
+				        }
+				        
+				    }
+				    
+				    echo "</table></td></tr>";    
+				}
+				echo "</table></div>";
+			}
+			else
+			{
+				
+				echo "<br><pre style='width:40%;float:right;'></br></br></br></br></br></br>You Haven't Yet Submitted this Test Yet ! Consider <a href='?m=ot_submit&otid=".$_GET["otid"]."'>Submitting It Now!</a></br></br></br></br></br></br></br></br></pre>";
+				
+			}
+		    }
 		}
 	}
 	else
@@ -172,7 +280,7 @@
 		echo "<legend>Choose An Objective Test</legend><center>";
 		$object = getObject($_COOKIE["object"]);
 		$student = getStudent($object["obhandle"]);
-		echo getEntries($student["batid"],$student["sec"]);
+		echo getEntries($student["batid"],$student["sec"],"S");
 		
 	}
     }
@@ -187,19 +295,24 @@
 	if(isStudent($_COOKIE["object"]))
 	{
 		$student = getStudent($object["obhandle"]);
-		echo getEntries($student["batid"],$student["sec"]);
+		echo getEntries($student["batid"],$student["sec"],"S");
 	}
 	else
 	{
-		echo  getEntries($batid,$sec);
+		echo  getEntries($batid,$sec,"F");
 		
 	}
     }
-    function getEntries($batid,$sec)
+    function getEntries($batid,$sec,$mode)
     {
-	
-	$entries = getObjectiveEntries($batid,$sec);
+	if($mode == "F")
+		$entries = getObjectiveEntries($batid,$sec,getCurrentObject());
+	else
+		$entries = getObjectiveEntries($batid,$sec);
 	//print_r($entries);
+	$obj = getObject(getCurrentObject());
+	$stu = $obj["obhandle"];
+	
 	if(count($entries)>0)
 	{
 		$ret = "<table class='bttable' border='1'>";
@@ -210,7 +323,11 @@
 		$ret .= "<th class='blue'>Question Count</th>";
 		$ret .= "<th class='blue'>Treshold</th>";
 		$ret .= "<th class='blue'>Timelimit</th>";
-		$ret .= "<th class='blue'>Created By</th>";
+		$ret .= "<th class='blue' >Created By</th>";
+		$ret .= "<th class='blue'>Actions</th>";
+		if($mode == "F")
+			$ret .= "<th class='blue' >Submissions</th>";
+		
 		for($i=0;$i<count($entries);$i++)
 		{
 		    
@@ -228,7 +345,28 @@
 		    $ret .= "<td>".$entries[$i]["Timelt"]."</td>";
 		    $object = getObject($entries[$i]["Object"]);
 		    $ret .= "<td><a href='?m=p&id=".$object["oid"]."'>".$object["obname"]."</a></td>";
-		    
+		    if($mode == "S")
+		    {
+			$ret .= "<td colspan='2'>";
+			if(checkSubmitted($entries[$i]["Id"],$stu) == false)
+				$ret .= "<a href='?m=ot_submit&otid=".$entries[$i]["Id"]."'>Submit</a>";
+			else
+			{
+				$sub = getSubmission($entries[$i]["Id"],$stu);
+				$ret .= "Submitted Result:".$sub["result"];
+				if($sub["result"]<$entries[$i]["Thresh"])
+					$ret .= "<div class='' style='width:50%;'>Fail</div>";
+				else
+					$ret .= "<div class='' height='5px;' >Pass</div>";
+			}
+			$ret .= "</td>";
+		    }
+		    else{
+			
+			$ret .= "<td><a href='?m=ot_edit&otid=".$entries[$i]["Id"]."'>Edit</a></td>";
+			$subcnt = getSubmissionCount($entries[$i]["Id"]);
+			$ret .= "<td><a href='../modules/objective/whosub.php?otid=".$entries[$i]["Id"]."' class='nyroModal'>".$subcnt." Submissions</a></td>";
+		    }
 		    $ret .= "</tr>";
 		    
 		    

@@ -244,11 +244,12 @@ function addEdit()
             $ques = $_POST["ques"];
             $opttext = $_POST["options"];
             $optcorrect = $_POST["check"];
+            
             $question = getQuestion($postmotid);
             $entry2 = getObjectiveEntry($question["otid"]);
             $row = editQuestion($postmotid,$ques,$opttext,$optcorrect);
             echo "<form action='' method='post'><center>";
-            echo "<input type='number' name='thres' value='".$entry2["otthresh"]."'></input>&emsp;<input type='submit' name='over'></input>
+            echo "Minimun No: Of Questions To Pass:&emsp;<input type='number' name='thres' value='".$entry2["otthresh"]."'></input>&emsp;<input type='submit' name='over'></input>
             <input type='hidden' name='otid' value='".$question["otid"]."'></center></form>";
             
             notify("Modified Question Succesfully!");

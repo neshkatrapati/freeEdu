@@ -4,7 +4,7 @@ function getMarksGraph($srno)
 {
     
     $array = tpercent($srno);
-    
+    //echo  $srno;
      echo "<script type='text/javascript'>
 $(function () {
     var d1 = [";

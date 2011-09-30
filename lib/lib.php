@@ -1966,7 +1966,7 @@ function readExcel()
             $s=mysql_fetch_array($student);
             $sid=$s['sid'];
             $batid=$s['batid'];
-            $marks=mysql_query("select * from MAVAILT where batid='$batid' and ros='R'");
+            $marks=mysql_query("select * from MAVAILT where batid='$batid' and ros='R' order by(mrid)");
             $num=mysql_num_rows($marks);
             $mpercent=0;
 	    $per = array();
@@ -1976,7 +1976,7 @@ function readExcel()
                 $date=$m['doex'];
                 $akyr=$m['akayr'];
                 $mrid=$m['mrid'];
-                $marks1=mysql_query("select * from MMARKST where sid='$sid' and mrid='$mrid'");
+                $marks1=mysql_query("select * from MMARKST where sid='$sid' and mrid='$mrid' order by(mrid)");
                 $total=0;
                 $mtotal=0;
                 while($m1=mysql_fetch_array($marks1))
@@ -2274,7 +2274,7 @@ $(function () {
 	function getStudent($sid)
 	{
 
-		return queryMe("select * from MSTUDENTT where sid like '".$sid."'");
+		return queryMe("select *,(select imguri from MIMGT i where i.imgid=s.imgid) as img from MSTUDENTT s where sid like '".$sid."'");
 	}
 	function getBatchFromId($batid)
 	{
@@ -2525,5 +2525,11 @@ $(function () {
 	$ret .= "</table></div>";
 	return $ret;
     }
+    function getCurrentObject()
+    {
+	
+	return $_COOKIE["object"];
+    }
+    
     
 ?>

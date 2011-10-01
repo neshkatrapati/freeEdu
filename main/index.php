@@ -493,12 +493,12 @@ else if($mode=="str")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
-else if($mode=="lib")
+else if($mode=="add_ebook")
 {
 	echo "<div id='content'  class='content'>";
-	if(isSudo($oid))
+	if(isAlib($oid))
 	{
-		include("../modules/library/library.php");
+		include("../modules/library/addEbook.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -530,7 +530,7 @@ else if($mode=="eb")
 else if($mode=="ab")
 {
 	echo "<div id='content'  class='content'>";
-	if(isSudo($oid))
+	if(isAlib($oid))
 	{
 		include("../modules/library/addBook.php");
 	}

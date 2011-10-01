@@ -10,9 +10,10 @@
 <link rel="shortcut icon" href="images/icon.png" type="image/x-icon" /> 
 <?php
 if(!isset($_POST['btnLogin']))
-	{
-		setcookie("object","",time()+60);
-	}
+{
+	setcookie("object","",time()+60);
+}
+
 ?>
 <script type="text/javascript">
 function validator()
@@ -87,9 +88,9 @@ function validator()
 		<div id="loginForm">	
 			<form method="post" action="#" onsubmit="return validator()" name="login" id="login">
 				<table>
-				<tr><td><label for="ologin">Username</label></td>
+				<tr><td><label for="ologin" class='loginlabel'>Username</label></td>
 				<td><input type="text" name="ologin" id="ologin" value="" style=''></input></td></tr><tr>
-				<td><label for="opass">Password</label></td>
+				<td><label for="opass" class='loginlabel'>Password</label></td>
 				<td><input type="password" name="opass" value=""></input></td>
 				</table>
 				<a href='doc/loginpage.php?var=1' class='thickbox'>Help</a><br><br>		

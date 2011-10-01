@@ -1,80 +1,18 @@
 <html>
     <head>
-        <style type='text/css'>
-.imgteaser {
-	margin: 0;
-	overflow: hidden;
-	float: left;
-	position: absolute;
-}
-.imgteaser a {
-	text-decoration: none;
-	float: left;
-}
-.imgteaser a:hover {
-	cursor: pointer;
-}
-.imgteaser a img {
-	float: left;
-	margin: 0;
-	border: none;
-	padding: 10px;
-	background: #fff;
-	border: 1px solid #ddd;
-}
-.imgteaser a .desc {	display: none; }
-.imgteaser a:hover .epimg { visibility: hidden;}
-.imgteaser a .epimg {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	font-size: 12px;
-	color: #fff;
-	background: #000;
-	padding: 4px 10px;
-	filter:alpha(opacity=65);
-	opacity:.65;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=65)";
-	
-}
-.imgteaser a:hover .desc{
-	display: block;
-	font-size: 11px;
-	padding: 10px 0;
-	background: #111;
-	filter:alpha(opacity=75);
-	opacity:.75;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
-	color: #fff;
-	position: absolute;
-	bottom: 11px;
-	left: 11px;
-	padding: 4px 10px;
-	margin: 0;
-	width: 125px;
-	border-top: 1px solid #999;
-	
-}
-table
-{
-    text-align:center;
-}
-div.mainpos
-{
-    right:200px;
-}
-        </style>
+        <link rel="stylesheet" href="../modules/library/libStyle.css" type="text/css" media="screen" />
+        
     </head>
 <body>
    
     <center>
             <?php
             include('library_lib.php');
-            echo "<fieldset>";
-            echo "<legend>Edit Books</legend>";
             include("../lib/connection.php");
+            
             if(!isset($_POST['phase1']) && !isset($_POST['phase2']))
             {
+                 echo "<h1>Edit Books</h1>";
                echo "<table border=1 cellpadding=10>
                <tr>
                 <th>&nbsp</th>
@@ -110,7 +48,10 @@ div.mainpos
                 $imguri=$image['imguri'];
                 echo "<form action='#' method='post'>";
                 echo "<tr><td><input type='radio' name='lid' value='$lid'></td>";
-                echo "<td><img src='../$imguri' width='100'></td>";
+                if($imguri==NULL)
+                    echo "<td>No cover Image</td>";
+                else
+                    echo "<td><img src='../$imguri' width='100'></td>";
                 echo "<td>$bid</td>";
                 echo "<td>$bname</td>";
                 echo "<td>$bauthor</td>";
@@ -130,6 +71,8 @@ div.mainpos
     if(isset($_POST['phase1']) && !isset($_POST['phase2']))
     {
         include("../lib/connection.php");
+        echo "<fieldset>";
+            echo "<legend>Edit Books</legend>";
         $lid=$_POST['lid'];
         $doc=mysql_query("select * from MLIBRARYT where lid='$lid'");
         $book=mysql_fetch_array($doc);
@@ -143,7 +86,11 @@ div.mainpos
         $img=mysql_query("select * from MIMGT where imgid='$imgid'");
         $image=mysql_fetch_array($img);
         $imguri=$image['imguri'];
+        if($imguri!=NULL)
         echo "<div class='imgteaser' style='border:1px'><a href='../modules/library/changeLibPic.php?lid=$lid&KeepThis=true&TB_iframe=true&#TB_inline?width=300&height=200' title='Change Picture' class='thickbox'><img src='../$imguri' width='130' /><span class='epimg'>&raquo; Change Picture</span><span class='desc' class='strong'>Click to change the picture
+	</span></a></div>";
+        else
+         echo "<div class='imgteaser' style='border:1px'><a href='../modules/library/changeLibPic.php?lid=$lid&KeepThis=true&TB_iframe=true&#TB_inline?width=300&height=200' title='Change Picture' class='thickbox'>Add a cover page<span class='epimg'>&raquo; Change Picture</span><span class='desc' class='strong'>Click to change the picture
 	</span></a></div>";
         echo "<div class='mainpos'>";
         echo "<form action='#' method='post'>";

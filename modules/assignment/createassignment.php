@@ -9,7 +9,16 @@
     {
         echo "<form action='#' method='post'>";
         $object = getObject($_COOKIE["object"]);
-        echo "Select A Class :".getFacClasses("cls[]",$object["obhandle"],"")."<br><br>";
+	if($object["otyid"] == "1"){
+	    echo "Select A Class :".getFacClasses("cls[]",$object["obhandle"],"")."<br><br>";
+	    echo "<input type='hidden' name='type' value='1'>";
+	}
+	if($object["otyid"] == "3")
+	{
+	    echo "Select A Class :".getClassesAsSelect("cls[]")."<br><br>";
+	    echo "<input type='hidden' name='type' value='3'>";
+	}
+	    
         echo "Name Of Assignment: <input type='text' name='docname'></input>";
         echo "&emsp;<input type='submit' name='phase1'></input>";
         echo "</form>";
@@ -61,25 +70,53 @@
 <form method="post" action="#">
     	<textarea id="elm1" name="elm1" rows='30' style="width: 100%">
             <?php
-                $main = $_POST['cls'][0];
-                $clsmain = explode(':',$main);
-                $cldet = $clsmain[0];
-                $subid = $clsmain[1];
-                $batid = substr($cldet,0,1);
-                $sec = substr($cldet,-1);
-                $suba = getSubject($subid);
-                $batch = getBatchFromId($batid);
-                $class = $batch["brname"]." ".getFullClass($batch["akayr"]+1);
-                $object = getObject($_COOKIE["object"]);
-                $facname = $object["obname"];
-               
-                echo "<center><h2>".$_POST["docname"]."-".$suba["subname"]."</h2><h3>Class:&emsp;".$class."</h3><div style='text-align:right;'><h3>Created By<br>".$facname."</h3></div></center>";
+		if($_POST["type"]==1)
+		{
+		    $main = $_POST['cls'][0];
+		    $clsmain = explode(':',$main);
+		    $cldet = $clsmain[0];
+		    $subid = $clsmain[1];
+		    $batid = substr($cldet,0,1);
+		    $sec = substr($cldet,-1);
+		    $suba = getSubject($subid);
+		    $batch = getBatchFromId($batid);
+		    $class = $batch["brname"]." ".getFullClass($batch["akayr"]+1)." ".$sec;
+		    $object = getObject($_COOKIE["object"]);
+		    $facname = $object["obname"];
+    
+		    echo "<center><h2>".$_POST["docname"]."-".$suba["subname"]."</h2>
+				    <h3>Class:&emsp;".$class."</h3><div style='text-align:right;'>
+				    <h3>Created By<br>".$facname."</h3></div></center>";
+		}
+		else
+		{
+		    $main = $_POST['cls'][0];
+		    $clsmain = explode(':',$main);
+		    $batid = $clsmain[0];
+		    $sec = $clsmain[1];
+		    $batch = getBatchFromId($batid);
+		    $class = $batch["brname"]." ".getFullClass($batch["akayr"]+1)." ".$sec;
+		    $object = getObject($_COOKIE["object"]);
+		    $facname = $object["obname"];
+		    
+		     echo "<center><h2>".$_POST["docname"]."</h2>
+				    <h3>Class:&emsp;".$class."</h3><div style='text-align:right;'>
+				    <h3>Created By<br>".$facname."</h3></div></center>";
+		    
+		}
+		    
             ?>
 	</textarea><br><br>
-        <?php  echo "<input type='hidden' name='docname' value ='".$_POST["docname"]."' />";
-                echo "<input type='hidden' name='batid' value ='".$batid."' />";
-                echo "<input type='hidden' name='sec' value ='".$sec."' />";
-		 echo "<input type='hidden' name='subid' value ='".$subid."' />";
+	
+        <?php
+		 
+		 echo "<input type='hidden' name='docname' value ='".$_POST["docname"]."' />";
+		 echo "<input type='hidden' name='batid' value ='".$batid."' />";
+		 echo "<input type='hidden' name='sec' value ='".$sec."' />";
+		 if($_POST["type"] == 1)
+		    echo "<input type='hidden' name='subid' value ='".$subid."' />";
+		if($_POST["type"] == 3)
+		    echo "<input type='hidden' name='subid' value ='' />";
 	?>
 	<input type="submit" name="phase2" value="Submit" />
 	

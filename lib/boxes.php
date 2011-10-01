@@ -157,24 +157,26 @@ class freeEdu_box
 		if(count($entries)!=0)
 	        {
 	            $ret .= "<table class='bttable' border='1'>";
-		    $ret .= "<th class='blue'>Assignment Name</th>";
-		    $ret .= "<th class='blue'>Subject</th>";
-		    $ret .= "<th class='blue'>Created Date</th>";
-		    $ret .= "<th class='blue'>Actions</th>";
+		    $ret .= "<th class='zebra-striped'>Assignment Name</th>";
+		    if($ob["otyid"] == 1)
+			$ret .= "<th class='zebra-striped'>Subject</th>";
+		    $ret .= "<th class='zebra-striped'>Created Date</th>";
+		    
 	          
 		    for($i=0;$i<count($entries);$i++)
 		    {   
            
 		       $ret .= "<tr>";
-		       $ret .= "<td><a href='".$entries[$i]["Link"]."'>".$entries[$i]['Name']."</a></td>";
+		       $ret .= "<td><a href='?m=ass_see&asid=".$entries[$i]["Id"]."'>".$entries[$i]['Name']."</a></td>";
 		       $asid = $entries[$i]["Id"];
 		       $subject = getSubject($entries[$i]['subid']);
 		       $subname =  $subject["subname"];
 		       $object = getObjectByType('2',$entries[$i]["subid"]);
 		       $oid = $object["oid"];
-		       $ret .= "<td><a href='?m=p&id=".$oid."'>".$subname."</a></td>";
+		       if($ob["otyid"] == 1)
+			    $ret .= "<td><a href='?m=p&id=".$oid."'>".$subname."</a></td>";
 		       $ret .= "<td>".$entries[$i]["cdate"]."</td>";
-		       $ret .= "<td><a href='?m=ass_see&asid=".$asid."'>See</a>&emsp;|&emsp;<a href='?m=ass_edit&asid=".$asid."'>Edit</a></td>";
+		       
 		       $ret .= "</tr>";
            
            

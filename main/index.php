@@ -849,7 +849,7 @@ else if($mode=="ep")
 else if($mode=="ass")
 {
 	echo "<div id='content'  class='content'>";
-	if(isFaculty($_COOKIE["object"]))
+	if(!isStudent($oid))
 		include("../modules/assignment/createassignment.php");
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -860,7 +860,7 @@ else if($mode=="ass_see")
 {
 	
 	echo "<div id='content'  class='content'>";
-	if(isFaculty($_COOKIE["object"]))
+	if(!isStudent($oid))
 		include("../modules/assignment/showassignment.php");
 	else if(isStudent($_COOKIE["object"]))
 		include("../modules/assignment/showassignment_stu.php");
@@ -874,9 +874,7 @@ else if($mode=="ass_edit")
 {
 	echo "<div id='content'  class='content'>";
 	echo "<fieldset><legend>Edit Assignment</legend>";
-	
 	$asid = $_GET["asid"];
-	//echo "<a href='?m=ass_edit&asid=".$asid."' style='float:right;'>Edit This Assignment</a>";
 	include("../modules/assignment/editassignment.php");
 	echo "</div></fieldset>";
 }

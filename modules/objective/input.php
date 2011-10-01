@@ -57,9 +57,17 @@ echo "<script>function check()
 	    echo "</tr>";
 	
 	    echo "<tr>";
-		$classes = getFacClasses("otsub[]",$object["obhandle"],"onchange=check() id='otsub'");
-		$classes2 = substr($classes,0,-8);
-		$classes2 .= "<option value=''>Other</option></select>";
+		if($object["otyid"]==1)
+		{
+			$classes = getFacClasses("otsub[]",$object["obhandle"],"onchange=check() id='otsub'");
+			$classes2 = substr($classes,0,-8);
+			$classes2 .= "<option value=''>Other</option></select>";
+		}
+		else
+		{
+			$classes2 .= "<select name='otsub[]' onchange=check() id='otsub'><option value=''>--Select--</option><option value=''>Other</option></select>";
+			
+		}
 		echo "<td align=\"right\">Subject:</td><td>".$classes2."</td><td><div id='myDiv'></div></td>";
 	    echo "</tr>";
 	

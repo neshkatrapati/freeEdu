@@ -93,17 +93,36 @@ function show(value,element)
 					element.src = "../images/others/expandico.gif";	
 				}
 			}
+function showModuleDetails(value,element)
+			{
+				var ele = document.getElementById(value);
+				
+				if(ele.style.display == 'none'){
+					
+					ele.style.display = 'block';
+					
+					element.src = "../images/others/collapse.png";	
+				}
+					
+				else{
+					ele.style.display = 'none';
+					
+					element.src = "../images/others/expandico.gif";	
+				}
+			}
+
 </script>
  </head>
 <body>
 <?php
 
-include("../lib/menus.php");
+include("../lib/menu2.php");
 include("../lib/graphs.php");
 include("../lib/lib.php");
 include("../misc/constants.php");
 include("../core/interfaces.php");
 require("../lib/boxes.php");
+//require("../lib/classes.php");
 
 
 ?>
@@ -114,6 +133,7 @@ require("../lib/boxes.php");
 $optarray = $_GET;
 $mode="";
 $oid = $_COOKIE['object'];
+
 if($oid==NULL)
 {
 	$url = htmlify(curPageUrl());
@@ -122,7 +142,8 @@ if($oid==NULL)
 }
 if($_GET["menu"]!="no")
 {
-	echo getMenu();
+	$object = getObject($oid);
+	echo getMenu("sudo");
 }
 echo "<br><br>";
 if(array_key_exists("m",$optarray) || !array_key_exists("m",$optarray))
@@ -133,9 +154,56 @@ if(array_key_exists("m",$optarray) || !array_key_exists("m",$optarray))
 	
 if($mode==NULL)
 {
-	echo "<div id='sidebar' class='sidebar'></div>";
+	echo "<div id='sidebar' class='sidebar'>";
 	include("../EditProfile/showProfile.php");
 	showProfile($oid);
+	echo "<br><br>";
+        $obj = getObject(getCurrentObject());
+	$abcd = freeedu_boxes($obj["otyid"]);
+	$boxes = $abcd["left"];
+	echo "<div style='float:left'>";
+	for($i=0;$i<count($boxes);$i++)
+	{
+		$boxname = $boxes[$i];
+		
+	
+		$box = new $boxname(getCurrentObject(),"context.home");
+		
+		echo "<div id='box#".$boxname."#main' class='".$box->classinfo."' style=''>";
+		if($box->defstate_e == "none")
+			$img = "../images/others/expandico.gif";
+		else
+			$img = "../images/others/collapse.png";
+		echo "".$box->name."<br><input type='image' onclick='show(\"box#".$boxname."\",this)' src='".$img."' style='float:right;' ></input>";
+		echo "<div id='box#".$boxname."#expand'  style='display:".$box->defstate_e.";'>".$box->box_onexpand()."</div>";
+		echo "<div id='box#".$boxname."#collapse' class='' style='display:".$box->defstate_c."'>".$box->box_oncollapse()."</div>";
+		echo $ret."</div>";
+	 }
+	 echo "</div>";
+	 echo "</div>";
+	 $obj = getObject(getCurrentObject());
+	 $abcd = freeedu_boxes($obj["otyid"]);
+	 $boxes = $abcd["right"];
+	 echo "<div style='float:right'>";
+	 for($i=0;$i<count($boxes);$i++)
+	 {
+		$boxname = $boxes[$i];
+		
+	
+		$box = new $boxname(getCurrentObject(),"context.home");
+		
+		echo "<div id='box#".$boxname."#main' class='".$box->classinfo."' style=''>";
+		if($box->defstate_e == "none")
+			$img = "../images/others/expandico.gif";
+		else
+			$img = "../images/others/collapse.png";
+		echo "".$box->name."&emsp;<input type='image' onclick='show(\"box#".$boxname."\",this)' src='".$img."' style='float:right;' ></input>";
+		echo "<div id='box#".$boxname."#expand'  style='display:".$box->defstate_e.";'>".$box->box_onexpand()."</div>";
+		echo "<div id='box#".$boxname."#collapse' class='' style='display:".$box->defstate_c."'>".$box->box_oncollapse()."</div>";
+		echo $ret."</div>";
+	 }
+	 echo "</div>";
+	
 }
 else if($mode == "p")
 {
@@ -145,19 +213,30 @@ else if($mode == "p")
        	 include("../EditProfile/showProfile.php");
 	 echo "<div id='sidebar' style='float:left'>"; 
        	 showProf($id);
-	 echo "</div>";
-	 if(isStudent($id))
+	 echo "<br><br>";
+	 $obj = getObject($_GET["id"]);
+	 $abcd = freeedu_boxes($obj["otyid"]);
+	 $boxes = $abcd["left"];
+	 echo "<div style='float:right'>";
+	 for($i=0;$i<count($boxes);$i++)
 	 {
-			//echo "<div class='content' id='content' align='right'> <div id='placeholder' style='width:450px;height:250px'></div>
-			//<br><div id='placeholderm' style='width:450px;height:250px'></div>
-			//<p id='hoverdata'><span id='clickdata'></span></p></div>";
-			//$obj = getObject($id);
-			//$array =  queryMe("select * from MSTUDENTT where sid like '".$obj['obhandle']."'");
-			//echo "select sid from MSTUDENT where srno like '".$obj['obhandle']."'";
-			//getStuGraph($array["sid"],strtotime("-4 week"),strtotime("now"));
-			//getMarksGraph($array["srno"]);
-			
+		$boxname = $boxes[$i];
+		
+	
+		$box = new $boxname($_GET["id"],"context.profile");
+		
+		echo "<div id='box#".$boxname."#main' class='".$box->classinfo."' style=''>";
+		if($box->defstate_e == "none")
+			$img = "../images/others/expandico.gif";
+		else
+			$img = "../images/others/collapse.png";
+		echo "".$box->name."<br><input type='image' onclick='show(\"box#".$boxname."\",this)' src='".$img."' style='float:right;' ></input>";
+		echo "<div id='box#".$boxname."#expand'  style='display:".$box->defstate_e.";'>".$box->box_onexpand()."</div>";
+		echo "<div id='box#".$boxname."#collapse' class='' style='display:".$box->defstate_c."'>".$box->box_oncollapse()."</div>";
+		echo $ret."</div>";
 	 }
+	 echo "</div>";
+	 echo "</div>";
 	 $obj = getObject($_GET["id"]);
 	 $abcd = freeedu_boxes($obj["otyid"]);
 	 $boxes = $abcd["right"];
@@ -167,7 +246,7 @@ else if($mode == "p")
 		$boxname = $boxes[$i];
 		
 	
-		$box = new $boxname($_GET["id"]);
+		$box = new $boxname($_GET["id"],"context.profile");
 		
 		echo "<div id='box#".$boxname."#main' class='".$box->classinfo."' style=''>";
 		if($box->defstate_e == "none")
@@ -175,7 +254,7 @@ else if($mode == "p")
 		else
 			$img = "../images/others/collapse.png";
 		echo "".$box->name."&emsp;<input type='image' onclick='show(\"box#".$boxname."\",this)' src='".$img."' style='float:right;' ></input>";
-		echo "<div id='box#".$boxname."#expand' class='".$box->classinfo."' style='display:".$box->defstate_e.";'>".$box->box_onexpand()."</div>";
+		echo "<div id='box#".$boxname."#expand'  style='display:".$box->defstate_e.";'>".$box->box_onexpand()."</div>";
 		echo "<div id='box#".$boxname."#collapse' class='' style='display:".$box->defstate_c."'>".$box->box_oncollapse()."</div>";
 		echo $ret."</div>";
 	 }
@@ -203,6 +282,17 @@ else if($mode=="ba")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
+else if($mode=="modules")
+{
+	echo "<div id='content' >";
+	if(isSudo($oid)){
+		include("../core/modmain.php");
+	}
+	else
+		notifywar("You Are Un Authorised To View This Page");
+	echo "</div>";
+}
+
 else if($mode=="sa")
 {
 	echo "<div id='content'  class='content'>";

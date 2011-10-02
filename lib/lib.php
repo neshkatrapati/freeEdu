@@ -2530,6 +2530,132 @@ $(function () {
 	
 	return $_COOKIE["object"];
     }
-    
+    function module_parser()
+    {
+	$filepath = "../modules/";
+	$dirArray = array();
+	$i=0;
+	$myDirectory = opendir($filepath);
+	while($entryName = readdir($myDirectory)) {
+		if(!in_array($entryName,array(".","..")))
+		{
+			$modfile = $filepath.$entryName."/module.php";
+			
+			if(file_exists($modfile))
+			{
+				$dirArray[$i]["name"] = $entryName;
+				$dirArray[$i]["modfile"] = $modfile;
+				$i++;
+				
+			}
+		}
+	}
+	closedir($myDirectory);
+	
+	return $dirArray;
+    }
+    function enableModules($list)
+    {
+	for($i=0;$i<count($list);$i++)
+	{
+		
+		$tag = $list[$i]["tag"];
+		$file = $list[$i]["file"];
+		$read = $list[$i]["reads"];
+		$updates = $list[$i]["updates"];
+		$modname = "mod_".$tag;
+		queryMe("delete from MMODULET");
+		queryMe("Insert into MMODULET values('".$i."','".$modname."','".$tag."','".$file."','".uniqid()."','".$read."','".$updates."')");
+		
+	}
+	
+    }
+    function fq($query,$authtoken)
+    {
+	$query = trim($query);
+	$pquery = preg_split("/[\s]+/", $query);
+	print_r($pquery);
+	$stat = $pquery[0];
+	$clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	
+	if(strtoupper($stat) == "SELECT")
+	{
+		$mod = getModFromToken($authtoken);
+		$modreads = explode(";",$mod["mod_read"]);
+		$table = $pquery[3];
+		if(in_array($table,$modreads))
+			return mysql_query($query);
+		else
+			return -1;
+	}
+	if(strtoupper($stat) == "UPDATE")
+	{
+		$mod = getModFromToken($authtoken);
+		$modreads = explode(";",$mod["mod_update"]);
+		$table = $pquery[1];
+		if(in_array($table,$modreads))
+			return mysql_query($query);
+		else
+			return -1;
+	}
+	if(strtoupper($stat) == "INSERT")
+	{
+		$mod = getModFromToken($authtoken);
+		$modreads = explode(";",$mod["mod_update"]);
+		$table = $pquery[2];
+		if(in_array($table,$modreads))
+			return mysql_query($query);
+		else
+			return -1;
+	}
+	
+    }
+    function getModFromToken($token)
+    {
+	
+	$x = queryMe("select * from MMODULET where mod_authtoken='".$token."'");
+	return $x;
+	
+    }
+    function getMenuItems($context,$parent)
+    {
+	
+	$clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	$array = array();
+	$top = 0;
+	$query = mysql_query("select * from MMODULET");
+	while($row = mysql_fetch_array($query))
+	{
+		
+		require_once("../".$row["mod_file"]);
+		$classname = $row["mod_tag"]."_ModuleInfo";
+		$instance = new $classname();
+		$links = $instance->module_getLinkInfo();
+		for($i=0;$i<count($links);$i++)
+		{
+			if($links[$i]["createMenuItem"]=="yes")
+			{
+				
+				if(in_array($context,$links[$i]["perms"]) && $links[$i]["parent"]==$parent)
+				{
+					$array[$top]["title"] = $links[$i]["title"];
+					$array[$top]["link"] = "?m=".$links[$i]["mode"];
+					$top++;
+				}
+			}
+			
+		}
+		
+	}
+	return $array;
+	
+    }
+    //include("../misc/constants.php");
+    //print_r(getMenuItems('sudo','batch'));
+    //var_dump(fq("update MOBJECTT values(1,2)","4e884dfa84160"));
     
 ?>

@@ -17,7 +17,10 @@ function getSudoMenu()
 	      <li><a href='?m=ba'>Add A Batch</a></li>
               <li><a href='?m=up'>Upgrade Batches</a></li>
               <li><a href='?m=sa'>Add A Subject List</a></li>
-	      <li><a href='?m=al'>Add A Lateral Entry</a></li>
+	      <li><a href='?m=al'>Add A Lateral Entry</a></li>";
+              
+              
+    $retstr .= "
 	    </ul>
             
           </li>

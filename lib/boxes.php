@@ -1,32 +1,44 @@
 <?php
-class freeEdu_box
+    abstract class freeEdu_box
     {
-	
 	public $name = "FreeEdu-Box";
 	public $module = "freeedu.mod_core";
 	public $classinfo= "box";
 	public $floatinfo ="right";
 	private $object = "";
 	
-	public function __construct($oid)
+	
+	abstract protected function box_getContent($params);
+	
+	
+	
+	
+    }
+    abstract class freeEdu_expandable_box extends freeEdu_box
+    {
+	
+	public $name = "FreeEdu-Expandable-Box";
+	public $module = "freeedu.mod_core";
+	public $classinfo= "box";
+	public $floatinfo ="right";
+	private $object = "";
+	
+	public function __construct($oid,$context)
 	{
-	   // xDebug("Hello World!");
+	   
 	    $this->object = $oid;
 	    
 	}
-	public function box_oncollapse()
+	abstract protected function box_oncollapse();
+	abstract protected function box_onexpand();
+	public function box_getContent($params)
 	{
-		
-		
-	}
-	public function box_onexpand()
-	{
-		
-		
+	    
+	    
 	}
 	
     }
-    class rayon_Box extends freeEdu_box
+    class rayon_Box extends freeEdu_expandable_box
     {
 	
 	public $name = "Marks Graph";
@@ -37,10 +49,10 @@ class freeEdu_box
 	public $defstate_e = "none";
 	public $defstate_c = "block";
 	
-	public function __construct($oid)
+	public function __construct($oid,$context)
 	{
 	    $this->object = $oid;
-	    //$this->defstate = $defstate;
+	   
 
 	}
 	public function box_oncollapse()
@@ -59,7 +71,7 @@ class freeEdu_box
 	}
 	
     }
-    class roster_Box extends freeEdu_box
+    class roster_Box extends freeEdu_expandable_box
     {
 	
 	public $name = "Attendance Graph";
@@ -91,7 +103,7 @@ class freeEdu_box
 	}
 	
     }
-     class fac_plan_Box extends freeEdu_box
+    class fac_plan_Box extends freeEdu_expandable_box
     {
 	
 	public $name = "Classes Taken By This Faculty";
@@ -102,10 +114,15 @@ class freeEdu_box
 	public $defstate_e = "none";
 	public $defstate_c = "block";
 	
-	public function __construct($oid)
+	public function __construct($oid,$context)
 	{
 	    $this->object = $oid;
 	    //$this->defstate = $defstate;
+	    if($context == "context.profile")
+		$this->name ="Classes Taken By This Faculty";
+	    else
+		$this->name ="Classes Taken By By You";
+
 
 	}
 	public function box_oncollapse()
@@ -123,7 +140,7 @@ class freeEdu_box
 	}
 	
     }
-    class assignments_Box extends freeEdu_box
+    class assignments_Box extends freeEdu_expandable_box
     {
 	
 	public $name = "Assignments Created By This Faculty";
@@ -134,11 +151,14 @@ class freeEdu_box
 	public $defstate_e = "none";
 	public $defstate_c = "block";
 	
-	public function __construct($oid)
+	public function __construct($oid,$context)
 	{
 	    $this->object = $oid;
 	    //$this->defstate = $defstate;
-
+	    if($context == "context.profile")
+		$this->name ="Assignments Created By This Faculty";
+	    else
+		$this->name ="Assignments Created By You";
 	}
 	public function box_oncollapse()
 	{
@@ -188,7 +208,7 @@ class freeEdu_box
 	
         }
     }
-    class subjects_fac_Box extends freeEdu_box
+    class subjects_fac_Box extends freeEdu_expandable_box
     {
 	
 	public $name = "Faculty Assigned To This Subject";
@@ -199,7 +219,7 @@ class freeEdu_box
 	public $defstate_e = "none";
 	public $defstate_c = "block";
 	
-	public function __construct($oid)
+	public function __construct($oid,$context)
 	{
 	    $this->object = $oid;
 	    //$this->defstate = $defstate;
@@ -243,5 +263,38 @@ class freeEdu_box
 	
  
     }
+    class class_Box extends freeEdu_expandable_box
+    {
+	
+	public $name = "Belongs To Class";
+	public $module = "freeedu.mod_core";
+	public $classinfo= "box";
+	public $floatinfo ="right";
+	private $object = "";
+	public $defstate_e = "none";
+	public $defstate_c = "block";
+	
+	public function __construct($oid,$context)
+	{
+	    $this->object = $oid;
+	    //$this->defstate = $defstate;
 
+	}
+	public function box_oncollapse()
+	{
+		//include("../modules/assignment/as_lib.php");
+		$ob = getObject($this->object);
+		$obhandle = $ob["obhandle"];
+		$student = getStudent($obhandle);
+		return getClassName($student["batid"],$student["sec"]);
+		
+	}
+	public function box_onexpand()
+	{
+		$ob = getObject($this->object);
+		$obhandle = $ob["obhandle"];
+		$student = getStudent($obhandle);
+		return getClassPreview($student["batid"],$student["sec"],"3","9");
+	}
+    }
 ?>

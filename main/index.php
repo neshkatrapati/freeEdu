@@ -143,7 +143,10 @@ if($oid==NULL)
 if($_GET["menu"]!="no")
 {
 	$object = getObject($oid);
-	echo getMenu("sudo");
+	$object = getObject(getCurrentObject());
+	//$links = getLinkItems();
+	
+	echo getMenu(getObjectTypeTag($object["otyid"]));
 }
 echo "<br><br>";
 if(array_key_exists("m",$optarray) || !array_key_exists("m",$optarray))
@@ -1056,10 +1059,25 @@ else if($mode=="al")
 
 else
 {
+	$object = getObject(getCurrentObject());
+	$links = getLinkItems(getObjectTypeTag($object["otyid"]));
 	echo "<div id='content'>";
-	notifyerr("There Is No Such Page!");
-	redirect("?");
+	for($i=0;$i<count($links);$i++)
+	{
+		if($mode == $links[$i]["mode"]){
+			$modpath = "../modules/".$links[$i]["tag"]."/";
+			//echo $modpath.$links[$i]["file"];
+			include($modpath.$links[$i]["file"]);
+		}
+	}
 	echo "</div>";
+	if($i==0)
+	{
+		echo "<div id='content'>";
+		notifyerr("There Is No Such Page!");
+		redirect("?");
+		echo "</div>";
+	}
 }
 }
 echo "</div>";

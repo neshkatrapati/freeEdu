@@ -140,7 +140,7 @@ function getMenu($otytag)
             <ul class='menu-dropdown'>";
 	    if($otytag == "sudo")
 	    {
-                $retstr.=" <li><a href='?m=rga'>Add Regulation</a></li>
+                $retstr.=" <li><a href='?m=modules'>Manage Modules</a></li> <li><a href='?m=rga'>Add Regulation</a></li>
                  <li><a href='?m=suba'>Substitute Subjects</a></li>
                  <li><a href='?m=immap'>Assign Images To Subjects[**Experimental**]</a></li>
                  <li><a href='?m=create_student'>Create Username For Student</a></li>";
@@ -149,7 +149,7 @@ function getMenu($otytag)
                  <li><a href='https://github.com/freeEdu/freeEdu' target='_blank'>Download Source</a></li>";
 		  $titles = getMenuItems($otytag,'tools');
 	  for($i=0;$i<count($titles);$i++)
-	    $retstr .= "<li><a href='".$titles[$i]["link"]."'>".$titles[$i]["title"]."</li>";
+	    $retstr .= "<li><a href='".$titles[$i]["link"]."'>".$titles[$i]["title"]."</a></li>";
                           
             $retstr .= "</ul>
             
@@ -175,7 +175,7 @@ $retstr .= "<ul class='nav secondary-nav'>
                 <li><a href='../login.php'>Logout</a></li>";
 	  $titles = getMenuItems($otytag,'user');
 	  for($i=0;$i<count($titles);$i++)
-	    $retstr .= "<li><a href='".$titles[$i]["link"]."'>".$titles[$i]["title"]."</li>";
+	    $retstr .= "<li><a href='".$titles[$i]["link"]."'>".$titles[$i]["title"]."</a></li>";
 $retstr .= "</ul>
           </li>
         </ul>

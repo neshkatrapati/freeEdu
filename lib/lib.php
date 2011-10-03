@@ -2574,7 +2574,7 @@ $(function () {
     {
 	$query = trim($query);
 	$pquery = preg_split("/[\s]+/", $query);
-	print_r($pquery);
+	//print_r($pquery);
 	$stat = $pquery[0];
 	$clsname = "Constants";
 	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
@@ -2619,6 +2619,14 @@ $(function () {
 	return $x;
 	
     }
+    function getAuthToken($modname)
+    {
+	
+	$x = queryMe("select * from MMODULET where mod_tag='".$modname."'");
+	return $x["mod_authtoken"];
+	
+    }
+    
     function getMenuItems($context,$parent)
     {
 	
@@ -2630,11 +2638,12 @@ $(function () {
 	$query = mysql_query("select * from MMODULET");
 	while($row = mysql_fetch_array($query))
 	{
-		
+		//print_r($row);
 		require_once("../".$row["mod_file"]);
 		$classname = $row["mod_tag"]."_ModuleInfo";
 		$instance = new $classname();
 		$links = $instance->module_getLinkInfo();
+	
 		for($i=0;$i<count($links);$i++)
 		{
 			if($links[$i]["createMenuItem"]=="yes")
@@ -2654,8 +2663,50 @@ $(function () {
 	return $array;
 	
     }
+    function getLinkItems($context)
+    {
+	
+	$clsname = "Constants";
+	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+	mysql_select_db($clsname::$dbname, $con);
+	$array = array();
+	$top = 0;
+	$query = mysql_query("select * from MMODULET");
+	while($row = mysql_fetch_array($query))
+	{
+		
+		require_once("../".$row["mod_file"]);
+		$classname = $row["mod_tag"]."_ModuleInfo";
+		$instance = new $classname();
+		$links = $instance->module_getLinkInfo();
+		$info = $instance->module_getInfo();
+		for($i=0;$i<count($links);$i++)
+		{
+		
+				if(in_array($context,$links[$i]["perms"]))
+				{
+					$array[$top]["tag"] = $info["mod_tag"];
+					$array[$top]["mode"] = $links[$i]["mode"];
+					$array[$top]["file"] = $links[$i]["file"];
+					$top++;
+				}
+			
+			
+		}
+		
+	}
+	return $array;
+	
+    }
+    function getObjectTypeTag($otyid)
+    {
+	
+	$x = queryMe("select tag from OTYPET where tyid like '".$otyid."'");
+	return $x["tag"];
+	
+    }
     //include("../misc/constants.php");
-    //print_r(getMenuItems('sudo','batch'));
+    //print_r(getLinkItems('sudo'));
     //var_dump(fq("update MOBJECTT values(1,2)","4e884dfa84160"));
     
 ?>

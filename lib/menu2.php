@@ -132,6 +132,28 @@ function getMenu($otytag)
         </ul>";
 	
 	}
+	$x = getParentMenus($otytag);
+	for($I=0;$i<count($x);$i++)
+	{
+	  
+	  $retstr .= "<ul class='nav'>
+          <li class='menu'>
+            
+            <a href='#' class='menu'><span class='profname'>
+            ".$x[$i]["title"]."
+            </span></a>
+            <ul class='menu-dropdown'>
+               ";
+	  $titles = getMenuItems($otytag,$x[$i]["tag"]);
+	  for($i=0;$i<count($titles);$i++)
+	    $retstr .= "<li><a href='".$titles[$i]["link"]."'>".$titles[$i]["title"]."</a></li>";
+$retstr .= "</ul>
+          </li>
+        </ul>";
+	  
+	  
+	}
+	
 	if(in_array($otytag,array("sudo","admin","faculty","student","aadmin","ladmin")))
 	{
 	  $retstr .= "<ul class='nav'>
@@ -154,14 +176,14 @@ function getMenu($otytag)
             $retstr .= "</ul>
             
           </li>
-        </ul>
+        </ul>";
         
-        <form action='?m=os' method='post'>
+        }
+	$oid = $_COOKIE['object'];
+  $retstr .=  "<form action='?m=os' method='post'>
           <input type='text' placeholder='Search' name='srch' />
         </form>";
-	}
-	$oid = $_COOKIE['object'];
-
+      
 $oarray = getObject($oid);
 $retstr .= "<ul class='nav secondary-nav'>
           <li class='menu'>

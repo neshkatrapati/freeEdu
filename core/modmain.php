@@ -27,8 +27,19 @@
 			$links = $instance->module_getLinkInfo();
                         echo "<input type='hidden' name='modnames[]' value='".$dirlist[$i]["name"]."'></input>";
                         echo "<input type='hidden' name='modfiles[]' value='".$dirlist[$i]["modfile"]."'></input>";    
-			echo "<td>".implode(', ',$info["authors"])."</td>
-                        <td><input type='checkbox' name='modules[]' value='".$i."'></input>&emsp;<img src='../images/others/expandico.gif' style='float:right' onclick='showModuleDetails(\"mod".$i."\",this)'></td>
+			echo "<td>".implode(', ',$info["authors"])."</td>";
+			
+			$clsname = "Constants";
+			$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
+			mysql_select_db($clsname::$dbname, $con);
+			
+			$res = mysql_query("select * from MMODULET where mod_tag like '".$dirlist[$i]["name"]."'");
+			if(mysql_num_rows($res)==0)
+				    $chval = '';
+			else
+				    $chval = "checked";
+				    
+                        echo "<td><input type='checkbox' name='modules[]' value='".$i."' ".$chval."></input>&emsp;<img src='../images/others/expandico.gif' style='float:right' onclick='showModuleDetails(\"mod".$i."\",this)'></td>
 			<tr><td colspan='3' id='mod".$i."' style='display:none'><div class='box'>Db Access:";
 			echo "</br>Creates Tables: ";
 			for($j=0;$j<count($dbcreate);$j++)
@@ -66,8 +77,6 @@
                     $modupdates = $_POST["modupdates"];
                 $enables = $_POST["modules"];
                 $list = array();
-                if(count($enables)>0)
-                {
                     for($i=0;$i<count($enables);$i++)
                     {
                         $list[$i]["tag"] = $modnames[$enables[$i]];
@@ -88,13 +97,6 @@
                     enableModules($list);
                     notify("Modules Updated Successfully");
                     redirect("?m=modules");
-                }
-                else
-                {
-                    
-                    notifyerr("No Modules Selected To Enable");
-                    redirect("?m=modules");
-                }
                 
             }
 

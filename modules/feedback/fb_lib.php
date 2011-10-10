@@ -1,4 +1,5 @@
 <?php
+    $authtoken = getAuthToken("feedback");
     function createFeedback($oid,$fbname,$cdate,$edate,$fbmin,$fbmax,$batid,$sec)
     {
         $clsname = "Constants";
@@ -7,7 +8,9 @@
 	
         $result = mysql_query("select * from FBAVAILT");
         $rows = mysql_num_rows($result);
-        mysql_query("insert into FBAVAILT values('".$rows."','".$fbname."','".$cdate."','".strtotime($edate)."','".$fbmin."','".$fbmax."','".$oid."','".$batid."','".$sec."')");	
+	$authtoken = getAuthToken("feedback");
+    
+        fq("insert into FBAVAILT values('".$rows."','".$fbname."','".$cdate."','".strtotime($edate)."','".$fbmin."','".$fbmax."','".$oid."','".$batid."','".$sec."')",$authtoken);	
 	makeObject($fbname,$rows,'7','476','','');
         return $rows;
     }

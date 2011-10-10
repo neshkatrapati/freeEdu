@@ -1,5 +1,6 @@
 <?php
 include("fb_lib.php");
+echo "<fieldset><legend>Feedback Analysis</legend><center>";
 if(!isset($_POST["phase1"]) && !isset($_GET["fbid"]))
 {
     echo "<form action='#' method='post'>";
@@ -39,14 +40,16 @@ else if(!isset($_GET["fbid"]))
     echo "</table>";
     
 }
+
 else if(isset($_GET["fbid"]))
 {
    echo "<form action='../modules/feedback/xlsxport.php' method='post'>";
    $entry = getFeedbackEntry($_GET['fbid']);
    echo "<h3>Feedback Analysis For ".$entry["fbname"]."</h3><br>";
-    echo "<a href='?m=fbget'>Go Back</a><br ><br>";
+    echo "<a href='?m=fb_get'>Go Back</a><br ><br>";
    echo getFeedback($_GET["fbid"]);
    echo "<input type='image' value='' style='margin-right:5px;' src='../modules/feedback/xlsxp.png'></input>";
    echo "<input type='hidden' name='fbid' value='".$_GET['fbid']."'></input>";    
 }
+echo "</center></fieldset>";
 ?>

@@ -7,7 +7,7 @@
     $student = getStudent($object["obhandle"]);
     $batid = $student["batid"];
     $sec = $student["sec"];
-
+    echo "<fieldset><legend>Submit A Feedback Form</legend><center>";
     if(!isset($_GET['fbid']) && !isset($_POST["postbtn"]))
     {
        
@@ -137,4 +137,5 @@
         redirect("?m=fbput");
         
     }
+    echo "</fieldset>";
 ?>  

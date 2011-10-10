@@ -13,14 +13,14 @@
 include("fb_lib.php");
 if(!isset($_POST["phase1"]))
 {
-    echo "<form action='#' method='post'>";
+    echo "<fieldset><legend>Create A Feedback Form</legend><center><form action='#' method='post'>";
     echo "Name : <input type='text' name='fbname' required=true>&emsp;";
     echo "Assign To : ".getClassesAsSelect("bat[]")."&emsp;";
     echo "Completable By: <input type='text' name='date' id='inputField' required=true>";
     echo "<br><br>Minimum Rating:&emsp;<input type='number' name='min' required=true></input>";
     echo "&emsp;Maximum Rating:&emsp;<input type='number' name='max' required=true></input>";
     echo "<br><br><input type='submit' name='phase1'/>";
-    echo "</form>";
+    echo "</form></center></fieldset>";
 }
 else
 {

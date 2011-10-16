@@ -122,15 +122,9 @@ function showProf($oid)
 echo "<img src='$imguri' width='$width' height='$height' border='1'/>";
 echo "<h3>$obname</h3>";
 
-if(isPage($oid))
-{
-	
-	
-	echo page_profile($_GET["id"]);
-	
 }
 
-}
+
 ?>
 
 

@@ -158,11 +158,14 @@ if(array_key_exists("m",$optarray) || !array_key_exists("m",$optarray))
 if($mode==NULL)
 {
 	echo "<div id='sidebar' class='sidebar'>";
+	
 	include("../EditProfile/showProfile.php");
+	
 	showProfile($oid);
 	echo "<br><br>";
         $obj = getObject(getCurrentObject());
 	$abcd = freeedu_boxes($obj["otyid"]);
+
 	$boxes = $abcd["left"];
 	echo "<div style='float:left'>";
 	for($i=0;$i<count($boxes);$i++)
@@ -213,9 +216,10 @@ else if($mode == "p")
 	if(array_key_exists("id",$optarray))
 	{
       	 $id = $_GET['id'];
-       	 include("../EditProfile/showProfile.php");
+       	 require("../EditProfile/showProfile.php");
 	 echo "<div id='sidebar' style='float:left'>"; 
-       	 showProf($id);
+
+	 showProf($id);
 	 echo "<br><br>";
 	 $obj = getObject($_GET["id"]);
 	 $abcd = freeedu_boxes($obj["otyid"]);

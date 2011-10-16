@@ -4,7 +4,7 @@ function getMarksGraph($srno)
 {
     
     $array = tpercent($srno);
-    //echo  $srno;
+   
      echo "<script type='text/javascript'>
 $(function () {
     var d1 = [";
@@ -18,7 +18,7 @@ $(function () {
            ], {
         series: {
             lines: { show: true },
-            points: { show: true }
+            points: { show: true }jquery.js
         },
         xaxis: {
            tickDecimals: 0,

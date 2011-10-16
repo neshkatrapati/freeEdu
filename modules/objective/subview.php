@@ -28,6 +28,7 @@ echo "";
 						echo "<a href='?m=ot_edit&otid=".$otid."' style='float:left;'>Go Back</a><br>";
 						$entry = getObjectiveEntry($otid);
 						$subi = getSubmission($_GET["otid"],$stu["sid"]);
+						
 						$obj = getObject($_GET["oid"]);
 						$stu = getStudent($obj["obhandle"]);
 						$suba = getSubmissionAsArray($subi["submid"]);

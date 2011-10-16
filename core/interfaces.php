@@ -2,7 +2,7 @@
     function freeedu_boxes($otyid)
     {
         if($otyid == "0")
-            $array = array("right" => array("rayon_Box","roster_Box"),"left" => array("class_Box"));
+            $array = array();
         if($otyid == "1")
             $array = array("right" => array("fac_plan_Box","assignments_Box"));
         if($otyid == "2")

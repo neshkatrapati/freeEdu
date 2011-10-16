@@ -97,7 +97,8 @@ while($reglr=mysql_fetch_array($regular))
 	if($i==0){
 	echo "<div id='placeholderm' style='width:450px;height:250px'></div>
 			<p id='hoverdata'><span id='clickdata'></span></p></div>" ;
-	echo getMarksGraph($srno);}
+	echo getMarksGraph($srno);
+	}
 	echo "<center>";
 	if($akyr=='1')
 	{

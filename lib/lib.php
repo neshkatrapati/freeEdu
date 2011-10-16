@@ -1968,6 +1968,7 @@ function readExcel()
             $batid=$s['batid'];
             $marks=mysql_query("select * from MAVAILT where batid='$batid' and ros='R' order by(mrid)");
             $num=mysql_num_rows($marks);
+	    
             $mpercent=0;
 	    $per = array();
 	    $i=0;
@@ -2583,9 +2584,11 @@ $(function () {
 	
 	if(strtoupper($stat) == "SELECT")
 	{
+		
 		$mod = getModFromToken($authtoken);
 		$modreads = explode(";",$mod["mod_read"]);
 		$table = $pquery[3];
+		echo $table;
 		if(in_array($table,$modreads))
 			return mysql_query($query);
 		else

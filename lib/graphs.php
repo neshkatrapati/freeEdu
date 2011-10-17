@@ -18,7 +18,7 @@ $(function () {
            ], {
         series: {
             lines: { show: true },
-            points: { show: true }jquery.js
+            points: { show: true }
         },
         xaxis: {
            tickDecimals: 0,

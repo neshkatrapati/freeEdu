@@ -2,6 +2,7 @@
             if(!isset($_POST["phase1"]))
             {
                 $dirlist = module_parser();
+		//print_r($dirlist);
 		echo "<h2>Install New Modules</h2><center><form action='#' method='post'>";
 		echo "<table class='bttable' style='border:2px solid black;'>";
 		echo "<th class='zebra-striped' colspan='3'>Modules</th><tr><td>

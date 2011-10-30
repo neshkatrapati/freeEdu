@@ -29,7 +29,7 @@ echo "<form action=\"#\" method=\"post\" enctype=\"multipart/form-data\" name='f
 </form>";
 if(isset($_POST['sub']))
 {
-	$array = readExcel($newfile);
+	$array = readExcel();
 	for($i=0;$i<count($array);$i++)
 	{
 		$fname = $array[$i][0];

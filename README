@@ -11,4 +11,3 @@ Steps For Installing |
 6. edit misc/constants.php [$dbuname,$dbpass]
 7. edit connection.php also in the same way
 8. Bingo You Are Done! hit localhost/freeEdu .. 
-9. Hit the help icon for login! 

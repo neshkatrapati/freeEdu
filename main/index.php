@@ -761,17 +761,6 @@ else if($mode=="create_student")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
-else if($mode=="feedback")
-{
-	echo "<div id='content' class='content'>";
-	if(isSudo($oid))
-	{
-		include("../core/feedback.php");
-	}
-	else
-		notifywar("You Are Un Authorised To View This Page");
-	echo "</div>";
-}
 else if($mode=="cflow")
 {
 	echo "<div id='content' class='content'>";

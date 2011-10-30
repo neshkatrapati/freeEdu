@@ -41,9 +41,8 @@ function getMenu($otytag)
 	    if($otytag == "sudo")
 	    {
 	         $retstr .="<li><a href='?m=cf'>Create Faculty</a></li>
-                 <li><a href='?m=mf&l=0&r=5'>Map Faculty</a></li>
-                 <li><a href='?m=fbcreate'>Create Faculty Feedback</a></li>
-	         <li><a href='?m=fbget'>Analyze Faculty Feedback</a></li>";
+                 <li><a href='?m=mf&l=0&r=5'>Map Faculty</a></li>";
+                
             
 	    }
 	    else if($otytag == "admin")

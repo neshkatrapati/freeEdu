@@ -1,5 +1,6 @@
 <?php
 	require_once 'connection.php';
+	$CONFIG_SUCCESS = "config_success";
 	function addConfigKey($mod_auth_token,$key,$value){
 		$clsname = "Constants";
 		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
@@ -76,9 +77,10 @@ function isModConfigured($modtag){
 	$clsname = "Constants";
 	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
 	mysql_select_db($clsname::$dbname, $con);
-	
-	
-	
+}
+function module_error($errstr){
+	$debugarr = debug_backtrace();
+	return array($errstr,$debugarr[0]["line"]);
 }
 	
 ?>

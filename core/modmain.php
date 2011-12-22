@@ -41,7 +41,7 @@
 				    $chval = "checked";
 			$tag = $info["mod_tag"];
 			if(method_exists($instance, "module_getConfigInfo")){
-				$link = "<a target='_blank' class='nyroModal' href='../core/modconf.php?modtag=$tag'>Configure</a>";
+				$link = "<a  href='../core/modconf.php?modtag=$tag' target='_blank' class='nyroModal'>Configure</a>";
 			}
 			else{
 				$link = "No Config File";

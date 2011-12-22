@@ -51,7 +51,7 @@
   			return $mc;
   		}      
   		public function module_setConfigInfo($params){
-  		  	print_r($params);		
+  		  	return "Error At Database !";	
   		}
     }
 

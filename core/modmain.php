@@ -6,7 +6,7 @@
 		echo "<h2>Install New Modules</h2><center><form action='#' method='post'>";
 		echo "<table class='bttable' style='border:2px solid black;'>";
 		echo "<th class='zebra-striped' colspan='3'>Modules</th><tr><td>
-		<table class='bttable'><th class='zebra-striped'>Module Name</th><th class='zebra-striped'>Authors</th><th class='zebra-striped'>Status</th>";
+		<table class='bttable'><th class='zebra-striped'>Module Name</th><th class='zebra-striped'>Authors</th><th class='zebra-striped'></th><th class='zebra-striped'>Status</th>";
 		for($i=0;$i<count($dirlist);$i++)
 		{
 			echo "<tr>";
@@ -26,8 +26,8 @@
                         $read = array();
                         $update = array();
 			$links = $instance->module_getLinkInfo();
-                        echo "<input type='hidden' name='modnames[]' value='".$dirlist[$i]["name"]."'></input>";
-                        echo "<input type='hidden' name='modfiles[]' value='".$dirlist[$i]["modfile"]."'></input>";    
+            echo "<input type='hidden' name='modnames[]' value='".$dirlist[$i]["name"]."'></input>";
+            echo "<input type='hidden' name='modfiles[]' value='".$dirlist[$i]["modfile"]."'></input>";    
 			echo "<td>".implode(', ',$info["authors"])."</td>";
 			
 			$clsname = "Constants";
@@ -39,8 +39,17 @@
 				    $chval = '';
 			else
 				    $chval = "checked";
+			$tag = $info["mod_tag"];
+			if(method_exists($instance, "module_getConfigInfo")){
+				$link = "<a target='_blank' class='nyroModal' href='../core/modconf.php?modtag=$tag'>Configure</a>";
+			}
+			else{
+				$link = "No Config File";
+			}
+			
+			
 				    
-                        echo "<td><input type='checkbox' name='modules[]' value='".$i."' ".$chval."></input>&emsp;<img src='../images/others/expandico.gif' style='float:right' onclick='showModuleDetails(\"mod".$i."\",this)'></td>
+                        echo "<td>$link</td><td><input type='checkbox' name='modules[]' value='".$i."' ".$chval."></input>&emsp;<img src='../images/others/expandico.gif' style='float:right' onclick='showModuleDetails(\"mod".$i."\",this)'></td>
 			<tr><td colspan='3' id='mod".$i."' style='display:none'><div class='box'>Db Access:";
 			echo "</br>Creates Tables: ";
 			for($j=0;$j<count($dbcreate);$j++)

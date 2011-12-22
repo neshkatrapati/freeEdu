@@ -8,7 +8,7 @@
         {
             $array = array(
                            
-                           "name" => "Portcullis-freeEdu Extension  ",
+                           "name" => "Portcullis-freeEdu Extension",
                            "mod_name" => "mod_portcullis",
                            "mod_tag" => "portcullis",
                            "authors" => array("Ganesh Katrapati"),
@@ -46,9 +46,13 @@
   		public function module_getConfigInfo(){
   			$mc = new Module_Config();
   			$mc->addKey("DB Username","dbuname",$mc->TYPE_TEXT);		
-  			$mc->addKey("DB Password","dbpass",$mc->TYPE_TEXT);		
+  			$mc->addKey("DB Password","dbpass",$mc->TYPE_TEXT);
+  			$mc->addKey("DB Name","dbname",$mc->TYPE_TEXT);
   			return $mc;
   		}      
+  		public function module_setConfigInfo($params){
+  		  	print_r($params);		
+  		}
     }
 
 ?>

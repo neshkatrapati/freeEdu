@@ -1,0 +1,305 @@
+/* START Default typography styles */
+
+
+@font-face {
+	font-family: 'LietzLindauHamburgRegular';
+	src: url('lietzlindauhamburg-webfont.eot');
+	src: local('☺'), url('lietzlindauhamburg-webfont.woff') format('woff'), url('lietzlindauhamburg-webfont.ttf') format('truetype'), url('lietzlindauhamburg-webfont.svg#webfont7wlycxIS') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Courier10BTRoman';
+	src: url('courier-10-pitch-bt-webfont.eot');
+	src: local('☺'), url('courier-10-pitch-bt-webfont.woff') format('woff'), url('courier-10-pitch-bt-webfont.ttf') format('truetype'), url('courier-10-pitch-bt-webfont.svg#webfontKRtE3TYu') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ClumsyRegular';
+	src: url('clumsy-webfont.eot');
+	src: local('☺'), url('clumsy-webfont.woff') format('woff'), url('clumsy-webfont.ttf') format('truetype'), url('clumsy-webfont.svg#webfontYlE9Voyi') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body, div, p, a {
+	font-family: Courier10BTRoman, Courier, monospace;
+}
+
+h2, h2 a,
+.field-field-second-title .field-item,
+#block-menu-primary-links a,
+#block-menu-secondary-links a,
+#block-locale-0 a {
+	font-family: ClumsyRegular, serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+/* Buttons */
+
+a.button-link {
+	font-family: ClumsyRegular, serif;
+	font-size: 15px;
+	text-decoration: none;
+	letter-spacing: 0;
+}
+
+/* Forms */
+
+input[type=submit] {
+	font-family: ClumsyRegular, serif;
+}
+
+.content form label,
+form input[type=text],
+form textarea {
+	font-family: Courier10BTRoman, Courier, monospace;
+}
+
+.content form label,
+form input[type=text],
+form textarea,
+form input[type=submit] {
+	font-size: 16px;
+	font-weight: normal;
+	letter-spacing: 0;
+	line-height: 150%;
+}
+
+/* END Default typography styles */
+
+/* START Newsletter */
+
+#block-phplist-0 h2 {
+	font-size: 17px;
+	font-weight: normal;
+	letter-spacing: 0;
+}
+
+#block-phplist-0 label {
+	font-weight:normal;
+}
+
+/* END Newsletter */
+
+/* START Header */
+
+#block-menu-primary-links ul li {
+	text-align: center;
+}
+
+#block-menu-primary-links a {
+	font-size: 16px;
+	text-decoration: none;
+}
+
+/* END Header */
+
+/* START Footer*/
+
+#block-menu-secondary-links a,
+#block-locale-0 a,
+#block-menu-menu-social-media-links li#social_links_hover {
+	font-size: 13px;
+}
+
+#block-menu-menu-social-media-links li#social_links_hover {
+	font-family: ClumsyRegular, serif;
+}
+
+#block-aggregator-feed-2 a {
+	font-size: 14px;
+	letter-spacing: -1px;
+	line-height: 150%;
+}
+
+#block-aggregator-feed-2 h2 a {
+	font-size: 22px;
+	font-weight: normal;
+}
+
+#block-aggregator-feed-2 h3 {
+	font-family: ClumsyRegular,serif;
+	font-weight: normal;
+}
+
+#block-aggregator-feed-2 p,
+#block-aggregator-feed-2 a{
+	font-size: 14px;
+}
+
+/* END Footer */
+
+/* START Home */
+
+#css_id_page_home h2,
+#css_id_page_home .field-field-first-title p a {
+	font-family: ClumsyRegular, serif;
+	font-size: 28px;
+	font-weight: normal;
+	letter-spacing: -1px;
+	line-height: 140%;
+}
+
+#css_id_page_home .content > p {
+	font-size: 17px;
+	letter-spacing: -1px;
+	line-height: 125%;
+	padding-left: 5px;
+}
+
+#css_id_page_home h2,
+#css_id_page_home .field-field-second-title .field-item {
+	padding-left: 4px;
+}
+
+/* END Home */
+
+/* START Team */
+
+#css_id_page_team {
+	text-align: center;
+}
+
+#css_id_page_team .field-field-first-title p {
+	font-family: ClumsyRegular, serif;
+	font-size: 28px;
+	font-weight: normal;
+	letter-spacing: -1px;
+	line-height: 140%;
+}
+
+#css_id_page_team .field-field-second-title p {
+	font-size: 17px;
+	letter-spacing: -1px;
+	line-height: 125%;
+}
+
+#css_id_page_team .content > p,
+#css_id_page_team .field-field-fun-fact .field-label,
+#css_id_page_team .field-field-fun-fact .field-items .field-item {
+	font-size: 13px;
+	letter-spacing: 0px;
+	line-height: 160%;
+}
+
+#css_id_page_team .phone-image {
+	font-size: 18px;
+}
+
+#css_id_page_team .email-image {
+	font-size: 18px;
+}
+
+#css_id_page_team .twitter-image {
+	font-size: 21px;
+}
+
+#css_id_page_team .phone-text,
+#css_id_page_team .email-text,
+#css_id_page_team .twitter-text {
+	font-size: 14px;
+}
+
+/* END Team */
+
+/* START Services */
+
+#css_id_page_services .panels-flexible-row-grid-2,
+#css_id_page_services .panels-flexible-row-grid-4 {
+	text-align: center;
+}
+
+#css_id_page_services h2,
+#css_id_page_services .panels-flexible-row-grid-2 .field-field-second-title p {
+	font-family: ClumsyRegular, serif;
+	font-size: 28px;
+	font-weight: normal;
+	letter-spacing: -1px;
+	line-height: 140%;
+}
+
+#css_id_page_services .panels-flexible-row-grid-2 h3,
+#css_id_page_services .panels-flexible-row-grid-2 p,
+#css_id_page_services .panels-flexible-row-grid-3 p,
+#css_id_page_services .node-type-testimony .field-field-content p,
+#css_id_page_services .node-type-testimony .field-field-testimoniator .field-item, 
+#css_id_page_services .node-type-testimony .field-field-company a {
+	font-size: 13px;
+	letter-spacing: 0;
+	line-height: 160%;
+}
+
+/* END Services */
+
+/* START Clients */
+
+#css_id_page_clients h2 {
+	font-size: 28px;
+	font-weight: normal;
+	letter-spacing: -1px;
+	line-height: 140%;
+}
+
+#css_id_page_clients .content .field-label {
+	letter-spacing: -1px;
+}
+
+#css_id_page_clients .field-label,
+#css_id_page_clients p,
+#css_id_page_clients .field-field-what-they-got li {
+	font-size: 13px;
+	letter-spacing: 0;
+	line-height: 160%;
+}
+
+#css_id_page_clients .field-field-what-they-got .field-items li {
+	line-height: 145%;
+}
+
+#css_id_page_clients .field-label {
+	font-weight: bold;
+}
+
+/* END Clients */
+
+/* START Contact */
+
+#css_id_page_contact h2,#css_id_page_event h2  {
+	font-size: 28px;
+	font-weight: normal;
+	letter-spacing: -1px;
+	line-height: 140%;
+}
+
+#css_id_page_contact .column-right-row-bottom p,#css_id_page_event .column-right-row-bottom p  {
+	font-size: 17px;
+	letter-spacing: -1px;
+	line-height: 125%;
+}
+
+/* END Contact */
+
+/* START Static pages */
+
+.node-type-static-page #main-wrapper h1.title {
+	font-family: ClumsyRegular, sans-serif;
+	font-size: 28px;
+	font-weight: normal;
+}
+
+.node-type-static-page #main-wrapper h2,
+.node-type-static-page #main-wrapper .field-field-content p {
+	font-family: Courier10BTRoman, Courier, monospace;
+	font-size: 13px;
+	letter-spacing: 0;
+	line-height: 160%;
+}
+
+/* END Static pages */

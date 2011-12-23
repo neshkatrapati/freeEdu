@@ -1,0 +1,32 @@
+div.img
+  {
+  margin:2px;
+  border:2px solid #555500;
+  height:auto;
+  width:auto;
+  float:left;
+  text-align:center;
+ }
+div.img img
+  {
+  display:inline;
+  margin:3px;
+  border:1px solid #ffffff;
+  }
+div.img a:hover img
+  {
+  border:1px solid #0000ff;
+  }
+div.desc
+  {
+  text-align:center;
+  font-weight:normal;
+  font-family:'Times New Roman';
+  width:120px;
+  margin:2px;
+  }
+  .paddings
+  {
+	align:right;
+  
+  }

@@ -1,0 +1,71 @@
+.imgteaser {
+	margin: 0;
+	overflow: hidden;
+	float: left;
+	position: absolute;
+}
+.imgteaser a {
+	text-decoration: none;
+	float: left;
+}
+.imgteaser a:hover {
+	cursor: pointer;
+}
+.imgteaser a img {
+	float: left;
+	margin: 0;
+	border: none;
+	padding: 10px;
+	background: #fff;
+	border: 1px solid #ddd;
+}
+.imgteaser a .desc {	display: none; }
+.imgteaser a:hover .epimg { visibility: hidden;}
+.imgteaser a .epimg {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	font-size: 12px;
+	color: #fff;
+	background: #000;
+	padding: 4px 10px;
+	filter:alpha(opacity=65);
+	opacity:.65;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=65)";
+	
+}
+.imgteaser a:hover .desc{
+	display: block;
+	font-size: 11px;
+	padding: 10px 0;
+	background: #111;
+	filter:alpha(opacity=75);
+	opacity:.75;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+	color: #fff;
+	position: absolute;
+	bottom: 11px;
+	left: 11px;
+	padding: 4px 10px;
+	margin: 0;
+	width: 125px;
+	border-top: 1px solid #999;
+	
+}
+table
+{
+    text-align:center;
+}
+th,td
+{
+	color:black;
+}
+div.mainpos
+{
+    right:200px;
+}
+body
+{
+	background-image: url(wood.jpg);
+}
+    

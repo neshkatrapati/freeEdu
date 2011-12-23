@@ -43,14 +43,15 @@
 					</fieldset>
 				</form>";
 		echo "</center>";
-		$clsname = "Constants";
-		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-		mysql_select_db($clsname::$dbname, $con);
+	
 		echo "<h2>Some Existing Batches</h2>";
+		
 		$abc = mysql_query("select * from MBATCHT order by rand() limit 0,3");
+		
 		echo "<table class='bttable'><center><tr>";
 		while($row=mysql_fetch_array($abc))
 		{
+			
 			$rnd = rand(0,1);
 			if($rnd == 0)
 				$sec = "A";
@@ -59,6 +60,7 @@
 				
 			$batid = $row["batid"];
 			$year = $row["batyr"];
+			
 			echo "<td><h3>Batch ".$year."</h3>".getClassPreview($batid,$sec,4,16)."</td></center></div>&emsp;";
 			
 		}
@@ -78,7 +80,6 @@
 		$imgfmt = $_POST["imgfmt"];
 			$array = readExcel($newfile);
 		
-		//echo $imgfmt;	
 			putBatch($array,$reg,$brn,$batyr,$A,$B,$imgfmt);
 		
 		}

@@ -1,7 +1,7 @@
 <?php
 function showProfile($oid)
 {
-	include("../lib/connection.php");
+	include_once("../lib/connection.php");
 	$imgid=mysql_query("select * from MOBJECTT where oid='$oid'");
 	
 	while($img=mysql_fetch_array($imgid))
@@ -57,7 +57,7 @@ echo "<a href='?m=ep'><h3>$obname</h3></a>";
 }
 function showProf($oid)
 {
-	include("../lib/connection.php");
+	include_once("../lib/connection.php");
 	$imgid=mysql_query("select * from MOBJECTT where oid='$oid'");
 	while($img=mysql_fetch_array($imgid))
 	{

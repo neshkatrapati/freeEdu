@@ -69,6 +69,15 @@
                            );
             return $array;
         }
+        public function module_getConfigInfo(){
+        	$mc = new Module_Config();
+        	$mc->addKey("Max Rating","maxrating",$mc->TYPE_TEXT);
+        	$mc->addKey("Min Rating","minrating",$mc->TYPE_TEXT);
+        	return $mc;
+        }
+        public function module_setConfigInfo($params){
+        	return "config_success";
+        }
     }
 
 ?>

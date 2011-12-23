@@ -116,12 +116,13 @@ function showModuleDetails(value,element)
 <body>
 <?php
 
-include("../lib/menu2.php");
-include("../lib/graphs.php");
-include("../lib/lib.php");
-include("../misc/constants.php");
-include("../core/interfaces.php");
-require("../lib/boxes.php");
+include_once("../lib/menu2.php");
+include_once("../lib/graphs.php");
+include_once("../lib/lib.php");
+include_once("../misc/constants.php");
+include_once("../core/interfaces.php");
+require_once("../lib/boxes.php");
+require_once '../lib/connection.php';
 //require("../lib/classes.php");
 
 
@@ -216,7 +217,7 @@ else if($mode == "p")
 	if(array_key_exists("id",$optarray))
 	{
       	 $id = $_GET['id'];
-       	 require("../EditProfile/showProfile.php");
+       	 require_once("../EditProfile/showProfile.php");
 	 echo "<div id='sidebar' style='float:left'>"; 
 
 	 showProf($id);
@@ -293,7 +294,7 @@ else if($mode=="modules")
 {
 	echo "<div id='content' >";
 	if(isSudo($oid)){
-		include("../core/modmain.php");
+		include_once("../core/modmain.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -312,11 +313,11 @@ else if($mode=="sa")
 		if(array_key_exists("t",$optarray))
 			$type = $_GET['t'];
 		if($type=='a')
-			include("../Rayon/sublistadd.php");
+			include_once("../Rayon/sublistadd.php");
 		else if($type == 'e')
-			include("../Rayon/sublistedit.php");
+			include_once("../Rayon/sublistedit.php");
 		else
-			include("../Rayon/sublistadd.php");
+			include_once("../Rayon/sublistadd.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -337,13 +338,13 @@ else if($mode=="ma")
 		if(array_key_exists("t",$optarray))
 			$type = $_GET['t'];
 		if($type=='e')
-			include("../Rayon/marksadd.php");
+			include_once("../Rayon/marksadd.php");
 		else if($type == 'm')
-			include("../Rayon/dataentry.php");
+			include_once("../Rayon/dataentry.php");
 		else if($type == 'ed')
-			include("../Rayon/manUp.php");
+			include_once("../Rayon/manUp.php");
 		else
-			include("../Rayon/marksadd.php");
+			include_once("../Rayon/marksadd.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -364,11 +365,11 @@ else if($mode=="cf")
 		if(array_key_exists("t",$optarray))
 			$type = $_GET['t'];
 		if($type=='e')
-			include("../core/factsheetup.php");
+			include_once("../core/factsheetup.php");
 		else if($type == 'm')
-			include("../core/faccreate.php");
+			include_once("../core/faccreate.php");
 		else
-			include("../core/faccreate.php");	
+			include_once("../core/faccreate.php");	
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -380,7 +381,7 @@ else if($mode=="mf")
 	if(isSudo($oid))
 	{
 		$low = $_GET['l'];
-		include("../core/facmap.php");
+		include_once("../core/facmap.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -392,7 +393,7 @@ else if($mode=="rga")
 	if(isSudo($oid))
 	{
 		echo "<center>";
-		include("../core/regadd.php");
+		include_once("../core/regadd.php");
 		echo "</center>";
 	}
 	else
@@ -405,7 +406,7 @@ else if($mode=="suba")
 	if(isSudo($oid))
 	{
 		echo "<center>";
-		include("../core/substituteui.php");
+		include_once("../core/substituteui.php");
 		echo "</center>";
 	}
 	else
@@ -418,7 +419,7 @@ else if($mode=="immap")
 	if(isSudo($oid))
 	{
 		echo "<center>";
-		include("../core/imagemap.php");
+		include_once("../core/imagemap.php");
 		echo "</center>";
 	}
 	else
@@ -431,7 +432,7 @@ else if($mode=="ra")
 	if(isSudo($oid) || isAdmin($oid))
 	{
 		
-		  include("../Rayon/excelex.php");
+		  include_once("../Rayon/excelex.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -444,7 +445,7 @@ else if($mode=="rr")
 	{
 		echo "<fieldset><legend>Record Retrieval</legend>";
 		echo "<center>";
-		include("../Rayon/MRetrival.php");
+		include_once("../Rayon/MRetrival.php");
 		echo "</center></fieldset>";
 	}
 	else
@@ -457,7 +458,7 @@ else if($mode=="up")
 	echo "<div id='content'  class='content'>";
 	if(isSudo($oid) || isAdmin($oid))
 	{
-		include("../Rayon/upgrade.php");
+		include_once("../Rayon/upgrade.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -469,7 +470,7 @@ else if($mode=="dr")
 	echo "<div id='content'  class='content'>";
 	if(isSudo($oid) || isAdmin($oid))
 	{
-		include("../Roster/dayreport.php");
+		include_once("../Roster/dayreport.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -480,7 +481,7 @@ else if($mode=="cr")
 	echo "<div id='content'  class='content'>";
 	if(isSudo($oid) || isAdmin($oid))
 	{
-		include("../Roster/conreport.php");
+		include_once("../Roster/conreport.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -491,7 +492,7 @@ else if($mode=="sc")
 	echo "<div id='content'  class='content'>";
 	if(isSudo($oid) || isAdmin($oid))
 	{
-		include("../Roster/schedule.php");
+		include_once("../Roster/schedule.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -533,7 +534,7 @@ else if($mode=="src")
 			
 		}
 	}
-	include("../core/livesearch2.php");
+	include_once("../core/livesearch2.php");
 	getResult($q,$t,$ip,$op,$b,$c);
 
 	echo "</div>";
@@ -543,7 +544,7 @@ else if($mode=="str")
 	echo "<div id='content'  class='content'>";
 	if(isSudo($oid) || isAdmin($oid))
 	{
-		include("../Roster/stureport.php");
+		include_once("../Roster/stureport.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -554,7 +555,7 @@ else if($mode=="add_ebook")
 	echo "<div id='content'  class='content'>";
 	if(isAlib($oid))
 	{
-		include("../modules/library/addEbook.php");
+		include_once("../modules/library/addEbook.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -565,7 +566,7 @@ else if($mode=="edit_ebook")
 	echo "<div id='content'  class='content'>";
 	if(isAlib($oid))
 	{
-		include("../modules/library/editEbook.php");
+		include_once("../modules/library/editEbook.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -576,7 +577,7 @@ else if($mode=="eb")
 	echo "<div id='content'  class='content'>";
 	if(isAlib($oid))
 	{
-		include("../modules/library/editBook.php");
+		include_once("../modules/library/editBook.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -588,7 +589,7 @@ else if($mode=="ab")
 	echo "<div id='content'  class='content'>";
 	if(isAlib($oid))
 	{
-		include("../modules/library/addBook.php");
+		include_once("../modules/library/addBook.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -630,7 +631,7 @@ else if($mode=="ot_create")
 	echo "<div id='content'  class='content'>";
 	if(!isStudent($oid))
 	{
-		include("../modules/objective/input.php");
+		include_once("../modules/objective/input.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -641,7 +642,7 @@ else if($mode=="ot_edit")
 	echo "<div id='content' style='margin-left:20px;margin-right:20px'>";
 	if(true)
 	{
-		include("../modules/objective/editobjective.php");
+		include_once("../modules/objective/editobjective.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -652,7 +653,7 @@ else if($mode=="ot_submit_see")
 	echo "<div id='content' style='margin-left:20px;margin-right:20px'>";
 	if(true)
 	{
-		include("../modules/objective/subview.php");
+		include_once("../modules/objective/subview.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -664,7 +665,7 @@ else if($mode=="ot_ques")
 	echo "<div id='content'  class='content'>";
 	if(!isStudent($oid))
 	{
-		include("../modules/objective/otques.php");
+		include_once("../modules/objective/otques.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -675,7 +676,7 @@ else if($mode=="ot_submit")
 	echo "<div id='content'  class='content'>";
 	if(isStudent($oid))
 	{
-		include("../modules/objective/otsubmit.php");
+		include_once("../modules/objective/otsubmit.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -687,7 +688,7 @@ else if($mode=="ot_edit_meta")
 	echo "<div id='content'  class='content'>";
 	if(!isStudent($oid))
 	{
-		include("../modules/objective/editmeta.php");
+		include_once("../modules/objective/editmeta.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -698,7 +699,7 @@ else if($mode=="edit_att")
 	echo "<div id='content' class='content'>";
 	if(isFaculty($oid))
 	{
-		include("../Roster/editAtt.php"); 
+		include_once("../Roster/editAtt.php"); 
 		//echo "<center>".getFacPlan($array['obhandle'])."</center>";
 	}
 	else
@@ -710,7 +711,7 @@ else if($mode=="edit_Matt")
 	echo "<div id='content' class='content'>";
 	if(isAAdmin($oid))
 	{
-		include("../Roster/maineditAtt.php"); 
+		include_once("../Roster/maineditAtt.php"); 
 		//echo "<center>".getFacPlan($array['obhandle'])."</center>";
 	}
 	else
@@ -755,7 +756,7 @@ else if($mode=="create_student")
 	echo "<div id='content' class='content'>";
 	if(isSudo($oid))
 	{
-		include("../core/createStudentUser.php");
+		include_once("../core/createStudentUser.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -766,7 +767,7 @@ else if($mode=="feedback")
 	echo "<div id='content' class='content'>";
 	if(isSudo($oid))
 	{
-		include("../core/feedback.php");
+		include_once("../core/feedback.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -890,7 +891,7 @@ else if($mode=="inc")
 	echo "<div id='content'  class='content'>";
 	if(isFaculty($oid))
 	{
-		include("../Rayon/internals.php");
+		include_once("../Rayon/internals.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -899,14 +900,14 @@ else if($mode=="inc")
 else if($mode=="ep")
 {
 	echo "<div id='content'  class='content'>";
-	include("../EditProfile/editProfile.php");
+	include_once("../EditProfile/editProfile.php");
 	echo "</div>";
 }
 else if($mode=="ass")
 {
 	echo "<div id='content'  class='content'>";
 	if(!isStudent($oid))
-		include("../modules/assignment/createassignment.php");
+		include_once("../modules/assignment/createassignment.php");
 	else
 		notifywar("You Are Un Authorised To View This Page");
 		
@@ -917,9 +918,9 @@ else if($mode=="ass_see")
 	
 	echo "<div id='content'  class='content'>";
 	if(!isStudent($oid))
-		include("../modules/assignment/showassignment.php");
+		include_once("../modules/assignment/showassignment.php");
 	else if(isStudent($_COOKIE["object"]))
-		include("../modules/assignment/showassignment_stu.php");
+		include_once("../modules/assignment/showassignment_stu.php");
 	else
 		notifywar("You Are Un Authorised To View This Page");
 
@@ -931,14 +932,14 @@ else if($mode=="ass_edit")
 	echo "<div id='content'  class='content'>";
 	echo "<fieldset><legend>Edit Assignment</legend>";
 	$asid = $_GET["asid"];
-	include("../modules/assignment/editassignment.php");
+	include_once("../modules/assignment/editassignment.php");
 	echo "</div></fieldset>";
 }
 else if($mode=="license")
 {
 	echo "<div id='content'  class='content'>";
 	echo "<center><pre>";
-	include("../COPYING");
+	include_once("../COPYING");
 	echo "</pre></center></div>";
 }
 else if($mode=="ua")
@@ -946,7 +947,7 @@ else if($mode=="ua")
 	echo "<div id='content' class='content'>";
 	if(isFaculty($oid))
 	{
-		include("../Roster/atupload.php");
+		include_once("../Roster/atupload.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -959,7 +960,7 @@ else if($mode=="see_marks")
 	echo "<center>";
 	if(isStudent($oid))
 	{
-		include("../Rayon/Retrival.php");
+		include_once("../Rayon/Retrival.php");
 		$arr = getObject($oid);
 		//print_r($arr);
 		$sidarr = getStudent($arr["obhandle"]); 	
@@ -977,7 +978,7 @@ else if($mode=="see_att")
 	echo "<div id='content' class='content' align='center'>";
 	if(isStudent($oid))
 	{
-		include("../Roster/stugetatt.php");
+		include_once("../Roster/stugetatt.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -1011,7 +1012,7 @@ else if($mode=="al")
 	{
 		echo "<fieldset><legend>Lateral Entry-Add a student into the Batch</legend>";
 		echo "<center>";
-		include("../core/addLateral.php");
+		include_once("../core/addLateral.php");
 		echo "</center></fieldset>";
 	}
 	else
@@ -1030,7 +1031,7 @@ else
 		if($mode == $links[$i]["mode"]){
 			$modpath = "../modules/".$links[$i]["tag"]."/";
 			//echo $modpath.$links[$i]["file"];
-			include($modpath.$links[$i]["file"]);
+			include_once($modpath.$links[$i]["file"]);
 		}
 	}
 	echo "</div>";

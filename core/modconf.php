@@ -77,7 +77,7 @@
 					$mod = getModule($modtag);
 					$modauth = $mod["mod_authtoken"];
 					$keys = getConfigKeys($modauth);
-					echo "<center><table>";
+					echo "<center><table><th class='red'>Key</th><th class='red'>Value</th>";
 					for($i=0;$i<count($keys);$i++){
 						echo "<tr>";
 						$key = $keys[$i][0];

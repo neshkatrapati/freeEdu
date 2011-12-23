@@ -1,6 +1,7 @@
 <?php
     require_once "../lib/classes.php";
     require_once "../lib/mod_lib.php";
+    $CONFIG_SUCCESS = "config_success";
     class portcullis_ModuleInfo extends ModuleInfo
     {
         
@@ -51,7 +52,7 @@
   			return $mc;
   		}      
   		public function module_setConfigInfo($params){
-  		  	return "Error At Database !";	
+  		  	return "Error!!";	
   		}
     }
 

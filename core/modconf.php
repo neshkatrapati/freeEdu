@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../aux/bootstrap/bootstrap-1.0.0.css"
+<link rel="stylesheet" href="../aux/bootstrap/bootstrap.css"
 	type="text/css" media="screen" />
 
 	<?php
@@ -19,10 +19,16 @@
 		if(get_class($module_config) == "Module_Config"){
 				
 			$keys = $module_config->getKeys();
+			echo "<center><div style='width:80%'><h1 style='font-size:12px' class='box'>Welcome To ".$info["name"]." Config Page!</h1>";
 			if(count($keys)>0){
-				if(!isset($_POST["phase1"])){
+				if(!isset($_POST["phase1"]) && $_GET["check"]!="true"){
+					
 					echo "<form action='#' method='post'>";
-					echo "<center><div style='width:80%'><h3 class='box'>Welcome To ".$info["name"]." Config Page!</h3>";
+					
+					if(isModConfigured($modtag)){
+						echoError("This Module Might Have Been Configured Already! <a href='?modtag=$modtag&check=true'>Check</a>");
+					}
+					
 					echo "</div><div><table class='bttable' style='border:2px solid black'>";
 					for($i=0;$i<count($keys);$i++){
 						echo "<tr>";
@@ -51,18 +57,39 @@
 					echo "</center>";
 					echo "</form>";
 				}
-				if(isset($_POST['phase1'])){
+				if(isset($_POST['phase1']) && $_GET["check"]!='true'){
 					$return = $class->module_setConfigInfo($_POST);
 					
 					if($return == $CONFIG_SUCCESS){
+						echoSuccess("<a href='?modtag=$modtag'>Go Back</a>");
 						echoSuccess("Module Configured Properly");
+						
 					}
 					else{
+						echoSuccess("<a href='?modtag=$modtag'>Go Back</a>");
 						echoError("Configuration Failure");
 						echo "<center><div class='box' style='width:50%'>Error Message:<br>".$return."</div></center>";
+						
 					}
-					redirect("");	
+					
 				}
+				if($_GET["check"] == "true"){
+					$mod = getModule($modtag);
+					$modauth = $mod["mod_authtoken"];
+					$keys = getConfigKeys($modauth);
+					echo "<center><table>";
+					for($i=0;$i<count($keys);$i++){
+						echo "<tr>";
+						$key = $keys[$i][0];
+						$value = $keys[$i][1];
+						echo "<td>$key</td>";
+						echo "<td>$value</td>";
+						echo "</tr>";
+					}
+					echo "</table></center>";
+					echoSuccess("<a href='?modtag=$modtag'>Go Back</a>");
+				}
+				
 			}
 			else{
 
@@ -77,11 +104,11 @@
 		echoError("No Configuration Function!!");
 	}
 	function echoSuccess($string){
-		echo "<br><center><h3 class='btn success'>$string</h3></center><br>";
+		echo "<br><center><h3 class='label success'>$string</h3></center><br>";
 	}
 
 	function echoError($string){
-		echo "<br><center><h3 class='btn danger'>$string</h3></center><br>";
+		echo "<br><center><h3 class='label warning'>$string</h3></center><br>";
 	}
 
 

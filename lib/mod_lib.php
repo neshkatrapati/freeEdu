@@ -44,7 +44,28 @@
 		}
 	
 	}
-
+function getConfigKeys($mod_auth_token){
+	$x = mysql_query("select * from MMODULET where mod_authtoken='".$mod_auth_token."'");
+	if(!$x){
+		return false;
+	}
+	
+	$module = mysql_fetch_array($x);
+	$modid = $module['mod_tag'];
+	$x2 = mysql_query("SELECT * FROM MODCONFT where modtag like '$modid'");
+	
+	if(!$x2){
+		return false;
+	}
+	else
+	{
+		while($t = mysql_fetch_array($x2)){
+			$arr[] = array($t['key'],$t['value']);
+		}
+		return $arr;
+	
+	}
+}
 class Module_Config{
 	
 	public function __construct(){
@@ -74,13 +95,21 @@ function getModule($modtag){
 	
 }
 function isModConfigured($modtag){
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
+
+	
+	$res = mysql_query("SELECT * FROM MODCONFT where modtag like '$modtag'");
+	//echo "SELECT * FROM MODCONFT where modtag like '$modtag'";
+	if(mysql_num_rows($res)<=0){
+		return False;
+	}
+	else{
+		return True;
+	}
 }
 function module_error($errstr){
 	$debugarr = debug_backtrace();
 	return array($errstr,$debugarr[0]["line"]);
 }
+
 	
 ?>

@@ -102,7 +102,7 @@
 		    else
 		    {
 		        notifyerr("Problem in copying the Image Try again");
-		        redirect('?m=add_book');
+		        redirect('?m=ab');
 		    }
 		}
 	    }

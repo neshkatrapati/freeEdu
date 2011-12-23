@@ -23,17 +23,17 @@ function getYear($id)
 {
     if($id==0)
         return "1st Year";
-    else if($id==1)
+    else if($id=='1')
         return "2nd-Year 1st-Sem";
-    else if($id==2)
+    else if($id=='2')
         return "2nd-Year 2nd-Sem";
-    else if($id==3)
+    else if($id=='3')
         return "3rd-Year 1st-Sem";
-    else if($id==4)
+    else if($id=='4')
         return "3rd-Year 2nd-Sem";
-    else if($id==5)
+    else if($id=='5')
         return "4th-Year 1st-Sem";
-    else if($id==6)
+    else if($id=='6')
         return "4th-Year 2nd-Sem";
 }
 ?>

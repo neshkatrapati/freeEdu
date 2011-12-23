@@ -12,28 +12,12 @@
         
         if(!isset($_POST['phase1']) && !isset($_POST['phase2']))
         {
-            echo "<h2>Edit Ebooks</h2><br>";
-            include("alpha.php");
-            echo "<br>";
-            $n=$_GET['n'];
-             if($n=='all')
-            {
-                $doc=mysql_query("select * from MDOCT");
-            }
-            else
-                $doc=mysql_query("select * from MDOCT where docname like '$n%'");
-        $num=mysql_num_rows($doc);
-        if($num==0)
-        {
-            notifywar("No Ebook Starting with $n. Try Another Letter");   
-        }
-        else
-        {
-            echo "<form action='#' method='post'>";
-            echo "<table border='5' cellpadding='6' cellspacing='15'>
+            echo "<h1>Edit Ebooks</h1>";
+        echo "<form action='#' method='post'>";
+        echo "<table border='1' cellpadding=6>
             <tr>
                 <th>&nbsp</th>
-                <th>Cover Page<br>(if given uploaded)</th>
+                <th>Cover Page<br>(if given previously)</th>
                 <th>EBook Name</th>
                 <th>Author</th>
                 <th>Publications</th>
@@ -43,7 +27,7 @@
                 <th>Year</th>
                 <th>Linked Book</th>
             </tr>";
-           
+        $doc=mysql_query("select * from MDOCT");
         while($d=mysql_fetch_array($doc))
         {
             echo "<tr>";
@@ -54,21 +38,21 @@
             $akyr=$d['akyr'];
             $reg=$d['reg'];
             $docpub=$d['docpub'];
-            $docedition=$d['docedition'];
+            $docedition=$b['docedition'];
             $docimg=$d['docimg'];
             $lid=$d['lid'];
             $img=mysql_query("select * from MIMGT where imgid='$docimg'");
             $image=mysql_fetch_array($img);
             $imguri=$image['imguri'];
-            echo "<td><input type='radio' name='did' value='$did' required='true'></td>";
-            echo "<td><img src='../$imguri' width='75'></td>";
+            echo "<td><input type='radio' name='did' value='$did'></td>";
+            echo "<td><img src='../$imguri' width='100'></td>";
             echo "<td>$docname</td>";
             echo "<td>$docauthor</td>";
             echo "<td>$docpub</td>";
             echo "<td>$docedition</td>";
             echo "<td>".getBranch($brid)."</td>";
             echo "<td>".getReg($reg)."</td>";
-            echo "<td>".getYear($akyr)."</td>";
+            echo "<td>".getYear($year)."</td>";
             if($lid!=NULL)
             {
                 $d1=mysql_query("select * from MLIBRARYT where lid='$lid'");
@@ -83,15 +67,14 @@
             echo "</tr>";
         }
         echo "<table><br><br>";
-        echo "<input type='submit' name='phase1' value='Edit'>";
+        echo "<input type='submit' name='phase1' value='Submit'>";
         echo "</form>";
         }
-        }
-        if(isset($_POST['phase1'])&& !isset($_POST['phase2']) && $_POST['did']!=NULL)
+        if(isset($_POST['phase1'])&& !isset($_POST['phase2']))
         {
             echo "<fieldset>";
             echo "<legend>Edit Ebooks</legend>";
-            notifywar("Please check the branch year and linking before you Update");
+            notifywar("Please check the branch year and linking before you Submit");
             $did=$_POST['did'];
             $doc=mysql_query("select * from MDOCT where did='$did'");
             $d=mysql_fetch_array($doc);
@@ -107,14 +90,14 @@
             $imguri=$image['imguri'];
             echo "<div class='imgteaser' style='border:1px'><a href='../modules/library/changeEbookPic.php?did=$did&KeepThis=true&TB_iframe=true&#TB_inline?width=300&height=200' title='Change Picture' class='thickbox'><img src='../$imguri' width='130' /><span class='epimg'>&raquo; Change Picture</span><span class='desc' class='strong'>Click to change the picture
             </span></a></div>";
-            echo "<table cellpadding=5 align=center>";
+            echo "<table cellpadding=5>";
             echo "<form action='#' method='post'>";
             echo "<input type='hidden' name='did' value='$did'>";
-            echo "<tr><td>Book Name:</td><td><input type='text' name='ebname' value='$docname' required='true'></td>";
-            echo "<td>Author:</td><td><input type='text' name='ebauthor' value='$docauthor' required='true'></td></tr>";
-            echo "<tr><td>Publication:</td><td><br><input type='text' name='ebpub' value='$pub' required='true'></td>";
-            echo "<td>Edition:</td><td><input type='text' name='ebedition' value ='$ebedition' required='true'></td></tr>";
-            echo "<tr><td>Linking:</td><td> <select name='link'>";
+            echo "<tr><td>Book Name:<input type='text' name='ebname' value='$docname' required='true'></td>";
+            echo "<td>Author:<input type='text' name='ebauthor' value='$docauthor' required='true'></td></tr>";
+            echo "<tr><td>Publication:<input type='text' name='ebpub' value='$pub' required='true'></td>";
+            echo "<td>Edition:<input type='text' name='ebedition' value ='$ebedition' required='true'></td></tr>";
+            echo "<tr><td>Linking: <select name='link'>";
             echo "<option value='dnl'>Dont Link</option>";
             include('../lib/connection.php');
             $d1=mysql_query("select * from MLIBRARYT");
@@ -123,7 +106,6 @@
                 $lid=$d2['lid'];
                 $bname=$d2['bname'];
                 $bauthor=$d2['bauthor'];
-                echo "Hello".$lid;
                 if($dlid==$lid)
                     echo "<option value='$lid' default>$bname-by-$bauthor</option>";
                 else
@@ -134,7 +116,7 @@
             $arr=getBranches();
 	    $len=count($arr);
 	    include("../lib/connection.php");
-	    echo "<td>Branch:</td><td><br><select name='branch'>";
+	    echo "<td>Branch:<select name='branch'>";
 	    for($i=0;$i<$len;$i++)
 	    {
 		$br=mysql_query("select brid from MBRANCHT where brname='$arr[$i]'") or die(mysql_error());
@@ -144,7 +126,7 @@
                 
             }
 	    echo "</select></td></tr>";
-            echo "<tr><td>Year:</td><td><br><select name='year'>";
+            echo "<tr><td>Year:<select name='year'>";
 	    echo "<option value='0'>1st-Year</option>";
 	    echo "<option value='1'>2nd-Year 1st-Sem</option>";
 	    echo "<option value='2'>2nd-Year 2nd-Sem</option>";
@@ -157,7 +139,7 @@
             $reg=getRegulations();
 	    $rlen=count($reg);
 	    include("../lib/connection.php");
-	    echo "<td>Regulation:</td><td><br><select name='reg'>";
+	    echo "<td>Regulation: <select name='reg'>";
 	    for($i=0;$i<$rlen;$i++)
 	    {
 		$r=mysql_query("select * from MREGT where regname='$reg[$i]'") or die(mysql_error());
@@ -167,13 +149,8 @@
 	    }
 	    echo "</select></td></tr>";
             echo "</table>";
-            echo "<br><br><input type='submit' name='phase2' value='Update'>";
+            echo "<br><br><input type='submit' name='phase2'>";
             echo "</form>";
-        }
-        else if(isset($_POST['phase1']))
-        {
-            notifyerr("!No Filed Selected Try Again!");
-            redirect("?m=edit_ebook");
         }
         if(isset($_POST['phase2']))
         {

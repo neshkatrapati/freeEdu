@@ -12,23 +12,7 @@
             
             if(!isset($_POST['phase1']) && !isset($_POST['phase2']))
             {
-                echo "<h1>Edit Books</h1>";
-                include("balpha.php");
-                echo "<br>";
-                $n=$_GET['n'];
-                if($n=='all')
-                {
-                    $bk=mysql_query("select * from MLIBRARYT");
-                }
-                else
-                    $bk=mysql_query("select * from MLIBRARYT where bname like '$n%'");
-                $num=mysql_num_rows($bk);
-                if($num==0)
-                {
-                    notifywar("No Such books with Filter $n. Try another Filter");
-                }
-                else
-                {
+                 echo "<h1>Edit Books</h1>";
                echo "<table border=1 cellpadding=10>
                <tr>
                 <th>&nbsp</th>
@@ -43,48 +27,47 @@
                 <th>Year</th>
                 <th>Number<br>of Copies</th>
                </tr>
-                <form action='#' method='post'>";
-                
-                while($b=mysql_fetch_array($bk))
-                {
-                    $lid=$b['lid'];
-                    $bid=$b['bookid'];
-                    $bname=$b['bname'];
-                    $bauthor=$b['bauthor'];
-                    $pub=$b['bpub'];
-                    $reg=$b['breg'];
-                    $edition=$b['bedition'];
-                    $brid=$b['brid'];
-                    $year=$b['akyr'];
-                    $ncps=$b['ncps'];
-                    $imgid=$b['imgid'];
-                    $lid=$b['lid'];
-                    $img=mysql_query("select * from MIMGT where imgid='$imgid'");
-                    $image=mysql_fetch_array($img);
-                    $imguri=$image['imguri'];
-                    echo "<form action='#' method='post'>";
-                    echo "<tr><td><input type='radio' name='lid' value='$lid' required='true'></td>";
-                    if($imguri==NULL)
-                        echo "<td>No cover Image</td>";
-                    else
-                        echo "<td><img src='../$imguri' width='100'></td>";
-                    echo "<td>$bid</td>";
-                    echo "<td>$bname</td>";
-                    echo "<td>$bauthor</td>";
-                   echo "<td>$pub</td>";
-                   echo "<td>$edition</td>";
-                   echo "<td>".getBranch($brid)."</td>";
-                   echo "<td>".getReg($reg)."</td>";
-                   echo "<td>".getYear($year)."</td>";
-                   echo "<td>$ncps</td>";
-                   echo "</tr>";
-                }   
-            
-                echo "</table><br>
-                <input type='submit' name='phase1' value='Edit'>
-                </form>";
-                }
+            <form action='#' method='post'>";
+            $bk=mysql_query("select * from MLIBRARYT");
+            while($b=mysql_fetch_array($bk))
+            {
+                $lid=$b['lid'];
+                $bid=$b['bookid'];
+                $bname=$b['bname'];
+                $bauthor=$b['bauthor'];
+                $pub=$b['bpub'];
+                $reg=$b['breg'];
+                $edition=$b['bedition'];
+                $brid=$b['brid'];
+                $year=$b['akyr'];
+                $ncps=$b['ncps'];
+                $imgid=$b['imgid'];
+                $lid=$b['lid'];
+                $img=mysql_query("select * from MIMGT where imgid='$imgid'");
+                $image=mysql_fetch_array($img);
+                $imguri=$image['imguri'];
+                echo "<form action='#' method='post'>";
+                echo "<tr><td><input type='radio' name='lid' value='$lid'></td>";
+                if($imguri==NULL)
+                    echo "<td>No cover Image</td>";
+                else
+                    echo "<td><img src='../$imguri' width='100'></td>";
+                echo "<td>$bid</td>";
+                echo "<td>$bname</td>";
+                echo "<td>$bauthor</td>";
+                echo "<td>$pub</td>";
+                echo "<td>$edition</td>";
+                echo "<td>".getBranch($brid)."</td>";
+                echo "<td>".getReg($reg)."</td>";
+                echo "<td>".getYear($year)."</td>";
+                echo "<td>$ncps</td>";
+                echo "</tr>";
             }
+            
+    echo "</table><br>
+    <input type='submit' name='phase1' value='Edit'>
+    </form>";
+    }
     if(isset($_POST['phase1']) && !isset($_POST['phase2']))
     {
         include("../lib/connection.php");

@@ -71,7 +71,7 @@
 </style>
 <body align=center>
 <?php
-include("../lib/connection.php");
+
 $oid = $_COOKIE['object'];
 $imgid=mysql_query("select * from MOBJECTT where oid='$oid'");
 while($img=mysql_fetch_array($imgid))

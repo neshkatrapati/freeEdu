@@ -3,9 +3,6 @@
 </head>
 <body>
 <?php
-include("../lib/connection.php");
-include("../lib/lib.php");
-include("constants.php");
 $oid = $_COOKIE['object'];
 echo "Select an image file on your computer (1MB max):<br>";
 echo "<form name='newad' method='post' enctype='multipart/form-data' action='#'>";
@@ -35,7 +32,6 @@ if(isset($_POST['Submit']))
 			{	
 				echo '<h2>You have exceeded the size limit!</h2>';
 				$errors=1;
-				break;
 			}
 			$image_name=time().'.'.$extension;
 			$newname="../images/faces/".$image_name;

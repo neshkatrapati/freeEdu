@@ -1,7 +1,7 @@
 <?php
 function cheker()
 {
-include("../lib/connection.php");
+include_once("../lib/connection.php");
 $rnum=array();
 $detain=mysql_query("select count(did) as cnt from MDETAINT");
 $didarray=mysql_fetch_array($detain);

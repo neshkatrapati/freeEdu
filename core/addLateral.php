@@ -39,7 +39,7 @@
         $errors=1;
     	if(isset($_POST['submit']))
 	   {
-                include("../lib/connection.php");
+                
                 $bat=$_POST['bat'][0];
                 $srno=$_POST['srno'];
                 $fn=$_POST['fn'];

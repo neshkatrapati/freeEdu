@@ -57,7 +57,7 @@
     }
     if(isset($_POST['phase1']))
     {
-        include("../lib/connection.php");
+    
         $srno = $_POST["rno"];
         $srno= strtoupper($srno);
         $result=mysql_query("select * from MSTUDENTT where srno='$srno'");

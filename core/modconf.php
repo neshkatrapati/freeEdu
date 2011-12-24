@@ -78,11 +78,12 @@
 					$modauth = $mod["mod_authtoken"];
 					$keys = getConfigKeys($modauth);
 					echo "<center><table><th class='red'>Key</th><th class='red'>Value</th>";
-					for($i=0;$i<count($keys);$i++){
+					foreach($keys as $key){
 						echo "<tr>";
-						$key = $keys[$i][0];
-						$value = $keys[$i][1];
-						echo "<td>$key</td>";
+						
+						$keyx = $key[0];
+						$value = $key[1];
+						echo "<td>$keyx</td>";
 						echo "<td>$value</td>";
 						echo "</tr>";
 					}

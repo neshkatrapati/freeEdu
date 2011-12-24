@@ -855,8 +855,8 @@ function queryMe($query)
 {
 
 	
-
 	$sqlresult = mysql_query($query);
+	
 	return mysql_fetch_array($sqlresult);
 
 }
@@ -2501,8 +2501,10 @@ function getModFromToken($token)
 function getAuthToken($modname)
 {
 
+	
 	$x = queryMe("select * from MMODULET where mod_tag='".$modname."'");
-	xDebug($x["mod_authtoken"]);
+	
+	//xDebug($x["mod_authtoken"]);
 	return $x["mod_authtoken"];
 
 }

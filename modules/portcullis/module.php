@@ -1,6 +1,7 @@
 <?php
     require_once "../lib/classes.php";
     require_once "../lib/mod_lib.php";
+    require_once "../lib/lib.php";
     $CONFIG_SUCCESS = "config_success";
     class portcullis_ModuleInfo extends ModuleInfo
     {
@@ -33,7 +34,7 @@
                              array(
                                     "mode" => "marks_portcullis",
                                     "title" => "Import From A Portcullis Database",
-                                    "file" => "portcullis_import.php",
+                                    "file" => "import.php",
                                     "type" => "child",
                                     "parent" => "marks",
                                     "createMenuItem" => "yes",
@@ -52,7 +53,17 @@
   			return $mc;
   		}      
   		public function module_setConfigInfo($params){
-  		  	return "Error!!";	
+  		  	$dbuser = $params["dbuname"];
+  		  	$dbpass = $params["dbpass"];
+  		  	$dbname = $params["dbname"];
+  		  	
+  		  	$mod_auth_token = getAuthToken("portcullis");
+  		  	
+  		  	addConfigKey($mod_auth_token, "dbuser", $dbuser);
+  		  	addConfigKey($mod_auth_token, "dbpass", $dbpass);
+  		  	addConfigKey($mod_auth_token, "dbname", $dbname);
+  		  
+  		  	return "config_success";
   		}
     }
 

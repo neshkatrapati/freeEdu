@@ -73,7 +73,7 @@ function getBranches()
 }
 function getRegulations()
 {	
-	$result = mysql_query("SELECT * FROM MREGT");
+	$result = mysql_query("SELECT * FROM MREGT");	
 	$i =0;
 	while($row = mysql_fetch_array($result))
 	{
@@ -491,7 +491,7 @@ function putMarks($data,$batyr,$brid,$doex,$ros,$akayr)
 }
 function updateMarks($mrid)
 {
-	include_once("connection.php");
+	//include_once("connection.php");
 	$ros=mysql_query('select * from MAVAILT where mrid='.$mrid);
 	while($ROS = mysql_fetch_array($ros))
 	{
@@ -952,7 +952,7 @@ function getFacClasses($name,$fid,$extra)
 
 function totAtt($ppl,$pora,$batid)
 {
-	include_once("connection.php");
+	//include_once("connection.php");
 	$p=explode(".",$ppl);
 	$num=count($p);
 	$set = "";
@@ -1013,7 +1013,7 @@ function getMPeriods($batid,$sec,$date,$fid)
 	$result=mysql_query("select * from SMETAT where batid='$batid' and sec='$sec' order by(pid)");
 	while($res=mysql_fetch_array($result))
 	{
-		include_once("connection.php");
+		//include_once("connection.php");
 		$pid=$res['pid'];
 		$s1=mysql_query("select * from MATDT where sec='$sec' and batid='$batid' and dayid='$date' and sessionid='$pid'");
 		$s2=mysql_fetch_array($s1);
@@ -1061,7 +1061,7 @@ function getMPeriods($batid,$sec,$date,$fid)
 
 function getPeriods($batid,$sec,$date)
 {
-	include_once("connection.php");
+	//include_once("connection.php");
 	$date = strtotime($date);
 	$result=mysql_query("select * from SMETAT where batid='$batid' and sec='$sec' order by(pid)");
 	$get=mysql_query("select sessionid from MATDT where batid='$batid' and sec='$sec' and dayid='$date'");
@@ -1115,7 +1115,7 @@ function getPeriods($batid,$sec,$date)
 
 function geteditPeriods($batid,$sec,$date)
 {
-	include_once("connection.php");
+	//include_once("connection.php");
 	$date = strtotime($date);
 
 	$get=mysql_query("select sessionid from MATDT where batid='$batid' and sec='$sec' and dayid='$date'");
@@ -1209,7 +1209,7 @@ function getdelPeriods($batid,$sec,$date)
 
 function getSubPeriods($batid,$sec,$date,$fid)
 {
-	include_once("connection.php");
+	//include_once("connection.php");
 	$date = strtotime($date);
 	$result=mysql_query("select * from SMETAT where batid='$batid' and sec='$sec' order by(pid)");
 	$get=mysql_query("select sessionid from MATDT where batid='$batid' and sec='$sec' and dayid='$date' and fid='$fid'");
@@ -1351,7 +1351,7 @@ function check($checker)
 function uploadAtt($batid,$sec,$ppl,$pora,$subid,$fid,$per,$date)
 {
 
-	include_once("connection.php");
+	//include_once("connection.php");
 	$att=mysql_query("select * from MATDT");
 	$aid=mysql_num_rows($att);
 	mysql_query("insert into MATDT values('$aid','$fid','$batid','$sec','$date','$per','$subid')");
@@ -1850,7 +1850,7 @@ function getBranchFromSrno($srno)
 }
 function tpercent($rno)
 {
-	include_once("connection.php");
+	//include_once("connection.php");
 	$student=mysql_query("select * from MSTUDENTT where srno='$rno'");
 	$s=mysql_fetch_array($student);
 	$sid=$s['sid'];
@@ -2070,7 +2070,7 @@ function xDebug($debug)
 }
 function createStudentUser($sid,$uname,$pass)
 {
-	include_once("connection.php");
+	//include_once("connection.php");
 	mysql_query("Update MOBJECTT set ologin='".$uname."' where obhandle='".$sid."' and otyid='0'");
 	mysql_query("Update MOBJECTT set opwd='".$pass."' where obhandle='".$sid."' and otyid='0'");
 	xDebug("Update MOBJECTT set ologin='".$uname."' where obhandle='".$sid."' and otyid='0'");
@@ -2184,7 +2184,7 @@ function getExtension($str)
 function getFacultyForClassAsSelect($batid1,$sec1)
 {
 
-	include_once("connection.php");
+	//include_once("connection.php");
 
 	 
 	$ret = "Select Faculty : <select name='fid'>";
@@ -2203,7 +2203,7 @@ function getFacultyForClassAsSelect($batid1,$sec1)
 function getFacultyForClass($batid1,$sec1)
 {
 
-	include_once("connection.php");
+	//include_once("connection.php");
 	//$ret .= "<option value='null'>--Faculty--</option>";
 	$f=mysql_query("select * from MFACULTYT where fcourse like '%$batid1$sec1%'");
 	$ret = array();

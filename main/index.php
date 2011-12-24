@@ -115,14 +115,14 @@ function showModuleDetails(value,element)
  </head>
 <body>
 <?php
-
+require_once '../lib/connection.php';
 include_once("../lib/menu2.php");
 include_once("../lib/graphs.php");
 include_once("../lib/lib.php");
 include_once("../misc/constants.php");
 include_once("../core/interfaces.php");
 require_once("../lib/boxes.php");
-require_once '../lib/connection.php';
+
 //require("../lib/classes.php");
 
 

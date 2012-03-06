@@ -19,7 +19,7 @@
 <?php
 echo "";
 	
-			include("ob_lib.php");
+			include_once("ob_lib.php");
 			$otid = $_GET["otid"];
 			
 			if(isAuth(getCurrentObject(),$otid))
@@ -27,10 +27,11 @@ echo "";
 						echo "<fieldset><legend>Objective Submission</legend>";
 						echo "<a href='?m=ot_edit&otid=".$otid."' style='float:left;'>Go Back</a><br>";
 						$entry = getObjectiveEntry($otid);
-						$subi = getSubmission($_GET["otid"],$stu["sid"]);
 						
 						$obj = getObject($_GET["oid"]);
 						$stu = getStudent($obj["obhandle"]);
+						$subi = getSubmission($_GET["otid"],$stu["sid"]);
+
 						$suba = getSubmissionAsArray($subi["submid"]);
 						$image = getImgUri($obj["imguri"]);
 						$questions = getQuestions($otid);

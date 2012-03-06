@@ -82,7 +82,7 @@
 </script>
 <?php
     echo "<fieldset>";
-    include("ob_lib.php");
+    include_once("ob_lib.php");
     if(isset($_GET["otid"]))
     {
 	
@@ -126,7 +126,7 @@
 			<br><div style='float:right;margin-right:10px;text-align:center'>
 			<a href='?m=ot_ques&mode=add&otid=".$otid."'>
 			<img src='../images/others/add.png' style='margin-left:20px' width='25' hieght='25'></img></a></div>
-			<h4>Questions</h4></th>";
+			Questions</th>";
 			
 			for($i=0;$i<count($questions);$i++)
 			{

@@ -6,9 +6,6 @@ echo "<center>";
 //Getting Branches And Regulations 
 echo "<form method='post' action='#'>";
 
-$clsname = "Constants";
-$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-mysql_select_db($clsname::$dbname, $con);	
 
 $query = 'SELECT count(fid) as cnt from MFACULTYT';
 $result = mysql_query($query);

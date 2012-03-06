@@ -42,7 +42,7 @@
 <form method="post" action="#">
     	
             <?php
-                include("as_lib.php");
+                include_once("as_lib.php");
 		
                $asid = $_GET["asid"];
 	       $ass = getAssignment($asid);
@@ -72,7 +72,7 @@
 }
 else if(isset($_POST["phase1"]))
 {
-          include("as_lib.php");    
+          include_once("as_lib.php");    
         updateAssignment($_POST["asid"],$_POST["elm1"]);
         notify("Assignment Edited");
         redirect("?m=ass_see&asid=".$_POST["asid"]);

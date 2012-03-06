@@ -1,9 +1,7 @@
 <?php
     function createObjectiveTest($otname,$otdate,$otsub,$otcnt,$otthresh,$otdline,$ottt,$oid,$batid,$sec)
     {
-        $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
+    
 	
         $result = mysql_query("select * from OTAVAILT");
         $rows = mysql_num_rows($result);
@@ -16,10 +14,6 @@
     }
     function putSubmission($sid,$detail,$date,$res,$otid)
     {
-        $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
         $result = mysql_query("select * from MSUBMISSIONT");
         $rows = mysql_num_rows($result);
 	
@@ -32,9 +26,6 @@
 	
 	$array = explode(';',$detail);
 	//print_r($array);
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
 	$result = 0;
 	for($i=0;$i<count($array);$i++)
 	{
@@ -54,10 +45,7 @@
     }
     function updateObjectiveTest($otid,$otname,$otdate,$otsub,$otdline,$ottt,$batid,$sec)
     {
-        $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
+        
         mysql_query("update OTAVAILT set otname = '".$otname."' where otid like '".$otid."'");
 	mysql_query("update OTAVAILT set otdate = '".strtotime($otdate)."' where otid like '".$otid."'");
 	mysql_query("update OTAVAILT set otsub = '".$otsub."' where otid like '".$otid."'");
@@ -125,10 +113,7 @@
     function putQuestion($otid,$ques,$optext,$opcorrect)
     {
         
-        $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
+        
         $result = mysql_query("select * from MOTESTT");
         $rows = mysql_num_rows($result);
         
@@ -142,10 +127,6 @@
     function editQuestion($motid,$ques,$optext,$opcorrect)
     {
         
-        $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
         $result = mysql_query("select * from MOTESTT");
         $rows = mysql_num_rows($result);
         
@@ -160,9 +141,6 @@
     }
     function updateQuestionCount($otid,$otcnt)
     {
-	 $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
 	      
         mysql_query("update OTAVAILT set otcnt='".$otcnt."' where otid like '".$otid."'");
        
@@ -170,9 +148,6 @@
     }
     function updateQuestionTreshold($otid,$ottresh)
     {
-	 $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
 	      
         mysql_query("update OTAVAILT set otthresh='".$ottresh."' where otid like '".$otid."'");
        
@@ -180,11 +155,6 @@
     }
     function getQuestions($otid)
     {
-        
-        $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
         $result = mysql_query("select * from MOTESTT where otid like '".$otid."' order by(motid) ASC");
         $returnLinks = array();
 	$i=0;
@@ -223,10 +193,7 @@
     function getQuestionAsArray($motid)
     {
         
-        $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
+        
         $result = mysql_query("select * from MOTESTT where motid like '".$motid."' order by(motid) ASC");
         $returnLinks = array();
 	$i=0;
@@ -262,9 +229,6 @@
     }
     function getObjectiveEntries($batid,$sec,$obid='%')
     {
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
 	
 	$query = "SELECT * From OTAVAILT where batid like '".$batid."' and sec like '".$sec."'";
 	$result = mysql_query($query);
@@ -308,10 +272,7 @@
     function getSubmissionAsArray($submid)
     {
         
-        $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
+        
         $result = mysql_query("select * from MSUBMISSIONT where submid like '".$submid."' order by(submid) ASC");
         $returnLinks = array();
 	$row=mysql_fetch_array($result);
@@ -352,9 +313,6 @@
     
     function getObjectiveEntryAsArray($otid)
     {
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
 	
 	$query = "SELECT * From OTAVAILT where otid like '".$otid."'";
 	$result = mysql_query($query);
@@ -401,9 +359,6 @@
     
     function getObjectiveEntriesByOid($oid)
     {
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
 	
 	$query = "SELECT * From OTAVAILT where oid like '".$oid."'";
 	$result = mysql_query($query);
@@ -452,22 +407,70 @@
 	}
        return $returnLinks;
     }
+ function getObjectiveEntriesByBatIdSec($batid,$sec)
+    {
+	
+	$query = "SELECT * From OTAVAILT where batid like '".$batid."' and sec like '$sec'";
+	$result = mysql_query($query);
+	$returnLinks = array();
+	$i=0;
+	while($row=mysql_fetch_array($result))
+	{
+	    $otid = $row["otid"];
+		$oid = $row["oid"];
+	    $otname = $row["otname"];
+	    $otdate = $row["otdate"];
+	    $otsub = $row["otsub"];
+	    $otcnt = $row["otcnt"];
+	    $otthresh = $row["otthresh"];
+	    $otdline = $row["otdline"];
+	    $ottt = $row["ottt"];
+	    $obatid = $row["batid"];
+	    $osec = $row["sec"];
+	    
+	    
+	    $returnLinks[$i] = array();
+	    $returnLinks[$i]["Name"] = $otname;
+	    $returnLinks[$i]["Cdate"] = date("d-M-Y",$otdate);
+	    $returnLinks[$i]["Edate"]= date("d-M-Y",$otdline);
+	    $returnLinks[$i]["Id"] = $otid;
+	    $returnLinks[$i]["Thresh"] = $otthresh;
+	    $returnLinks[$i]["Timelt"] = $ottt;
+	    $returnLinks[$i]["Count"] = $otcnt;
+	    $subject = getSubject($otsub);
+	    $subob = getObjectByType("2",$otsub);
+	    $returnLinks[$i]["Subject"] = array();
+	    $returnLinks[$i]["Subject"]["Id"] = $otsub;
+	    $returnLinks[$i]["Subject"]["Name"] = $subject["subname"];
+	    $returnLinks[$i]["Subject"]["Link"] = "?m=p&id=".$subob["oid"] ;
+	    $returnLinks[$i]["Object"] = $oid;
+	    $returnLinks[$i]["Class"] = array();
+	    $returnLinks[$i]["Class"]["Id"] = $obatid;
+	    $returnLinks[$i]["Class"]["Sec"] = $osec;
+	    
+	    $array2 = queryMe("select (select brname from MBRANCHT br where br.brid=ba.brid) as brname,akayr from MBATCHT ba where batid like '".$obatid."'");
+	    $batch = $array2['brname']." ".getFullClass($array2['akayr']+1)." Section: ".$osec;
+	    $link =  "?m=src&q=%&t=0&ip=n&op=c&c=".$obatid.":".$osec;
+	    
+	    $returnLinks[$i]["Class"]["Name"] = $batch;
+	    $returnLinks[$i]["Class"]["Link"] = $link;
+	    $returnLinks[$i]["Link"] = curPageURL()."&otid=".$otid;
+	    $i++;
+	}
+       return $returnLinks;
+    }
     function checkSubmitted($otid,$sid)
     {
 	//xDebug("select * from MSUBMISSIONT where sid like '".$sid."' and otid like '".$otid."'");
 	$res = mysql_query("select * from MSUBMISSIONT where sid like '".$sid."' and otid like '".$otid."'");
 	xDebug(mysql_num_rows($res));
 	if(mysql_num_rows($res)==0)
-	    return false;
+	    return FALSE;
 	else
-	    return true;
+	    return TRUE;
     }
     function getSubmissionsForOtid($otid)
     {
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
 	$res = mysql_query("select * from MSUBMISSIONT where otid='".$otid."' order by(date)");
 	$returnX = array();
 	
@@ -492,10 +495,6 @@
     }
     function getSubmissionCount($otid)
     {
-	
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
 	
 	$res = mysql_query("select * from MSUBMISSIONT where otid='".$otid."' order by(date)");
 	return mysql_num_rows($res);

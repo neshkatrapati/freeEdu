@@ -9,12 +9,9 @@
 	}
 	else
 	{	
-		include("misc/constants.php");
+		require_once("../lib/connection.php");
 
-		$clsname = "Constants";
-		$batname = $clsname::$batname;
-		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-		mysql_select_db($clsname::$dbname, $con);
+		
 		$result = mysql_query("SELECT oid FROM MOBJECTT where ologin='".$ologin."' and opass='".$opass."'");
 		$row = mysql_fetch_array($result);
 		setcookie('object',$row["oid"]);
@@ -22,12 +19,8 @@
 	}
 	function val($ologin,$opass)
 	{
-		include("misc/constants.php");
+require_once("../lib/connection.php");
 
-		$clsname = "Constants";
-		$batname = $clsname::$batname;
-		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-		mysql_select_db($clsname::$dbname, $con);
 		$result = mysql_query("SELECT ologin,opass FROM MOBJECTT where ologin='".$ologin."' and opass='".$opass."'");
 		return mysql_num_rows($result);
 

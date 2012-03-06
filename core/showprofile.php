@@ -1,11 +1,8 @@
 <?php
-include("../misc/constants.php");
+include_once("../lib/connection.php");
 function fetchProfile($objectid)
 {
 
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
 	$query = "SELECT obname, (SELECT imguri FROM MIMGT i WHERE i.imgid = o.oimgid) img, obhandle FROM MOBJECTT o WHERE oid ='".$objectid."'";
 	$result = mysql_query($query);
 	$row = mysql_fetch_array($result);

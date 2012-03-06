@@ -1,6 +1,7 @@
-Steps For Installing |
----------------------
---------------------------------------
+-------------------------------------------------------------------------------
+Steps For Installing 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 1. download source from https://github.com/freeEdu/freeEdu [Place @ /var/www]
 2. download sql from http://is.gd/freeedu_sql 
 3. download these files 
@@ -12,3 +13,5 @@ Steps For Installing |
 7. edit connection.php also in the same way
 8. Bingo You Are Done! hit localhost/freeEdu .. 
 9. Hit the help icon for login! 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------

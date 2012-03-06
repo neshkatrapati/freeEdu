@@ -1,10 +1,12 @@
 <?php
-    $authtoken = getAuthToken("feedback");
+
+	//require_once '../../lib/lib.php';    
+
+	$authtoken = getAuthToken("feedback");
+    
     function createFeedback($oid,$fbname,$cdate,$edate,$fbmin,$fbmax,$batid,$sec)
     {
-        $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
+    
 	
         $result = mysql_query("select * from FBAVAILT");
         $rows = mysql_num_rows($result);
@@ -16,9 +18,6 @@
     }
     function getFeedbackEntries($batid,$sec)
     {
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
 	
 	$query = "SELECT * From FBAVAILT where batid like '".$batid."' and sec like '".$sec."'";
 	$result = mysql_query($query);
@@ -42,17 +41,19 @@
     }
     function getFeedback($fid)
     {
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
 	$query = "SELECT * From MFEEDBACKT where fbid like '".$fid."'";
 	$query2 = "SELECT distinct fid from MFEEDBACKT where fbid like '".$fid."'";
 	$query3 = "SELECT distinct sid from MFEEDBACKT where fbid like '".$fid."'";
 	$result1 = mysql_query($query);
 	$result2 = mysql_query($query2);
 	$result3 = mysql_query($query3);
-	
+	if(mysql_num_rows($result1) <= 0)
+	{
+
+	//	notifywar("No Submissions to show <a href='?m=fb_get'>Click Here To Go Back!</a>");
+	redirect("?m=fb_get");
+	notifywar("No Submissions to show");
+	}
 	$fbentry = getFeedbackEntry($fid);
 	$fbname = $fbentry["fbname"];
 	
@@ -71,7 +72,7 @@
 	$totalrating = array();
 	while($row2 = mysql_fetch_array($result3))
 	{
-	    $sql = "SELECT * FROM MFEEDBACKT where sid like '".$row2['sid']."'";
+	    $sql = "SELECT * FROM MFEEDBACKT where sid like '".$row2['sid']."' and fbid = '$fid'";
 	    $sqlres = mysql_query($sql);
 	    $student = getStudent($row2["sid"]);
 	    $ret .= "<tr><td>".$student["srno"]."</td>"; 
@@ -110,10 +111,6 @@
     }
     function putFeedback($sid,$feedback,$fbid)
     {
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
 	$result = mysql_query("select * from MFEEDBACKT");
 	$id = mysql_num_rows($result);
 	for($i=0;$i<count($feedback);$i++)
@@ -149,10 +146,6 @@
     }
     function checkSubmitted($fbid,$sid)
     {
-	
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
 	
 	//echo  $fbid." ".$sid;
 	$result = mysql_query("select * from MFEEDBACKT where fbid like '".$fbid."' and sid like '".$sid."'");

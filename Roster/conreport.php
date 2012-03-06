@@ -30,9 +30,10 @@ if(isset($_POST['phase1']))
 {
 	$bat = $_POST['cls'];
 	
-	$batdet = explode(":",$_POST['cls'][0]);
+	$batdet = explode(":",$_POST['cls']);
 	$batid = $batdet[0];
 	$sec = $batdet[1];
+	
 	$datein = $_POST["datein"];
         $dateout = $_POST['dateout'];
 	$in=strtotime($datein);

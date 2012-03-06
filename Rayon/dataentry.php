@@ -58,7 +58,7 @@
             	<?php
 		if (isset($_POST['sub']))
       		{
-		include("insert.php");	     
+		include_once("insert.php");	     
 		mavailt();         	
 		?>
 		
@@ -94,7 +94,7 @@
 		}
 		if(isset($_POST['update']))
 		{
-		include("insert.php");		
+		include_once("insert.php");		
 		mmarkst();
 		}
 		echo "<div align=center>";

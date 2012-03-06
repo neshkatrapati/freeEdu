@@ -81,7 +81,7 @@
     }
     if(isset($_POST['phase1']))
     {
-        include("../lib/connection.php");
+        include_once("../lib/connection.php");
         $date = strtotime($date);
         $per=$_POST['per'];
         $batid=$_POST['batid'];
@@ -174,7 +174,7 @@
     }
     if(isset($_POST['phase2']) && !isset($_POST['phase3']))
     {
-        include("../lib/connection.php");
+        include_once("../lib/connection.php");
         $chk=$_POST[chk];
         $len=count($chk);
         $per=$_POST['per'];

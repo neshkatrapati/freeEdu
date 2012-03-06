@@ -2,7 +2,7 @@
 <?php
 	require_once "../../lib/mod_lib.php";
 	require_once "../../lib/lib.php";
-	require_once "../../misc/constants.php";
+	require_once "../../lib/connection.php";
 	$auth = getAuthToken("feedback");
 	if(!isset($_POST['phase1'])){
 		

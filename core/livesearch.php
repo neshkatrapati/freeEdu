@@ -6,12 +6,10 @@ $t='';
 if(array_key_exists('t',$_GET))
 	$t = $_GET['t'];
 
-include("../misc/constants.php");
-include("../lib/lib.php");
-$clsname = "Constants";
-$batname = $clsname::$batname;
-$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-mysql_select_db($clsname::$dbname, $con);
+require_once '../lib/connection.php';
+include_once("../lib/lib.php");
+
+
 if($t=="")
 {
 	

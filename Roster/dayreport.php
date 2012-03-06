@@ -35,7 +35,7 @@ function printer()
 
 echo "<fieldset><legend>Day Report</legend><center><form action='#' method='post'>";
 echo getClassesAsSelect("cls[]","");
-echo "<input type='text' id='inputField' name='date' /><br><br /><select name='bunk[]'><option value='0'>Standard</option><option value='1'>Partially Present</option><option value='2'>Any Absentees</option></select><input type='submit' name='phase1'><br /><a href='' onclick='printer()'>Print</a></form>";
+echo "&emsp;<input type='text' id='inputField' name='date' /><br><br /><select name='bunk[]'><option value='0'>Standard</option><option value='1'>Partially Present</option><option value='2'>Any Absentees</option></select>&emsp;<input type='submit' name='phase1'><br />&emsp;<a href='' onclick='printer()'>Print</a></form>";
 echo "<div id='printarea'>";
 if(isset($_POST['phase1']))
 {

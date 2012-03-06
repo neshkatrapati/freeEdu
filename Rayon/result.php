@@ -1,7 +1,7 @@
 		<html>
 		<body>
 	<?php
-	include("../lib/connection.php");
+	include_once("../lib/connection.php");
 		$brid=$_GET['brid'];
 		$batyr=$_GET['batyr'];
 		$query=mysql_query("SELECT * FROM MBATCHT WHERE brid='$brid' AND batyr='$batyr' ") or die(mysql_error());

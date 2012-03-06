@@ -1,7 +1,7 @@
 
 <?php
-    include("lib.php");
-    include("../misc/constants.php");
+    
+    
     echo "<link rel='stylesheet' href='../aux/demo/menu.css' type='text/css' media='screen'>
 <link rel='stylesheet' href='../aux/pagestyles/style.css' type='text/css' media='screen'>
 <link rel='stylesheet' href='../aux/pagestyles/profiles.css' type='text/css' media='screen'>

@@ -3,6 +3,7 @@
 </head>
 <body>
 <?php
+require_once '../lib/connection.php';
 $oid = $_COOKIE['object'];
 echo "Select an image file on your computer (1MB max):<br>";
 echo "<form name='newad' method='post' enctype='multipart/form-data' action='#'>";

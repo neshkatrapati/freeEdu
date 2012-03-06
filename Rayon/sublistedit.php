@@ -5,7 +5,7 @@
             <center>
                 <form action='#' method='post'>
                 <?php
-				include("../lib/connection.php");
+				include_once("../lib/connection.php");
                     if(!isset($_POST['phase1']))
                     {
                         $placeBranch = "";
@@ -65,7 +65,7 @@
 		}
 		if(isset($_POST['phase2']))
 		{
-				include("../lib/connection.php");
+				include_once("../lib/connection.php");
 			$num=$_POST['num'];
 			for($i=0;$i<$num;$i++)
 			{

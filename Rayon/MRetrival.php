@@ -63,7 +63,7 @@ Roll Number: <input type="text" name="srno" /><br><br><br>
 		  $srno=$_POST['srno'];
 		  if($obrid=='%' || $brid==$obrid)
 		  {
-		    include("Retrival.php");
+		    include_once("Retrival.php");
 		    retrival($srno);
 		  }
 		  else

@@ -83,9 +83,7 @@ $(function () {
 
 function getStuGraph($sid,$datein,$dateout)
 {
-    $clsname = "Constants";
-    $con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-    mysql_select_db($clsname::$dbname, $con);
+ 
     $return = "";
     $bA = queryMe("SELECT batid,sec FROM MSTUDENTT WHERE sid like '".$sid."'");
     $batid = $bA["batid"];

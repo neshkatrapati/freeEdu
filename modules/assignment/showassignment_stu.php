@@ -1,11 +1,14 @@
 <?php
-include("as_lib.php");
 
+include_once("as_lib.php");
+//echo "Hello";
 if(!isset($_GET["asid"]))
 {
+
     echo "<center><fieldset><legend>Assignment List</legend>";
     $object = getObject($_COOKIE["object"]);
     $student = getStudent($object["obhandle"]);
+
    $entries = getAssignmentEntriesForBatch($student["batid"],$student["sec"]);
    //print_r($entries);
     if(count($entries)>0)

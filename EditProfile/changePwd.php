@@ -15,7 +15,7 @@ echo "<input type='submit' name='pwd'>";
 echo "</form>";
 if(isset($_POST['pwd']))
 {
-	include("../lib/connection.php");
+	include_once("../lib/connection.php");
 	$oid = $_COOKIE['object'];
 	$opswd=$_POST['opswd'];
 	$npwd=$_POST['npwd'];

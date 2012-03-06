@@ -31,8 +31,7 @@ function validator()
 	else if($n==1)
 	{
 
-		$con = mysql_connect("localhost","root","1234");
-		mysql_select_db("freeedu", $con);
+		require_once '../lib/connection.php';
 		$result = mysql_query("SELECT oid FROM MOBJECTT");
 		$result2 = mysql_query("SELECT fid FROM MFACTT");
 		$num1 = mysql_num_rows($result);

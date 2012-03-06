@@ -1,7 +1,7 @@
 <?php
 
-    
-    include("fb_lib.php");
+
+    include_once("fb_lib.php");
     
     $object = getObject($_COOKIE["object"]);
     $student = getStudent($object["obhandle"]);

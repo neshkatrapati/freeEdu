@@ -10,7 +10,7 @@
 	};
 </script>
 <?php
-include("fb_lib.php");
+include_once("fb_lib.php");
 if(!isset($_POST["phase1"]))
 {
     echo "<fieldset><legend>Create A Feedback Form</legend><center><form action='#' method='post'>";
@@ -37,7 +37,7 @@ else
     $fbmax = $_POST["max"];
     
     $fbid = createFeedback($oid,$fbname,$cdate,$edate,$fbmin,$fbmax,$batid,$sec);
-    notify("Feedback Created! See It <a href=?m=fbget&fbid=".$fbid.">Here</a>");
+    notify("Feedback Created! See It <a href=?m=fb_get&fbid=".$fbid.">Here</a>");
    // redirect("?m=fbcreate");
 }
 ?>

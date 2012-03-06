@@ -1,14 +1,13 @@
+<?php $con = mysql_connect("localhost","root","1234");
+	mysql_select_db("freeEdu", $con);  ?>
+<?php require_once '../../lib/lib.php';    ?>
 <?php
     $fid = $_POST["fbid"];
-    include("fb_lib.php");
-    //include("../../misc/constants.php");
-     require_once 'Spreadsheet/Excel/Writer.php';
-        require '../../misc/constants.php';
-         require '../../lib/lib.php';
-    $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
+    include_once("fb_lib.php");
+    
+    require_once 'Spreadsheet/Excel/Writer.php';
+    
+    
 	$query = "SELECT * From MFEEDBACKT where fbid like '".$fid."'";
 	$query2 = "SELECT distinct fid from MFEEDBACKT where fbid like '".$fid."'";
 	$query3 = "SELECT distinct sid from MFEEDBACKT where fbid like '".$fid."'";

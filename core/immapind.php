@@ -42,11 +42,9 @@
         $subid = $_GET["subid"];
         //echo "Select A Book";
         //require_once "../lib/lib.php";
-        include("../misc/constants.php");
+       require_once '../lib/connection.php';
          echo "<form action='#' method='post'>";
-         $clsname = "Constants";
-        $con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-        mysql_select_db($clsname::$dbname, $con);
+        
         $subres = mysql_query("SELECT * from MSUBJECTT where subid like '".$subid."'");
 	    $cnt = 0;
          while($row = mysql_fetch_array($subres))
@@ -135,7 +133,7 @@
 
     function queryMe($query)
 	{
-		include("../misc/constants.php");
+		require_once("../lib/connection.php");
 		$clsname = "Constants";
 		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
 		mysql_select_db($clsname::$dbname, $con);

@@ -1,5 +1,6 @@
 <?php
 	require_once '../lib/connection.php';
+	require_once '../lib/classes.php';
 	$CONFIG_SUCCESS = "config_success";
 	function addConfigKey($mod_auth_token,$key,$value){
 		
@@ -18,9 +19,6 @@
 		}
 	}
 	function getConfigValue($mod_auth_token,$key){
-		$clsname = "Constants";
-		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-		mysql_select_db($clsname::$dbname, $con);
 	
 		$x = mysql_query("select * from MMODULET where mod_authtoken='".$mod_auth_token."'");
 		if(!$x){

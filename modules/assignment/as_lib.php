@@ -2,9 +2,6 @@
 
     function putAssignment($asname,$oid,$batid,$sec,$subid,$contents)
     {
-        $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
 	
         $result = mysql_query("select * from MASSIGNMENTT");
         $rows = mysql_num_rows($result);
@@ -19,10 +16,7 @@
     }
     function updateAssignment($asid,$contents)
     {
-        $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
+     
         $docpath = "../modules/assignment/docs/".uniqid().".html";
         file_put_contents($docpath,$contents);
         mysql_query("update MASSIGNMENTT set docpath='".$docpath."' where asid like '".$asid."'");	
@@ -30,29 +24,18 @@
     }
     function getAssignmentContent($asid)
     {
-        $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
+     
         $result = queryMe("select * from MASSIGNMENTT where asid like '".$asid."'");
         $data = file_get_contents($result["docpath"]);
         return $data;
     }
     function getAssignment($asid)
     {
-        $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
         $result = queryMe("select * from MASSIGNMENTT where asid like '".$asid."'");
         return $result;
     }
     function getAssignmentEntries($oid)
     {
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
 	$query = "SELECT * From MASSIGNMENTT where oid like '".$oid."'";
 	$result = mysql_query($query);
 	$returnLinks = array();
@@ -74,10 +57,6 @@
     
     function getAssignmentEntriesForBatch($batid,$sec)
     {
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
 	$query = "SELECT * From MASSIGNMENTT where batid like '".$batid."' and sec like '".$sec."'";
 	$result = mysql_query($query);
 	$returnLinks = array();

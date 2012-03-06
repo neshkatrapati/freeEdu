@@ -3,10 +3,7 @@ function getResult($q,$t,$ip,$op,$b,$c)
 {
 	
 	$q = strtoupper($q);	
-	$clsname = "Constants";
-	$batname = $clsname::$batname;
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
+
 	echo "<fieldset><br>";
 	if($t=="")
 	{

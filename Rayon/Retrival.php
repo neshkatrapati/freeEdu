@@ -1,7 +1,7 @@
 <?php
 function retrival($srno)
 {
-include("../lib/connection.php");
+include_once("../lib/connection.php");
 $newakyr=-1;
 $srno= strtoupper($srno);
 $result=mysql_query("select * from MSTUDENTT where srno='$srno'");
@@ -65,7 +65,7 @@ if($did>=0)
 	}
 
 }
-include("Detain.php");
+include_once("Detain.php");
 $branch=mysql_query("select * from MBATCHT where batid='$batid'");
 while($br = mysql_fetch_array($branch))
 {

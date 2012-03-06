@@ -1,11 +1,9 @@
 <?php
 	$q = $_GET['q'];
-	include("../misc/constants.php");
+	require_once("connection.php");
 	$exparray = explode(':',$q);
 	$batid = $exparray[0];
-	$clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
+	
 	
 	$sql2 = "select * from MBATCHT where batid like '".$batid."'";
 	$result2 = mysql_query($sql2);

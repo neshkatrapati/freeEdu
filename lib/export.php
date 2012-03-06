@@ -1,19 +1,10 @@
+<?php 
+    	$con = mysql_connect("localhost","root","1234");
+	mysql_select_db("freeEdu", $con);
+?>
 <?php
-        /*
-                $Id: report_all.php,v 1.1 2004/08/30 16:03:40 chris Exp $
-                generate a spreadsheed from and addressbook in mysql database.
-        */
-
-       
-        
         require_once 'Spreadsheet/Excel/Writer.php';
-        require '../misc/constants.php';
-       
-        $clsname = "Constants";
-	$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-	mysql_select_db($clsname::$dbname, $con);
-	
-        
+             
         $docname = 'Internals.xls';
         
         $workbook = new Spreadsheet_Excel_Writer();

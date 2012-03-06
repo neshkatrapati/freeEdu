@@ -18,6 +18,9 @@ You should have received a copy of the Affero GNU General Public License
 along with FreeEdu.  If not, see <http://www.gnu.org/licenses/>.*/?>
 <html>
 <head> 
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="../aux/demo/menu.css" type="text/css" media='screen'>
 <link rel="stylesheet" href="../aux/pagestyles/style.css" type="text/css" media='screen'>
 <link rel="stylesheet" href="../aux/pagestyles/profiles.css" type="text/css" media='screen'>
@@ -26,7 +29,7 @@ along with FreeEdu.  If not, see <http://www.gnu.org/licenses/>.*/?>
 <script type="text/javascript" src="../aux/thickbox/thickbox.js"></script>
 <script language="javascript" type="text/javascript" src="../lib/flot/jquery.flot.js"></script>
 <link rel="stylesheet" href="../aux/thickbox/ThickBox.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="../aux/bootstrap/bootstrap-1.0.0.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../aux/bootstrap/css/bootstrap.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../lib/nyromodal/styles/nyroModal.css" type="text/css" media="screen" />
  <script type="text/javascript" src="../lib/nyromodal/js/jquery.nyroModal.custom.js"></script>
 <link href="../aux/bootstrap/docs/assets/js/google-code-prettify/prettify.css" rel="stylesheet" type="text/css">
@@ -35,6 +38,7 @@ along with FreeEdu.  If not, see <http://www.gnu.org/licenses/>.*/?>
 <script type="text/javascript" src="../aux/stars/jquery.starRating.js"></script>
 <link rel="stylesheet" type="text/css" media="all" href="../aux/calendar/jsDatePick_ltr.min.css" />
 <script type="text/javascript" src="../aux/calendar/jsDatePick.min.1.3.js"></script>
+<script src='../aux/bootstrap/js/bootstrap.js' ></script>
 
 <script type="text/javascript">
 $(function() {
@@ -45,8 +49,11 @@ $(function() {
 
 
 </script>
-
-
+<style>
+	input[type='text']{height:auto;}
+	input[type='number']{height:auto;}
+	input[type='password']{height:auto;}
+</style>
 <title>FreeEdu-CMS</title>
 <link rel="icon" href="../images/icon.png" type="image/x-icon" /> 
 <link rel="shortcut icon" href="../images/icon.png" type="image/x-icon" /> 
@@ -76,6 +83,7 @@ function omniMeth(str,elementname)
 	xmlhttp.open("GET",string,true);
 	xmlhttp.send();
 }
+
 function show(value,element)
 			{
 				var ele = document.getElementById(value+"#expand");
@@ -119,7 +127,8 @@ require_once '../lib/connection.php';
 include_once("../lib/menu2.php");
 include_once("../lib/graphs.php");
 include_once("../lib/lib.php");
-include_once("../misc/constants.php");
+include_once("../lib/mod_lib.php");
+include_once("../lib/classes.php");
 include_once("../core/interfaces.php");
 require_once("../lib/boxes.php");
 
@@ -129,7 +138,7 @@ require_once("../lib/boxes.php");
 ?>
 <script type="text/javascript" src="../core/search.js"></script>
 
-<br>
+
 <?php
 $optarray = $_GET;
 $mode="";
@@ -148,6 +157,7 @@ if($_GET["menu"]!="no")
 	//$links = getLinkItems();
 	
 	echo getMenu(getObjectTypeTag($object["otyid"]));
+	
 }
 echo "<br><br>";
 if(array_key_exists("m",$optarray) || !array_key_exists("m",$optarray))
@@ -160,7 +170,7 @@ if($mode==NULL)
 {
 	echo "<div id='sidebar' class='sidebar'>";
 	
-	include("../EditProfile/showProfile.php");
+	include_once("../EditProfile/showProfile.php");
 	
 	showProfile($oid);
 	echo "<br><br>";
@@ -168,6 +178,9 @@ if($mode==NULL)
 	$abcd = freeedu_boxes($obj["otyid"]);
 
 	$boxes = $abcd["left"];
+
+	//print_r(getParentMenus("sudo"));
+	
 	echo "<div style='float:left'>";
 	for($i=0;$i<count($boxes);$i++)
 	{
@@ -278,14 +291,18 @@ else if($mode == "cre")
 else if($mode == "fbimage")
 {
 	//echo "Hello";
-	include("../core/example.php");
+	include_once("../core/example.php");
 }
-
+else if($mode == "mobilemenu")
+{
+	//echo "Hello";
+	include_once("../lib/mobilemenu.php");
+}
 else if($mode=="ba")
 {
 	echo "<div id='content' >";
 	if(isSudo($oid))
-		include("../Rayon/batchadd.php");
+		include_once("../Rayon/batchadd.php");
 	else
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
@@ -550,51 +567,8 @@ else if($mode=="str")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
-else if($mode=="add_ebook")
-{
-	echo "<div id='content'  class='content'>";
-	if(isAlib($oid))
-	{
-		include_once("../modules/library/addEbook.php");
-	}
-	else
-		notifywar("You Are Un Authorised To View This Page");
-	echo "</div>";
-}
-else if($mode=="edit_ebook")
-{
-	echo "<div id='content'  class='content'>";
-	if(isAlib($oid))
-	{
-		include_once("../modules/library/editEbook.php");
-	}
-	else
-		notifywar("You Are Un Authorised To View This Page");
-	echo "</div>";
-}
-else if($mode=="eb")
-{
-	echo "<div id='content'  class='content'>";
-	if(isAlib($oid))
-	{
-		include_once("../modules/library/editBook.php");
-	}
-	else
-		notifywar("You Are Un Authorised To View This Page");
-	echo "</div>";
-}
 
-else if($mode=="ab")
-{
-	echo "<div id='content'  class='content'>";
-	if(isAlib($oid))
-	{
-		include_once("../modules/library/addBook.php");
-	}
-	else
-		notifywar("You Are Un Authorised To View This Page");
-	echo "</div>";
-}
+
 else if($mode=="os")
 {
 	
@@ -620,75 +594,6 @@ else if($mode=="fp")
 	{
 		$array = getObject($_COOKIE['object']); 
 		echo "<center>".getFacPlan($array['obhandle'])."</center>";
-	}
-	else
-		notifywar("You Are Un Authorised To View This Page");
-	echo "</div>";
-}
-
-else if($mode=="ot_create")
-{
-	echo "<div id='content'  class='content'>";
-	if(!isStudent($oid))
-	{
-		include_once("../modules/objective/input.php");
-	}
-	else
-		notifywar("You Are Un Authorised To View This Page");
-	echo "</div>";
-}
-else if($mode=="ot_edit")
-{
-	echo "<div id='content' style='margin-left:20px;margin-right:20px'>";
-	if(true)
-	{
-		include_once("../modules/objective/editobjective.php");
-	}
-	else
-		notifywar("You Are Un Authorised To View This Page");
-	echo "</div>";
-}
-else if($mode=="ot_submit_see")
-{
-	echo "<div id='content' style='margin-left:20px;margin-right:20px'>";
-	if(true)
-	{
-		include_once("../modules/objective/subview.php");
-	}
-	else
-		notifywar("You Are Un Authorised To View This Page");
-	echo "</div>";
-}
-
-else if($mode=="ot_ques")
-{
-	echo "<div id='content'  class='content'>";
-	if(!isStudent($oid))
-	{
-		include_once("../modules/objective/otques.php");
-	}
-	else
-		notifywar("You Are Un Authorised To View This Page");
-	echo "</div>";
-}
-else if($mode=="ot_submit")
-{
-	echo "<div id='content'  class='content'>";
-	if(isStudent($oid))
-	{
-		include_once("../modules/objective/otsubmit.php");
-	}
-	else
-		notifywar("You Are Un Authorised To View This Page");
-	echo "</div>";
-}
-
-else if($mode=="ot_edit_meta")
-{
-	echo "<div id='content'  class='content'>";
-	if(!isStudent($oid))
-	{
-		include_once("../modules/objective/editmeta.php");
 	}
 	else
 		notifywar("You Are Un Authorised To View This Page");
@@ -762,118 +667,7 @@ else if($mode=="create_student")
 		notifywar("You Are Un Authorised To View This Page");
 	echo "</div>";
 }
-else if($mode=="feedback")
-{
-	echo "<div id='content' class='content'>";
-	if(isSudo($oid))
-	{
-		include_once("../core/feedback.php");
-	}
-	else
-		notifywar("You Are Un Authorised To View This Page");
-	echo "</div>";
-}
-else if($mode=="cflow")
-{
-	echo "<div id='content' class='content'>";
-	if(isSudo($oid))
-	{
-		
-		echo "<div id='coverflowHolder'>
 
-<div id='__cvfl-coverflow-holder' style='display:none'><div id='__cvfl-coverflow'>
-<div id='__cvfl-coverflow-wrapper'></div>
-<div id='smallerPreview'></div>
-<div id='__cvfl-coverflow-label'></div>";
-		echo "<SCRIPT type='text/javascript'>
-	if (true) {
-	
-window.onload = function(){	Coverflow.init([
-
-		{src: 'CoverFlows_files/covers/cover1med.jpg',
-		  label: {album: 'Abbey Road', artist: 'The Beatles', url:'http://www.beatles.com/', high:'CoverFlows_files/covers/cover1large.jpg'}},
-
-		{src: 'CoverFlows_files/covers/cover2med.jpg',
-		   label: {album: 'Graduation', artist: 'Kanye West', url:'http://www.kanyewest.com', high:'CoverFlows_files/covers/cover2large.jpg'}},
-
-		{src: 'CoverFlows_files/covers/cover3med.jpg',
-		   label: {album: 'Circus', artist: 'Britney Spears', url:'http://www.britneyspears.com', high:'CoverFlows_files/covers/cover3large.jpg'}},
-		   
-		{src: 'CoverFlows_files/covers/cover13med.jpg',
-		   label: {album: 'The Fame', artist: 'Lady Gaga', url:'http://www.ladygaga.com', high:'CoverFlows_files/covers/cover13large.jpg'}},
-		   
-		{src: 'CoverFlows_files/covers/cover14med.jpg',
-		   label: {album: 'The Fray', artist: 'The Fray', url:'http://www.thefray.com', high:'CoverFlows_files/covers/cover14large.jpg'}},
-		   
-		{src: 'CoverFlows_files/covers/cover12med.jpg',
-		   label: {album: 'Funhouse', artist: 'Pink', url:'http://www.pinkspage.com', high:'CoverFlows_files/covers/cover12large.jpg'}},
-		   
-
-		{src: 'CoverFlows_files/covers/cover4med.jpg',
-		   label: {album: '21st Century Breakdown', artist: 'Greenday', url:'http://www.greenday.com', high:'CoverFlows_files/covers/cover4large.jpg'}},
-
-		{src: 'CoverFlows_files/covers/cover5med.jpg',
-		   label: {album: 'Carter III', artist: 'Lil Wayne', url:'http://www.lilwayne.com', high:'CoverFlows_files/covers/cover5large.jpg'}},
-
-		{src: 'CoverFlows_files/covers/cover6med.jpg',
-		   label: {album: 'Clumsy', artist: 'Fergie', url:'http://www.fergie.com', high:'CoverFlows_files/covers/cover6large.jpg'}},
-
-		{src: 'CoverFlows_files/covers/cover7med.jpg',
-		   label: {album: 'The Best Of', artist: 'Blur', url:'http://ww.blur.com', high:'CoverFlows_files/covers/cover7large.jpg'}},
-
-		{src: 'CoverFlows_files/covers/cover8med.jpg',
-		   label: {album: 'Rockferry', artist: 'Duffy', url:'http://www.duffy.com', high:'CoverFlows_files/covers/cover8large.jpg'}},
-
-		{src: 'CoverFlows_files/covers/cover9med.jpg',
-		   label: {album: 'Dig out your soul', artist: 'Oasis', url:'http://www.oasis.com', high:'CoverFlows_files/covers/cover9large.jpg'}},
-
-		{src: 'CoverFlows_files/covers/cover10med.jpg',
-		   label: {album: 'Loose', artist: 'Nelly Furtado', url:'http://www.nellyfurtado.com', high:'CoverFlows_files/covers/cover10large.jpg'}}
-		   
-],
-{	createLabel: function(item)
-       {
-			
-			return item.label.album +'<br><span id=\"artist\">'+ item.label.artist + '</span><br><a href=\"\" + item.label.url + \"\">'+item.label.url+'</a>';
-	         
-	  },
-		onSelectCenter: function(item,id){
-		
-		var img = new Image();
-		img.onload = function(){ 
-		
-		
-		Lightbox.show(this.src,id);	
-		
-		}; 
-		
-		img.src = item.label.high;
-		
-		},
-		
-		refill: function(start){
-
-			new HTTPQuery('/ajax/cflow/0/?from='+start+'&l=1&cache=3998668924011356071',0,'updateCflow');
-		}		
-		});
-		}
-	}
-	
-	function updateCflow(oHttp) {
-		cResponse = oHttp.responseText;
-		if (cResponse.substr(0,1)=='!'){
-			cResponse=cResponse.substr(1);
-			eval(cResponse);
-		}
-	}
-
-</SCRIPT></div></div>";
-
-	}
-	else
-		notifywar("You Are Un Authorised To View This Page");
-	echo "</div>";
-}
 else if($mode=="xdebug_clear")
 {
 	echo "<div id='content' class='content'>";
@@ -933,6 +727,13 @@ else if($mode=="ass_edit")
 	echo "<fieldset><legend>Edit Assignment</legend>";
 	$asid = $_GET["asid"];
 	include_once("../modules/assignment/editassignment.php");
+	echo "</div></fieldset>";
+}
+else if($mode=="mhpage")
+{
+	
+	echo "<div id='content'  class='content'>";
+	include_once("../core/modulehomepage.php");
 	echo "</div></fieldset>";
 }
 else if($mode=="license")
@@ -1025,16 +826,38 @@ else
 {
 	$object = getObject(getCurrentObject());
 	$links = getLinkItems(getObjectTypeTag($object["otyid"]));
-	echo "<div id='content'>";
 	for($i=0;$i<count($links);$i++)
 	{
 		if($mode == $links[$i]["mode"]){
+			echo "<div class='row-fluid'>";
+			echo "<div class='span2'>";
+			echo getChildMenu(getObjectTypeTag($object["otyid"]),$links[$i]["tag"]);
+			echo "</div>";
+			$info = getModuleInfo($links[$i]["tag"]);
+			if(array_key_exists("css",$info)){
+				
+				$css = $info["css"];
+				foreach($css as $c){
+						echo "<link rel='stylesheet' href='$c' type='text/css'></link>";
+				}
+			}
+			if(array_key_exists("js",$info)){
+				
+				$css = $info["js"];
+				foreach($css as $c){
+						echo "<script src='$c' type='text/javascript'></script>";
+				}
+			}
+			echo "<div class='span10'>";
+			
 			$modpath = "../modules/".$links[$i]["tag"]."/";
-			//echo $modpath.$links[$i]["file"];
 			include_once($modpath.$links[$i]["file"]);
+			echo "</div>";
+			echo "</div>";
+			break;
 		}
 	}
-	echo "</div>";
+	
 	if($i==0)
 	{
 		echo "<div id='content'>";

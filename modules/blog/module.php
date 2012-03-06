@@ -1,6 +1,5 @@
 <?php
-    require_once "../lib/classes.php";
-    require_once "../lib/mod_lib.php";
+
     class blog_ModuleInfo extends ModuleInfo
     {
         
@@ -40,7 +39,9 @@
                                     "parent" => "/",
                                     "createMenuItem" => "yes",
                                     "perms" => array("sudo"),
-                                    "tag" => "blog"
+                                    "tag" => "blog",
+                                    "mode" => "blog_home",
+                                    "file" => "blog_create.php"
                                   ),
                              array(
                                     "mode" => "blog_create",

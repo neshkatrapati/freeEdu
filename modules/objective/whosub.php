@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="../../aux/bootstrap/bootstrap-1.0.0.css" type="text/css" media="screen" />
 <?php
     
-    include("ob_lib.php");
-    include("../../lib/lib.php");
-    include("../../misc/constants.php");
+    include_once("ob_lib.php");
+    include_once("../../lib/lib.php");
+    include_once("../../lib/connection.php");
     
     $otid = $_GET["otid"];
     $subs = getSubmissionsForOtid($otid);

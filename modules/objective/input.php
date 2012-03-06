@@ -19,7 +19,7 @@
 	
 </script>
 <?php
-include("ob_lib.php");
+include_once("ob_lib.php");
 echo "<script>function check()
 	{
 		

@@ -162,7 +162,7 @@
 	}
 	public function box_oncollapse()
 	{
-		//include("../modules/assignment/as_lib.php");
+		//include_once("../modules/assignment/as_lib.php");
 		$entries = getAssignmentEntries($this->object);
 		
 		return "Created ".count($entries)." Assignments <br>Expand To See The Assignments";	
@@ -170,7 +170,7 @@
 	}
 	public function box_onexpand()
 	{
-		include("../modules/assignment/as_lib.php");
+		include_once("../modules/assignment/as_lib.php");
 		$ob = getObject($this->object);
 		$entries = getAssignmentEntries($this->object);
 		$ret = "";
@@ -227,7 +227,7 @@
 	}
 	public function box_oncollapse()
 	{
-		//include("../modules/assignment/as_lib.php");
+		//include_once("../modules/assignment/as_lib.php");
 		$ob = getObject($this->object);
 		$obhandle = $ob["obhandle"];
 		$array = taughtBy($obhandle);
@@ -282,7 +282,7 @@
 	}
 	public function box_oncollapse()
 	{
-		//include("../modules/assignment/as_lib.php");
+		//include_once("../modules/assignment/as_lib.php");
 		$ob = getObject($this->object);
 		$obhandle = $ob["obhandle"];
 		$student = getStudent($obhandle);

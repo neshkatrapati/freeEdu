@@ -1,8 +1,8 @@
 <?php
 function nextUp()
 {
-include("../lib/connection.php");
-include("check.php");
+include_once("../lib/connection.php");
+include_once("check.php");
 echo "<link rel='stylesheet' href='../aux/pagestyles/profiles.css' type='text/css' media='screen'>";
 $bat = $_POST['bat'][0];
 $barray = explode(':',$bat);

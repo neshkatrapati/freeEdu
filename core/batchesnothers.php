@@ -1,6 +1,6 @@
 <?php
-include("../lib/lib.php");
-	include("../misc/constants.php");
+include_once("../lib/lib.php");
+	require_once("../lib/connection.php");
 $q=$_GET['q'];
 if($q=='b')
 {

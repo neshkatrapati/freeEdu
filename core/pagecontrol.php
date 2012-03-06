@@ -1,6 +1,6 @@
 <?php
-include("../lib/lib.php");
-include("../misc/constants.php");
+include_once("../lib/lib.php");
+include_once("../lib/connection.php");
 $clsname = "Constants";
 		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
 		mysql_select_db($clsname::$dbname, $con);

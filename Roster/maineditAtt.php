@@ -46,7 +46,7 @@ xmlhttp.send();
         echo "<center>";
     if(!isset($_POST['phase0']) && !isset($_POST['phase1']))
     {
-        include("../lib/connection.php");
+        include_once("../lib/connection.php");
         
         echo "<form action='#' method='post'>";
         echo getEClassesAsSelect("cls[]","");
@@ -78,7 +78,7 @@ xmlhttp.send();
     }
         if(isset($_POST['phase1']))
         {
-            include("../lib/connection.php");
+            include_once("../lib/connection.php");
             $per=$_POST['per'];
             $per1=$_POST['per1'];
             $aid=$_POST['aid'];

@@ -1,5 +1,5 @@
 <?php
-    require_once "../lib/classes.php";
+
     class irq_ModuleInfo extends ModuleInfo
     {
         

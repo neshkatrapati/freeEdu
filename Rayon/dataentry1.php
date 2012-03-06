@@ -9,8 +9,8 @@
         <fieldset>
         <legend>DETAILS</legend>
            	<?php
-	include("../misc/constants.php");
-	include("../lib/lib.php");	
+	
+	
 	echo "<center>";
 	 
 	$placeBranch = "";

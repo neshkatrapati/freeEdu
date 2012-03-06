@@ -1,6 +1,6 @@
 <?php
-    include("../lib/lib.php");
-    include("../misc/constants.php");
+    include_once("../lib/lib.php");
+    include_once("../lib/connection.php");
     $sid = $_GET['sid'];
     $datein = $_GET["datein"];
     $dateout = $_GET['dateout'];

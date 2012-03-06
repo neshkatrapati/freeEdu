@@ -84,7 +84,7 @@ function addEdit()
 
 </script>
 <?php
-    include("ob_lib.php");
+    include_once("ob_lib.php");
     echo "<fieldset>";
     $mode = $_GET["mode"];
     if($mode == "add")

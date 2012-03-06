@@ -4,7 +4,7 @@
     <legend>Create An Assignment</legend>
     <center>
 <?php
-    include("as_lib.php");
+    include_once("as_lib.php");
     if(!isset($_POST['phase1']) && !isset($_POST['phase2']))
     {
         echo "<form action='#' method='post'>";

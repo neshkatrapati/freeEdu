@@ -1,7 +1,5 @@
 <?php
-    require_once "../lib/classes.php";
-    require_once "../lib/mod_lib.php";
-    require_once "../lib/lib.php";
+  
     $CONFIG_SUCCESS = "config_success";
     class portcullis_ModuleInfo extends ModuleInfo
     {

@@ -64,9 +64,7 @@
     if(isset($_POST["sub"]) && !isset($_POST["sub2"]))
     {
         echo "<form action='#' method='post'>";
-        $clsname = "Constants";
-		$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-		mysql_select_db($clsname::$dbname, $con);
+      
         $brn = $_POST['brn'][0];
 	$reg = $_POST['reg'][0];
         $yr = $_POST['yr'][0];

@@ -61,7 +61,7 @@
 	        $yr="0";
 	endswitch;
 	?>
-	<form action="../lib/demo.php" method="post" target='_blank'>
+	<form action="../lib/demo.php" method="get" target='_blank'>
 	<?php
 	echo '<input type="radio"'.'name="mixed"'.'value=' .$result1['mrid'].":".$result1['akayr'].":".$result1['doex'].'>';
 	

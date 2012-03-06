@@ -15,7 +15,7 @@ function printer()
 }
 </script>
 <?php
-include("as_lib.php");
+include_once("as_lib.php");
    
 if(!isset($_GET["asid"]))
 {

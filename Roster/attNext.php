@@ -1,5 +1,5 @@
 <?php
-include("../lib/connection.php");
+include_once("../lib/connection.php");
 $fac=$_GET['fac'];
 $fac1=explode(":",$fac);
 $batid1=$fac1[0];

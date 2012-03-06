@@ -30,9 +30,7 @@
             echo "<input type='hidden' name='modfiles[]' value='".$dirlist[$i]["modfile"]."'></input>";    
 			echo "<td>".implode(', ',$info["authors"])."</td>";
 			
-			$clsname = "Constants";
-			$con = mysql_connect($clsname::$dbhost, $clsname::$dbuname,$clsname::$dbpass);
-			mysql_select_db($clsname::$dbname, $con);
+			
 			
 			$res = mysql_query("select * from MMODULET where mod_tag like '".$dirlist[$i]["name"]."'");
 			if(mysql_num_rows($res)==0)
@@ -103,8 +101,12 @@
                         
                         $list[$i]["reads"] = $modreads[$enables[$i]];
                         $list[$i]["updates"] = $modupdates[$enables[$i]];
+                        if(method_exists($instance,"module_after_install")){
+								$instance->module_after_install();
+						}
                     }
                     enableModules($list);
+                    
                     notify("Modules Updated Successfully");
                     redirect("?m=modules");
                 

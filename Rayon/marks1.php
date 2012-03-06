@@ -50,7 +50,7 @@
 		</head>
 		<body>
 			<?php
-			include("../lib/connection.php");
+			include_once("../lib/connection.php");
 			$year=$_POST['year'];
 			$mrid=$_POST['mrid'];
 			$suid=$_POST['subid'];

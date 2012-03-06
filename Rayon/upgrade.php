@@ -14,7 +14,7 @@ if(!array_key_exists("batsub",$_POST) && !array_key_exists("phase2",$_POST))
 </center>
 <div id='php_next'>
 <?php 
-include("next.php");
+include_once("next.php");
 if(isset($_POST['batsub']))
 {
 	
@@ -25,7 +25,7 @@ if(isset($_POST['batsub']))
 
 <div id='php_check'>
 <?php
-include("check.php");
+include_once("check.php");
 if(isset($_POST['phase2']))
 {
 	cheker();

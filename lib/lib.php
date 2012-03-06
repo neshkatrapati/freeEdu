@@ -1,6 +1,6 @@
 <?php
 /*
- Copyright 2011
+ Copyright 2012
 Ganesh Katrapati <ganesh.katrapati@gmail.com>
 Aditya Maturi <maturiaditya@gmail.com>
 This file is part of FreeEdu.
@@ -1507,12 +1507,10 @@ function getPersCount($batid,$sec,$dayid,$pid)
 }
 function getConReport($batid,$sec,$datein,$dateout)
 {
-
-
-
 	$return = "";
-
+	
 	$query = "SELECT distinct sessionid from MATDT where batid like '".$batid."' and sec like '".$sec."' order by(sessionid)";
+	//echo $query;
 	$result = mysql_query($query);
 	$return = "<table border='1' style='text-align:center;'><th>Students</th>";
 	$counter = 0;
@@ -2155,6 +2153,13 @@ function getStudent($sid)
 
 	return queryMe("select *,(select imguri from MIMGT i where i.imgid=s.imgid) as img from MSTUDENTT s where sid like '".$sid."'");
 }
+function getStudentByRNO($sid)
+{
+
+	$t = mysql_query("select *,(select imguri from MIMGT i where i.imgid=s.imgid) as img from MSTUDENTT s where s.srno like '".$sid."'");
+	return mysql_fetch_assoc($t);
+	
+}
 function getBatchFromId($batid)
 {
 
@@ -2226,7 +2231,7 @@ function getFacultyForClass($batid1,$sec1)
 }
 function getObjectByType($tyid,$handle)
 {
-
+    
 	return queryMe("select * from MOBJECTT where obhandle like '".$handle."' and otyid like '".$tyid."'");
 }
 function getStudentType()
@@ -2433,6 +2438,45 @@ function module_parser()
 
 	return $dirArray;
 }
+function get_modules_render(){
+	
+	
+	$filepath = "modules/";
+	$dirArray = array();
+	$i=0;
+	$myDirectory = opendir($filepath);
+	
+	while($entryName = readdir($myDirectory)) {
+				
+		if(!in_array($entryName,array(".","..")))
+		{
+			
+			$modfile = $filepath.$entryName."/module.php";
+			
+			if(file_exists($modfile))
+			{
+			
+				require_once $modfile;
+					
+				$class = $entryName."_ModuleInfo";
+				//echo $class;
+				$object = new $class();
+				$method = "module_getRenderData";
+				if(method_exists($object,$method)){
+					$x = $object->$method();
+					$dirArray[$entryName] = $x;
+					
+				}	
+				
+				
+			}
+		}
+	}
+	closedir($myDirectory);
+
+	return $dirArray;
+	
+}
 function enableModules($list)
 {
 	queryMe("delete from MMODULET");
@@ -2450,6 +2494,7 @@ function enableModules($list)
 	}
 
 }
+
 function fq($query,$authtoken)
 {
 	$query = trim($query);
@@ -2567,6 +2612,10 @@ function getParentMenus($context)
 				{
 					$array[$top]["title"] = $links[$i]["title"];
 					$array[$top]["tag"] = $links[$i]["tag"];
+					if($links[$i]["mode"] != "")
+						$array[$top]["link"] = "?m=".$links[$i]["mode"];
+					else
+						$array[$top]["link"] = "?m=mhpage&modtag=".$links[$i]["tag"];
 					$top++;
 				}
 			}
@@ -2574,6 +2623,7 @@ function getParentMenus($context)
 		}
 
 	}
+	
 	return $array;
 
 }
@@ -2601,6 +2651,7 @@ function getLinkItems($context)
 				$array[$top]["tag"] = $info["mod_tag"];
 				$array[$top]["mode"] = $links[$i]["mode"];
 				$array[$top]["file"] = $links[$i]["file"];
+				$array[$top]["modtag"] = $links[$i]["tag"];
 				$top++;
 			}
 				
@@ -2618,6 +2669,55 @@ function getObjectTypeTag($otyid)
 	return $x["tag"];
 
 }
+function freeedu_add_css($link){
+	
+		if(!file_exists("css.json")){
+			
+				$file = fopen("css.json","w");
+				$css = json_encode(array($link));
+				fputs($file,$css);
+		}
+		else{
+				$file = fopen("css.json","r");
+				$css = json_decode(fgets($file));
+				fclose($file);
+				if(!in_array($link,$css)){
+						$file = fopen("css.json","w");
+						$css = array_merge($css,array($link));
+						fputs($file,json_encode($css));
+				}
+			
+		}
+}
+function freeedu_add_js($link){
+	
+		if(!file_exists("js.json")){
+				$file = fopen("js.json","w");
+				$css = json_encode(array($link));
+				fputs($file,$css);
+		}
+		else{
+				$file = fopen("js.json","r");
+				$css = json_decode(fgets($file));
+				fclose($file);
+				if(!in_array($link,$css)){
+						$file = fopen("js.json","w");
+						$css = array_merge($css,array($link));
+						fputs($file,json_encode($css));
+				}
+			
+		}
+}
+function getModuleInfo($tag){
+	
+	
+		require_once("../modules/".$tag."/module.php");
+		$classname = $tag."_ModuleInfo";
+		$instance = new $classname();
+		$info = $instance->module_getInfo();
+		return $info;
+}
+
 //include_once("../misc/constants.php");
 //print_r(getLinkItems('sudo'));
 //var_dump(fq("update MOBJECTT values(1,2)","4e884dfa84160"));

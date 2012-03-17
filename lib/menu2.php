@@ -2,7 +2,7 @@
 function getChildMenu($otytag,$modname){
 		
 		$menus = getMenuItems($otytag,$modname);
-		$stages = "<div class='well'>";
+		$stages = "<div class='well' style='float:left;margin-right:5%'>";
 		$stages .= "<ul class='nav nav-list' >";
 		$stages .= "<li class='nav-header'>Menu</li>";
 		
@@ -14,15 +14,19 @@ function getChildMenu($otytag,$modname){
 }
 function getMenu($otytag)
 {  
-  $retstr =  " <div class='navbar'>
-  <div class='navbar-inner'>
-      <div class='container'>
-        <a class='brand' href='?'><img src='../images/others/home.png' width='20'>freeEdu</a><div class='nav-collapse'><ul class='nav'>";
-     if(in_array($otytag,array("sudo","admin")))
+  $retstr =  " <div class='page-header'>
+   </div>
+  <div class='topbar-wrapper' style='z-index: 5;'>
+    <div class='topbar'>
+      <div class='container fixed'>
+        <a class='logo' href='?'>freeEdu<img src='../images/others/home.png' width='20'></a>";
+        if(in_array($otytag,array("sudo","admin")))
 	{
-	  $retstr .= "<li class='dropdown'>
-	      <a href='#' class='dropdown-toggle' data-toggle='dropdown'>Batches<b class='caret'></b></a>
-	      <ul class='dropdown-menu'>";
+	  $retstr .= "<ul class='nav'>
+	    <li class='menu'>
+	      <a href='#' class='menu'>Batches</a>
+	      <ul class='menu-dropdown'>";
+	      
 	      if($otytag == "sudo")
 	      {
 	        $retstr .= "<li><a href='?m=ba'>Add A Batch</a></li>
@@ -42,16 +46,18 @@ function getMenu($otytag)
 	
 	$retstr .= "</ul>
              </li>
-        
-        
-          <li class='dropdown'>
-            <a href='#' class='dropdown-toggle' data-toggle='dropdown'>Faculty<b class='caret'></b></a>
-            <ul class='dropdown-menu'>";
+        </ul>
+        <ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Faculty</a>
+            <ul class='menu-dropdown'>";
 	    if($otytag == "sudo")
 	    {
 	         $retstr .="<li><a href='?m=cf'>Create Faculty</a></li>
-                 <li><a href='?m=mf&l=0&r=5'>Map Faculty</a></li>";
-                 
+                 <li><a href='?m=mf&l=0&r=5'>Map Faculty</a></li>
+                 <li><a href='?m=fbcreate'>Create Faculty Feedback</a></li>
+	         <li><a href='?m=fbget'>Analyze Faculty Feedback</a></li>";
+            
 	    }
 	    else if($otytag == "admin")
 	    {
@@ -65,16 +71,16 @@ function getMenu($otytag)
             $retstr .= "</ul>
             
           </li>
-        ";
+        </ul>";
 	  
 	}
 	if(in_array($otytag,array("sudo","admin","faculty","student")))
 	{
 	  $retstr .= "
-	  
-            <li class='dropdown'>
-              <a href='#'  class='dropdown-toggle' data-toggle='dropdown'>Attendance<b class='caret'></b></a>
-              <ul class='dropdown-menu'>";
+	  <ul class='nav'>
+            <li class='menu'>
+              <a href='#' class='menu'>Attendance</a>
+              <ul class='menu-dropdown'>";
 	      if($otytag == "sudo" || $otytag == "admin")
 	      {
                 $retstr .= "<li><a href='?m=sc'>Design Schedules</a></li>
@@ -99,11 +105,11 @@ function getMenu($otytag)
 		 $retstr .= "</ul>
 	      
             </li>
-          ";
-	  $retstr .= "
-          <li class='dropdown'>
-            <a href='#'  class='dropdown-toggle' data-toggle='dropdown'>Marks<b class='caret'></b></a>
-            <ul class='dropdown-menu'>
+          </ul>";
+	  $retstr .= "<ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Marks</a>
+            <ul class='menu-dropdown'>
             ";
 	    if($otytag == "sudo")
 	    {
@@ -136,15 +142,15 @@ function getMenu($otytag)
               $retstr .= "</ul>
             
           </li>
-        ";
+        </ul>";
 	
 	}
 	$x = getParentMenus($otytag);
-	$retstr .= "
-          <li class='dropdown'>
-            <a href='#'  class='dropdown-toggle' data-toggle='dropdown'>Modules<b class='caret'></b></a>
+	$retstr .= "<ul class='nav'>
+          <li class='menu'>
+            <a href='#'  class='menu' >Modules</a>
             
-            <ul class='dropdown-menu'>";
+            <ul class='menu-dropdown'>";
 	  
 	for($i=0;$i<count($x);$i++){
 		
@@ -153,15 +159,14 @@ function getMenu($otytag)
 	
             $retstr .= "</ul>
             
-          </li>
+          </li></ul>
         ";
-	
 	if(in_array($otytag,array("sudo","admin","faculty","student","aadmin","ladmin")))
 	{
-	  $retstr .= "
-          <li class='dropdown'>
-            <a href='#'  class='dropdown-toggle' data-toggle='dropdown'>Tools<b class='caret'></b></a>
-            <ul class='dropdown-menu'>";
+	  $retstr .= "<ul class='nav'>
+          <li class='menu'>
+            <a href='#' class='menu'>Tools</a>
+            <ul class='menu-dropdown'>";
 	    if($otytag == "sudo")
 	    {
                 $retstr.=" <li><a href='?m=modules'>Manage Modules</a></li> <li><a href='?m=rga'>Add Regulation</a></li>
@@ -182,23 +187,22 @@ function getMenu($otytag)
         
         }
 	$oid = $_COOKIE['object'];
-  $retstr .=  "<form class='navbar-search pull-left' action='?m=os' method='post'>
+  $retstr .=  "<form action='?m=os' method='post'>
           <input type='text' placeholder='Search' name='srch' />
         </form>";
       
 $oarray = getObject($oid);
-$retstr .= "<ul class='nav pull-right'>
-          <li class='dropdown'>
+$retstr .= "<ul class='nav secondary-nav'>
+          <li class='menu'>
             
-            <a href='#'  class='dropdown-toggle' data-toggle='dropdown'><span class='profname'>
+            <a href='#' class='menu'><span class='profname'>
             ".$oarray["obname"]."
-            </span><b class='caret'></b></a>
-            <ul class='dropdown-menu'>
+            </span></a>
+            <ul class='menu-dropdown'>
                <li><a href='?m=cre' style='font-size:13px;'><b><i>@</i>Team-Alacrity</b></a></li> 
                <li><a href='?m=ep'>Edit Profile</a></li>
                 <li><a href='../login.php'>Logout</a></li>";
 	  $titles = getMenuItems($otytag,'user');
-
 	  for($i=0;$i<count($titles);$i++)
 	    $retstr .= "<li><a href='".$titles[$i]["link"]."'>".$titles[$i]["title"]."</a></li>";
 $retstr .= "</ul>

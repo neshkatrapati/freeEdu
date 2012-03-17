@@ -1,8 +1,11 @@
 <html>
     <head>
+		<?php echo "<script src='../aux/bootstrap/js/bootstrap.js' type='text/javascript'></script>"; ?>
 	<link rel="stylesheet" href="../modules/library/css/bootstrap1.css" type="text/css" media="screen" />
+	<script type="text/javascript" src="../modules/library/js/bootstrap-alert.js"></script>
 	<script type="text/javascript">
 	$('.typeahead').typeahead();
+	
 	function subSelect(snum)
 	{
 	    if(snum==0)
@@ -66,10 +69,12 @@
     </script>
     </head>
     <body>
-        <?php
+	<?php
 	if(!(isset($_POST['phase1'])))
         {
-	    include_once("library_lib.php");
+	    include_once("../lib/connection.php");
+	    include_once("../lib/lib.php");
+	    include_once("../modules/library/library_lib.php");
 	    echo "<center>";
             echo "<fieldset>";
             echo "<legend>Add-a-New-Book</legend>";
@@ -92,7 +97,7 @@
         }
 	if(isset($_POST[phase1]))
         {
-	    
+	    include_once("../lib/connection.php");
 	    $MAX_SIZE=1000;
 	    $snum=$_POST['snumber'];
 	    $img=$_FILES['img']['name'];
@@ -103,6 +108,11 @@
 	    $bpub=$_POST['pub'];
 	    $ncps=$_POST['cp'];
 	    $edition=$_POST['edition'];
+	    
+	    $bidcheck=mysql_query("select * from MLIBRARYT where bookid='$bookid'");
+	    $bidchecknum=mysql_num_rows($bidcheck);
+	    if($bidchecknum==0)
+	    {
 	    for($k=0;$k<$snum;$k++)
 	    {
 		$reg=$_POST['reg'.$k];
@@ -165,10 +175,15 @@
 		notify('Book Added Succesfully Successfull!');
 		redirect('?m=add_book');
 	    }
-	    
-	   
-	    
+	}
+	
+	else if($bidchecknum!=0){
+	   notifywar("Book Id already exists. Please check once again and enter the Details.");
+	redirect('?m=add_book');
+		
+	}
 	}
 	?>
+	
     </body>
 </html>

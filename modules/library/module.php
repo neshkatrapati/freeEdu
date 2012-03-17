@@ -1,5 +1,5 @@
 <?php
-    require_once "../lib/classes.php";
+
     class library_ModuleInfo extends ModuleInfo
     {
         
@@ -11,7 +11,8 @@
                            "mod_name" => "mod_library",
                            "mod_tag" => "library",
                            "authors" => array("Aditya Maturi"),
-                           "dependencies" => array("mod_core")
+                           "dependencies" => array("mod_core"),
+			   
                             
                            );
             return $array;
@@ -21,7 +22,7 @@
         {
             $array = array("create" => array(
                                     array("name" => "MLIBRARYT",
-                                    "sql" => "create table MLIBRARYT(lib text,bookid text,bname text,bauthor text,bpub text,reg text,bedition text,brid text,akyr text,imgid text,ncps text)")
+                                    "sql" => "create table MLIBRARYT(lib text,bookid text,bname text,bauthor text,bpub text,reg text,bedition text,brid text,imgid text,ncps text,subid text)")
                                                                    ),
                            "read" => array("MOBJECTT","MSTUDENTT","MBATCHT","MBRANCHT","MREGT","MLIBRARYT","MIMGT","MDOCT"),
                            "update" => array("MLIBRARYT","MDOCTT")
@@ -43,7 +44,7 @@
                                     "perms" => array("sudo"),
                                     "tag" => "library.book.create"
                                   ),
-			    array(
+                                     array(
                                     "mode" => "lib_ebookcreate",
                                     "title" => "Add E-Book",
                                     "file" => "addEbook.php",
@@ -53,16 +54,29 @@
                                     "perms" => array("sudo"),
                                     "tag" => "library.ebook.create"
                                   ),
-			    array(
-                                    "mode" => "lib_viewbook",
-                                    "title" => "View Books",
-                                    "file" => "viewbook.php",
+                                  
+			     array(
+                                    "mode" => "lib_issueorder",
+                                    "title" => "Isuue an Order",
+                                    "file" => "issueOrder.php",
                                     "type" => "child",
                                     "parent" => "library",
                                     "createMenuItem" => "yes",
                                     "perms" => array("sudo"),
-                                    "tag" => "library.view.book"
+                                    "tag" => "library.issue.ordered"
                                   ),
+			 
+			     array(
+                                    "mode" => "lib_viewordered",
+                                    "title" => "View Order",
+                                    "file" => "viewOrdered.php",
+                                    "type" => "child",
+                                    "parent" => "library",
+                                    "createMenuItem" => "yes",
+                                    "perms" => array("sudo","student","faculty"),
+                                    "tag" => "library.view.ordered"
+                                  ),
+			
 			     array(
                                     "mode" => "lib_editbook",
                                     "title" => "Edit Books Details",
@@ -75,7 +89,7 @@
                                   ),
 			      array(
                                     "mode" => "lib_editebook",
-                                    "title" => "edit E-Books Details",
+                                    "title" => "Edit E-Books Details",
                                     "file" => "editEbook.php",
                                     "type" => "child",
                                     "parent" => "library",
@@ -90,7 +104,7 @@
                                     "type" => "child",
                                     "parent" => "library",
                                     "createMenuItem" => "yes",
-                                    "perms" => array("sudo"),
+                                    "perms" => array("sudo","student","faculty"),
                                     "tag" => "library.view.book"
                                   ),
 				 array(
@@ -100,7 +114,7 @@
                                     "type" => "child",
                                     "parent" => "library",
                                     "createMenuItem" => "yes",
-                                    "perms" => array("sudo"),
+                                    "perms" => array("sudo","student","faculty"),
                                     "tag" => "library.view.book"
                                   ),
                             
@@ -109,7 +123,7 @@
                                     "type" => "parent",
                                     "parent" => "/",
                                     "createMenuItem" => "yes",
-                                    "perms" => array("sudo"),
+                                    "perms" => array("sudo","student"),
                                     "tag" => "library"
                                   )
                            

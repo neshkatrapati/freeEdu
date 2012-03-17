@@ -1,12 +1,18 @@
 <?php
+	
     require_once 'yaml/Yaml.php';
-	$params = $_GET;
+    require_once 'lib/lib.php';
+    //echo "Hello";
+ 	$params = $_GET;
 	$mode = $params["mode"];
 	$render = $params["render"];
 	$others = get_modules_render();
+	//print_r($others);
 	$toggle = FALSE;
 	if(array_key_exists($mode,$others)){
+		
 			jsonify($others[$mode]);
+			
 	}
 	else{
 	switch($mode){
@@ -47,7 +53,7 @@
 }
 	
 	function jsonify($args){
-		
+			
 			$params = $_GET;
 			foreach($args as $key=>$value){
 					if(array_key_exists($key,$params) || $key == "null"){

@@ -1,7 +1,7 @@
 <html>
     <head>
-		<link rel="stylesheet" href="../modules/library/css/bootstrap1.css" type="text/css" media="screen" />
 	 <link rel="stylesheet" href="../modules/library/libStyle.css" type="text/css" media="screen" />
+	 <link rel="stylesheet" href="../modules/library/css/bootstrap1.css" type="text/css" media="screen" />
 	<script type="text/javascript">
 	$('.typeahead').typeahead();
 	function showUser(str)

@@ -1,4 +1,8 @@
 <style type='text/css'>
+li
+{
+		list-style:none;
+}
 .imgteaser {
 	margin: 0;
 	overflow: hidden;
@@ -81,6 +85,11 @@
 	
 </script>
 <?php
+	echo "<link href='../aux/bootstrap/css/bootstrap.css' rel='stylesheet' type='text/css'></link>";
+	echo "<script src='../aux/bootstrap/js/bootstrap.js' type='text/javascript'></script>";
+	echo "<script>$(\".accordion2\").collapse();</script>";
+	echo "<script>$(\".accordion3\").collapse();</script>";
+	
     echo "<fieldset>";
     include_once("ob_lib.php");
     if(isset($_GET["otid"]))
@@ -88,23 +97,28 @@
 	
         $otid = $_GET["otid"];
         $entry = getObjectiveEntry($otid);
-	echo "<legend>Objective Test ".$entry["otname"]."</legend><a href='?m=ot_edit' style='float:left;margin-left:50px;'>Go Back</a></br><center>";
+		echo "<legend>Objective Test -".$entry["otname"]."</legend><a href='?m=ot_edit' style='float:left;margin-left:50px;'>Go Back</a></br><center>";
         if(isAuth($_COOKIE["object"],$otid))
-	{
-		if(isNotSubmitted($otid)) //Replace By More Stringent Auth Check
 		{
+			if(isNotSubmitted($otid)) //Replace By More Stringent Auth Check
+			{
 		    
-		    echo "<pre style='width:50%;'>This Objective Test Has No Questions Yet Consider Submitting Some <a href='?m=ot_ques&mode=add&otid=".$otid."'>Here</a></pre>";
+				echo "<pre style='width:50%;'>This Objective Test Has No Questions Yet Consider Submitting Some <a href='?m=ot_ques&mode=add&otid=".$otid."'>Here</a></pre>";
 		    
-		}
+			}
 		else
 		{
 		    $questions = getQuestions($otid);
 		    $entarry  = getObjectiveEntryAsArray($otid);
-		    echo "<div style='float:left;margin-left:50px;margin-bottom:50px;margin-top:20px;border: 2px solid #550;'>";
-		    echo "<table class='bttable' >";
-		    echo "<th class='zebra-striped' colspan='2'>Test Details<a href='?m=ot_edit_meta&otid=".$otid."' style='float:right;'>
-		    <img src='../images/others/edit.png' width='20' hieght='20'></img></a></th>";
+		    echo "<div class='accordion' id='accordion2' style='width:70%'>";
+		    echo "<div class='accordion-group'>
+					<div class='accordion-heading'>
+						<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion2' href='#collapse0'>Details</a>
+					</div>
+						<div id='collapse0' class='accordion-body collapse' style='height: 0px; '>
+							<div class='accordion-inner'>
+								<ul>";
+		    echo "<li><table class='bttable'>";
 		    echo "<tr><td>Name</td><td>".$entarry["Name"]."</td></tr>";
 		    echo "<tr><td>Created On</td><td>".$entarry["Cdate"]."</td></tr>";
 		    echo "<tr><td>Submittable By</td><td>".$entarry["Edate"]."</td></tr>";
@@ -117,60 +131,71 @@
 			echo "<tr><td>Submissions</td><td><a href='../modules/objective/whosub.php?otid=".$otid."' class='nyroModal'>".$subcnt." Submissions</a></td></tr>";
 		    echo "<tr><td>Created By</td><td>".getImageBox(getObjectLink($ct["oid"]),"../".getImgUri($ct["oimgid"]),$ct["obname"],"","50","50","1","0.8")."</td></tr>";
 		    echo "<tr><td>Created For</td><td style='margin-right:20px;'>".getClassPreview($entarry["Class"]["Id"],$entarry["Class"]["Sec"],3,9)."</td></tr>";
-		    echo "</table>";
-		    echo "</div>";
+		    echo "</table></li></ul></div></div></div>";
+		    
 		    if($entry["oid"]==$_COOKIE["object"])
 		    {
-			echo "<center><table class='bttable' style='width:400px;float:right;margin-right:50px;margin-bottom:50px;margin-top:20px;float:right;text-align:center;border: 2px solid #550;'>";
-			echo "<th colspan='2' class='zebra-striped'>
-			<br><div style='float:right;margin-right:10px;text-align:center'>
-			<a href='?m=ot_ques&mode=add&otid=".$otid."'>
-			<img src='../images/others/add.png' style='margin-left:20px' width='25' hieght='25'></img></a></div>
-			Questions</th>";
+				echo "<div class='accordion-group'>
+						<div class='accordion-heading'>
+							<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion2' href='#collapse1'>Questions</a>
+						</div>
+						<div id='collapse1' class='accordion-body collapse' style='height: 0px; '>
+							<div class='accordion-inner'>
+								<ul>";	
+								
+				echo "<li><div class='accordion' id='accordion3'>";
 			
-			for($i=0;$i<count($questions);$i++)
-			{
+				for($i=0;$i<count($questions);$i++)
+				{
 			    
-			    echo "";
-				 echo "<tr>";	       
-			    $ques = $questions[$i]["Question"];
-			    
-			    echo "<tr><td>Question</td><td>".$ques."&emsp;";
-				echo "<div style='float:right'>
-					<input type='image' onclick='show(\"div".$i."\",this)' src='../images/others/expandico.gif' style='float:right;' ></input></div><a href='?m=ot_ques&mode=edit&motid=".$questions[$i]["Id"]."'>
-					&emsp;<img style='float:right' src='../images/others/edit.png' width='20' height='20'></img></a>
-					&emsp;<div style='float:right;' >".getCorrectCount($questions[$i]["Id"])."<img style='' src='../images/others/tick.png' width='20' hieght='20'></img></div></div>";
-				echo "</td></tr>
-					<tr><td style='display:none;' colspan='2' id=\"div".$i."\"><table class='box' align='center' style='float:center;' >";
-			    for($j=0;$j<count($questions[$i]["Options"]);$j++)
-			    {
+					$ques = $questions[$i]["Question"];
+					$ind = $i + 4; // For Collapse Ids 
+					echo "<div class='accordion-group'>
+							<div class='accordion-heading'>
+								<a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion3' href='#collapse$ind'>
+								<div style=''>$ques
+									
+									
+								</div>
+								</a>
+							</div>
+							
+							<div id='collapse$ind' class='accordion-body collapse' style='height: 0px;'>
+								<div class='accordion-inner'>
+									<ul>";
+					echo "<li><a style='float:right;margin-left:1%' class='btn btn-primary' href='?m=ot_ques&mode=edit&motid=".$questions[$i]["Id"]."'>
+										<img style='' src='../images/others/edit.png' height='23' width='18'></img>
+									</a>
+									<div style='float:right' class='btn btn-success'>".getCorrectCount($questions[$i]["Id"])."</div>";
+					echo "<table class='bttable' align='center' style='float:center;' >";
+					for($j=0;$j<count($questions[$i]["Options"]);$j++)
+					{
 			        
-			        $option = $questions[$i]["Options"][$j]["Option"];
-			        $correct = $questions[$i]["Options"][$j]["Correct"];
-			        if($correct!='true')
-			            $string = "<td >".$option."</td>";
-			        if($correct=='true')
-			            $string = "<td >".$option."&emsp;<img src='../images/others/tick.png' width='20' hieght='20'></img></td>";
+						$option = $questions[$i]["Options"][$j]["Option"];
+						$correct = $questions[$i]["Options"][$j]["Correct"];
+						if($correct!='true')
+							$string = "<td >".$option."</td>";
+						if($correct=='true')
+							$string = "<td >".$option."&emsp;<img src='../images/others/tick.png' width='20' hieght='20'></img></td>";
 			        
-			        if($j%2==0)
-			        {
-			            if($j==(count($questions[$i]["Options"])-1))
-			                echo $string."<td ></td></tr>";
-			            else
-			                echo "<tr>".$string;
-			            
-			        }
-			        else
-			        {
+						if($j%2==0)
+						{
+							if($j==(count($questions[$i]["Options"])-1))
+								echo $string."<td ></td></tr>";
+							else
+								echo "<tr>".$string;
+			            }
+						else
+						{
 			                echo $string."</tr>";
-			        }
+						}
 			        
-			    }
+					}
 			    
-			    echo "</table></td></tr>";    
+					echo "</table></li></ul></div></div></div>";    
+				}
+				echo "</div></li></ul></div></div></div></div>";
 			}
-			echo "</table></div>";
-		    }
 		    else if(isStudent(getCurrentObject()))
 		    {
 			$obj = getObject(getCurrentObject());

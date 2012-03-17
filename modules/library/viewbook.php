@@ -1,7 +1,13 @@
 <html>
     <head>
         <link rel="stylesheet" href="../modules/library/libStyle.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="../modules/library/css/bootstrap1.css" type="text/css" media="screen" />
+        <script type="text/javascript" src="../modules/library/js/bootstrap.js"></script> 
+        <script type="text/javascript" src="../modules/library/js/bootstrap-modal.js"></script>
+        <script type="text/javascript" src="../modules/library/js/bootstrap-alert.js"></script> 
+                     
         <script type="text/javascript">
+			
 	function showUser(branch,reg,search)
 	{
 	    if (branch=="" && reg=="" && search=="")
@@ -31,22 +37,69 @@
 	    }
 	    xmlhttp.open("GET","../modules/library/viewNext.php?branch="+branch+"&reg="+reg+"&search="+search,true);
 	    xmlhttp.send();
-	}        
+	}
+
 	</script>
     </head>
 <body>
-   
     <center>
         <?php
-        
             include_once('library_lib.php');
         
+            $order=$_GET['order'];
+            $rorder=$_GET['rorder'];
+            $objid=getCurrentObject();
+            $or_num=mysql_query("select * from MORDERT");
+            $ornum=mysql_num_rows($or_num);
+            if($order!=NULL)
+            {
+                $maxnum=mysql_query("select * from MORDERT where oid='$objid' and aop='-1'") or die(mysql_error());
+                $max_num=mysql_num_rows($maxnum);
+                if($max_num<=2)
+                {
+                    $oc=mysql_query("select * from MORDERT where oid='$objid' and lid='$order' and aop='-1'");
+                    $numcheck=mysql_num_rows($oc);
+                    
+                    if($numcheck==0)
+                    {
+                        mysql_query("insert into MORDERT values('$ornum','$objid','$order','','','','-1')");?>
+                            <div class="alert alert-success fade in">
+                            <a class="close" data-dismiss="alert" href="#">&times;</a>
+                            Order Placed Successfully. Your Order Id is <? echo $ornum?>.</div><?
+                    }
+                    else
+                    {?>
+                      <div class="alert alert-block alert-error fade in">
+                            <a class="close" data-dismiss="alert" href="#">&times;</a>
+                           Duplicate Orders cannot be placed.</div>
+                    <?}
+                }
+                else
+                {?>
+                    <div class="alert alert-block alert-error fade in">
+                            <a class="close" data-dismiss="alert" href="#">&times;</a>
+                           Maximum Of 3 orders can be placed. Please remove previous orders to add a new Order.</div>
+                    
+                <?}
+            
+            
+            }
+            if($rorder!=NULL)
+            {
+                mysql_query("update MORDERT set aop='-2' where oid='$objid' and lid='$rorder'");?>
+                
+              <div class="alert fade in">
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+            Ordered Book Removed Successfully</div>  
+            <?
+                
+            }
             echo "<center>";
             echo "<fieldset>";
             echo "<legend>Available Books in the Library</legend>";
+            echo "<a href='?m=lib_viewordered' target='_blank'>View Ordered Books</a>";
             echo "<form action='#' method='post' name='f1'>";
             echo "<h5>Select the following filters</h5>";
-            
             echo "Search :<input type='text' name='search' AUTOCOMPLETE=OFF onkeyup='showUser(branch.value,reg.value,this.value)'><br><br><br>";
             $arr=getBranches();
 	    $len=count($arr);
@@ -76,7 +129,6 @@
             echo "<br><br><br><br><div id='txtHint'>Note : Books will be shown here.</div><br>";
             echo "</form>";
             ?>
-  
     </center>
 </body>
 </html>

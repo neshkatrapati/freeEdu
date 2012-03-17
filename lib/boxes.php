@@ -79,8 +79,8 @@
 	public $classinfo= "box";
 	public $floatinfo ="right";
 	private $object = "";
-	public $defstate_e = "block";
-	public $defstate_c = "none";
+	public $defstate_e = "none";
+	public $defstate_c = "block";
 	
 	public function __construct($oid)
 	{
@@ -295,6 +295,89 @@
 		$obhandle = $ob["obhandle"];
 		$student = getStudent($obhandle);
 		return getClassPreview($student["batid"],$student["sec"],"3","9");
+	}
+    }
+    class stream_Box extends freeEdu_expandable_box
+    {
+	
+	public $name = "Posts By User";
+	public $module = "freeedu.mod_stream";
+	public $classinfo= "box";
+	public $floatinfo ="right";
+	private $object = "";
+	public $defstate_e = "block";
+	public $defstate_c = "none;width:300px";
+	
+	public function __construct($oid,$context)
+	{
+	    $this->object = $oid;
+	    $ob = getObject($oid);
+	    $this->name = "Posts By ".$ob["obname"];
+	    echo "<script>function post(object){
+		var el = document.getElementById('msg');
+		
+		if (window.XMLHttpRequest)
+		{
+			xmlhttp=new XMLHttpRequest();
+		}
+		xmlhttp.onreadystatechange=function()
+		{
+		
+			if(xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+			
+				el.value = 'Whats On Your Mind?';
+		
+			
+			}	
+		}
+		var string = '../modules/stream/handler.php?mode=post&msg='+el.value+'&object='+object+'&targets=*'	;
+		
+		xmlhttp.open('GET',string,true);
+		xmlhttp.send();
+
+	}
+	 window.setInterval(function() {
+		var el = document.getElementById('stream');
+		if (window.XMLHttpRequest)
+		{
+			xmlhttp=new XMLHttpRequest();
+		}
+		xmlhttp.onreadystatechange=function()
+		{
+		
+			if(xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+			
+				el.innerHTML = xmlhttp.responseText;
+		
+			
+			}	
+		}
+		var string = '../modules/stream/handler.php?mode=gets&object='+".$this->object.";
+		
+		xmlhttp.open('GET',string,true);
+		xmlhttp.send();
+	},1000);
+	</script>";
+	    //$this->defstate = $defstate;
+
+	}
+	public function box_oncollapse()
+	{
+		//include_once("../modules/assignment/as_lib.php");
+		return "Expand to see the Posts";
+		
+	}
+	public function box_onexpand()
+	{
+		
+		require_once '../modules/stream/stlib.php';
+		$object = getCurrentObject();
+		$t = "";
+		if($this->object == $object)
+			$t = "<center><form style='width:300px'><textarea style='width:290px' id='msg' name='msg' rows='3' cols='45'>Whats On Your Mind??</textarea><br><br><div class='btn' style='width:70%' onclick='post($object)'>Post</div></form></center>";
+		return $t."<div id='stream'></div>";
 	}
     }
 ?>

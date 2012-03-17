@@ -27,9 +27,9 @@ along with FreeEdu.  If not, see <http://www.gnu.org/licenses/>.*/?>
 <link rel="stylesheet" href="../aux/pagestyles/livesearch.css" type="text/css" media='screen'>
 <script type="text/javascript" src="../lib/jquery.js"></script>
 <script type="text/javascript" src="../aux/thickbox/thickbox.js"></script>
-<script language="javascript" type="text/javascript" src="../lib/flot/jquery.flot.js"></script>
+<script language="javascript" type="text/javascript"  src="../lib/flot/jquery.flot.js"></script>
 <link rel="stylesheet" href="../aux/thickbox/ThickBox.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="../aux/bootstrap/css/bootstrap.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../aux/bootstrap/bootstrap-1.0.0.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../lib/nyromodal/styles/nyroModal.css" type="text/css" media="screen" />
  <script type="text/javascript" src="../lib/nyromodal/js/jquery.nyroModal.custom.js"></script>
 <link href="../aux/bootstrap/docs/assets/js/google-code-prettify/prettify.css" rel="stylesheet" type="text/css">
@@ -38,7 +38,7 @@ along with FreeEdu.  If not, see <http://www.gnu.org/licenses/>.*/?>
 <script type="text/javascript" src="../aux/stars/jquery.starRating.js"></script>
 <link rel="stylesheet" type="text/css" media="all" href="../aux/calendar/jsDatePick_ltr.min.css" />
 <script type="text/javascript" src="../aux/calendar/jsDatePick.min.1.3.js"></script>
-<script src='../aux/bootstrap/js/bootstrap.js' ></script>
+
 
 <script type="text/javascript">
 $(function() {
@@ -196,7 +196,7 @@ if($mode==NULL)
 			$img = "../images/others/collapse.png";
 		echo "".$box->name."<br><input type='image' onclick='show(\"box#".$boxname."\",this)' src='".$img."' style='float:right;' ></input>";
 		echo "<div id='box#".$boxname."#expand'  style='display:".$box->defstate_e.";'>".$box->box_onexpand()."</div>";
-		echo "<div id='box#".$boxname."#collapse' class='' style='display:".$box->defstate_c."'>".$box->box_oncollapse()."</div>";
+		echo "<div id='box#".$boxname."#collapse'  class='' style='display:".$box->defstate_c."'>".$box->box_oncollapse()."</div>";
 		echo $ret."</div>";
 	 }
 	 echo "</div>";
@@ -831,7 +831,8 @@ else
 		if($mode == $links[$i]["mode"]){
 			echo "<div class='row-fluid'>";
 			echo "<div class='span2'>";
-			echo getChildMenu(getObjectTypeTag($object["otyid"]),$links[$i]["tag"]);
+			if($links[$i]["show_side_menu"]!= "false")
+				echo getChildMenu(getObjectTypeTag($object["otyid"]),$links[$i]["tag"]);
 			echo "</div>";
 			$info = getModuleInfo($links[$i]["tag"]);
 			if(array_key_exists("css",$info)){
@@ -861,8 +862,6 @@ else
 	if($i==0)
 	{
 		echo "<div id='content'>";
-		notifyerr("There Is No Such Page!");
-		redirect("?");
 		echo "</div>";
 	}
 }

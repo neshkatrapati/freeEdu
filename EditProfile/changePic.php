@@ -16,7 +16,7 @@ $errors=1;
 
 if(isset($_POST['Submit'])) 
  { 	$image=$_FILES['image']['name'];
- 	if($image) 
+ 	if($image!="") 
  	{
  		$filename = stripslashes($_FILES['image']['name']);
  		$extension = getExtension($filename);
@@ -36,6 +36,7 @@ if(isset($_POST['Submit']))
 			}
 			$image_name=time().'.'.$extension;
 			$newname="../images/faces/".$image_name;
+			echo $newname;
 			$imguri="images/faces/".$image_name;
 			$copied = copy($_FILES['image']['tmp_name'], $newname);
 			if (!$copied)

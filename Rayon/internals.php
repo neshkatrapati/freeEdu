@@ -17,7 +17,7 @@
             echo "<br /><input type='submit' name='phase1' /  ></form>";
         }
         else if(isset($_POST['phase1']))
-        {
+        {n
             $cls = $_POST['cls'][0];
             $clsa = explode(":",$cls);
             $batid = substr($clsa[0],0,1);

@@ -1,22 +1,4 @@
 <?php
-/*
- Copyright 2012
-Ganesh Katrapati <ganesh.katrapati@gmail.com>
-Aditya Maturi <maturiaditya@gmail.com>
-This file is part of FreeEdu.
-
-FreeEdu is free software: you can redistribute it and/or modify
-it under the terms of the Affero GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-FreeEdu is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the Affero GNU General Public License
-along with FreeEdu.  If not, see <http://www.gnu.org/licenses/>.*/
 
 function printPreview()
 {
@@ -784,11 +766,26 @@ function getFacMap($lowlimit,$hilimit)
 	return $retstr;
 
 }
-
-function getTypes($name,$spstr)
+function getModifTypes($name,$spstr)
 {
 
 	
+	$result = mysql_query("select * from OTYPET where loggable='yes'");
+	$i =0;
+	$ret = "<select name='".$name."' ".$spstr." id=type><option value=''>-Select-</option>";
+	while($row = mysql_fetch_array($result))
+	{
+		$ret  .= "<option value='".$row['tyid']."'>".$row['tyname']."</option>";
+			
+	}
+	$ret .= "</select>";
+	 
+	return $ret;
+
+
+}
+function getTypes($name,$spstr)
+{
 	$result = mysql_query("select * from OTYPET");
 	$i =0;
 	$ret = "<select name='".$name."' ".$spstr." id=type><option value=''>-Select-</option>";
@@ -2424,9 +2421,10 @@ function module_parser()
 		if(!in_array($entryName,array(".","..")))
 		{
 			$modfile = $filepath.$entryName."/module.php";
-				
+	
 			if(file_exists($modfile))
 			{
+							
 				$dirArray[$i]["name"] = $entryName;
 				$dirArray[$i]["modfile"] = $modfile;
 				$i++;
@@ -2434,6 +2432,7 @@ function module_parser()
 			}
 		}
 	}
+	//print_r($dirArray);
 	closedir($myDirectory);
 
 	return $dirArray;
@@ -2447,7 +2446,7 @@ function get_modules_render(){
 	$myDirectory = opendir($filepath);
 	
 	while($entryName = readdir($myDirectory)) {
-				
+			
 		if(!in_array($entryName,array(".","..")))
 		{
 			
@@ -2461,9 +2460,11 @@ function get_modules_render(){
 				$class = $entryName."_ModuleInfo";
 				//echo $class;
 				$object = new $class();
+				
 				$method = "module_getRenderData";
 				if(method_exists($object,$method)){
 					$x = $object->$method();
+						
 					$dirArray[$entryName] = $x;
 					
 				}	
@@ -2652,6 +2653,7 @@ function getLinkItems($context)
 				$array[$top]["mode"] = $links[$i]["mode"];
 				$array[$top]["file"] = $links[$i]["file"];
 				$array[$top]["modtag"] = $links[$i]["tag"];
+				$array[$top]["show_side_menu"] = $links[$i]["show_side_menu"];
 				$top++;
 			}
 				

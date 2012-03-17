@@ -12,7 +12,7 @@
         if($otyid == "4")
             $array = array("right" => array("assignments_Box"));
             
-        
+        $array["right"][] = "stream_Box";
         return $array;    
     }
 

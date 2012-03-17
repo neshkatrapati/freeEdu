@@ -10,7 +10,7 @@
                            "name" => "Feedback Forms",
                            "mod_name" => "mod_feedback",
                            "mod_tag" => "feedback",
-                           "authors" => array("Ganesh Katrapati"),
+                           "authors" => array("Sandeep Billakanti"),
                            "dependencies" => array("mod_core"),
                            "css" => array("a.css","b.css")
                             

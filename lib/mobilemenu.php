@@ -1,7 +1,6 @@
 
 <?php
 	echo "<link href='../aux/bootstrap/css/bootstrap.css' rel='stylesheet' type='text/css'></link>";
-	
 	echo "<script>$(\".accordion2\").collapse();</script>";
 	echo "<center>";
 	echo "<div class='accordion' id='accordion2'>";

@@ -95,8 +95,8 @@
 			$dbaccess = $instance->module_dbaccess();
 			$dbcreate = $dbaccess["create"];
 			
-                        for($j=0;$j<count($dbcreate);$j++)
-				queryMe($dbcreate[$j]["sql"]);
+            for($j=0;$j<count($dbcreate);$j++)
+				mysql_query($dbcreate[$j]["sql"]);
 			
                         
                         $list[$i]["reads"] = $modreads[$enables[$i]];

@@ -1,6 +1,0 @@
-Sample Queries
--------------------
-1. Select * From Results
-2. Select * From Results where Student Like 'X'
-3. Select * From Results where Subject Like 'X'
-4. Select * From Results where Student Like 'X' and Internal/External/Total/Cre >/</>=/<=/==/In/NotIn  X

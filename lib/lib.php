@@ -2719,7 +2719,12 @@ function getModuleInfo($tag){
 		$info = $instance->module_getInfo();
 		return $info;
 }
+function path_exists($path){
 
+	echo $path;
+	return file_exists($path);
+
+}
 //include_once("../misc/constants.php");
 //print_r(getLinkItems('sudo'));
 //var_dump(fq("update MOBJECTT values(1,2)","4e884dfa84160"));

@@ -20,20 +20,39 @@
                 $var = "COL_".strtoupper("$col");
                 $$var = $value;
                 $this -> $var = $value;
-                $this -> colvars[] = $var;
+                $this -> colvars[$col] = $var;
                 
             }
             
         }
-        public function set($column_name,$value){
-            
-            
-            $this -> $column_name = $value;
-            
+
+        public function set($parameters){
+
+            foreach($parameters as $key => $value){
+
+                $var = "COL_".strtoupper("$key");
+                $this -> $var = $value;
+
+            }
+
+
         }
+        
+        public function pack(){
+			
+				$pack = array();
+				foreach($this->colvars as $key => $value){
+						
+						$pack[$key] = $this -> $value;
+					
+				}
+				return $pack;
+		
+		}
         
         
         
     }
 
+	
 ?>

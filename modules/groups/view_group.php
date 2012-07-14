@@ -147,8 +147,7 @@ function viewGroup($oid)
 	echo "<table cellpadding='10'>";
    	echo "<tr><td><a href ='?m=view_group&id=".$id."'><img src='../".$row['imguri']."' align=left width='200' height='200'/></a></td>";
     echo "<td><div class=''>Subject :&nbsp;<input type=text name=subject ></div><br />";
-    echo "<div class=''>Body :&nbsp;
-    <textarea class='mceSimple' name=post width=300px rows='10' cols='50' ></textarea></div></td>";
+    echo "<div class=''>Body :&nbsp;<textarea class='mceSimple' name=post width=300px rows='10' cols='50' ></textarea></div></td>";
     echo "<tr><td><input type=submit name= submit></td></tr>";
     echo "</table></fieldset></form>";
    
@@ -180,8 +179,8 @@ function viewGroup($oid)
 		$object = getObject($oid);
 
 		echo "<center><div class='well'>
-			<div class='posttitle'><img style ='float:left' src='../".$object["imguri"]."' width='25' height='25'>".$arr[$i]["subject"]." -- By ".$object["obname"]."
-	 		-- On ".$real_date."</div><hr /><table class='table bordered-table'>
+			<img style ='float:left' src='../".$object["imguri"]."' width='25' height='25'>".$arr[$i]["subject"]." -- By ".$object["obname"]."
+	 		-- On ".$real_date."<hr /><table class='table bordered-table'>
 			<tr><td size='30'>
 			".$arr[$i]["post"]."
 

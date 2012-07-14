@@ -1,0 +1,14 @@
+<?php
+	require_once '../modules/groups/group.php';
+	echo "<table class='bttable  table-bordered'>";
+	$g=new Group();
+	
+	$arr=$g->groups_by_object(getCurrentObject());
+
+	for($i=0;$i<count($arr);$i++)
+	{
+		echo "<tr><td align=center><img src='../".$arr[$i]["imguri"]."' width='50' height='50'>
+			   ".$arr[$i]["name"]."</td></tr>";
+	}
+	echo "</table>";
+?>

@@ -1,0 +1,17 @@
+-------------------------------------------------------------------------------
+Steps For Installing 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+1. download source from https://github.com/freeEdu/freeEdu [Place @ /var/www]
+2. download sql from http://is.gd/freeedu_sql 
+3. download these files 
+	3.1 constants.php from http://is.gd/freeedu_constants
+	3.2 connection.php from http://is.gd/freeedu_connection
+4. place constants.php in freeEdu/misc [Create folder misc before that]
+5. place connection.php in lib/
+6. edit misc/constants.php [$dbuname,$dbpass]
+7. edit connection.php also in the same way
+8. Bingo You Are Done! hit localhost/freeEdu .. 
+9. Hit the help icon for login! 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------

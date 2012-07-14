@@ -1,0 +1,165 @@
+<html>
+<head>
+	<title>ViewGroup</title>
+	<style type='text/css'>
+.imgteaser {
+	margin: 0;
+	overflow: hidden;
+	float: left;
+	position: relative;
+}
+.imgteaser a {
+	text-decoration: none;
+	float: left;
+}
+.imgteaser a:hover {
+	cursor: pointer;
+}
+.imgteaser a img {
+	float: left;
+	margin: 0;
+	border: none;
+	padding: 10px;
+	background: #fff;
+	border: 1px solid #ddd;
+	position: relative;
+	
+}
+.imgteaser a .desc {	display: none; }
+.imgteaser a:hover .epimg { visibility: hidden;}
+.imgteaser a .epimg {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	font-size: 12px;
+	color: #fff;
+	background: #000;
+	padding: 4px 10px;
+	filter:alpha(opacity=65);
+	opacity:.65;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=65)";
+	
+}
+.imgteaser a:hover .desc{
+	display: block;
+	font-size: 11px;
+	padding: 10px 0;
+	background: #111;
+	filter:alpha(opacity=75);
+	opacity:.75;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+	color: #fff;
+	position: absolute;
+	bottom: 11px;
+	left: 11px;
+	padding: 4px 10px;
+	margin: 0;
+	width: 125px;
+	border-top: 1px solid #999;
+	
+}
+.pos
+{
+	position:absolute;
+	top:91px;
+	left:350px;
+	
+}
+.form
+{
+	position:absolute;
+	left:410px;	
+}
+
+.comment .comment-text {
+  border-bottom-color:#D3D7D9;
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+  border-image:initial;
+  border-left-color:#D3D7D9;
+  border-left-style:solid;
+  border-left-width:1px;
+  border-right-color:#D3D7D9;
+  border-right-style:solid;
+  border-right-width:1px;
+  border-top-color:#D3D7D9;
+  border-top-style:solid;
+  border-top-width:1px;
+  display:table-cell;
+  padding-bottom:10px;
+  padding-left:25px;
+  padding-right:25px;
+  padding-top:10px;
+  position:relative;
+  vertical-align:top;
+  width:100%;
+}
+
+
+</style>
+
+</head>
+<body>
+
+<?php
+require_once '../modules/groups/group.php';
+require_once '../modules/groups/post.php';
+$id=$_GET['id'];
+viewGroup($id);
+function viewGroup($oid)
+{
+     
+
+	$g=new Group();
+	$row = $g -> find($oid);
+	echo "<form method='post' accept-charset='UTF-8' enctype='multipart/form-data' align='center'>";
+	echo "<fieldset width=500 align=center><legend><h2>".$row['name']."</h2></legend>";
+	echo "<table>";
+   	echo "<tr><img src='../".$row['imguri']."' align=left width='200' height='200'/>";
+    echo "<td>Subject :</td><td>&nbsp&nbsp<input type=text name=subject ></td>";
+    echo "<tr><td>Body &nbsp&nbsp&nbsp&nbsp:</td><td>&nbsp&nbsp<textarea name=post width=300px></textarea></td>";
+    echo "<td><input type=submit name= submit></td></tr>";
+    echo "</table></fieldset></form>";
+   
+	$id=$_GET['id'];  
+    $p=new Post();
+  	$arr=$p->posts_by_group($id);   
+    for($i=0;$i<count($arr);$i++)
+	{   
+		$id = $arr[$i]["id"];
+		echo "<center><fieldset style='width:100'><legend><h2>".$arr[$i]["subject"]."</h2></legend>
+			<table><tr><td size='30'>".$i."
+			<br>
+			".$arr[$i]["post"]."
+			</td>
+            </tr></table></fieldset></center>";
+               
+
+	}
+           	    
+
+   if(isset($_POST["submit"]))
+    {
+		
+    	$oid=getCurrentObject();
+       	$subject=$_POST["subject"];
+    	$post=$_POST["post"];
+       	$date = strtotime(date("m.d.y"));
+
+		$p = new Post();
+		$p->pcreate($id,$oid,$post,$subject,$date);
+		$arr=$p->post_by_group;
+		notify("Successfully Posted!!!");
+		echo "<center><fieldset style='width:50'><legend><h2>".$subject."</h2></legend>";
+		echo "$post"; 
+		echo "</fieldset></center>";
+
+     }
+     echo "Number of Posts: $i"; 
+
+        
+    }
+
+?>
+</body>
+</html>

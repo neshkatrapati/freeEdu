@@ -1,0 +1,19 @@
+<?php
+require_once '../modules/groups/group.php';
+$con=mysql_connect("localhost","root","password");
+mysql_select_db("freeEdu", $con);
+
+function viewGroup($oid)
+{
+        
+	$query = "SELECT * ,(SELECT imguri FROM MIMGT i WHERE i.imgid = g.imgid)  FROM Groups g WHERE oid ='%,$oid,'";
+	$result = mysql_query($query);
+	$row = mysql_fetch_array($result);
+	echo "<h1>".$row['name']."</h1>";
+	echo "<img src='../".$row['img']."' width='200' height='200' />";
+        $p=new Post();
+	
+	$arr=$p->posts_by_group(getCurrentObject());
+        
+}
+?>

@@ -1,0 +1,8 @@
+<?php
+    echo "delete";
+ 	//if($_get["op"=="delete"]){
+ 	//	$g=new Group();
+ 	//	$g->delete($id);
+ 	//}	
+
+?>

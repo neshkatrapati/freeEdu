@@ -1,0 +1,35 @@
+<?php
+  
+        require_once '../modules/groups/group.php';
+        
+               
+           echo "<form> <fieldset ><legend><h2>Groups</h2></legend>";
+
+	echo "<center><table class='bttable table-bordered'>";
+	$g=new Group();
+	$arr=$g->groups_by_object(getCurrentObject());
+	for($i=0;$i<count($arr);$i++)
+	{        
+		echo "<tr>
+			<td align=center>
+			<a href='?m=view_group&id=$id'><img src='../".$arr[$i]["imguri"]."' width='150' height='100'></a>
+			<br>
+			<center>
+			<font size='4'>".$arr[$i]["name"]."
+			</font>
+			</center>
+			</td>
+                        <th><center><a href='m=edit_group?id=$id'>EDIT</a><br><br><br>
+			<a href='?op=delete&id=$id'>DELETE</a></center></th>
+                        </tr>";
+	}
+        echo "Number of groups: $i";
+	echo "</table></center></fieldset>";
+	echo "</form>";
+        
+
+
+
+
+
+?>

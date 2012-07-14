@@ -16,7 +16,7 @@
 
     theme_advanced_resizing : true,
     width: "100%",
-    height: "400"
+    
 	});
 	</script>
 	<style type='text/css'>
@@ -145,10 +145,10 @@ function viewGroup($oid)
 	echo "<form method='post' accept-charset='UTF-8' enctype='multipart/form-data' align='center'>";
 	echo "<fieldset width=500 align=center><legend><h2>".$row['name']."</h2></legend>";
 	echo "<table cellpadding='10'>";
-   	echo "<tr><a href ='?m=view_group&id=".$id."'><img src='../".$row['imguri']."' align=left width='200' height='200'/></a>";
-    echo "<td><div class=''>&nbsp&nbspSubject :</div></td><td>&nbsp&nbsp<input type=text name=subject ></td>";
-    echo "<tr><td><div class=''>&nbsp&nbspBody &nbsp&nbsp&nbsp:</div></td>
-    <td>&nbsp&nbsp<textarea class='mceSimple' name=post width=300px rows='10' cols='50' ></textarea></td>";
+   	echo "<tr><td><a href ='?m=view_group&id=".$id."'><img src='../".$row['imguri']."' align=left width='200' height='200'/></a></td>";
+    echo "<td><div class=''>Subject :&nbsp;<input type=text name=subject ></div><br />";
+    echo "<div class=''>Body :&nbsp;
+    <textarea class='mceSimple' name=post width=300px rows='10' cols='50' ></textarea></div></td>";
     echo "<tr><td><input type=submit name= submit></td></tr>";
     echo "</table></fieldset></form>";
    

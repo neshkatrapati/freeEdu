@@ -1,6 +1,6 @@
 <?php 
 class Object extends Model { 
-	public $table = "object";
+	public $table = "MOBJECTT";
 	public $columns = array(
 		array("colname" => "oid","type" => "text","value" => ""),
 		array("colname" => "obname","type" => "text","value" => ""),

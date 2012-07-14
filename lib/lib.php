@@ -803,8 +803,6 @@ function getTypes($name,$spstr)
 function getSchedule($batid,$sec,$clsnum)
 {
 
-	
-
 	$array = queryMe("SELECT brid,regid,akayr from MBATCHT where batid like '".$batid."'");
 	$brid = $array['brid'];
 	$regid = $array['regid'];
@@ -843,10 +841,6 @@ function getSchedule($batid,$sec,$clsnum)
 	$retstr .= "</table>";
 
 	return $retstr;
-
-
-
-
 }
 function queryMe($query)
 {
@@ -2725,6 +2719,20 @@ function path_exists($path){
 	return file_exists($path);
 
 }
+function include_all_models_and_controllers(){
+
+	$it = new RecursiveDirectoryIterator("../");
+	foreach(new RecursiveIteratorIterator($it) as $file) {
+		if(is_dir($file)){
+			echo "$file\n";
+			$t = preg_match("/models/", $file,$matches);
+			if(count($matches) > 0)
+				print_r($matches);
+		}
+	}
+
+}
+//include_all_models_and_controllers();
 //include_once("../misc/constants.php");
 //print_r(getLinkItems('sudo'));
 //var_dump(fq("update MOBJECTT values(1,2)","4e884dfa84160"));

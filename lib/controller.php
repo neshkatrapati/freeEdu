@@ -37,9 +37,7 @@
 					$selectors = join($columns,",");
 					$query = "SELECT $selectors FROM ".$this -> model -> table."";
 					echo $query;
-
-
-				
+			
 			}
 			public function findBy($column,$value){
 
@@ -48,8 +46,19 @@
 					$value = "'".$value."'";
 
 				$query = "SELECT * FROM ".$this -> model -> table." WHERE $column = $value";
-				echo $query;
+				//echo $query;
 
+				$result = mysql_query($query);
+
+				$results = array();
+				while ($row = mysql_fetch_array($result)) {
+					$m = new Model($this->model->table,$this->model->columns);
+					$m -> set($row);
+					$results[] = $m;
+				}
+				if(count($results) == 1)
+						return $results[0];
+				return $results;
 
 			}
 			public function raw_query($query){

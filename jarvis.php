@@ -15,11 +15,18 @@
 				case 'model':
 					$module = $argv[2];
 					$path = evaluatePath($module);
-					$result = create('model',$argv[3],$path,$argv);
+					$result = create('model',$argv[3],"",$path,$argv);
 					if($result == ALREADY_EXISTS)
 						echo "Model Already Exists";
 
 					break;
+				case 'controller':
+					$module = $argv[2];
+					$path = evaluatePath($module);
+					$result = create('controller',$argv[3],"s_controller",$path,$argv);
+					if($result == ALREADY_EXISTS)
+						echo "Controller Already Exists";
+
 				
 				default:
 					# code...
@@ -62,16 +69,17 @@
 			return $path;
 
 	}
-	function create($thing,$name,$path,$params){
+	function create($thing,$name,$extension,$path,$params){
 
 		$tdir = $thing."s";
 		if($path !== false){
 			
 			if(!file_exists($path."/$tdir")){
 				mkdir($path."/$tdir");
+				chmod($path."/$tdir", 0777);
 			}
 			if(!file_exists($path."/$tdir/$name.php")){
-				$file = fopen($path."/$tdir/$name.php","w");
+				$file = fopen($path."/$tdir/$name".$extension.".php","w");
 				$func = "generate".ucwords($thing);
 				fwrite($file, $func($name,$params));
 			}
@@ -101,6 +109,13 @@
 		$script .= "\n\t);";
 		$script .= "\n\tpublic function __construct(){\n\t\tparent::__construct(".'$this'." -> table,".'$this'." -> columns);\n\t}";
 		$script .= "\n}\n?>";
+		return $script;
+	}
+	function generateController($controller,$params){
+
+		$modelclass = ucwords($controller)."sController";
+		$controller =  ucwords($controller);
+		$script = "<?php\nclass $modelclass extends Controller{\n\tpublic function __construct(){\n\t\tparent::__construct(new $controller());\n\t}\n}\n?>";
 		return $script;
 	}
 

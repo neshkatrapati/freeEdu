@@ -26,6 +26,22 @@
             
         }
 
+        public function createTable(){
+
+            $query = "CREATE TABLE ". $this -> table ." ( ";
+            foreach($this -> columns as $column){
+                
+                $col = $column["colname"];
+                $type = $column["type"];
+                $query .= "$col $type,";
+                
+            }
+            $query = substr($query,0,-1);
+            $query .=  ")" ;
+            return $query;
+            
+        }
+
         public function set($parameters){
 
             foreach($parameters as $key => $value){
@@ -48,9 +64,7 @@
 				}
 				return $pack;
 		
-		}
-        
-        
+		}     
         
     }
 

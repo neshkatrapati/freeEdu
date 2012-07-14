@@ -20,7 +20,11 @@
     <?php
         echo "<form name='al' method='post' enctype='multipart/form-data' action='#'>";
         $placeBranch = "";
+<<<<<<< HEAD
 	    $placeBranch = getBatches('bat[]');
+=======
+	$placeBranch = getBatches('bat[]');
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
         echo "<table cellpadding=10>";
         echo "<tr><td colspan=2 style='text-align:center;'style='text-align:center;'>Upload Image:&nbsp;<input type='file' name='image'></td></tr>";
         echo "<tr><td colspan=2 style='text-align:center;font-size:13; '>Note: Image size should not exceed 1MB.</td></tr>";
@@ -29,7 +33,11 @@
         echo "<td>Last(Family) Name:&nbsp;<input type='text' name='ln' required=true></td></tr>";
         echo "<tr><td>Slogin:&nbsp;<input type='text' name='slogin' required=true id='slogin'></td>";
         echo "<td>Spassword:&nbsp;<input type='password' name='spswd' required=true id='spass'></td>";
+<<<<<<< HEAD
 	    echo "<tr><td>Select A Batch:&nbsp;".$placeBranch."</td>";
+=======
+	echo "<tr><td>Select A Batch:&nbsp;".$placeBranch."</td>";
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
         echo  "<td>Section:&nbsp;<input type='text' size='1px' name='sec' required=true></td>";
         echo "<tr><td colspan=2 style='text-align:center;'>Student Info:<br><textarea name='sinfo' rows='5' cols='10'></textarea></td></tr>";
         echo "<tr><td colspan=2 style='text-align:center;'><input type='submit' name='submit' value='Submit'/></td></tr>";

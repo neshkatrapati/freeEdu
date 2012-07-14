@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 .button,input[type=submit],input[type=reset],input[type=button] {
+=======
+.button,input[type=submit] {
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
 	display: inline-block;
 	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
 	*display: inline;
@@ -18,16 +22,27 @@
 	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	box-shadow: 0 1px 2px rgba(0,0,0,.2);
 }
+<<<<<<< HEAD
 .button:hover,input[type=submit],input[type=reset],input[type=button] {
 	text-decoration: none;
 }
 .button:active,input[type=submit],input[type=reset],input[type=button] {
+=======
+.button:hover,input[type=submit] {
+	text-decoration: none;
+}
+.button:active,input[type=submit] {
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
 	position: relative;
 	top: 1px;
 }
 
 /* blue */
+<<<<<<< HEAD
 .blue,input[type=submit],input[type=reset],input[type=button] {
+=======
+.blue,input[type=submit] {
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
 	color: #d9eef7;
 	border: solid 1px #0076a3;
 	background: #0095cd;
@@ -35,13 +50,21 @@
 	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
 }
+<<<<<<< HEAD
 .blue:hover,input[type=submit]:hover,input[type=reset]:hover,input[type=button]:hover {
+=======
+.blue:hover,input[type=submit]:hover {
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
 	background: #007ead;
 	background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
 	background: -moz-linear-gradient(top,  #0095cc,  #00678e);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#0095cc', endColorstr='#00678e');
 }
+<<<<<<< HEAD
 .blue:active,input[type=submit]:active,input[type=reset]:active,input[type=button]:active {
+=======
+.blue:active,input[type=submit]:active {
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
 	color: #80bed6;
 	background: -webkit-gradient(linear, left top, left bottom, from(#0078a5), to(#00adee));
 	background: -moz-linear-gradient(top,  #0078a5,  #00adee);
@@ -55,6 +78,7 @@ color: #CCC;
 	width:auto;
 
 }
+<<<<<<< HEAD
 #notif
 {
 	display:block;
@@ -120,6 +144,9 @@ text-decoration: none;
 text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
 #content,#notif,#noterr,#notwar
+=======
+#content
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
 {
 	margin-right:100px;
 	margin-left:100px;
@@ -133,6 +160,7 @@ text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 	width:200px;
 	word-wrap:break-word;
 }
+<<<<<<< HEAD
 #omni2
 {
 
@@ -162,3 +190,5 @@ tr.even
 {
 	background-color:cyan;
 }
+=======
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6

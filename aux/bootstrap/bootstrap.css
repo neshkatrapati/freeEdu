@@ -1821,7 +1821,10 @@ footer {
   background-color: #0064cd;
   background-repeat: repeat-x;
   background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
+<<<<<<< HEAD
 
+=======
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
   background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
   background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
@@ -2354,6 +2357,7 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
   -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
   box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 }
+<<<<<<< HEAD
 
 .table-bordered thead:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child td {
   border-top: 0;
@@ -2381,3 +2385,5 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
 .table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
   background-color: #f9f9f9;
 }
+=======
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6

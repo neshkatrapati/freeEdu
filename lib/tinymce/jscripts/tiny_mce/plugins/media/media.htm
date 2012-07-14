@@ -29,7 +29,20 @@
 							<tr>
 								<td><label for="media_type">{#media_dlg.type}</label></td>
 								<td>
+<<<<<<< HEAD
 									<select id="media_type"></select>
+=======
+									<select id="media_type" name="media_type" onchange="Media.formToData('type');">
+										<option value="video">HTML5 Video</option>
+										<option value="audio">HTML5 Audio</option>
+										<option value="flash">Flash</option>
+										<option value="quicktime">QuickTime</option>
+										<option value="shockwave">Shockwave</option>
+										<option value="windowsmedia">Windows Media</option>
+										<option value="realmedia">Real Media</option>
+										<option value="iframe">Iframe</option>
+									</select>
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
 								</td>
 							</tr>
 							<tr>
@@ -205,6 +218,7 @@
 					</table>
 				</fieldset>
 
+<<<<<<< HEAD
 				<fieldset id="embeddedaudio_options">
 					<legend>{#media_dlg.embedded_audio_options}</legend>
 
@@ -240,6 +254,8 @@
 					</table>
 				</fieldset>
 
+=======
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
 				<fieldset id="audio_options">
 					<legend>{#media_dlg.html5_audio_options}</legend>
 
@@ -272,7 +288,11 @@
 							<td><label for="audio_preload">{#media_dlg.preload}</label></td>
 							<td>
 								<select id="audio_preload" name="audio_preload" onchange="Media.formToData();">
+<<<<<<< HEAD
 									<option value="none">{#media_dlg.preload_none}</option>
+=======
+									<option value="none">{#media_dlg.preload_none}</option> 
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
 									<option value="metadata">{#media_dlg.preload_metadata}</option>
 									<option value="auto">{#media_dlg.preload_auto}</option>
 								</select>
@@ -312,6 +332,10 @@
 					</table>
 				</fieldset>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
 				<fieldset id="flash_options">
 					<legend>{#media_dlg.flash_options}</legend>
 

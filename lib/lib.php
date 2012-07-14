@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 function addImg($imguri)
 {
     echo "Hello";
@@ -8,6 +9,9 @@ function addImg($imguri)
     mysql_query("insert into MIMGT values('$num','$imguri')") or die(mysql_error());
     return($num);
 }
+=======
+
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
 function printPreview()
 {
 	$filename = $_FILES["file"]["tmp_name"];
@@ -2727,7 +2731,16 @@ function getModuleInfo($tag){
 		$info = $instance->module_getInfo();
 		return $info;
 }
+<<<<<<< HEAD
 
+=======
+function path_exists($path){
+
+	echo $path;
+	return file_exists($path);
+
+}
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
 //include_once("../misc/constants.php");
 //print_r(getLinkItems('sudo'));
 //var_dump(fq("update MOBJECTT values(1,2)","4e884dfa84160"));

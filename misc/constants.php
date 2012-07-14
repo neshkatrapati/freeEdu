@@ -3,7 +3,11 @@
 	{
 		public static $dbhost = "localhost"; // Replace By Your Database-Host
 		public static $dbuname = "root"; // Replace By Your Database-Username 
+<<<<<<< HEAD
+		public static $dbpass = "password"; // Replace By Your Database-Password
+=======
 		public static $dbpass = "1234"; // Replace By Your Database-Password
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6
 		public static $dbname = "freeEdu"; // Standard Database Name Donot change It!
 		public static $branchtab = "MBRANCHT";
 		public static $regtab = "MREGT";

@@ -141,4 +141,8 @@
         <br><br>
         <div id='txtHint'><center><h6>Orders will be showed here</h6></center></div>
     </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> a470b63f9e103738c05dcc555176f0ba2f1802b6

@@ -1,4 +1,4 @@
 <?php 
-$con = mysql_connect("localhost", "root","1234");
+$con = mysql_connect("localhost", "root","password");
 mysql_select_db("freeEdu", $con);
 ?>

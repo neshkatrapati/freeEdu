@@ -21,11 +21,9 @@
                 $$var = $value;
                 $this -> $var = $value;
                 $this -> colvars[$col] = $var;
-                
             }
             
         }
-
         public function createTable(){
 
             $query = "CREATE TABLE ". $this -> table ." ( ";
@@ -64,9 +62,12 @@
 				}
 				return $pack;
 		
+
 		}     
+
+
+        
         
     }
 
-	
 ?>
